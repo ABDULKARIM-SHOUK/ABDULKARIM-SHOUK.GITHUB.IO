@@ -14,7 +14,13 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 svg{fill:currentColor;display:block}
 .en{font-family:var(--font-en);direction:ltr;unicode-bidi:isolate}
-.wrap{max-width:640px;margin-inline:auto;padding-block:14px 120px}
+.wrap{max-width:640px;margin-inline:auto;padding-block:14px 120px;position:relative;z-index:1}
+body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:var(--gh,0px);background:var(--ground,none) repeat-x center bottom/auto 100%;pointer-events:none;z-index:0}
+.scene{margin-block:12px 0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);line-height:0;border:3px solid var(--scene-bd,#fff)}
+.scene svg{width:100%;height:auto;display:block;direction:ltr}
+.namebox .scene{width:100%;margin-block:0 6px}
+.path{position:relative}
+.path::before{content:"";position:absolute;inset-block:34px;inset-inline-start:calc(50% - var(--tw,6px) / 2);width:var(--tw,6px);background:var(--trail,none);border-radius:99px;z-index:0}
 .wrap.q{padding-bottom:260px}
 .screen{animation:fade .25s ease-out}
 
@@ -43,11 +49,13 @@ svg{fill:currentColor;display:block}
 .go{display:flex;align-items:center;gap:14px;width:100%;text-align:start;background:var(--a1);color:var(--on-a1);border-radius:var(--r);padding:14px 16px;box-shadow:0 6px 0 var(--a1-deep);transition:transform .08s,box-shadow .08s}
 .go:active{transform:translateY(5px);box-shadow:0 1px 0 var(--a1-deep)}
 .go .gt{flex:1;min-width:0}
+.go + .meter{margin-inline:16px}
 .go small{display:block;opacity:.85;font-weight:700}
 .go b{font-family:var(--font-display);font-size:1.25rem;line-height:1.3}
 .go svg{width:30px;height:30px;flex:none}
-.meter{height:14px;border-radius:99px;background:var(--track);overflow:hidden;margin-top:14px}
-.meter i{display:block;height:100%;width:var(--w,0%);background:var(--a2);border-radius:99px;transition:width .6s ease}
+.meter{height:14px;border-radius:99px;background:var(--track);margin-top:14px}
+.meter i{display:block;position:relative;height:100%;width:var(--w,0%);background:var(--a2);border-radius:99px;transition:width .6s ease}
+.meter i::after{content:var(--veh,none);position:absolute;inset-inline-end:-15px;top:50%;translate:0 -52%;font-size:26px;line-height:1;filter:drop-shadow(0 2px 0 rgba(0,0,0,.18))}
 .mlabel{display:flex;justify-content:space-between;font-weight:700;font-size:.9rem;margin-top:6px;color:var(--muted)}
 h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-height:1.3}
 
@@ -61,7 +69,8 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .node .meta{min-width:0;flex:1}
 .node h3{margin:0;font-family:var(--font-display);font-size:1.12rem;line-height:1.3}
 .node p{margin:2px 0 0;color:var(--muted);font-size:.9rem;line-height:1.4}
-.node.locked{opacity:.6;filter:grayscale(.9);cursor:not-allowed}
+.node.locked{filter:grayscale(.9);cursor:not-allowed;background:var(--card2);background:color-mix(in srgb,var(--card) 64%,var(--bg))}
+.node.locked>*{opacity:.6}
 .node .lk{width:22px;height:22px;color:var(--muted);flex:none}
 .stars{display:flex;gap:2px;margin-top:4px}
 .st svg{width:22px;height:22px;fill:var(--star-off)}
@@ -108,7 +117,8 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .dock-in .btn{flex:1}
 
 /* quiz */
-.qbar{flex:1}
+.qbar{flex:1;min-width:0}
+.qbar .meter{margin-inline:16px!important}
 .qcount{font-weight:800;min-width:3.4ch;text-align:center;font-variant-numeric:tabular-nums}
 .qprompt{font-family:var(--font-display);font-size:1.3rem;margin:4px 0 14px;text-align:center;line-height:1.5;font-weight:800}
 .again{display:inline-block;margin-inline-start:8px;font-size:.8rem;background:var(--a2);color:var(--on-a2);padding:2px 10px;border-radius:99px;vertical-align:middle}
@@ -231,6 +241,14 @@ h2.sec{font-size:1.5rem}
 .meter{height:18px;background:rgba(255,255,255,.8)}
 .meter i{background:linear-gradient(90deg,#FFB703,#FF7A18)}
 
+/* creative pass: garden path */
+:root{--veh:"🦋";--gh:74px;--ground:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgOTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iOTAiPjxwYXRoIGQ9Ik0wIDQ0IFE3MCAxNCAxNTAgNDIgVDI5MCA0MCBUMzYwIDQ0IFY5MCBIMFoiIGZpbGw9IiNCNkU5OEMiLz48cGF0aCBkPSJNMCA1OCBRMTAwIDM0IDIwMCA1NiBUMzYwIDU4IFY5MCBIMFoiIGZpbGw9IiM3RkQxNjUiLz48cGF0aCBkPSJNMCA3NCBIMzYwIFY5MCBIMFoiIGZpbGw9IiM1REJFNEQiLz48ZyBzdHJva2U9IiMyRjlFNDUiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik0zMCA4MCBWNjIiLz48cGF0aCBkPSJNOTYgODIgVjY0Ii8+PHBhdGggZD0iTTE3MCA4MCBWNjAiLz48cGF0aCBkPSJNMjQwIDgyIFY2NCIvPjxwYXRoIGQ9Ik0zMTYgODAgVjYyIi8+PC9nPjxjaXJjbGUgY3g9IjMwIiBjeT0iNTgiIHI9IjciIGZpbGw9IiNGRjVFOEEiLz48Y2lyY2xlIGN4PSIzMCIgY3k9IjU4IiByPSIyLjYiIGZpbGw9IiNGRkQyM0YiLz48Y2lyY2xlIGN4PSI5NiIgY3k9IjYwIiByPSI3IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iOTYiIGN5PSI2MCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMTcwIiBjeT0iNTYiIHI9IjciIGZpbGw9IiNGRjlBM0MiLz48Y2lyY2xlIGN4PSIxNzAiIGN5PSI1NiIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMjQwIiBjeT0iNjAiIHI9IjciIGZpbGw9IiNCMjZCRkYiLz48Y2lyY2xlIGN4PSIyNDAiIGN5PSI2MCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMzE2IiBjeT0iNTgiIHI9IjciIGZpbGw9IiNGRjVFOEEiLz48Y2lyY2xlIGN4PSIzMTYiIGN5PSI1OCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGc+PHBhdGggZD0iTTEyNiA3NiBxMTAgLTIyIDIyIDB6IiBmaWxsPSIjRTU0ODREIi8+PHJlY3QgeD0iMTM0IiB5PSI3NiIgd2lkdGg9IjYiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRjNENiIvPjxjaXJjbGUgY3g9IjEzMSIgY3k9IjcwIiByPSIxLjYiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSI2NiIgcj0iMS42IiBmaWxsPSIjZmZmIi8+PC9nPjwvc3ZnPgo=");--tw:16px;--scene-bd:#fff;
+  --trail:radial-gradient(circle,#F3B94D 0 42%,transparent 46%) center 0/16px 24px repeat-y}
+.sc-bfly{transform-box:fill-box;transform-origin:center;transform:translate(170px,30px);animation:sc-bfly 18s ease-in-out infinite}
+@keyframes sc-bfly{0%{transform:translate(-30px,44px) rotate(8deg)}20%{transform:translate(90px,8px) rotate(-8deg)}40%{transform:translate(170px,40px) rotate(8deg)}60%{transform:translate(250px,4px) rotate(-8deg)}80%{transform:translate(340px,36px) rotate(8deg)}100%{transform:translate(440px,8px) rotate(-8deg)}}
+.sc-sun{transform-box:fill-box;transform-origin:center;animation:sc-pulse 5s ease-in-out infinite alternate}
+@keyframes sc-pulse{from{transform:scale(.94)}to{transform:scale(1.08)}}
+
 </style>
 </head>
 <body>
@@ -238,7 +256,7 @@ h2.sec{font-size:1.5rem}
 <noscript>هذه الصفحة تحتاج إلى تفعيل JavaScript لتعمل.</noscript>
 <script>
 window.CONFIG = {
-  id: 'g2', askName: true, title: 'حديقة الإنجليزية', mascot: '🦁',
+  id: 'g2v2', migrate: 'g2', askName: true, title: 'حديقة الإنجليزية', mascot: '🦁',
   nameAsk: 'أهلًا بك في الحديقة! أنا الأسد الصغير. ما اسمك يا صديقي؟', nameBtn: 'هيا نلعب', speechRate: 0.7, pitch: 1.1,
   journey: 'تقدّمك في الحديقة', pathTitle: 'طريق الحديقة', learnTitle: 'تعلّم الكلمات', startLabel: 'ابدأ اللعب',
   confetti: ['#FF7A18', '#FFB703', '#1F9D45', '#3AA7FF', '#E5484D', '#8E5CF7'],
@@ -256,125 +274,157 @@ window.CONFIG = {
   defaultPlan: ['listen2pic', 'pic2word', 'listen2pic', 'spell', 'match', 'pic2word', 'q', 'spell', 'listen2pic', 'q'],
   levels: [
     {
-      id: 'l1', title: 'الحروف من A إلى M', sub: 'نتعلّم أصوات الحروف مع كلمات', emoji: '🔤', color: '#FF8A3D', cefr: 'Pre-A1',
-      tips: [{ t: 'كيف نتعلّم صوت الحرف؟', b: 'لكل حرف اسم وصوت. اضغط على البطاقة، واستمع للكلمة، ثم قل صوت أول حرف بصوت عالٍ.', ex: [['A, a, apple', 'الحرف A في كلمة تفاحة'], ['B, b, ball', 'الحرف B في كلمة كرة']] }],
+      id: 'l1', title: 'مشاعري', sub: 'الوحدة الأولى: كيف تشعر اليوم؟', emoji: '😊', color: '#FF8A3D', cefr: 'Pre-A1',
+      plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
+      tips: [{ t: 'أنا...', b: 'نقول I am ثم الشعور. وعندما يسألك أحد How are you؟ تجيب I am happy أو I am fine.', ex: [['I am happy.', 'أنا سعيد.'], ['I am sad.', 'أنا حزين.'], ['How are you?', 'كيف حالك؟'], ['I am fine, thank you.', 'أنا بخير، شكرًا.']] }],
       vocab: [
-        ['apple', 'تفاحة', '🍎', 'Aa'], ['ball', 'كرة', '⚽', 'Bb'], ['cat', 'قطة', '🐱', 'Cc'], ['dog', 'كلب', '🐶', 'Dd'],
-        ['egg', 'بيضة', '🥚', 'Ee'], ['fish', 'سمكة', '🐟', 'Ff'], ['goat', 'ماعز', '🐐', 'Gg'], ['hat', 'قبعة', '🎩', 'Hh'],
-        ['ice cream', 'آيس كريم', '🍦', 'Ii'], ['juice', 'عصير', '🧃', 'Jj'], ['kite', 'طائرة ورقية', '🪁', 'Kk'],
-        ['lion', 'أسد', '🦁', 'Ll'], ['moon', 'قمر', '🌙', 'Mm']
+        ['happy', 'سعيد', '😊'], ['sad', 'حزين', '😢'], ['angry', 'غاضب', '😠'], ['tired', 'متعب', '😴'], ['scared', 'خائف', '😨'], ['hungry', 'جائع', '🍽️'],
+        ['thirsty', 'عطشان', '🥤'], ['cold', 'بردان', '🥶'], ['hot', 'حار', '🥵'], ['sick', 'مريض', '🤒'], ['excited', 'متحمس', '🤩']
       ],
       qs: [
-        { p: 'أي كلمة تبدأ بالحرف B؟', q: 'Which word starts with B?', opts: ['ball', 'cat', 'dog'], a: 'ball', speak: 'ball', tip: 'الحرف B يعطي صوت /b/ مثل ball.' },
-        { p: 'أي كلمة تبدأ بالحرف L؟', q: 'Which word starts with L?', opts: ['moon', 'lion', 'hat'], a: 'lion', speak: 'lion', tip: 'الحرف L يعطي صوت /l/ مثل lion.' },
-        { p: 'بأي حرف تبدأ كلمة fish؟', q: 'fish', say: 'fish', opts: ['F', 'S', 'G'], a: 'F', speak: 'fish', tip: 'fish تبدأ بالحرف F.' }
-      ]
-    },
-    {
-      id: 'l2', title: 'الحروف من N إلى Z', sub: 'نكمل أصوات الحروف', emoji: '🔠', color: '#FFB703', cefr: 'Pre-A1',
-      tips: [{ t: 'استمع ثم كرّر', b: 'قل الكلمة ببطء: s… s… sun. ثم قلها بسرعة: sun!', ex: [['S, s, sun', 'الحرف S في كلمة شمس'], ['Z, z, zebra', 'الحرف Z في كلمة حمار وحشي']] }],
-      vocab: [
-        ['nose', 'أنف', '👃', 'Nn'], ['orange', 'برتقالة', '🍊', 'Oo'], ['parrot', 'ببغاء', '🦜', 'Pp'], ['queen', 'ملكة', '👑', 'Qq'],
-        ['rabbit', 'أرنب', '🐰', 'Rr'], ['sun', 'شمس', '☀️', 'Ss'], ['tree', 'شجرة', '🌳', 'Tt'], ['umbrella', 'مظلة', '☂️', 'Uu'],
-        ['van', 'سيارة فان', '🚐', 'Vv'], ['watch', 'ساعة يد', '⌚', 'Ww'], ['fox', 'ثعلب', '🦊', 'Xx'],
-        ['yogurt', 'زبادي', '🥣', 'Yy'], ['zebra', 'حمار وحشي', '🦓', 'Zz']
-      ],
-      qs: [
-        { p: 'أي كلمة تبدأ بالحرف S؟', q: 'Which word starts with S?', opts: ['sun', 'tree', 'van'], a: 'sun', speak: 'sun', tip: 'الحرف S يعطي صوت /s/ مثل sun.' },
-        { p: 'أي كلمة تبدأ بالحرف Z؟', q: 'Which word starts with Z?', opts: ['zebra', 'rabbit', 'queen'], a: 'zebra', speak: 'zebra', tip: 'الحرف Z يعطي صوت /z/ مثل zebra.' },
-        { p: 'أي كلمة تبدأ بالحرف T؟', q: 'Which word starts with T?', opts: ['tree', 'sun', 'fox'], a: 'tree', speak: 'tree', tip: 'الحرف T يعطي صوت /t/ مثل tree.' }
-      ]
-    },
-    {
-      id: 'l3', title: 'الألوان', sub: 'ما لون هذا؟', emoji: '🎨', color: '#3AA7FF', cefr: 'Pre-A1',
-      tips: [{ t: 'ما لونه؟', b: 'نقول It is ثم اسم اللون.', ex: [['It is red.', 'إنه أحمر.'], ['It is blue.', 'إنه أزرق.']] }],
-      vocab: [
-        ['red', 'أحمر', '🔴'], ['blue', 'أزرق', '🔵'], ['green', 'أخضر', '🟢'], ['yellow', 'أصفر', '🟡'], ['orange', 'برتقالي', '🟠'],
-        ['purple', 'بنفسجي', '🟣'], ['black', 'أسود', '⚫'], ['white', 'أبيض', '⚪'], ['brown', 'بني', '🟤'], ['pink', 'وردي', '🌸']
-      ],
-      qs: [
-        { p: 'ما لون الموز؟', big: '🍌', q: 'A banana is ___.', opts: ['yellow', 'blue', 'black'], a: 'yellow' },
-        { p: 'ما لون التفاحة؟', big: '🍎', q: 'An apple is ___.', opts: ['red', 'white', 'purple'], a: 'red' },
-        { p: 'ما لون السماء؟', big: '☁️', q: 'The sky is ___.', opts: ['green', 'blue', 'brown'], a: 'blue' },
-        { p: 'ما لون الحليب؟', big: '🥛', q: 'Milk is ___.', opts: ['white', 'black', 'pink'], a: 'white' }
-      ]
-    },
-    {
-      id: 'l4', title: 'الأرقام من 1 إلى 10', sub: 'نعدّ ونلعب', emoji: '🔢', color: '#8E5CF7', cefr: 'Pre-A1',
-      tips: [{ t: 'نعدّ معًا', b: 'اضغط على كل رقم واستمع، ثم عدّ بصوت عالٍ حتى العشرة.', ex: [['one, two, three', 'واحد، اثنان، ثلاثة'], ['I am seven.', 'عمري سبع سنوات.']] }],
-      vocab: [
-        ['one', 'واحد', '1️⃣'], ['two', 'اثنان', '2️⃣'], ['three', 'ثلاثة', '3️⃣'], ['four', 'أربعة', '4️⃣'], ['five', 'خمسة', '5️⃣'],
-        ['six', 'ستة', '6️⃣'], ['seven', 'سبعة', '7️⃣'], ['eight', 'ثمانية', '8️⃣'], ['nine', 'تسعة', '9️⃣'], ['ten', 'عشرة', '🔟']
-      ],
-      qs: [
-        { p: 'كم تفاحة ترى؟', big: '🍎🍎🍎', q: 'How many apples?', opts: ['two', 'three', 'five'], a: 'three', speak: 'three apples' },
-        { p: 'كم نجمة ترى؟', big: '⭐⭐⭐⭐⭐', q: 'How many stars?', opts: ['four', 'five', 'six'], a: 'five', speak: 'five stars' },
-        { p: 'كم قطة ترى؟', big: '🐱🐱', q: 'How many cats?', opts: ['one', 'two', 'ten'], a: 'two', speak: 'two cats' },
-        { p: 'أكمل العدّ', q: 'one, two, three, ___', opts: ['four', 'six', 'ten'], a: 'four', speak: 'one, two, three, four' }
-      ]
-    },
-    {
-      id: 'l5', title: 'الحيوانات', sub: 'أصدقاؤنا في الحديقة', emoji: '🐘', color: '#1F9D45', cefr: 'A1',
-      tips: [{ t: 'أصوات الحيوانات', b: 'كل حيوان له صوت. القطة meow، والبقرة moo، والبطة quack.', ex: [['The cow says moo.', 'البقرة تقول موو.'], ['The duck says quack.', 'البطة تقول كواك.']] }],
-      vocab: [
-        ['bird', 'طائر', '🐦'], ['cow', 'بقرة', '🐄'], ['horse', 'حصان', '🐴'], ['sheep', 'خروف', '🐑'], ['duck', 'بطة', '🦆'],
-        ['monkey', 'قرد', '🐵'], ['elephant', 'فيل', '🐘'], ['tiger', 'نمر', '🐯'], ['camel', 'جمل', '🐪'], ['giraffe', 'زرافة', '🦒'],
-        ['bear', 'دب', '🐻'], ['frog', 'ضفدع', '🐸']
-      ],
-      qs: [
-        { p: 'أي حيوان يقول موو؟', q: 'Which animal says "moo"?', opts: ['cow', 'duck', 'tiger'], a: 'cow', speak: 'The cow says moo.' },
-        { p: 'أي حيوان يقول كواك؟', q: 'Which animal says "quack"?', opts: ['duck', 'horse', 'bear'], a: 'duck', speak: 'The duck says quack.' },
-        { p: 'أي حيوان رقبته طويلة جدًا؟', q: 'Which animal has a very long neck?', opts: ['giraffe', 'bear', 'frog'], a: 'giraffe', speak: 'The giraffe has a long neck.' }
-      ]
-    },
-    {
-      id: 'l6', title: 'جسمي وعائلتي', sub: 'أجزاء الجسم وأفراد الأسرة', emoji: '👨‍👩‍👧‍👦', color: '#E5484D', cefr: 'A1',
-      tips: [{ t: 'عائلتي', b: 'نقول My قبل اسم الشخص لنعرّف أنه من عائلتنا.', ex: [['This is my mom.', 'هذه أمي.'], ['This is my dad.', 'هذا أبي.']] }],
-      vocab: [
-        ['eye', 'عين', '👁️'], ['ear', 'أذن', '👂'], ['mouth', 'فم', '👄'], ['hand', 'يد', '✋'], ['foot', 'قدم', '🦶'],
-        ['mom', 'ماما', '👩'], ['dad', 'بابا', '👨'], ['brother', 'أخ', '👦'], ['sister', 'أخت', '👧'], ['baby', 'طفل رضيع', '👶'],
-        ['grandpa', 'جد', '👴'], ['grandma', 'جدة', '👵']
-      ],
-      qs: [
-        { p: 'أكمل الجملة', q: 'I see with my ___.', opts: ['eyes', 'ears', 'hands'], a: 'eyes' },
-        { p: 'أكمل الجملة', q: 'I hear with my ___.', opts: ['mouth', 'ears', 'feet'], a: 'ears' },
-        { p: 'من هذا؟', big: '👨', q: 'Who is he?', opts: ['dad', 'mom', 'baby'], a: 'dad', speak: 'He is my dad.' },
-        { p: 'من هذه؟', big: '👵', q: 'Who is she?', opts: ['sister', 'grandma', 'brother'], a: 'grandma', speak: 'She is my grandma.' }
-      ]
-    },
-    {
-      id: 'l7', title: 'الطعام اللذيذ', sub: 'ماذا أحب أن آكل؟', emoji: '🍕', color: '#FF7A18', cefr: 'A1',
-      plan: ['listen2pic', 'pic2word', 'q', 'spell', 'match', 'q', 'listen2pic', 'pic2word', 'q', 'spell'],
-      tips: [{ t: 'أنا أحب...', b: 'نقول I like ثم اسم الطعام.', ex: [['I like pizza.', 'أنا أحب البيتزا.'], ['I like milk.', 'أنا أحب الحليب.']] }],
-      vocab: [
-        ['bread', 'خبز', '🍞'], ['rice', 'أرز', '🍚'], ['milk', 'حليب', '🥛'], ['water', 'ماء', '💧'], ['cheese', 'جبن', '🧀'],
-        ['chicken', 'دجاج', '🍗'], ['pizza', 'بيتزا', '🍕'], ['cake', 'كعكة', '🍰'], ['banana', 'موز', '🍌'], ['grapes', 'عنب', '🍇'],
-        ['watermelon', 'بطيخ', '🍉'], ['carrot', 'جزرة', '🥕']
-      ],
-      qs: [
-        { t: 'order', w: ['I', 'like', 'pizza'], ar: 'أنا أحب البيتزا.' },
-        { t: 'order', w: ['I', 'like', 'milk'], ar: 'أنا أحب الحليب.' },
-        { p: 'أكمل الجملة', big: '🍞', q: 'I like ___.', opts: ['bread', 'water', 'cheese'], a: 'bread' }
-      ]
-    },
-    {
-      id: 'l8', title: 'مرحبًا ومشاعري', sub: 'نتحدّث ونعبّر عن مشاعرنا', emoji: '😊', color: '#14B8A6', cefr: 'A1',
-      plan: ['listen2pic', 'pic2word', 'word2ar', 'spell', 'match', 'q', 'q', 'listen2word', 'pic2word', 'q'],
-      tips: [{ t: 'أنا...', b: 'نقول I am ثم الشعور. وعندما يسألك أحد How are you؟ تقول I am fine.', ex: [['I am happy.', 'أنا سعيد.'], ['My name is Omar.', 'اسمي عمر.'], ['How are you?', 'كيف حالك؟']] }],
-      vocab: [
-        ['hello', 'مرحبًا', '👋'], ['goodbye', 'مع السلامة', ''], ['thank you', 'شكرًا', '🙏'], ['please', 'من فضلك', ''], ['sorry', 'آسف', ''],
-        ['happy', 'سعيد', '😊'], ['sad', 'حزين', '😢'], ['angry', 'غاضب', '😠'], ['tired', 'متعب', '😴'], ['scared', 'خائف', '😨'],
-        ['hungry', 'جائع', '🍽️'], ['cold', 'بردان', '🥶']
-      ],
-      qs: [
-        { t: 'order', w: ['My', 'name', 'is', 'Omar'], ar: 'اسمي عمر.' },
+        { p: 'كيف يشعر؟', big: '😢', q: 'I am ___.', opts: ['sad', 'happy', 'hot'], a: 'sad' },
+        { p: 'كيف يشعر؟', big: '😊', q: 'I am ___.', opts: ['happy', 'angry', 'tired'], a: 'happy' },
+        { p: 'كيف يشعر؟', big: '🥶', q: 'I am ___.', opts: ['cold', 'hot', 'sick'], a: 'cold' },
+        { p: 'اختر الرد المناسب', q: 'How are you?', say: 'How are you?', opts: ['I am fine, thank you.', 'My name is Omar.', 'Goodbye.'], a: 'I am fine, thank you.', speak: 'How are you? I am fine, thank you.' },
         { t: 'order', w: ['I', 'am', 'happy'], ar: 'أنا سعيد.' },
-        { p: 'اختر الرد المناسب', q: 'How are you?', say: 'How are you?', opts: ['I am fine.', 'My name is Omar.', 'Goodbye.'], a: 'I am fine.', speak: 'How are you? I am fine.' }
+        { t: 'order', w: ['I', 'am', 'hungry'], ar: 'أنا جائع.' },
+        { t: 'order', w: ['How', 'are', 'you?'], ar: 'كيف حالك؟' }
+      ]
+    },
+    {
+      id: 'l2', title: 'ملابسي', sub: 'الوحدة الثانية: ماذا ألبس؟', emoji: '👕', color: '#FFB703', cefr: 'Pre-A1',
+      plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
+      tips: [{ t: 'أنا ألبس...', b: 'نقول I wear أو I am wearing ثم اسم الملابس. ونضيف اللون قبل الكلمة مثل a red shirt.', ex: [['I wear a red shirt.', 'ألبس قميصًا أحمر.'], ['He is wearing a hat.', 'هو يرتدي قبعة.'], ['What are you wearing?', 'ماذا ترتدي؟']] }],
+      vocab: [
+        ['shirt', 'قميص', '👕'], ['pants', 'بنطلون', '👖'], ['dress', 'فستان', '👗'], ['shoes', 'حذاء', '👟'], ['socks', 'جوارب', '🧦'], ['cap', 'قبعة رياضية', '🧢'],
+        ['jacket', 'جاكيت', '🧥'], ['scarf', 'وشاح', '🧣'], ['gloves', 'قفازات', '🧤'], ['glasses', 'نظارة', '👓'], ['watch', 'ساعة يد', '⌚'], ['thobe', 'ثوب', '']
+      ],
+      qs: [
+        { p: 'أكمل الجملة', q: 'We wear ___ on our feet.', opts: ['shoes', 'a cap', 'gloves'], a: 'shoes' },
+        { p: 'أكمل الجملة', q: 'We wear a ___ on our head.', opts: ['cap', 'sock', 'shoe'], a: 'cap' },
+        { p: 'أكمل الجملة', q: 'It is cold. I wear a ___.', opts: ['jacket', 'dress', 'watch'], a: 'jacket' },
+        { p: 'أكمل الجملة', q: 'I wear ___ on my hands in winter.', opts: ['gloves', 'socks', 'glasses'], a: 'gloves' },
+        { t: 'order', w: ['I', 'wear', 'a', 'red', 'shirt'], ar: 'ألبس قميصًا أحمر.' },
+        { t: 'order', w: ['He', 'is', 'wearing', 'a', 'cap'], ar: 'هو يرتدي قبعة رياضية.' },
+        { t: 'order', w: ['I', 'wear', 'a', 'thobe'], ar: 'ألبس ثوبًا.' }
+      ]
+    },
+    {
+      id: 'l3', title: 'أشياء نفعلها', sub: 'الوحدة الثالثة: أفعال من حياتنا', emoji: '🏃', color: '#3AA7FF', cefr: 'Pre-A1',
+      plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
+      tips: [
+        { t: 'أستطيع أن...', b: 'نقول I can ثم الفعل. وللسؤال نقول Can you؟ ونجيب Yes, I can أو No, I can not.', ex: [['I can run.', 'أستطيع الركض.'], ['Can you jump?', 'هل تستطيع القفز؟'], ['Yes, I can.', 'نعم، أستطيع.']] },
+        { t: 'ماذا يفعل الآن؟', b: 'نقول He is أو She is ثم الفعل مع ing للحديث عمّا يحدث الآن.', ex: [['He is running.', 'هو يركض الآن.'], ['She is singing.', 'هي تغنّي الآن.']] }
+      ],
+      vocab: [
+        ['run', 'يركض', '🏃'], ['jump', 'يقفز', '🤸'], ['walk', 'يمشي', '🚶'], ['swim', 'يسبح', '🏊'], ['sing', 'يغنّي', '🎤'], ['dance', 'يرقص', '💃'],
+        ['read', 'يقرأ', '📖'], ['write', 'يكتب', '✍️'], ['draw', 'يرسم', '🎨'], ['eat', 'يأكل', '🍴'], ['drink', 'يشرب', '🥤'], ['sleep', 'ينام', '😴']
+      ],
+      qs: [
+        { p: 'أكمل الجملة', q: 'I can ___.', big: '🏊', opts: ['swim', 'sing', 'sleep'], a: 'swim' },
+        { p: 'أكمل الجملة', q: 'I can ___ a picture.', opts: ['draw', 'run', 'eat'], a: 'draw' },
+        { p: 'أكمل الجملة', q: 'Birds can ___.', opts: ['fly', 'swim', 'dance'], a: 'fly', tip: 'fly تعني يطير.' },
+        { p: 'اختر الإجابة الصحيحة', q: 'Can you jump?', say: 'Can you jump?', opts: ['Yes, I can.', 'I am happy.', 'It is red.'], a: 'Yes, I can.', speak: 'Can you jump? Yes, I can.' },
+        { t: 'order', w: ['I', 'can', 'run'], ar: 'أستطيع الركض.' },
+        { t: 'order', w: ['Can', 'you', 'swim?'], ar: 'هل تستطيع السباحة؟' },
+        { t: 'order', w: ['She', 'is', 'singing'], ar: 'هي تغنّي الآن.' }
+      ]
+    },
+    {
+      id: 'l4', title: 'الطبيعة الجميلة', sub: 'الوحدة الرابعة: أرى في الطبيعة', emoji: '🌳', color: '#1F9D45', cefr: 'A1',
+      plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
+      tips: [{ t: 'أرى...', b: 'نقول I see ثم الشيء. ونقول There is للمفرد، و There are للجمع.', ex: [['I see a tree.', 'أرى شجرة.'], ['There is a bird.', 'يوجد طائر.'], ['There are two flowers.', 'يوجد زهرتان.']] }],
+      vocab: [
+        ['tree', 'شجرة', '🌳'], ['flower', 'زهرة', '🌸'], ['sun', 'شمس', '☀️'], ['moon', 'قمر', '🌙'], ['cloud', 'سحابة', '☁️'], ['rain', 'مطر', '🌧️'],
+        ['mountain', 'جبل', '⛰️'], ['river', 'نهر', '🏞️'], ['sea', 'بحر', '🌊'], ['desert', 'صحراء', '🏜️'], ['bird', 'طائر', '🐦'], ['butterfly', 'فراشة', '🦋']
+      ],
+      qs: [
+        { p: 'أكمل الجملة', q: 'The ___ is hot and yellow.', big: '☀️', opts: ['sun', 'moon', 'rain'], a: 'sun' },
+        { p: 'أكمل الجملة', q: 'I see the ___ at night.', big: '🌙', opts: ['moon', 'sun', 'flower'], a: 'moon' },
+        { p: 'أكمل الجملة', q: 'Fish live in the ___.', opts: ['sea', 'tree', 'sun'], a: 'sea' },
+        { p: 'أكمل الجملة', q: 'There ___ a tree.', opts: ['is', 'are'], a: 'is', tip: 'tree مفرد، فنقول There is.' },
+        { p: 'أكمل الجملة', q: 'There ___ two birds.', opts: ['are', 'is'], a: 'are', tip: 'two birds جمع، فنقول There are.' },
+        { t: 'order', w: ['I', 'see', 'a', 'tree'], ar: 'أرى شجرة.' },
+        { t: 'order', w: ['The', 'sun', 'is', 'hot'], ar: 'الشمس حارة.' }
+      ]
+    },
+    {
+      id: 'l5', title: 'أصدقائي الحيوانات', sub: 'الوحدة الخامسة: أصدقاء في الحديقة', emoji: '🐘', color: '#E5484D', cefr: 'A1',
+      plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
+      tips: [{ t: 'أصوات الحيوانات', b: 'كل حيوان له صوت. البقرة moo، والبطة quack، والقطة meow.', ex: [['The cow says moo.', 'البقرة تقول موو.'], ['The duck says quack.', 'البطة تقول كواك.'], ['I like cats.', 'أنا أحب القطط.']] }],
+      vocab: [
+        ['cat', 'قطة', '🐱'], ['dog', 'كلب', '🐶'], ['cow', 'بقرة', '🐄'], ['horse', 'حصان', '🐴'], ['sheep', 'خروف', '🐑'], ['duck', 'بطة', '🦆'],
+        ['monkey', 'قرد', '🐵'], ['elephant', 'فيل', '🐘'], ['lion', 'أسد', '🦁'], ['camel', 'جمل', '🐪'], ['giraffe', 'زرافة', '🦒'], ['frog', 'ضفدع', '🐸']
+      ],
+      qs: [
+        { p: 'أي حيوان يقول موو؟', q: 'Which animal says "moo"?', opts: ['cow', 'duck', 'lion'], a: 'cow', speak: 'The cow says moo.' },
+        { p: 'أي حيوان يقول كواك؟', q: 'Which animal says "quack"?', opts: ['duck', 'horse', 'frog'], a: 'duck', speak: 'The duck says quack.' },
+        { p: 'أي حيوان رقبته طويلة جدًا؟', q: 'Which animal has a long neck?', opts: ['giraffe', 'frog', 'sheep'], a: 'giraffe', speak: 'The giraffe has a long neck.' },
+        { p: 'أي حيوان نراه في الصحراء؟', q: 'Which animal lives in the desert?', opts: ['camel', 'frog', 'duck'], a: 'camel', speak: 'The camel lives in the desert.' },
+        { t: 'order', w: ['I', 'like', 'cats'], ar: 'أنا أحب القطط.' },
+        { t: 'order', w: ['The', 'cow', 'says', 'moo'], ar: 'البقرة تقول موو.' },
+        { t: 'order', w: ['I', 'see', 'a', 'monkey'], ar: 'أرى قردًا.' }
+      ]
+    },
+    {
+      id: 'l6', title: 'أشياء من حولي', sub: 'ألعابي وأغراضي', emoji: '🧸', color: '#8E5CF7', cefr: 'A1',
+      plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
+      tips: [{ t: 'عندي...', b: 'نقول I have ثم الشيء الذي نملكه. وللسؤال نقول Do you have؟ ونجيب Yes, I do أو No, I do not.', ex: [['I have a ball.', 'عندي كرة.'], ['Do you have a bike?', 'هل عندك دراجة؟'], ['Yes, I do.', 'نعم، عندي.']] }],
+      vocab: [
+        ['ball', 'كرة', '⚽'], ['doll', 'دمية', '🪆'], ['kite', 'طائرة ورقية', '🪁'], ['car', 'سيارة', '🚗'], ['bike', 'دراجة', '🚲'], ['robot', 'روبوت', '🤖'],
+        ['teddy bear', 'دبدوب', '🧸'], ['book', 'كتاب', '📚'], ['phone', 'جوال', '📱'], ['lamp', 'مصباح', '💡'], ['bed', 'سرير', '🛏️'], ['key', 'مفتاح', '🔑']
+      ],
+      qs: [
+        { p: 'أكمل الجملة', big: '⚽', q: 'I have a ___.', opts: ['ball', 'lamp', 'key'], a: 'ball' },
+        { p: 'أكمل الجملة', big: '🚲', q: 'I have a ___.', opts: ['bike', 'doll', 'phone'], a: 'bike' },
+        { p: 'أكمل الجملة', big: '🛏️', q: 'I sleep on my ___.', opts: ['bed', 'car', 'kite'], a: 'bed' },
+        { p: 'اختر الإجابة المناسبة', q: 'Do you have a ball?', say: 'Do you have a ball?', opts: ['Yes, I do.', 'Yes, it is.', 'I am six.'], a: 'Yes, I do.', speak: 'Do you have a ball? Yes, I do.' },
+        { t: 'order', w: ['I', 'have', 'a', 'ball'], ar: 'عندي كرة.' },
+        { t: 'order', w: ['Do', 'you', 'have', 'a', 'bike?'], ar: 'هل عندك دراجة؟' },
+        { t: 'order', w: ['This', 'is', 'my', 'robot'], ar: 'هذا روبوتي.' }
+      ]
+    },
+    {
+      id: 'l7', title: 'كبير وصغير', sub: 'الصفات والأضداد', emoji: '📏', color: '#14B8A6', cefr: 'A1',
+      plan: ['listen2pic', 'pic2word', 'word2ar', 'match', 'q', 'pic2word', 'q', 'q', 'listen2word', 'q'],
+      tips: [{ t: 'الأضداد', b: 'الصفة تصف الشيء. وهناك أضداد مثل big و small، و fast و slow، و hot و cold. ونقول It is ثم الصفة.', ex: [['The elephant is big.', 'الفيل كبير.'], ['The turtle is slow.', 'السلحفاة بطيئة.'], ['The giraffe is tall.', 'الزرافة طويلة.']] }],
+      vocab: [
+        ['big', 'كبير', '🐘'], ['small', 'صغير', '🐜'], ['tall', 'طويل', '🦒'], ['fast', 'سريع', '🐆'], ['slow', 'بطيء', '🐢'], ['new', 'جديد', '🆕'],
+        ['old', 'قديم أو كبير في السن', '👴'], ['hot', 'حار', '🔥'], ['cold', 'بارد', '❄️'], ['clean', 'نظيف', '✨'], ['short', 'قصير', ''], ['dirty', 'متسخ', '']
+      ],
+      qs: [
+        { p: 'اختر الضد', q: 'big ↔ ___', opts: ['small', 'tall', 'hot'], a: 'small', speak: 'big, small' },
+        { p: 'اختر الضد', q: 'fast ↔ ___', opts: ['slow', 'new', 'clean'], a: 'slow', speak: 'fast, slow' },
+        { p: 'اختر الضد', q: 'hot ↔ ___', opts: ['cold', 'big', 'old'], a: 'cold', speak: 'hot, cold' },
+        { p: 'أكمل الجملة', big: '🐘', q: 'The elephant is ___.', opts: ['big', 'small', 'slow'], a: 'big' },
+        { p: 'أكمل الجملة', big: '🐆', q: 'The cheetah is ___.', opts: ['fast', 'slow', 'cold'], a: 'fast' },
+        { t: 'order', w: ['The', 'giraffe', 'is', 'tall'], ar: 'الزرافة طويلة.' },
+        { t: 'order', w: ['The', 'turtle', 'is', 'slow'], ar: 'السلحفاة بطيئة.' }
+      ]
+    },
+    {
+      id: 'l8', title: 'أين الأشياء؟', sub: 'in و on و under', emoji: '📦', color: '#F97316', cefr: 'A1',
+      plan: ['pic2word', 'listen2pic', 'word2ar', 'match', 'q', 'q', 'q', 'listen2word', 'q', 'q'],
+      tips: [{ t: 'أين هو؟', b: 'نسأل Where is؟ ونجيب بكلمة تدل على المكان: in تعني داخل، on تعني فوق، under تعني تحت، next to تعني بجانب.', ex: [['Where is the cat?', 'أين القطة؟'], ['The cat is in the box.', 'القطة داخل الصندوق.'], ['The ball is under the bed.', 'الكرة تحت السرير.']] }],
+      vocab: [
+        ['box', 'صندوق', '📦'], ['bed', 'سرير', '🛏️'], ['chair', 'كرسي', '🪑'], ['bag', 'حقيبة', '🎒'], ['ball', 'كرة', '⚽'], ['cat', 'قطة', '🐱'],
+        ['in', 'داخل', ''], ['on', 'فوق', ''], ['under', 'تحت', ''], ['next to', 'بجانب', ''], ['behind', 'خلف', '']
+      ],
+      qs: [
+        { p: 'القطة داخل الصندوق', q: 'The cat is ___ the box.', opts: ['in', 'on', 'under'], a: 'in' },
+        { p: 'الكتاب فوق الطاولة', q: 'The book is ___ the table.', opts: ['on', 'in', 'under'], a: 'on' },
+        { p: 'الكرة تحت السرير', q: 'The ball is ___ the bed.', opts: ['under', 'on', 'next to'], a: 'under' },
+        { p: 'الحقيبة بجانب الكرسي', q: 'The bag is ___ the chair.', opts: ['next to', 'in', 'under'], a: 'next to' },
+        { p: 'اختر الإجابة المناسبة', q: 'Where is the cat?', say: 'Where is the cat?', opts: ['It is in the box.', 'I am happy.', 'Yes, I can.'], a: 'It is in the box.', speak: 'Where is the cat? It is in the box.' },
+        { t: 'order', w: ['The', 'cat', 'is', 'in', 'the', 'box'], ar: 'القطة داخل الصندوق.' },
+        { t: 'order', w: ['The', 'ball', 'is', 'under', 'the', 'bed'], ar: 'الكرة تحت السرير.' },
+        { t: 'order', w: ['Where', 'is', 'my', 'bag?'], ar: 'أين حقيبتي؟' }
       ]
     }
   ]
 };
 
+window.CONFIG.scene = "<svg viewBox=\"0 0 400 130\" focusable=\"false\" aria-hidden=\"true\">\n<defs><linearGradient id=\"g2sky\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#7FCFFF\"/><stop offset=\"1\" stop-color=\"#E6F7D4\"/></linearGradient>\n<g id=\"g2fl\"><path d=\"M0 0 V22\" stroke=\"#2F9E45\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M0 14 q-9 -2 -10 -9 q8 0 10 9z\" fill=\"#3DB35A\"/><g fill=\"currentColor\"><circle cx=\"0\" cy=\"-6\" r=\"5\"/><circle cx=\"6\" cy=\"-1\" r=\"5\"/><circle cx=\"-6\" cy=\"-1\" r=\"5\"/><circle cx=\"3.6\" cy=\"5\" r=\"5\"/><circle cx=\"-3.6\" cy=\"5\" r=\"5\"/></g><circle cx=\"0\" cy=\"0\" r=\"3.6\" fill=\"#FFD23F\"/></g></defs>\n<rect width=\"400\" height=\"130\" fill=\"url(#g2sky)\"/>\n<g class=\"sc-sun\"><circle cx=\"64\" cy=\"34\" r=\"30\" fill=\"#FFE066\" opacity=\".35\"/><circle cx=\"64\" cy=\"34\" r=\"19\" fill=\"#FFC21A\"/></g>\n<g fill=\"#fff\"><ellipse cx=\"190\" cy=\"30\" rx=\"28\" ry=\"9\"/><ellipse cx=\"208\" cy=\"23\" rx=\"16\" ry=\"9\"/><ellipse cx=\"320\" cy=\"46\" rx=\"22\" ry=\"7\"/><ellipse cx=\"334\" cy=\"40\" rx=\"12\" ry=\"7\"/></g>\n<path d=\"M0 84 Q80 50 170 80 T340 76 T400 80 V130 H0Z\" fill=\"#A8E27F\"/>\n<path d=\"M0 100 Q100 74 200 98 T400 96 V130 H0Z\" fill=\"#74CC5E\"/>\n<g><use href=\"#g2fl\" x=\"26\" y=\"96\" style=\"color:#FF5E8A\"/><use href=\"#g2fl\" x=\"78\" y=\"102\" style=\"color:#FFFFFF\"/><use href=\"#g2fl\" x=\"132\" y=\"94\" style=\"color:#FF9A3C\"/><use href=\"#g2fl\" x=\"196\" y=\"104\" style=\"color:#B26BFF\"/><use href=\"#g2fl\" x=\"256\" y=\"95\" style=\"color:#FF5E8A\"/><use href=\"#g2fl\" x=\"312\" y=\"103\" style=\"color:#FFFFFF\"/><use href=\"#g2fl\" x=\"368\" y=\"96\" style=\"color:#FF9A3C\"/></g>\n<g class=\"sc-bfly\" style=\"font-size:24px\"><text x=\"0\" y=\"60\">🦋</text></g>\n</svg>";
 </script>
 <script>
 (function () {
@@ -417,6 +467,7 @@ const ic = (name, cls) => h('span', { class: cls || 'ic', html: ICON[name] });
 const KEY = 'english-quest-' + C.id;
 let S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: true, open: false, name: '' };
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
+try { if (!S.name && C.migrate) { const old = localStorage.getItem('english-quest-' + C.migrate); if (old) S.name = String(JSON.parse(old).name || ''); } } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 const nm = () => String(S.name || C.name || '').trim();
 const fill = t => String(t).replace(/\{n\}/g, nm() || 'بطل');
@@ -517,9 +568,10 @@ function fromCustom(q) {
     return { kind: 'build', prompt: q.p || 'رتّب الكلمات لتكوّن جملة صحيحة', text: q.ar, textAr: true, units, ans: q.w, join: ' ', tip: q.tip, say: q.w.join(' '), speak: q.w.join(' ') };
   }
   if (q.t === 'type') return { kind: 'type', prompt: q.p || 'اكتب الإجابة الصحيحة', text: q.q, passage: q.passage, answers: Array.isArray(q.a) ? q.a : [q.a], tip: q.tip, speak };
+  const noTts = !!q.listen && !HAS_TTS;
   return {
-    kind: 'choice', prompt: q.p || 'اختر الإجابة الصحيحة', big: q.big, text: q.q, textAr: !!q.ar, passage: q.passage,
-    say: q.say, listen: q.listen, opts: shuffle(q.opts), a: q.a, oc: q.oc || (q.ar ? 'ar' : (q.emo ? 'emo' : 'en')), tip: q.tip, speak
+    kind: 'choice', prompt: (noTts && q.pn) || q.p || 'اختر الإجابة الصحيحة', big: q.big, text: noTts ? q.listen : q.q, textAr: !!q.ar, passage: q.passage,
+    say: q.say, listen: noTts ? undefined : q.listen, opts: shuffle(q.opts), a: q.a, oc: q.oc || (q.ar ? 'ar' : (q.emo ? 'emo' : 'en')), tip: q.tip, speak
   };
 }
 
@@ -598,6 +650,7 @@ function home() {
   const node = h('div', { class: 'wrap screen' },
     h('div', { class: 'top' }, h('div', { class: 'brand' }, C.title),
       h('div', { class: 'chips' }, chip(ICON.star, got + '/' + total), chip('⚡', fmt(S.xp)), chip('🔥', fmt(S.streak))), soundBtn()),
+    C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
     h('div', { class: 'hero' }, h('div', { class: 'mascot', 'aria-hidden': 'true' }, C.mascot), h('div', { class: 'bubble' }, line)),
     h('button', { class: 'go', onclick: () => openLevel(ci) },
       h('span', { class: 'orb', style: '--lv:' + (cl.color || 'var(--a2)') + ';width:56px;height:56px;font-size:1.7rem' }, cl.emoji),
@@ -830,6 +883,7 @@ function nameScreen(editing) {
   inp.addEventListener('input', sync);
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
   mount(h('div', { class: 'wrap screen' }, h('div', { class: 'namebox' },
+    C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
     h('div', { class: 'mascot huge', 'aria-hidden': 'true' }, C.mascot),
     h('div', { class: 'bubble' }, editing ? 'اكتب الاسم الجديد' : C.nameAsk),
     inp, btn,

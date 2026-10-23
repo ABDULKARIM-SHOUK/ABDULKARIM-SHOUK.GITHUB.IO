@@ -14,7 +14,13 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;paddin
 :focus-visible{outline:3px solid var(--focus);outline-offset:3px}
 svg{fill:currentColor;display:block}
 .en{font-family:var(--font-en);direction:ltr;unicode-bidi:isolate}
-.wrap{max-width:640px;margin-inline:auto;padding-block:14px 120px}
+.wrap{max-width:640px;margin-inline:auto;padding-block:14px 120px;position:relative;z-index:1}
+body::after{content:"";position:fixed;left:0;right:0;bottom:0;height:var(--gh,0px);background:var(--ground,none) repeat-x center bottom/auto 100%;pointer-events:none;z-index:0}
+.scene{margin-block:12px 0;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);line-height:0;border:3px solid var(--scene-bd,#fff)}
+.scene svg{width:100%;height:auto;display:block;direction:ltr}
+.namebox .scene{width:100%;margin-block:0 6px}
+.path{position:relative}
+.path::before{content:"";position:absolute;inset-block:34px;inset-inline-start:calc(50% - var(--tw,6px) / 2);width:var(--tw,6px);background:var(--trail,none);border-radius:99px;z-index:0}
 .wrap.q{padding-bottom:260px}
 .screen{animation:fade .25s ease-out}
 
@@ -43,11 +49,13 @@ svg{fill:currentColor;display:block}
 .go{display:flex;align-items:center;gap:14px;width:100%;text-align:start;background:var(--a1);color:var(--on-a1);border-radius:var(--r);padding:14px 16px;box-shadow:0 6px 0 var(--a1-deep);transition:transform .08s,box-shadow .08s}
 .go:active{transform:translateY(5px);box-shadow:0 1px 0 var(--a1-deep)}
 .go .gt{flex:1;min-width:0}
+.go + .meter{margin-inline:16px}
 .go small{display:block;opacity:.85;font-weight:700}
 .go b{font-family:var(--font-display);font-size:1.25rem;line-height:1.3}
 .go svg{width:30px;height:30px;flex:none}
-.meter{height:14px;border-radius:99px;background:var(--track);overflow:hidden;margin-top:14px}
-.meter i{display:block;height:100%;width:var(--w,0%);background:var(--a2);border-radius:99px;transition:width .6s ease}
+.meter{height:14px;border-radius:99px;background:var(--track);margin-top:14px}
+.meter i{display:block;position:relative;height:100%;width:var(--w,0%);background:var(--a2);border-radius:99px;transition:width .6s ease}
+.meter i::after{content:var(--veh,none);position:absolute;inset-inline-end:-15px;top:50%;translate:0 -52%;font-size:26px;line-height:1;filter:drop-shadow(0 2px 0 rgba(0,0,0,.18))}
 .mlabel{display:flex;justify-content:space-between;font-weight:700;font-size:.9rem;margin-top:6px;color:var(--muted)}
 h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-height:1.3}
 
@@ -61,7 +69,8 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .node .meta{min-width:0;flex:1}
 .node h3{margin:0;font-family:var(--font-display);font-size:1.12rem;line-height:1.3}
 .node p{margin:2px 0 0;color:var(--muted);font-size:.9rem;line-height:1.4}
-.node.locked{opacity:.6;filter:grayscale(.9);cursor:not-allowed}
+.node.locked{filter:grayscale(.9);cursor:not-allowed;background:var(--card2);background:color-mix(in srgb,var(--card) 64%,var(--bg))}
+.node.locked>*{opacity:.6}
 .node .lk{width:22px;height:22px;color:var(--muted);flex:none}
 .stars{display:flex;gap:2px;margin-top:4px}
 .st svg{width:22px;height:22px;fill:var(--star-off)}
@@ -108,7 +117,8 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .dock-in .btn{flex:1}
 
 /* quiz */
-.qbar{flex:1}
+.qbar{flex:1;min-width:0}
+.qbar .meter{margin-inline:16px!important}
 .qcount{font-weight:800;min-width:3.4ch;text-align:center;font-variant-numeric:tabular-nums}
 .qprompt{font-family:var(--font-display);font-size:1.3rem;margin:4px 0 14px;text-align:center;line-height:1.5;font-weight:800}
 .again{display:inline-block;margin-inline-start:8px;font-size:.8rem;background:var(--a2);color:var(--on-a2);padding:2px 10px;border-radius:99px;vertical-align:middle}
@@ -233,6 +243,16 @@ body{background-size:200px 200px,200px 200px,200px 200px,200px 200px,auto,auto,a
 .cefr{background:#38D6FF;color:#04202B}
 .btn.alt{box-shadow:0 5px 0 #0B1034;border:1px solid var(--line)}
 
+/* creative pass: space mission */
+:root{--veh:"🚀";--gh:74px;--ground:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgOTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iOTAiPjxwYXRoIGQ9Ik0wIDU4IFE5MCAzMCAxODAgNTggVDM2MCA1OCBWOTAgSDBaIiBmaWxsPSIjMkEyRjdBIi8+PHBhdGggZD0iTTAgNzIgUTEwMCA1MiAyMDAgNzAgVDM2MCA3MiBWOTAgSDBaIiBmaWxsPSIjMUMyMTYwIi8+PGcgZmlsbD0iIzE3MUM1NCI+PGVsbGlwc2UgY3g9IjYwIiBjeT0iNjYiIHJ4PSIxNCIgcnk9IjQiLz48ZWxsaXBzZSBjeD0iMTcwIiBjeT0iNzYiIHJ4PSIxOCIgcnk9IjQuNSIvPjxlbGxpcHNlIGN4PSIyOTAiIGN5PSI2OCIgcng9IjEyIiByeT0iMy42Ii8+PC9nPjxnIGZpbGw9IiNmZmYiIG9wYWNpdHk9Ii44Ij48Y2lyY2xlIGN4PSIzMCIgY3k9IjIwIiByPSIxLjIiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSIzMCIgcj0iMSIvPjxjaXJjbGUgY3g9IjIyMCIgY3k9IjE2IiByPSIxLjMiLz48Y2lyY2xlIGN4PSIzMjAiIGN5PSIyNiIgcj0iMSIvPjwvZz48L3N2Zz4K");--tw:4px;--scene-bd:#2E3B80;
+  --trail:radial-gradient(circle,rgba(255,255,255,.9) 0 1.6px,transparent 2.2px) center 0/6px 14px repeat-y}
+.meter i::after{rotate:-135deg;font-size:22px}
+.sc-rocket{transform:translate(180px,70px);animation:sc-fly 11s linear infinite}
+@keyframes sc-fly{0%{transform:translate(-30px,122px)}100%{transform:translate(430px,26px)}}
+.sc-tw{animation:sc-tw 2.8s ease-in-out infinite alternate}
+.sc-tw2{animation:sc-tw 3.6s ease-in-out infinite alternate-reverse}
+@keyframes sc-tw{from{opacity:.15}to{opacity:1}}
+
 </style>
 </head>
 <body>
@@ -240,7 +260,7 @@ body{background-size:200px 200px,200px 200px,200px 200px,200px 200px,auto,auto,a
 <noscript>هذه الصفحة تحتاج إلى تفعيل JavaScript لتعمل.</noscript>
 <script>
 window.CONFIG = {
-  id: 'g6', askName: true, title: 'مغامرة الكواكب', mascot: '🚀',
+  id: 'g6v2', migrate: 'g6', askName: true, title: 'مغامرة الكواكب', mascot: '🚀',
   nameAsk: 'مرحبًا بك في محطة الفضاء! أنا قائد المهمة. ما اسمك أيها المستكشف؟', nameBtn: 'انطلق', speechRate: 0.9, pitch: 1,
   journey: 'تقدّم مهمتك الفضائية', pathTitle: 'خريطة الكواكب', learnTitle: 'مركز التدريب', startLabel: 'انطلق للمهمة',
   confetti: ['#6A5CFF', '#38D6FF', '#FF8F3F', '#FFC83D', '#2FD088', '#FFFFFF'],
@@ -258,180 +278,203 @@ window.CONFIG = {
   defaultPlan: ['word2ar', 'listen2word', 'ar2word', 'spell', 'match', 'word2ar', 'q', 'q', 'q', 'q', 'q', 'q'],
   levels: [
     {
-      id: 'l1', title: 'الماضي البسيط 1', sub: 'الأفعال المنتظمة مع ed', emoji: '🪐', color: '#FF8F3F', cefr: 'A1+',
+      id: 'l1', title: 'أهلًا من جديد', sub: 'Welcome: مراجعة عادات اليوم', emoji: '🪐', color: '#FF8F3F', cefr: 'A1+',
+      plan: ['word2ar', 'listen2word', 'ar2word', 'match', 'q', 'q', 'q', 'q', 'q', 'q'],
       tips: [
-        { t: 'الماضي البسيط', b: 'نستخدمه للحديث عن أشياء حدثت وانتهت، مع كلمات مثل yesterday و last week و last night. وللأفعال المنتظمة نضيف ed.', ex: [['I played football yesterday.', 'لعبت كرة القدم أمس.'], ['She visited her grandmother last week.', 'زارت جدتها الأسبوع الماضي.']] },
-        { t: 'طريقة إضافة ed', b: 'إذا انتهى الفعل بحرف e نضيف d فقط مثل like → liked. وإذا انتهى بـ y بعد حرف ساكن نغيّرها إلى ied مثل study → studied. وبعض الأفعال نكرّر آخر حرف مثل stop → stopped.', ex: [['She studied hard.', 'هي درست بجد.'], ['The bus stopped.', 'توقفت الحافلة.']] }
+        { t: 'الآن أم عادةً؟', b: 'نستخدم المضارع البسيط للعادات مع كلمات مثل always و usually و every day. ونستخدم am و is و are مع ing لما يحدث الآن.', ex: [['I usually walk to school.', 'عادةً أمشي إلى المدرسة.'], ['I am walking now.', 'أنا أمشي الآن.'], ['She is studying at the moment.', 'هي تدرس في هذه اللحظة.']] },
+        { t: 'كلمات التكرار', b: 'always دائمًا، usually عادةً، often كثيرًا، sometimes أحيانًا، never أبدًا. وتأتي قبل الفعل.', ex: [['He never eats junk food.', 'هو لا يأكل الوجبات السريعة أبدًا.']] }
       ],
       vocab: [
-        ['visited', 'زار', '🏛️'], ['played', 'لعب', '⚽'], ['watched', 'شاهد', '📺'], ['cooked', 'طبخ', '🍳'], ['cleaned', 'نظّف', '🧹'],
-        ['helped', 'ساعد', '🤝'], ['wanted', 'أراد', ''], ['walked', 'مشى', '🚶'], ['studied', 'درس', '📚'], ['listened', 'استمع', '🎧'],
-        ['opened', 'فتح', '🚪'], ['stopped', 'توقّف', '🛑']
+        ['always', 'دائمًا', ''], ['usually', 'عادةً', ''], ['often', 'كثيرًا', ''], ['sometimes', 'أحيانًا', ''], ['never', 'أبدًا', ''], ['every day', 'كل يوم', '📆'],
+        ['now', 'الآن', '⏱️'], ['at the moment', 'في هذه اللحظة', ''], ['weekend', 'عطلة نهاية الأسبوع', '🗓️'], ['holiday', 'إجازة', '🏖️'], ['routine', 'روتين', '🔁'], ['yesterday', 'أمس', '']
       ],
       qs: [
-        { q: 'Yesterday I ___ football with my friends.', opts: ['played', 'play', 'plays'], a: 'played', tip: 'yesterday تدل على الماضي، فنضيف ed.' },
-        { q: 'She ___ her homework last night.', opts: ['finished', 'finish', 'finishes'], a: 'finished', tip: 'last night تدل على الماضي.' },
-        { q: 'We ___ a documentary last weekend.', opts: ['watched', 'watch', 'watching'], a: 'watched' },
-        { q: 'The bus ___ at the traffic light.', opts: ['stopped', 'stoped', 'stopt'], a: 'stopped', tip: 'stop → stopped نكرّر حرف p.' },
-        { q: 'He ___ hard for the exam.', opts: ['studied', 'studyed', 'studys'], a: 'studied', tip: 'study → studied نحوّل y إلى ied.' },
-        { t: 'order', w: ['I', 'visited', 'my', 'grandfather', 'yesterday'], ar: 'زرت جدي أمس.' },
-        { t: 'order', w: ['They', 'helped', 'their', 'mother'], ar: 'ساعدوا أمهم.' },
-        { t: 'type', p: 'اكتب الفعل في الماضي', q: 'We ___ (cook) dinner last night.', a: ['cooked'] }
+        { q: 'I ___ wake up at six. It is my routine.', opts: ['usually', 'now', 'yesterday'], a: 'usually' },
+        { q: 'He is ___ his homework now.', opts: ['doing', 'does', 'do'], a: 'doing', tip: 'now تدل على أن الفعل يحدث الآن.' },
+        { q: 'She ___ plays football on Fridays.', opts: ['often', 'now', 'tomorrow'], a: 'often' },
+        { q: 'My sister ___ to school by bus every day.', opts: ['goes', 'go', 'is going'], a: 'goes', tip: 'every day تدل على عادة، ومع she نضيف es.' },
+        { q: 'Look! The children ___ in the park.', opts: ['are playing', 'play', 'plays'], a: 'are playing', tip: 'كلمة Look تدل على أن الفعل يحدث الآن.' },
+        { t: 'order', w: ['I', 'always', 'brush', 'my', 'teeth'], ar: 'أنا دائمًا أفرّش أسناني.' },
+        { t: 'order', w: ['He', 'is', 'reading', 'a', 'book', 'now'], ar: 'هو يقرأ كتابًا الآن.' },
+        { t: 'type', p: 'أضف ing للفعل', q: 'We are ___ now. (run)', a: ['running'], tip: 'run → running نكرّر حرف n.' },
+        { p: 'اختر الإجابة المناسبة', q: 'What are you doing now?', opts: ['I am studying English.', 'I study every day.', 'I studied yesterday.'], a: 'I am studying English.' }
       ]
     },
     {
-      id: 'l2', title: 'الماضي البسيط 2', sub: 'الأفعال الشاذة والسؤال بـ did', emoji: '🌕', color: '#FFC83D', cefr: 'A2',
+      id: 'l2', title: 'الكائنات الحية', sub: 'Living Things: مجموعات الحيوانات', emoji: '🐾', color: '#FFC83D', cefr: 'A2',
       tips: [
-        { t: 'أفعال لا تأخذ ed', b: 'بعض الأفعال تتغير بالكامل في الماضي مثل go → went و see → saw و eat → ate. تحتاج إلى حفظها.', ex: [['We went to Abha last summer.', 'ذهبنا إلى أبها الصيف الماضي.'], ['He ate rice and chicken.', 'أكل الأرز والدجاج.'], ['She bought a new bag.', 'اشترت حقيبة جديدة.']] },
-        { t: 'النفي والسؤال', b: 'في النفي والسؤال نستخدم did، ويعود الفعل إلى صورته الأصلية.', ex: [["I didn't go to school yesterday.", 'لم أذهب إلى المدرسة أمس.'], ['Did you see the match?', 'هل شاهدت المباراة؟'], ['Yes, I did.', 'نعم شاهدتها.'], ["No, I didn't.", 'لا، لم أشاهدها.']] }
+        { t: 'مجموعات الحيوانات', b: 'نصنّف الحيوانات إلى مجموعات مثل mammals و birds و reptiles و fish و insects. ولكل مجموعة صفات مشتركة.', ex: [['Mammals have fur or hair.', 'الثدييات لها فراء أو شعر.'], ['Birds have feathers and wings.', 'الطيور لها ريش وأجنحة.'], ['Fish live in water.', 'الأسماك تعيش في الماء.']] },
+        { t: 'has و have و can', b: 'نستخدم has مع المفرد، و have مع الجمع. ونقول can لما يستطيع الحيوان فعله، و cannot لما لا يستطيعه.', ex: [['A snake has scales.', 'للأفعى حراشف.'], ['Most birds can fly.', 'معظم الطيور تستطيع الطيران.'], ['A fish cannot walk.', 'السمكة لا تستطيع المشي.']] }
       ],
       vocab: [
-        ['went', 'ذهب (go)', ''], ['saw', 'رأى (see)', ''], ['ate', 'أكل (eat)', ''], ['drank', 'شرب (drink)', ''], ['bought', 'اشترى (buy)', ''],
-        ['took', 'أخذ (take)', ''], ['made', 'صنع (make)', ''], ['had', 'تناول أو امتلك (have)', ''], ['came', 'جاء (come)', ''], ['gave', 'أعطى (give)', ''],
-        ['wrote', 'كتب (write)', ''], ['met', 'قابل (meet)', ''], ['ran', 'ركض (run)', ''], ['swam', 'سبح (swim)', '']
+        ['mammal', 'ثديي', '🐘'], ['bird', 'طائر', '🐦'], ['reptile', 'زاحف', '🦎'], ['fish', 'سمكة', '🐟'], ['insect', 'حشرة', '🐜'], ['amphibian', 'برمائي', '🐸'],
+        ['snake', 'أفعى', '🐍'], ['bat', 'خفاش', '🦇'], ['eagle', 'نسر', '🦅'], ['fur', 'فراء', ''], ['feathers', 'ريش', ''], ['scales', 'حراشف', '']
       ],
       qs: [
-        { q: 'Last week we ___ to Jeddah.', opts: ['went', 'go', 'goed'], a: 'went' },
-        { q: 'He ___ rice and fish for lunch.', opts: ['ate', 'eated', 'eats'], a: 'ate' },
-        { q: 'I ___ a new book yesterday.', opts: ['bought', 'buyed', 'buy'], a: 'bought' },
-        { q: 'She ___ a letter to her friend.', opts: ['wrote', 'writed', 'write'], a: 'wrote' },
-        { q: "I didn't ___ TV last night.", opts: ['watch', 'watched', 'watches'], a: 'watch', tip: "بعد didn't يعود الفعل إلى صورته الأصلية." },
-        { q: '___ you see the match yesterday?', opts: ['Did', 'Do', 'Does'], a: 'Did', tip: 'السؤال عن الماضي يبدأ بـ Did.' },
-        { t: 'type', p: 'اكتب الفعل في الماضي', q: 'They ___ (swim) in the sea last Friday.', a: ['swam'] },
-        { t: 'order', w: ['Did', 'you', 'go', 'to', 'school', 'yesterday?'], ar: 'هل ذهبت إلى المدرسة أمس؟' },
-        { t: 'order', w: ['I', "didn't", 'see', 'him'], ar: 'لم أره.' }
+        { q: 'A bird has ___.', opts: ['feathers', 'fur', 'scales'], a: 'feathers' },
+        { q: 'A snake has ___.', opts: ['scales', 'feathers', 'fur'], a: 'scales' },
+        { q: 'Camels are ___.', opts: ['mammals', 'reptiles', 'insects'], a: 'mammals' },
+        { q: 'Insects have six ___.', opts: ['legs', 'wings', 'eyes'], a: 'legs' },
+        { q: 'A bat is a mammal. It ___ fly.', opts: ['can', 'cannot', 'does'], a: 'can' },
+        { q: 'A penguin is a bird, but it ___ fly.', opts: ['cannot', 'can', 'must'], a: 'cannot', tip: 'البطريق طائر لكنه لا يطير.' },
+        { t: 'order', w: ['Birds', 'have', 'feathers', 'and', 'wings'], ar: 'الطيور لها ريش وأجنحة.' },
+        { t: 'order', w: ['A', 'snake', 'has', 'scales'], ar: 'للأفعى حراشف.' },
+        { t: 'type', p: 'اكتب has أو have', q: 'A fish ___ gills.', a: ['has'] },
+        { p: 'اختر الإجابة الصحيحة', q: 'Which animal is an amphibian?', opts: ['A frog', 'A camel', 'An eagle'], a: 'A frog', speak: 'A frog is an amphibian.' }
       ]
     },
     {
-      id: 'l3', title: 'المقارنات', sub: 'أطول وأسرع وأفضل', emoji: '🌍', color: '#38D6FF', cefr: 'A2',
+      id: 'l3', title: 'بيئات الكائنات', sub: 'Creatures around the world', emoji: '🌍', color: '#38D6FF', cefr: 'A2',
       tips: [
-        { t: 'المقارنة بين شيئين', b: 'للصفة القصيرة نضيف er ثم than. وللصفة الطويلة نضع more قبلها. وإذا انتهت الصفة بـ y نغيّرها إلى ier مثل easy → easier.', ex: [['A horse is faster than a man.', 'الحصان أسرع من الإنسان.'], ['This book is more interesting than that one.', 'هذا الكتاب أكثر إثارة من ذاك.']] },
-        { t: 'الأعلى والأفضل', b: 'للمقارنة بين ثلاثة أشياء أو أكثر نضيف est ونضع the قبل الصفة. وللصفات الطويلة نقول the most. وهناك صفات شاذة: good → better → the best، و bad → worse → the worst.', ex: [['Ali is the tallest boy in my class.', 'علي أطول ولد في صفي.'], ['This is the most expensive watch.', 'هذه أغلى ساعة.'], ['My brother is a better player than me.', 'أخي لاعب أفضل مني.']] }
+        { t: 'أين تعيش؟', b: 'لكل حيوان بيئة يعيش فيها تسمى habitat. ونقول lives in للمفرد، و live in للجمع.', ex: [['Camels live in the desert.', 'الجِمال تعيش في الصحراء.'], ['A polar bear lives in the Arctic.', 'الدب القطبي يعيش في القطب الشمالي.']] },
+        { t: 'ماذا يأكل؟', b: 'herbivore يأكل النباتات، و carnivore يأكل اللحوم، و omnivore يأكل الاثنين.', ex: [['A cow is a herbivore.', 'البقرة آكلة أعشاب.'], ['A lion is a carnivore.', 'الأسد آكل لحوم.']] },
+        { t: 'المقارنة', b: 'نضيف er أو est للصفة القصيرة، ونستخدم more أو most للصفة الطويلة.', ex: [['A cheetah is faster than a lion.', 'الفهد أسرع من الأسد.'], ['The blue whale is the biggest animal.', 'الحوت الأزرق هو أكبر حيوان.']] }
       ],
       vocab: [
-        ['tall', 'طويل', '📏'], ['short', 'قصير', ''], ['fast', 'سريع', '⚡'], ['slow', 'بطيء', '🐢'], ['heavy', 'ثقيل', ''], ['light', 'خفيف', '🪶'],
-        ['cheap', 'رخيص', ''], ['expensive', 'غالي', '💎'], ['old', 'قديم', ''], ['young', 'صغير في السن', ''], ['strong', 'قوي', '💪'],
-        ['difficult', 'صعب', ''], ['easy', 'سهل', ''], ['interesting', 'ممتع ومثير', '']
+        ['desert', 'صحراء', '🏜️'], ['rainforest', 'غابة مطيرة', '🌴'], ['ocean', 'محيط', '🌊'], ['mountain', 'جبل', '⛰️'], ['Arctic', 'القطب الشمالي', '❄️'], ['forest', 'غابة', '🌲'],
+        ['river', 'نهر', '🏞️'], ['habitat', 'بيئة طبيعية', '🏡'], ['herbivore', 'آكل أعشاب', '🌿'], ['carnivore', 'آكل لحوم', '🥩'], ['omnivore', 'آكل كل شيء', '🍽️'], ['survive', 'يبقى على قيد الحياة', '']
       ],
       qs: [
-        { q: 'A cheetah is ___ than a horse.', opts: ['faster', 'fast', 'fastest'], a: 'faster' },
-        { q: 'Mount Everest is the ___ mountain in the world.', opts: ['highest', 'higher', 'high'], a: 'highest', tip: 'نستخدم the + est للأعلى بين الجميع.' },
-        { q: 'This book is ___ than that one.', opts: ['more interesting', 'interestinger', 'most interesting'], a: 'more interesting', tip: 'interesting صفة طويلة فنضع more قبلها.' },
-        { q: 'Ahmed is the ___ boy in my class.', opts: ['tallest', 'taller', 'tall'], a: 'tallest' },
-        { q: 'My phone is cheaper ___ yours.', opts: ['than', 'then', 'that'], a: 'than', tip: 'نستخدم than بعد صفة المقارنة.' },
-        { q: 'Her English is ___ than mine.', opts: ['better', 'gooder', 'best'], a: 'better', tip: 'good → better → best.' },
-        { t: 'order', w: ['The', 'blue', 'whale', 'is', 'the', 'biggest', 'animal'], ar: 'الحوت الأزرق هو أكبر حيوان.' },
-        { t: 'order', w: ['My', 'bag', 'is', 'heavier', 'than', 'yours'], ar: 'حقيبتي أثقل من حقيبتك.' },
-        { t: 'type', p: 'اكتب صيغة المقارنة', q: 'Today is ___ than yesterday. (hot)', a: ['hotter'], tip: 'hot → hotter نكرّر حرف t.' }
+        { q: 'Camels live in the ___.', opts: ['desert', 'ocean', 'Arctic'], a: 'desert' },
+        { q: 'A polar bear lives in the ___.', opts: ['Arctic', 'rainforest', 'desert'], a: 'Arctic' },
+        { q: 'Cows eat only plants. They are ___.', opts: ['herbivores', 'carnivores', 'omnivores'], a: 'herbivores' },
+        { q: 'Lions eat meat. They are ___.', opts: ['carnivores', 'herbivores', 'omnivores'], a: 'carnivores' },
+        { q: 'A cheetah is ___ than a lion.', opts: ['faster', 'fast', 'fastest'], a: 'faster', tip: 'للمقارنة بين شيئين نضيف er ثم than.' },
+        { q: 'The blue whale is the ___ animal in the world.', opts: ['biggest', 'bigger', 'big'], a: 'biggest', tip: 'للأعلى في المجموعة نضيف est ونضع the.' },
+        { q: 'An elephant is ___ than a horse.', opts: ['bigger', 'big', 'biggest'], a: 'bigger' },
+        { t: 'order', w: ['Camels', 'live', 'in', 'the', 'desert'], ar: 'الجِمال تعيش في الصحراء.' },
+        { t: 'order', w: ['A', 'cheetah', 'is', 'faster', 'than', 'a', 'lion'], ar: 'الفهد أسرع من الأسد.' },
+        { t: 'type', p: 'اكتب الصفة بصيغة المقارنة', q: 'A giraffe is ___ than a horse. (tall)', a: ['taller'] }
       ]
     },
     {
-      id: 'l4', title: 'المستقبل', sub: 'going to و will', emoji: '🔮', color: '#6A5CFF', cefr: 'A2',
+      id: 'l4', title: 'أساليب الحياة', sub: 'Lifestyles: Living a healthy life', emoji: '🥗', color: '#2FD088', cefr: 'A2',
       tips: [
-        { t: 'going to للخطط', b: 'نستخدم am / is / are + going to + الفعل للخطط التي قررناها قبل الكلام، أو لتوقع شيء نرى علامته الآن.', ex: [["I'm going to visit my uncle tomorrow.", 'سأزور عمي غدًا.'], ['They are going to travel next month.', 'سيسافرون الشهر القادم.'], ['Look at the clouds! It is going to rain.', 'انظر إلى الغيوم! ستمطر.']] },
-        { t: 'will للقرار اللحظي', b: 'نستخدم will عندما نقرر وقت الكلام، أو عندما نتوقع شيئًا أو نعد بشيء. وبعد will يأتي الفعل بدون to.', ex: [["It's hot. I will open the window.", 'الجو حار. سأفتح النافذة.'], ['I will help you.', 'سأساعدك.'], ["I won't be late.", 'لن أتأخر.']] }
+        { t: 'should و shouldn\'t', b: 'نستخدم should للنصيحة، و shouldn\'t لما لا ننصح به. وبعدهما يأتي الفعل بدون s أو to.', ex: [['You should drink water.', 'يجب أن تشرب الماء.'], ["You shouldn't eat too much sugar.", 'لا ينبغي أن تأكل سكرًا كثيرًا.'], ['Should I exercise every day?', 'هل أتمرّن كل يوم؟']] },
+        { t: 'كم مرة؟', b: 'نسأل How often؟ ونجيب بكلمات مثل every day و once a week و twice a week و never.', ex: [['How often do you exercise?', 'كم مرة تتمرّن؟'], ['I exercise three times a week.', 'أتمرّن ثلاث مرات في الأسبوع.']] }
       ],
       vocab: [
-        ['tomorrow', 'غدًا', ''], ['tonight', 'الليلة', '🌙'], ['next week', 'الأسبوع القادم', ''], ['next month', 'الشهر القادم', ''], ['next year', 'السنة القادمة', ''],
-        ['plan', 'خطة', '📝'], ['trip', 'رحلة', '🧳'], ['holiday', 'إجازة', '🏖️'], ['travel', 'يسافر', '✈️'], ['visit', 'يزور', '🏛️'],
-        ['future', 'المستقبل', '🔮'], ['weekend', 'عطلة نهاية الأسبوع', '🗓️'], ['promise', 'وعد', '🤞'], ['decide', 'يقرّر', '']
+        ['exercise', 'يتمرّن', '🏋️'], ['healthy', 'صحّي', '🥗'], ['sleep', 'ينام', '😴'], ['vegetables', 'خضراوات', '🥦'], ['fruit', 'فاكهة', '🍎'], ['water', 'ماء', '💧'],
+        ['sugar', 'سكر', '🍬'], ['junk food', 'وجبات سريعة', '🍔'], ['habit', 'عادة', '🔁'], ['diet', 'نظام غذائي', '🥙'], ['vitamins', 'فيتامينات', '💊'], ['unhealthy', 'غير صحّي', '']
       ],
       qs: [
-        { q: 'I ___ visit my uncle tomorrow. I already have a plan.', opts: ['am going to', 'is going to', 'are going to'], a: 'am going to' },
-        { q: 'They ___ travel next month.', opts: ['are going to', 'is going to', 'am going to'], a: 'are going to' },
-        { q: "It's hot in here. I ___ open the window.", opts: ['will', 'went', 'was'], a: 'will', tip: 'قرار لحظي، فنستخدم will.' },
-        { q: 'Look at those dark clouds! It is ___ rain.', opts: ['going to', 'will to', 'go to'], a: 'going to' },
-        { q: 'I think my team ___ win tomorrow.', opts: ['will', 'is', 'did'], a: 'will', tip: 'نستخدم will للتوقع.' },
-        { t: 'order', w: ['What', 'are', 'you', 'going', 'to', 'do', 'next', 'weekend?'], ar: 'ماذا ستفعل في عطلة نهاية الأسبوع القادمة؟' },
-        { t: 'order', w: ['We', 'are', 'going', 'to', 'travel', 'by', 'plane'], ar: 'سنسافر بالطائرة.' },
-        { t: 'type', p: 'اكتب الفعل', q: 'She is going to ___ her grandmother tomorrow. (visit)', a: ['visit'], tip: 'بعد going to يأتي الفعل بصورته الأصلية.' },
-        { p: 'أي جملة تتحدث عن خطة؟', q: '', opts: ["I'm going to study tonight.", 'I studied yesterday.', 'I study every day.'], a: "I'm going to study tonight." }
+        { q: 'You ___ drink water every day.', opts: ['should', 'shouldn\'t', 'does'], a: 'should' },
+        { q: 'You ___ eat too much junk food.', opts: ["shouldn't", 'should', 'are'], a: "shouldn't" },
+        { q: 'We should ___ vegetables and fruit.', opts: ['eat', 'eats', 'eating'], a: 'eat', tip: 'بعد should يأتي الفعل بدون s.' },
+        { q: 'How ___ do you exercise?', opts: ['often', 'much', 'many'], a: 'often' },
+        { q: 'Children should ___ for nine hours at night.', opts: ['sleep', 'sleeps', 'to sleep'], a: 'sleep' },
+        { t: 'order', w: ['You', 'should', 'drink', 'more', 'water'], ar: 'يجب أن تشرب ماءً أكثر.' },
+        { t: 'order', w: ["You", "shouldn't", 'eat', 'too', 'much', 'sugar'], ar: 'لا ينبغي أن تأكل سكرًا كثيرًا.' },
+        { t: 'order', w: ['How', 'often', 'do', 'you', 'exercise?'], ar: 'كم مرة تتمرّن؟' },
+        { t: 'type', p: 'اكتب should أو shouldn\'t', q: 'Sugar is unhealthy. We ___ eat too much.', a: ["shouldn't", 'should not'] },
+        { p: 'اختر الإجابة الصحيحة', q: 'How often do you exercise?', opts: ['Three times a week.', 'In the park.', 'Because it is healthy.'], a: 'Three times a week.' }
       ]
     },
     {
-      id: 'l5', title: 'الصحة والمهن', sub: 'should و must', emoji: '🩺', color: '#2FD088', cefr: 'A2',
-      tips: [{ t: 'should و must', b: 'نستخدم should للنصيحة، و must للضرورة أو القانون. وللمنع نقول mustn\'t. وللنصيحة السلبية نقول shouldn\'t.', ex: [['You should drink water.', 'عليك أن تشرب الماء.'], ["You shouldn't eat too much sugar.", 'لا ينبغي أن تأكل الكثير من السكر.'], ['You must wear a seatbelt.', 'يجب أن تربط حزام الأمان.'], ["You mustn't run in the hospital.", 'ممنوع أن تركض في المستشفى.']] }],
+      id: 'l5', title: 'جسمي والصحة', sub: 'الأعضاء ووظائفها', emoji: '🫀', color: '#E5484D', cefr: 'A2',
+      tips: [
+        { t: 'ماذا يفعل هذا العضو؟', b: 'نستخدم المضارع البسيط للحقائق العلمية. ومع المفرد نضيف s للفعل. ونستخدم because لذكر السبب.', ex: [['The heart pumps blood.', 'القلب يضخّ الدم.'], ['We breathe with our lungs.', 'نتنفس برئتينا.'], ['Bones protect our body.', 'العظام تحمي أجسامنا.']] },
+        { t: 'السبب والنتيجة', b: 'نستخدم because قبل السبب.', ex: [['I drink water because I am thirsty.', 'أشرب الماء لأنني عطشان.'], ['Exercise is good because it makes muscles strong.', 'الرياضة مفيدة لأنها تقوّي العضلات.']] }
+      ],
       vocab: [
-        ['doctor', 'طبيب', '👨‍⚕️'], ['nurse', 'ممرض', '🧑‍⚕️'], ['engineer', 'مهندس', '👷'], ['pilot', 'طيار', '🧑‍✈️'], ['farmer', 'مزارع', '🧑‍🌾'],
-        ['police officer', 'رجل شرطة', '👮'], ['headache', 'صداع', '🤕'], ['fever', 'حمّى', '🤒'], ['cough', 'سعال', '😷'], ['toothache', 'ألم أسنان', '🦷'],
-        ['medicine', 'دواء', '💊'], ['healthy', 'صحي', '🥗'], ['exercise', 'تمرين رياضي', '🏃'], ['rest', 'يرتاح', '🛌']
+        ['heart', 'قلب', '❤️'], ['lungs', 'رئتان', '🫁'], ['brain', 'دماغ', '🧠'], ['bones', 'عظام', '🦴'], ['muscles', 'عضلات', '💪'], ['blood', 'دم', '🩸'],
+        ['stomach', 'معدة', ''], ['skin', 'جلد', ''], ['tooth', 'سن', '🦷'], ['pump', 'يضخّ', ''], ['breathe', 'يتنفس', '🌬️'], ['protect', 'يحمي', '🛡️']
       ],
       qs: [
-        { q: 'You have a headache. You ___ rest.', opts: ['should', "shouldn't", 'shoulds'], a: 'should' },
-        { q: 'A person who flies a plane is a ___.', opts: ['pilot', 'nurse', 'farmer'], a: 'pilot' },
-        { q: 'A ___ grows vegetables on a farm.', opts: ['farmer', 'doctor', 'engineer'], a: 'farmer' },
-        { q: "You ___ run in the hospital. It is forbidden.", opts: ["mustn't", 'must', 'should'], a: "mustn't", tip: "mustn't تفيد المنع." },
-        { q: 'You ___ wear a seatbelt in the car. It is the law.', opts: ['must', "mustn't", "shouldn't"], a: 'must' },
-        { q: 'Ali has a fever. He ___ see a doctor.', opts: ['should', "shouldn't", "can't"], a: 'should' },
-        { p: 'من يساعد المرضى في المستشفى؟', q: 'Who helps sick people in a hospital?', opts: ['A doctor', 'A pilot', 'A farmer'], a: 'A doctor' },
-        { t: 'order', w: ['You', 'should', 'drink', 'more', 'water'], ar: 'ينبغي أن تشرب ماءً أكثر.' },
-        { t: 'type', p: "اكتب should أو shouldn't", q: 'You ___ eat too much sugar. It is not healthy.', a: ["shouldn't", 'should not'] }
+        { q: 'The heart ___ blood around the body.', opts: ['pumps', 'pump', 'pumping'], a: 'pumps' },
+        { q: 'We breathe with our ___.', opts: ['lungs', 'bones', 'teeth'], a: 'lungs' },
+        { q: 'We think with our ___.', opts: ['brain', 'stomach', 'skin'], a: 'brain' },
+        { q: 'Our ___ protect our body and help us stand.', opts: ['bones', 'lungs', 'eyes'], a: 'bones' },
+        { q: 'I eat vegetables ___ they are healthy.', opts: ['because', 'but', 'or'], a: 'because' },
+        { q: 'Exercise makes our muscles ___.', opts: ['strong', 'stronger than', 'strongly'], a: 'strong' },
+        { t: 'order', w: ['The', 'heart', 'pumps', 'blood'], ar: 'القلب يضخّ الدم.' },
+        { t: 'order', w: ['We', 'breathe', 'with', 'our', 'lungs'], ar: 'نتنفس برئتينا.' },
+        { t: 'type', p: 'اكتب العضو: دماغ', q: 'The ___ controls our body.', a: ['brain'] },
+        { p: 'اختر الإجابة الصحيحة', q: 'Why do we drink water?', opts: ['Because our body needs it.', 'In the morning.', 'Every day.'], a: 'Because our body needs it.' }
       ]
     },
     {
-      id: 'l6', title: 'السفر والاتجاهات', sub: 'كيف أصل إلى المكان؟', emoji: '🧭', color: '#E5484D', cefr: 'A2',
-      tips: [{ t: 'الاتجاهات', b: 'نقول Go straight ahead للمشي مباشرة، و Turn left أو Turn right للانعطاف. وللمكان: opposite تعني مقابل، و near تعني قريب، و between تعني بين.', ex: [['Go straight ahead for two blocks.', 'امشِ مباشرةً مسافة شارعين.'], ['Turn left at the traffic light.', 'انعطف يسارًا عند إشارة المرور.'], ['The hotel is opposite the park.', 'الفندق مقابل الحديقة.'], ['Excuse me, where is the bank?', 'عفوًا، أين البنك؟']] }],
+      id: 'l6', title: 'اهتماماتي', sub: 'What are your interests?', emoji: '🔭', color: '#8E5CF7', cefr: 'A2',
+      tips: [
+        { t: 'أهتم بـ', b: 'نقول I am interested in ثم الهواية مع ing. ونقول I enjoy و I love و I am good at بالطريقة نفسها.', ex: [['I am interested in robotics.', 'أهتم بالروبوتات.'], ['She is good at drawing.', 'هي بارعة في الرسم.'], ['He enjoys collecting coins.', 'هو يستمتع بجمع العملات.']] },
+        { t: 'ماذا فعلت في العطلة؟', b: 'نستخدم الماضي البسيط للحديث عمّا فعلنا. وبعض الأفعال لها صيغة خاصة مثل go → went و see → saw.', ex: [['Last weekend I went hiking.', 'في عطلة الأسبوع الماضي ذهبت للمشي في الجبال.'], ['We saw a beautiful sunset.', 'رأينا غروبًا جميلًا.']] }
+      ],
       vocab: [
-        ['airport', 'مطار', '✈️'], ['passport', 'جواز سفر', '🛂'], ['ticket', 'تذكرة', '🎫'], ['luggage', 'حقائب السفر', '🧳'], ['hotel', 'فندق', '🏨'],
-        ['map', 'خريطة', '🗺️'], ['bridge', 'جسر', '🌉'], ['traffic light', 'إشارة المرور', '🚦'], ['roundabout', 'دوّار', '🔄'], ['corner', 'زاوية الشارع', ''],
-        ['cross', 'يعبر', '🚸'], ['opposite', 'مقابل', ''], ['straight ahead', 'أمامك مباشرة', '⬆️'], ['near', 'قريب من', '']
+        ['collecting', 'جمع الأشياء', '🪙'], ['programming', 'البرمجة', '💻'], ['photography', 'التصوير', '📷'], ['painting', 'الرسم بالألوان', '🎨'], ['gardening', 'الزراعة المنزلية', '🌱'], ['robotics', 'الروبوتات', '🤖'],
+        ['volunteering', 'العمل التطوعي', '🤝'], ['astronomy', 'علم الفلك', '🔭'], ['chess', 'الشطرنج', '♟️'], ['hobby', 'هواية', '🎯'], ['interested', 'مهتم', ''], ['talent', 'موهبة', '🌟']
       ],
       qs: [
-        { q: 'You show your ___ at the airport.', opts: ['passport', 'bridge', 'map'], a: 'passport' },
-        { q: 'To find your way in a new city, you can use a ___.', opts: ['map', 'ticket', 'hotel'], a: 'map' },
-        { q: 'Stop when the traffic light is ___.', opts: ['red', 'green', 'blue'], a: 'red' },
-        { q: 'The bank is ___ the hospital. They are face to face.', opts: ['opposite', 'between', 'behind'], a: 'opposite' },
-        { q: 'The pharmacy is ___ the bank and the school.', opts: ['between', 'at', 'under'], a: 'between' },
-        { q: 'Excuse me, how can I get ___ the airport?', opts: ['to', 'at', 'in'], a: 'to' },
-        { t: 'order', w: ['Go', 'straight', 'ahead', 'and', 'turn', 'right'], ar: 'امشِ مباشرةً ثم انعطف يمينًا.' },
-        { t: 'order', w: ['The', 'hotel', 'is', 'near', 'the', 'airport'], ar: 'الفندق قريب من المطار.' },
-        { t: 'type', p: 'اكتب الكلمة: تذكرة', q: 'You buy a ___ to travel by plane.', a: ['ticket'] }
+        { q: 'I am interested ___ astronomy.', opts: ['in', 'on', 'at'], a: 'in', tip: 'نقول interested in.' },
+        { q: 'She is good at ___ pictures.', opts: ['drawing', 'draw', 'draws'], a: 'drawing', tip: 'بعد at نضيف ing.' },
+        { q: 'He enjoys ___ stamps and coins.', opts: ['collecting', 'collect', 'collects'], a: 'collecting' },
+        { q: 'Last weekend we ___ hiking in the mountains.', opts: ['went', 'go', 'goes'], a: 'went', tip: 'go → went في الماضي.' },
+        { q: 'I ___ a beautiful bird yesterday.', opts: ['saw', 'see', 'seen'], a: 'saw' },
+        { q: 'What are you ___ in?', opts: ['interested', 'interesting', 'interest'], a: 'interested' },
+        { t: 'order', w: ['I', 'am', 'interested', 'in', 'robotics'], ar: 'أنا مهتم بالروبوتات.' },
+        { t: 'order', w: ['Last', 'weekend', 'I', 'went', 'hiking'], ar: 'في عطلة الأسبوع الماضي ذهبت للمشي في الجبال.' },
+        { t: 'type', p: 'اكتب الفعل في الماضي', q: 'We ___ (go) to the park last Friday.', a: ['went'] },
+        { p: 'اختر الإجابة المناسبة', q: 'What are your interests?', opts: ['I like programming and chess.', 'I am twelve.', 'I went to school.'], a: 'I like programming and chess.' }
       ]
     },
     {
-      id: 'l7', title: 'مختبر القراءة', sub: 'نصوص قصيرة وأسئلة فهم', emoji: '📖', color: '#A78BFA', cefr: 'A2',
-      plan: ['word2ar', 'pic2word', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q'],
-      tips: [{ t: 'كيف تقرأ بذكاء؟', b: 'اقرأ النص مرتين: مرة لفهم الفكرة العامة، ومرة للبحث عن الجواب. وانتبه لكلمة السؤال: Where تسأل عن المكان، When عن الوقت، Why عن السبب، How عن الطريقة.', ex: [['Where did they go?', 'أين ذهبوا؟'], ['When did they come home?', 'متى عادوا إلى البيت؟'], ['Why do camels have long eyelashes?', 'لماذا للجمال رموش طويلة؟'], ['How did they travel?', 'كيف سافروا؟']] }],
+      id: 'l7', title: 'المهن المهمة', sub: 'Professions: Important jobs in the community', emoji: '👩‍🔬', color: '#06B6D4', cefr: 'A2',
+      tips: [
+        { t: 'ماذا يفعل؟', b: 'نصف عمل الشخص بالمضارع البسيط ونضيف s للمفرد. ونقول A ___ is responsible for أي مسؤول عن.', ex: [['A pharmacist gives people medicine.', 'الصيدلاني يعطي الناس الدواء.'], ['A firefighter puts out fires.', 'رجل الإطفاء يُطفئ الحرائق.'], ['A journalist writes news stories.', 'الصحفي يكتب الأخبار.']] },
+        { t: 'must و has to', b: 'نستخدم must و has to للواجب. ونقول A pilot must be careful.', ex: [['A doctor must help sick people.', 'يجب على الطبيب مساعدة المرضى.'], ['An engineer has to design safe buildings.', 'على المهندس تصميم مبانٍ آمنة.']] }
+      ],
       vocab: [
-        ['shell', 'صدفة', '🐚'], ['boat', 'قارب', '⛵'], ['island', 'جزيرة', '🏝️'], ['desert', 'صحراء', '🏜️'], ['camel', 'جمل', '🐪'], ['sand', 'رمل', '']
+        ['scientist', 'عالِم', '🧑‍🔬'], ['engineer', 'مهندس', '👷'], ['pharmacist', 'صيدلاني', '💊'], ['journalist', 'صحفي', '📰'], ['architect', 'مهندس معماري', '📐'], ['firefighter', 'رجل إطفاء', '🧑‍🚒'],
+        ['police officer', 'شرطي', '👮'], ['pilot', 'طيّار', '🧑‍✈️'], ['surgeon', 'جرّاح', '🩺'], ['electrician', 'كهربائي', '💡'], ['lawyer', 'محامٍ', '⚖️'], ['judge', 'قاضٍ', '🧑‍⚖️']
       ],
       qs: [
-        { p: 'اقرأ ثم أجب', passage: "Last Friday, Khalid and his family went to the Farasan Islands. They traveled by boat. The sea was blue and calm. They swam, ate fresh fish and took many photos. Khalid's little brother found a beautiful shell on the beach. They came home at night. They were tired but very happy.", q: "Where did Khalid's family go?", opts: ['The Farasan Islands', 'Abha', 'Jeddah'], a: 'The Farasan Islands' },
-        { p: 'اقرأ ثم أجب', passage: "Last Friday, Khalid and his family went to the Farasan Islands. They traveled by boat. The sea was blue and calm. They swam, ate fresh fish and took many photos. Khalid's little brother found a beautiful shell on the beach. They came home at night. They were tired but very happy.", q: 'How did they travel?', opts: ['By boat', 'By plane', 'By bus'], a: 'By boat' },
-        { p: 'اقرأ ثم أجب', passage: "Last Friday, Khalid and his family went to the Farasan Islands. They traveled by boat. The sea was blue and calm. They swam, ate fresh fish and took many photos. Khalid's little brother found a beautiful shell on the beach. They came home at night. They were tired but very happy.", q: "What did Khalid's little brother find?", opts: ['A shell', 'A fish', 'A map'], a: 'A shell' },
-        { p: 'صح أم خطأ؟', passage: "Last Friday, Khalid and his family went to the Farasan Islands. They traveled by boat. The sea was blue and calm. They swam, ate fresh fish and took many photos. Khalid's little brother found a beautiful shell on the beach. They came home at night. They were tired but very happy.", q: 'They came home in the morning.', opts: ['True', 'False'], a: 'False', tip: 'النص يقول: They came home at night.' },
-        { p: 'اقرأ ثم أجب', passage: "Last Friday, Khalid and his family went to the Farasan Islands. They traveled by boat. The sea was blue and calm. They swam, ate fresh fish and took many photos. Khalid's little brother found a beautiful shell on the beach. They came home at night. They were tired but very happy.", q: 'How did they feel at the end?', opts: ['Tired but happy', 'Sad and angry', 'Hungry and cold'], a: 'Tired but happy' },
-        { p: 'اقرأ ثم أجب', passage: 'The camel is called "the ship of the desert". It can live for many days without water because it stores fat in its hump. Camels have long eyelashes to protect their eyes from sand. They also have wide feet, so they do not sink in the soft sand. Camels are very important in the life of many people in Arabia.', q: 'What does a camel store in its hump?', opts: ['Fat', 'Water', 'Sand'], a: 'Fat', tip: 'السنام يخزّن الدهون وليس الماء.' },
-        { p: 'اقرأ ثم أجب', passage: 'The camel is called "the ship of the desert". It can live for many days without water because it stores fat in its hump. Camels have long eyelashes to protect their eyes from sand. They also have wide feet, so they do not sink in the soft sand. Camels are very important in the life of many people in Arabia.', q: 'Why do camels have long eyelashes?', opts: ['To protect their eyes from sand', 'To run faster', 'To find water'], a: 'To protect their eyes from sand' },
-        { p: 'اقرأ ثم أجب', passage: 'The camel is called "the ship of the desert". It can live for many days without water because it stores fat in its hump. Camels have long eyelashes to protect their eyes from sand. They also have wide feet, so they do not sink in the soft sand. Camels are very important in the life of many people in Arabia.', q: 'Why do camels have wide feet?', opts: ['So they do not sink in the sand', 'To swim in the sea', 'To climb trees'], a: 'So they do not sink in the sand' },
-        { p: 'صح أم خطأ؟', passage: 'The camel is called "the ship of the desert". It can live for many days without water because it stores fat in its hump. Camels have long eyelashes to protect their eyes from sand. They also have wide feet, so they do not sink in the soft sand. Camels are very important in the life of many people in Arabia.', q: 'Camels can live many days without water.', opts: ['True', 'False'], a: 'True' }
+        { q: 'Who designs buildings?', opts: ['An architect', 'A pilot', 'A surgeon'], a: 'An architect', speak: 'An architect designs buildings.' },
+        { q: 'A ___ does experiments in a laboratory.', opts: ['scientist', 'lawyer', 'firefighter'], a: 'scientist' },
+        { q: 'A ___ protects people and keeps the city safe.', opts: ['police officer', 'pilot', 'judge'], a: 'police officer' },
+        { q: 'A pharmacist ___ people medicine.', opts: ['gives', 'give', 'giving'], a: 'gives' },
+        { q: 'A doctor ___ help sick people.', opts: ['must', 'musts', 'musting'], a: 'must' },
+        { q: 'An engineer ___ to design safe buildings.', opts: ['has', 'have', 'having'], a: 'has' },
+        { t: 'order', w: ['A', 'firefighter', 'puts', 'out', 'fires'], ar: 'رجل الإطفاء يُطفئ الحرائق.' },
+        { t: 'order', w: ['A', 'journalist', 'writes', 'news', 'stories'], ar: 'الصحفي يكتب الأخبار.' },
+        { t: 'type', p: 'اكتب المهنة: كهربائي', q: 'An ___ fixes electrical problems.', a: ['electrician'] },
+        { p: 'اختر الإجابة الصحيحة', q: 'What does a pilot do?', opts: ['A pilot flies planes.', 'A pilot sells medicine.', 'A pilot cooks food.'], a: 'A pilot flies planes.' }
       ]
     },
     {
-      id: 'l8', title: 'التحدي الأخير', sub: 'مراجعة شاملة لكل الكواكب', emoji: '🏁', color: '#F472B6', cefr: 'A2',
-      plan: ['q', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q'],
-      vocab: [],
+      id: 'l8', title: 'مستقبلي', sub: 'أحلامي وخططي', emoji: '🌠', color: '#FF8F3F', cefr: 'A2',
+      plan: ['word2ar', 'listen2word', 'ar2word', 'match', 'q', 'q', 'q', 'q', 'q', 'q'],
+      tips: [
+        { t: 'خططي للمستقبل', b: 'نقول I want to be ثم المهنة. ونقول I will ثم الفعل للحديث عن المستقبل، و I am going to ثم الفعل للخطة التي قررناها.', ex: [['I want to be an engineer.', 'أريد أن أكون مهندسًا.'], ['I will study hard.', 'سأدرس بجد.'], ['I am going to visit a university.', 'سأزور جامعة.']] }
+      ],
+      vocab: [
+        ['dream', 'حلم', '🌟'], ['goal', 'هدف', '🎯'], ['future', 'مستقبل', '🔮'], ['plan', 'خطة', '📝'], ['study', 'يدرس', '📚'], ['university', 'جامعة', '🎓'],
+        ['career', 'مسيرة مهنية', '💼'], ['success', 'نجاح', '🏆'], ['practice', 'يتدرّب', '🏋️'], ['succeed', 'ينجح', ''], ['hard work', 'اجتهاد', ''], ['experience', 'خبرة', '']
+      ],
       qs: [
-        { q: 'Yesterday my father ___ me to the stadium.', opts: ['took', 'take', 'taked'], a: 'took' },
-        { q: 'She is ___ than her brother.', opts: ['taller', 'tallest', 'tall'], a: 'taller' },
-        { q: 'We are ___ to visit Abha next summer.', opts: ['going', 'go', 'went'], a: 'going' },
-        { q: "I ___ finish my homework yesterday.", opts: ["didn't", "don't", "won't"], a: "didn't" },
-        { q: 'You have a cold. You ___ stay at home.', opts: ['should', "shouldn't", "mustn't"], a: 'should' },
-        { q: 'There ___ two mosques in my neighborhood.', opts: ['are', 'is', 'am'], a: 'are' },
-        { q: 'He ___ his teeth every morning.', opts: ['brushes', 'brush', 'brushed'], a: 'brushes', tip: 'every morning تدل على عادة، فنستخدم المضارع.' },
-        { q: 'Last night, we ___ a great film.', opts: ['watched', 'watch', 'watches'], a: 'watched' },
-        { q: 'This is the ___ day of my life!', opts: ['best', 'better', 'good'], a: 'best' },
-        { t: 'type', p: 'أكمل الإجابة', q: 'Can you ride a bike? Yes, I ___.', a: ['can'] },
-        { t: 'type', p: 'اكتب الفعل بالصيغة الصحيحة', q: 'My brother ___ (go) to school by bus every day.', a: ['goes'] },
-        { t: 'order', w: ['What', 'did', 'you', 'do', 'last', 'weekend?'], ar: 'ماذا فعلت في عطلة نهاية الأسبوع الماضية؟' },
-        { t: 'order', w: ['She', 'is', 'going', 'to', 'study', 'English', 'tonight'], ar: 'ستدرس الإنجليزية الليلة.' },
-        { t: 'order', w: ['The', 'pharmacy', 'is', 'opposite', 'the', 'school'], ar: 'الصيدلية مقابل المدرسة.' },
-        { p: 'اختر الجملة الصحيحة', q: '', opts: ['He went to Jeddah yesterday.', 'He goed to Jeddah yesterday.', 'He go to Jeddah yesterday.'], a: 'He went to Jeddah yesterday.' }
+        { q: 'I want ___ an engineer.', opts: ['to be', 'be', 'being'], a: 'to be' },
+        { q: 'I ___ study hard for the exam tomorrow.', opts: ['will', 'did', 'am'], a: 'will' },
+        { q: 'Tomorrow I am going ___ visit my uncle.', opts: ['to', 'for', 'at'], a: 'to' },
+        { q: 'Hard work leads to ___.', opts: ['success', 'succeed', 'successful'], a: 'success' },
+        { t: 'order', w: ['I', 'want', 'to', 'be', 'a', 'scientist'], ar: 'أريد أن أكون عالمًا.' },
+        { t: 'order', w: ['I', 'will', 'study', 'hard', 'every', 'day'], ar: 'سأدرس بجد كل يوم.' },
+        { t: 'type', p: 'اكتب الكلمة المناسبة', q: 'I will go to ___ after school. (u________)', a: ['university'] },
+        {
+          p: 'اقرأ ثم أجب', q: 'What does Majed want to be?', opts: ['An engineer', 'A pilot', 'A doctor'], a: 'An engineer', speak: 'Majed wants to be an engineer.',
+          passage: 'My name is Majed. I am twelve years old. I want to be an engineer. I like building things with my hands. Every day, I study math and science. In the future, I will go to university and design big bridges.'
+        },
+        {
+          p: 'اقرأ ثم أجب', q: 'What will Majed do in the future?', opts: ['Go to university', 'Fly planes', 'Cook food'], a: 'Go to university', speak: 'He will go to university.',
+          passage: 'My name is Majed. I am twelve years old. I want to be an engineer. I like building things with my hands. Every day, I study math and science. In the future, I will go to university and design big bridges.'
+        },
+        {
+          p: 'اقرأ ثم أجب', q: 'What does Majed study every day?', opts: ['Math and science', 'History and art', 'English and sports'], a: 'Math and science', speak: 'He studies math and science every day.',
+          passage: 'My name is Majed. I am twelve years old. I want to be an engineer. I like building things with my hands. Every day, I study math and science. In the future, I will go to university and design big bridges.'
+        }
       ]
     }
   ]
 };
 
+window.CONFIG.scene = "<svg viewBox=\"0 0 400 130\" focusable=\"false\" aria-hidden=\"true\">\n<defs><radialGradient id=\"g6bg\" cx=\".8\" cy=\".1\" r=\"1.1\"><stop offset=\"0\" stop-color=\"#4B3BC9\"/><stop offset=\".55\" stop-color=\"#171B5C\"/><stop offset=\"1\" stop-color=\"#0A0F2C\"/></radialGradient>\n<radialGradient id=\"g6pl\" cx=\".3\" cy=\".28\" r=\".85\"><stop offset=\"0\" stop-color=\"#FFC27A\"/><stop offset=\".6\" stop-color=\"#FF8F3F\"/><stop offset=\"1\" stop-color=\"#B8530E\"/></radialGradient>\n<clipPath id=\"g6cp\"><circle cx=\"312\" cy=\"70\" r=\"34\"/></clipPath></defs>\n<rect width=\"400\" height=\"130\" fill=\"url(#g6bg)\"/>\n<g fill=\"#fff\"><circle cx=\"20\" cy=\"22\" r=\"1.4\"/><circle cx=\"58\" cy=\"60\" r=\"1\"/><circle cx=\"96\" cy=\"16\" r=\"1.2\"/><circle cx=\"130\" cy=\"100\" r=\"1\"/><circle cx=\"168\" cy=\"40\" r=\"1.4\"/><circle cx=\"205\" cy=\"14\" r=\"1\"/><circle cx=\"224\" cy=\"86\" r=\"1.2\"/><circle cx=\"262\" cy=\"28\" r=\"1\"/><circle cx=\"372\" cy=\"22\" r=\"1.4\"/><circle cx=\"380\" cy=\"108\" r=\"1\"/><circle cx=\"40\" cy=\"112\" r=\"1.2\"/><circle cx=\"150\" cy=\"70\" r=\"1\"/><circle cx=\"244\" cy=\"116\" r=\"1\"/><circle cx=\"92\" cy=\"84\" r=\"1\"/></g>\n<g fill=\"#fff\"><circle class=\"sc-tw\" cx=\"36\" cy=\"40\" r=\"2\"/><circle class=\"sc-tw2\" cx=\"190\" cy=\"62\" r=\"2.2\"/><circle class=\"sc-tw\" cx=\"350\" cy=\"12\" r=\"2\"/><circle class=\"sc-tw2\" cx=\"120\" cy=\"30\" r=\"1.8\"/></g>\n<ellipse cx=\"312\" cy=\"70\" rx=\"64\" ry=\"14\" fill=\"none\" stroke=\"#fff\" stroke-opacity=\".22\" stroke-width=\"1.4\" stroke-dasharray=\"4 5\" transform=\"rotate(-18 312 70)\"/>\n<circle cx=\"312\" cy=\"70\" r=\"34\" fill=\"url(#g6pl)\"/>\n<g clip-path=\"url(#g6cp)\" opacity=\".28\"><path d=\"M270 60 H356 M270 74 H356 M270 86 H356\" stroke=\"#7A3300\" stroke-width=\"5\"/><circle cx=\"330\" cy=\"50\" r=\"34\" fill=\"#000\" opacity=\".35\"/></g>\n<ellipse cx=\"312\" cy=\"70\" rx=\"52\" ry=\"10\" fill=\"none\" stroke=\"#FFE3B0\" stroke-opacity=\".8\" stroke-width=\"3.5\" transform=\"rotate(-18 312 70)\" stroke-dasharray=\"0\"/>\n<circle cx=\"64\" cy=\"34\" r=\"10\" fill=\"#C9CDE8\"/><circle cx=\"60\" cy=\"31\" r=\"2.4\" fill=\"#A3A8CE\"/><circle cx=\"68\" cy=\"38\" r=\"1.8\" fill=\"#A3A8CE\"/>\n<circle cx=\"150\" cy=\"98\" r=\"12\" fill=\"#3E8EF0\"/><path d=\"M142 94 q5 -5 10 0 q3 5 -2 8 q-6 1 -8 -8z\" fill=\"#3DCB7B\"/>\n<g class=\"sc-rocket\" style=\"font-size:26px\"><text x=\"0\" y=\"0\">🚀</text></g>\n</svg>";
 </script>
 <script>
 (function () {
@@ -474,6 +517,7 @@ const ic = (name, cls) => h('span', { class: cls || 'ic', html: ICON[name] });
 const KEY = 'english-quest-' + C.id;
 let S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: true, open: false, name: '' };
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
+try { if (!S.name && C.migrate) { const old = localStorage.getItem('english-quest-' + C.migrate); if (old) S.name = String(JSON.parse(old).name || ''); } } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
 const nm = () => String(S.name || C.name || '').trim();
 const fill = t => String(t).replace(/\{n\}/g, nm() || 'بطل');
@@ -574,9 +618,10 @@ function fromCustom(q) {
     return { kind: 'build', prompt: q.p || 'رتّب الكلمات لتكوّن جملة صحيحة', text: q.ar, textAr: true, units, ans: q.w, join: ' ', tip: q.tip, say: q.w.join(' '), speak: q.w.join(' ') };
   }
   if (q.t === 'type') return { kind: 'type', prompt: q.p || 'اكتب الإجابة الصحيحة', text: q.q, passage: q.passage, answers: Array.isArray(q.a) ? q.a : [q.a], tip: q.tip, speak };
+  const noTts = !!q.listen && !HAS_TTS;
   return {
-    kind: 'choice', prompt: q.p || 'اختر الإجابة الصحيحة', big: q.big, text: q.q, textAr: !!q.ar, passage: q.passage,
-    say: q.say, listen: q.listen, opts: shuffle(q.opts), a: q.a, oc: q.oc || (q.ar ? 'ar' : (q.emo ? 'emo' : 'en')), tip: q.tip, speak
+    kind: 'choice', prompt: (noTts && q.pn) || q.p || 'اختر الإجابة الصحيحة', big: q.big, text: noTts ? q.listen : q.q, textAr: !!q.ar, passage: q.passage,
+    say: q.say, listen: noTts ? undefined : q.listen, opts: shuffle(q.opts), a: q.a, oc: q.oc || (q.ar ? 'ar' : (q.emo ? 'emo' : 'en')), tip: q.tip, speak
   };
 }
 
@@ -655,6 +700,7 @@ function home() {
   const node = h('div', { class: 'wrap screen' },
     h('div', { class: 'top' }, h('div', { class: 'brand' }, C.title),
       h('div', { class: 'chips' }, chip(ICON.star, got + '/' + total), chip('⚡', fmt(S.xp)), chip('🔥', fmt(S.streak))), soundBtn()),
+    C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
     h('div', { class: 'hero' }, h('div', { class: 'mascot', 'aria-hidden': 'true' }, C.mascot), h('div', { class: 'bubble' }, line)),
     h('button', { class: 'go', onclick: () => openLevel(ci) },
       h('span', { class: 'orb', style: '--lv:' + (cl.color || 'var(--a2)') + ';width:56px;height:56px;font-size:1.7rem' }, cl.emoji),
@@ -887,6 +933,7 @@ function nameScreen(editing) {
   inp.addEventListener('input', sync);
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
   mount(h('div', { class: 'wrap screen' }, h('div', { class: 'namebox' },
+    C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
     h('div', { class: 'mascot huge', 'aria-hidden': 'true' }, C.mascot),
     h('div', { class: 'bubble' }, editing ? 'اكتب الاسم الجديد' : C.nameAsk),
     inp, btn,

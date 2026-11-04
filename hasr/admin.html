@@ -207,7 +207,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
   var API_URL="https://script.google.com/macros/s/AKfycbyoMlxwTrMloEJWYJsBRRMN3NU2n7OrucyaHCt7HbOOf1nQXIzPFkTZohfnuLQGtYDu/exec";
   var FORM_URL="https://abdulkarim-shouk.github.io/hasr/";
   var SHOP='العرض من المنشأة',KEYK='hasr.adminKey',FK='hasr.adminFilters';
-  var C={id:0,at:1,ins:2,est:3,lic:4,city:5,contact:6,phone:7,ptype:8,prod:9,qty:10,offer:11,note:12,unit:13,avail:14,price:15,round:16,lat:17,lng:18,acc:19,map:20,photos:21,flags:22};
+  var C={id:0,at:1,ins:2,est:3,lic:4,city:5,contact:6,phone:7,ptype:8,prod:9,qty:10,offer:11,note:12,unit:13,avail:14,price:15,round:16,lat:17,lng:18,acc:19,map:20,photos:21,flags:22,method:24};
   function $(s){return document.querySelector(s)}
   function el(t,c,x){var e=document.createElement(t);if(c)e.className=c;if(x!=null)e.textContent=String(x);return e}
   function sget(k){try{return localStorage.getItem(k)}catch(e){return null}}
@@ -241,7 +241,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
   function setStatus(t,k){var s=$('#status');s.className='status'+(k?' '+k:'');$('#status-t').textContent=t}
   function post(body){body.key=KEY;return fetch(API_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}).then(function(r){return r.json()}).then(function(j){if(!j.ok)throw new Error(j.error||'تعذّر التنفيذ');return j})}
   function group(rows){var g={};rows.forEach(function(r){var id=r[0];if(!id)return;
-      var v=g[id]||(g[id]={id:id,at:r[C.at],ins:r[C.ins]||'مراقب',est:r[C.est],lic:r[C.lic],city:r[C.city],contact:r[C.contact],phone:r[C.phone],round:r[C.round]||'',
+      var v=g[id]||(g[id]={id:id,at:r[C.at],ins:r[C.ins]||'مراقب',est:r[C.est],lic:r[C.lic],city:r[C.city],contact:r[C.contact],phone:r[C.phone],round:r[C.round]||'',method:r[C.method]||'',
         lat:parseFloat(r[C.lat]),lng:parseFloat(r[C.lng]),acc:r[C.acc],map:r[C.map],photos:photoIds(r[C.photos]),flags:r[C.flags]||'',products:[]});
       v.products.push({ptype:r[C.ptype],prod:r[C.prod],qty:r[C.qty],unit:r[C.unit],avail:r[C.avail]||'متوفر',price:r[C.price],offer:r[C.offer]})});
     return Object.keys(g).map(function(k){var v=g[k];v.hasLoc=isFinite(v.lat)&&isFinite(v.lng);v.dup=/مكرر/.test(v.flags);
@@ -280,7 +280,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
     return DATA.visits.filter(function(v){var d=(v.at||'').slice(0,10);
       if(r&&v.round!==r)return false;if(FIL.from&&d<FIL.from)return false;if(FIL.to&&d>FIL.to)return false;
       if(FIL.city&&v.city!==FIL.city)return false;if(FIL.ins&&v.ins!==FIL.ins)return false;
-      if(!q)return true;return [v.est,v.lic,v.city,v.phone,v.contact,v.ins].concat(v.products.map(function(p){return p.prod+' '+p.ptype})).some(function(x){return x&&String(x).indexOf(q)>=0})})}
+      if(!q)return true;return [v.est,v.lic,v.city,v.phone,v.contact,v.ins,v.method].concat(v.products.map(function(p){return p.prod+' '+p.ptype})).some(function(x){return x&&String(x).indexOf(q)>=0})})}
   var MONTHS=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
   function arDate(d,withTime){var m=/^(\d{4})-(\d{2})-(\d{2})(?: (\d{2}:\d{2}))?/.exec(d||'');if(!m)return d||'';return (+m[3])+' '+MONTHS[+m[2]-1]+(withTime?(m[4]?' '+m[4]:''):' '+m[1])}
   function filterText(pretty){var b=[],r=FIL.round==='__cur'?DATA.round:FIL.round,f=pretty?arDate:function(x){return x};b.push(r?'الجولة: '+r:'كل الجولات');
@@ -333,7 +333,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
   function paintLog(V){var tb=$('#t-all'),cb=$('#c-all');tb.textContent='';cb.textContent='';
     V.forEach(function(v,i){var no=V.length-i;
       var c=el('div','ecard'),top=el('div','top');top.appendChild(el('b','',no+'. '+v.est));top.appendChild(el('span','',ago(v.at)));c.appendChild(top);
-      var meta=el('div','tools');meta.appendChild(el('span','chip av',v.ins));meta.appendChild(el('span','chip off',plural(v.products.length,'منتج واحد','منتجان','منتجات','منتجاً')));if(v.low)meta.appendChild(el('span','chip out','نقص '+v.low));flagChips(v,meta);c.appendChild(meta);
+      var meta=el('div','tools');meta.appendChild(el('span','chip av',v.ins));if(v.method)meta.appendChild(el('span','chip n',v.method.replace(/^في /,'')));meta.appendChild(el('span','chip off',plural(v.products.length,'منتج واحد','منتجان','منتجات','منتجاً')));if(v.low)meta.appendChild(el('span','chip out','نقص '+v.low));flagChips(v,meta);c.appendChild(meta);
       var row=el('div','tools'),bo=el('button','btn ghost sm','التفاصيل'),bd=el('button','btn ghost sm dz','حذف');bo.type=bd.type='button';bo.onclick=function(){open(v)};bd.onclick=function(){open(v,true)};row.appendChild(bo);row.appendChild(bd);c.appendChild(row);cb.appendChild(c);
       var tr=el('tr','click');tr.tabIndex=0;tr.onclick=function(){open(v)};tr.onkeydown=function(e){if(e.key==='Enter')open(v)};
       td(tr,'num',no);td(tr,'mut',v.at);td(tr,'nm',v.ins);td(tr,'',v.est);td(tr,'num',v.lic);td(tr,'',v.city);td(tr,'num',v.products.length);td(tr,'num',v.low||'0');
@@ -358,7 +358,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
   /* ---------- details dialog ---------- */
   var CUR=null,PHC={};
   function kv(dl,v){dl.textContent='';function a(k,x){dl.appendChild(el('dt','',k));var d=el('dd');if(x&&x.nodeType)d.appendChild(x);else d.textContent=x||'—';dl.appendChild(d)}
-    a('المراقب',v.ins);a('وقت الإدخال',v.at);a('الجولة',v.round);a('اسم المنشأة',v.est);a('رقم الترخيص',v.lic);a('المدينة',v.city);a('اسم المسؤول بالمنشأة',v.contact);a('رقم التواصل',v.phone);
+    a('المراقب',v.ins);a('وقت الإدخال',v.at);a('الجولة',v.round);a('طريقة الرصد',v.method);a('اسم المنشأة',v.est);a('رقم الترخيص',v.lic);a('المدينة',v.city);a('اسم المسؤول بالمنشأة',v.contact);a('رقم التواصل',v.phone);
     if(v.hasLoc){var l=el('a','','فتح في الخرائط');l.href=v.map||('https://maps.google.com/?q='+v.lat+','+v.lng);l.target='_blank';l.rel='noopener';var s=el('span');s.appendChild(l);if(v.acc)s.appendChild(document.createTextNode(' · دقة ±'+v.acc+' م'));a('الموقع',s)}else a('الموقع','غير محدد');
     if(v.flags)a('تنبيهات',v.flags);a('عدد المنتجات',v.products.length);return dl}
   function ptable(ps){var w=el('div','tbl'),t=el('table','pt'),h=el('thead'),r=el('tr');['م','نوع المنتج','اسم المنتج','الكمية','التوفر','السعر','عرض المصنع؟'].forEach(function(x){r.appendChild(el('th','',x))});h.appendChild(r);t.appendChild(h);
@@ -406,9 +406,9 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
   /* ---------- Excel export (filtered) ---------- */
   $('#xl').onclick=function(){var b=this;b.disabled=true;
     (window.XLSX?Promise.resolve(window.XLSX):loadJs('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js').then(function(){return window.XLSX}))
-    .then(function(X){var aoa=[['م','وقت الإدخال','المراقب','اسم المنشأة','رقم الترخيص','المدينة','اسم المسؤول بالمنشأة','رقم التواصل','نوع المنتج','اسم المنتج','الكمية','الوحدة','حالة التوفر','السعر (ريال)','هل يوجد عرض من المصنع؟','ملاحظة','الجولة','خط العرض','خط الطول','رابط الموقع','عدد الصور','تنبيهات']],n=0;
-      VIS.slice().reverse().forEach(function(v){v.products.forEach(function(p){n++;aoa.push([n,v.at,v.ins,v.est,String(v.lic||''),v.city,v.contact,String(v.phone||''),p.ptype,p.prod,p.avail==='نافد'?0:p.qty,p.unit,p.avail,p.price,p.offer,p.offer==='لا'?SHOP:'',v.round,v.hasLoc?v.lat:'',v.hasLoc?v.lng:'',v.map||'',v.photos.length,v.flags])})});
-      var ws=X.utils.aoa_to_sheet(aoa);ws['!cols']=[5,17,20,26,14,12,20,14,16,22,8,8,11,10,18,16,22,11,11,30,9,30].map(function(w){return {wch:w}});
+    .then(function(X){var aoa=[['م','وقت الإدخال','المراقب','اسم المنشأة','رقم الترخيص','المدينة','اسم المسؤول بالمنشأة','رقم التواصل','نوع المنتج','اسم المنتج','الكمية','الوحدة','حالة التوفر','السعر (ريال)','هل يوجد عرض من المصنع؟','ملاحظة','الجولة','طريقة الرصد','خط العرض','خط الطول','رابط الموقع','عدد الصور','تنبيهات']],n=0;
+      VIS.slice().reverse().forEach(function(v){v.products.forEach(function(p){n++;aoa.push([n,v.at,v.ins,v.est,String(v.lic||''),v.city,v.contact,String(v.phone||''),p.ptype,p.prod,p.avail==='نافد'?0:p.qty,p.unit,p.avail,p.price,p.offer,p.offer==='لا'?SHOP:'',v.round,v.method,v.hasLoc?v.lat:'',v.hasLoc?v.lng:'',v.map||'',v.photos.length,v.flags])})});
+      var ws=X.utils.aoa_to_sheet(aoa);ws['!cols']=[5,17,20,26,14,12,20,14,16,22,8,8,11,10,18,16,22,16,11,11,30,9,30].map(function(w){return {wch:w}});
       var wb=X.utils.book_new();X.utils.book_append_sheet(wb,ws,'حصر المنتجات');wb.Workbook={Views:[{RTL:true}]};X.writeFile(wb,'حصر_المنتجات_'+todayStr+'.xlsx')})
     .catch(function(){toast('تعذّر تجهيز ملف الإكسل الآن.')}).then(function(){b.disabled=false})};
 

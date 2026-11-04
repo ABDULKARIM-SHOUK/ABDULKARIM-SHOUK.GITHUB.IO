@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>قطار الإنجليزية</title>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800&family=Fredoka:wght@500;600;700&family=Lalezar&display=swap">
 <style>
 *{box-sizing:border-box}
@@ -196,6 +197,57 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .namebox .btn{min-width:220px}
 .inp.ar{direction:rtl;font-family:var(--font-ui);font-size:1.5rem;margin-top:0}
 .note{margin:0;color:var(--on-bg-2,var(--muted));font-size:.85rem;font-weight:700}
+/* pictures */
+img.pic{display:block;object-fit:contain;-webkit-user-drag:none;user-select:none;pointer-events:none}
+.wc{position:relative;padding:0;overflow:hidden}
+.wc .main{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:14px 8px 12px;border-radius:inherit}
+.wc .em img{width:88px;height:88px}
+.wc .em{line-height:1}
+.wc .mini{position:absolute;top:6px;inset-inline-start:6px;width:36px;height:36px;border-radius:50%;background:var(--card2);display:grid;place-items:center;box-shadow:0 2px 0 var(--line)}
+.wc .mini img{width:24px;height:24px}
+.big img{width:150px;height:150px;margin-inline:auto}
+.opt.emo img{width:86px;height:86px}
+.m-i.emo img{width:58px;height:58px}
+.mascot img{width:1em;height:1em}
+.orb img{width:64%;height:64%}
+.bd .e img{width:2.5rem;height:2.5rem;margin:0 auto 2px}
+.chip img{width:20px;height:20px}
+img.ti{display:inline-block;width:1.25em;height:1.25em;vertical-align:-.28em}
+.sh-fb img.pic{width:42px;height:42px}
+.spk.slow img{width:28px;height:28px}
+.spk.lg + .spk.slow{width:56px;height:56px}
+.spk.lg + .spk.slow img{width:34px;height:34px}
+/* photos */
+img.pic.ph{object-fit:cover;border-radius:16px;background:var(--card2);box-shadow:0 2px 0 rgba(31,48,80,.08)}
+.wc .em img.ph{width:min(132px,100%);height:auto;aspect-ratio:1/1}
+.big img.ph{width:min(230px,70vw);height:auto;aspect-ratio:1/1;border-radius:22px;border:4px solid #fff;box-shadow:var(--shadow)}
+.opt.emo img.ph{width:min(132px,100%);height:auto;aspect-ratio:1/1;border-radius:16px}
+.opt.emo:has(img.ph){padding:8px}
+.m-i.emo img.ph{width:64px;height:64px;border-radius:12px}
+.sh-fb img.ph{width:48px;height:48px;border-radius:10px}
+/* speaking challenge */
+.mic{width:96px;height:96px;border-radius:50%;background:var(--a1);color:var(--on-a1);display:grid;place-items:center;box-shadow:0 6px 0 var(--a1-deep);margin:18px auto 6px;transition:transform .08s}
+.mic img{width:58px;height:58px}
+.mic:active{transform:translateY(4px);box-shadow:0 2px 0 var(--a1-deep)}
+.mic.on{animation:micpulse 1s ease-in-out infinite}
+.mic[disabled]{opacity:.5}
+.heard{min-height:3em;text-align:center;font-weight:800;color:var(--muted)}
+.heard .en{color:var(--ink)}
+.skip{display:block;margin:4px auto 0}
+.sheet.soft{background:#E8F3FF;color:#173A66}
+.sheet.soft .btn{background:#2F7DD1;box-shadow:0 5px 0 #1E5A9E;color:#fff}
+/* voice chooser */
+.vlist{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow:auto;margin-block:6px}
+.vrow{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:8px 10px;border:3px solid transparent}
+.vrow.sel{border-color:var(--a2)}
+.vrow .vn{flex:1;min-width:0;text-align:start;font-weight:800;overflow-wrap:anywhere}
+.vrow .vn small{display:block;color:var(--muted);font-weight:700}
+.vrow .spk{width:40px;height:40px}
+.vhelp{font-size:.88rem;color:var(--muted);font-weight:700;margin:4px 0 0}
+.credit{width:100%;text-align:center;font-size:.75rem;color:var(--muted);margin:6px 0 0}
+.credit a{color:inherit}
+@keyframes micpulse{0%,100%{box-shadow:0 6px 0 var(--a1-deep),0 0 0 0 rgba(232,89,12,.45)}50%{box-shadow:0 6px 0 var(--a1-deep),0 0 0 18px rgba(232,89,12,0)}}
+.meter i::after{width:34px;height:34px;background:url(img/fe/locomotive.webp) center/contain no-repeat}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
 @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.12) rotate(-2deg)}100%{transform:scale(1)}}
@@ -224,7 +276,7 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 }
 body{font-size:17px;font-weight:600;background-size:44px 44px,100% 100%,auto}
 .brand,h2.sec,.btn,.node h3,.qprompt,.sh-t,.go b,.lvh .t,.tip h4,.res h1,.stat b{font-weight:400;font-synthesis:none;letter-spacing:.01em}
-.brand::before{content:"🚂 "}
+.brand::before{content:"";display:inline-block;width:1.05em;height:1.05em;margin-inline-end:.25em;vertical-align:-.12em;background:url(img/fe/locomotive.webp) center/contain no-repeat}
 .brand{font-size:1.9rem;color:#A3154A;text-shadow:0 2px 0 #fff}
 h2.sec{font-size:1.5rem}
 .qprompt{font-size:1.5rem}
@@ -242,7 +294,7 @@ h2.sec{font-size:1.5rem}
 .meter i{background:linear-gradient(90deg,#F5A623,#D6336C)}
 
 /* creative pass: train line */
-:root{--veh:"🚂";--gh:84px;--ground:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgOTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iOTAiPjxwYXRoIGQ9Ik0wIDU0IFE2MCAyMCAxMzAgNTIgVDI2MCA0OCBUMzYwIDU0IFY5MCBIMFoiIGZpbGw9IiNCOEU4QkYiLz48cGF0aCBkPSJNMCA2MiBRODAgNDAgMTcwIDYyIFQzMjAgNjAgVDM2MCA2MiBWOTAgSDBaIiBmaWxsPSIjOEZENkEwIi8+PHJlY3QgeT0iNjgiIHdpZHRoPSIzNjAiIGhlaWdodD0iMjIiIGZpbGw9IiNEOUIyN0MiLz48ZyBmaWxsPSIjOEE1QTJCIj48cmVjdCB4PSI0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMzQiIHk9IjcwIiB3aWR0aD0iOSIgaGVpZ2h0PSIxOCIgcng9IjIiLz48cmVjdCB4PSI2NCIgeT0iNzAiIHdpZHRoPSI5IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxyZWN0IHg9Ijk0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMTI0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMTU0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMTg0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMjE0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMjQ0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMjc0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMzA0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMzM0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PC9nPjxyZWN0IHk9IjczIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjMiIGZpbGw9IiM2Qjc2ODQiLz48cmVjdCB5PSI4MSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIzIiBmaWxsPSIjNkI3Njg0Ii8+PGc+PHJlY3QgeD0iODYiIHk9IjMwIiB3aWR0aD0iNCIgaGVpZ2h0PSIxNCIgcng9IjIiIGZpbGw9IiM4QTVBMkIiLz48Y2lyY2xlIGN4PSI4OCIgY3k9IjI2IiByPSIxMSIgZmlsbD0iIzM4QjI2QSIvPjxyZWN0IHg9IjI2MiIgeT0iMzQiIHdpZHRoPSI0IiBoZWlnaHQ9IjEyIiByeD0iMiIgZmlsbD0iIzhBNUEyQiIvPjxjaXJjbGUgY3g9IjI2NCIgY3k9IjMwIiByPSI5IiBmaWxsPSIjMkY5RTVCIi8+PC9nPjwvc3ZnPgo=");--tw:30px;--scene-bd:#fff;
+:root{--veh:"";--gh:84px;--ground:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgOTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iOTAiPjxwYXRoIGQ9Ik0wIDU0IFE2MCAyMCAxMzAgNTIgVDI2MCA0OCBUMzYwIDU0IFY5MCBIMFoiIGZpbGw9IiNCOEU4QkYiLz48cGF0aCBkPSJNMCA2MiBRODAgNDAgMTcwIDYyIFQzMjAgNjAgVDM2MCA2MiBWOTAgSDBaIiBmaWxsPSIjOEZENkEwIi8+PHJlY3QgeT0iNjgiIHdpZHRoPSIzNjAiIGhlaWdodD0iMjIiIGZpbGw9IiNEOUIyN0MiLz48ZyBmaWxsPSIjOEE1QTJCIj48cmVjdCB4PSI0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMzQiIHk9IjcwIiB3aWR0aD0iOSIgaGVpZ2h0PSIxOCIgcng9IjIiLz48cmVjdCB4PSI2NCIgeT0iNzAiIHdpZHRoPSI5IiBoZWlnaHQ9IjE4IiByeD0iMiIvPjxyZWN0IHg9Ijk0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMTI0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMTU0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMTg0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMjE0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMjQ0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMjc0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMzA0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PHJlY3QgeD0iMzM0IiB5PSI3MCIgd2lkdGg9IjkiIGhlaWdodD0iMTgiIHJ4PSIyIi8+PC9nPjxyZWN0IHk9IjczIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjMiIGZpbGw9IiM2Qjc2ODQiLz48cmVjdCB5PSI4MSIgd2lkdGg9IjM2MCIgaGVpZ2h0PSIzIiBmaWxsPSIjNkI3Njg0Ii8+PGc+PHJlY3QgeD0iODYiIHk9IjMwIiB3aWR0aD0iNCIgaGVpZ2h0PSIxNCIgcng9IjIiIGZpbGw9IiM4QTVBMkIiLz48Y2lyY2xlIGN4PSI4OCIgY3k9IjI2IiByPSIxMSIgZmlsbD0iIzM4QjI2QSIvPjxyZWN0IHg9IjI2MiIgeT0iMzQiIHdpZHRoPSI0IiBoZWlnaHQ9IjEyIiByeD0iMiIgZmlsbD0iIzhBNUEyQiIvPjxjaXJjbGUgY3g9IjI2NCIgY3k9IjMwIiByPSI5IiBmaWxsPSIjMkY5RTVCIi8+PC9nPjwvc3ZnPgo=");--tw:30px;--scene-bd:#fff;
   --trail:linear-gradient(90deg,transparent 0 5px,#7F8896 5px 8px,transparent 8px 22px,#7F8896 22px 25px,transparent 25px),repeating-linear-gradient(#A8754A 0 5px,transparent 5px 13px)}
 .sc-train{transform:translateX(150px);animation:sc-train 16s linear infinite}
 @keyframes sc-train{from{transform:translateX(430px)}to{transform:translateX(-150px)}}
@@ -260,7 +312,7 @@ h2.sec{font-size:1.5rem}
 <script>
 window.CONFIG = {
   id: 'g1', askName: true, title: 'قطار الإنجليزية', mascot: '🚂',
-  nameAsk: 'تشو تشو! أنا القطار الصغير. ما اسمك يا راكب؟', nameBtn: 'اركب القطار', speechRate: 0.65, pitch: 1.1,
+  nameAsk: 'تشو تشو! أنا القطار الصغير. ما اسمك يا راكب؟', nameBtn: 'اركب القطار', speechRate: 0.8, slowRate: 0.55, pitch: 1,
   journey: 'رحلة القطار', pathTitle: 'محطات القطار', learnTitle: 'تعلّم الكلمات', startLabel: 'ابدأ الرحلة',
   confetti: ['#D6336C', '#FFB703', '#1F9D45', '#3AA7FF', '#8E5CF7', '#FF7A18'],
   lines: [
@@ -282,8 +334,8 @@ window.CONFIG = {
       tips: [{ t: 'نقول مرحبًا ونعرّف بأنفسنا', b: 'نقول Hello أو Hi عندما نقابل صديقًا، ونقول Goodbye عندما نودّعه. وعندما يسألك أحد What is your name؟ تقول My name is ثم اسمك.', ex: [['Hello! My name is Omar.', 'مرحبًا! اسمي عمر.'], ['Goodbye!', 'مع السلامة!'], ['Good morning!', 'صباح الخير!']] }],
       vocab: [
         ['hello', 'مرحبًا', '👋'], ['hi', 'أهلًا', '🙋'], ['goodbye', 'مع السلامة', ''], ['good morning', 'صباح الخير', '🌅'], ['good night', 'تصبح على خير', '🌙'],
-        ['thank you', 'شكرًا', '🙏'], ['friend', 'صديق', '🧑‍🤝‍🧑'], ['boy', 'ولد', '👦'], ['girl', 'بنت', '👧'], ['teacher', 'معلم', '🧑‍🏫'],
-        ['name', 'اسم', '🏷️'], ['school', 'مدرسة', '🏫']
+        ['thank you', 'شكرًا', '🙏'], ['friend', 'صديق', '@friend'], ['boy', 'ولد', '@boy'], ['girl', 'بنت', '@girl'], ['teacher', 'معلم', '@teacher'],
+        ['name', 'اسم', '🏷️'], ['school', 'مدرسة', '@school']
       ],
       qs: [
         { p: 'ماذا نقول عندما نقابل صديقًا؟', q: 'We meet a friend. We say ___.', opts: ['Hello', 'Goodbye', 'Good night'], a: 'Hello' },
@@ -318,15 +370,15 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'q', 'listen2pic', 'q'],
       tips: [{ t: 'أجزاء الجسم', b: 'اضغط على كل بطاقة واستمع، ثم المس الجزء على جسمك وقل اسمه. وتذكّر الأغنية: Head, shoulders, knees and toes.', ex: [['Touch your nose.', 'المس أنفك.'], ['Clap your hands.', 'صفّق بيديك.'], ['Head, shoulders, knees and toes.', 'رأس، كتفان، ركبتان وأصابع القدم.']] }],
       vocab: [
-        ['eye', 'عين', '👁️'], ['ear', 'أذن', '👂'], ['nose', 'أنف', '👃'], ['mouth', 'فم', '👄'], ['hand', 'يد', '✋'], ['foot', 'قدم', '🦶'],
-        ['leg', 'ساق', '🦵'], ['arm', 'ذراع', '💪'], ['finger', 'إصبع', '☝️'], ['tooth', 'سن', '🦷'], ['head', 'رأس', ''], ['knees', 'ركبتان', '']
+        ['eye', 'عين', '@eye'], ['ear', 'أذن', '@ear'], ['nose', 'أنف', '@nose'], ['mouth', 'فم', '@mouth'], ['hand', 'يد', '@hand'], ['foot', 'قدم', '@foot'],
+        ['leg', 'ساق', '🦵'], ['arm', 'ذراع', '💪'], ['finger', 'إصبع', '@finger'], ['tooth', 'سن', '@tooth'], ['head', 'رأس', '@head'], ['knees', 'ركبتان', '@knees']
       ],
       qs: [
         { p: 'أكمل الجملة', q: 'I see with my ___.', opts: ['eyes', 'ears', 'hands'], a: 'eyes' },
         { p: 'أكمل الجملة', q: 'I hear with my ___.', opts: ['ears', 'mouth', 'feet'], a: 'ears' },
         { p: 'أكمل الجملة', q: 'I smell with my ___.', opts: ['nose', 'hand', 'leg'], a: 'nose' },
         { p: 'أكمل الجملة', q: 'I eat with my ___.', opts: ['mouth', 'ear', 'foot'], a: 'mouth' },
-        { p: 'اختر الجزء المناسب', big: '👃', q: 'Touch your ___.', opts: ['nose', 'foot', 'ear'], a: 'nose' },
+        { p: 'اختر الجزء المناسب', big: '@nose', q: 'Touch your ___.', opts: ['nose', 'foot', 'ear'], a: 'nose' },
         { t: 'order', w: ['Touch', 'your', 'nose'], ar: 'المس أنفك.' },
         { t: 'order', w: ['Clap', 'your', 'hands'], ar: 'صفّق بيديك.' }
       ]
@@ -336,14 +388,14 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
       tips: [{ t: 'نقول My قبل اسم الشخص', b: 'نقول This is my ثم اسم الشخص لنعرّف أنه من عائلتنا. وللأنثى نقول She is، وللذكر نقول He is.', ex: [['This is my mom.', 'هذه أمي.'], ['This is my dad.', 'هذا أبي.'], ['I love my family.', 'أنا أحب عائلتي.']] }],
       vocab: [
-        ['mom', 'ماما', '👩'], ['dad', 'بابا', '👨'], ['brother', 'أخ', '👦'], ['sister', 'أخت', '👧'], ['baby', 'طفل رضيع', '👶'],
-        ['grandpa', 'جد', '👴'], ['grandma', 'جدة', '👵'], ['family', 'عائلة', '👨‍👩‍👧‍👦'], ['uncle', 'عم أو خال', ''], ['aunt', 'عمة أو خالة', ''], ['cousin', 'ابن العم أو الخال', '']
+        ['mom', 'ماما', '@mom'], ['dad', 'بابا', '@dad'], ['brother', 'أخ', '@brother'], ['sister', 'أخت', '@sister'], ['baby', 'طفل رضيع', '@baby'],
+        ['grandpa', 'جد', '@grandpa'], ['grandma', 'جدة', '@grandma'], ['family', 'عائلة', '@family'], ['uncle', 'عم أو خال', ''], ['aunt', 'عمة أو خالة', ''], ['cousin', 'ابن العم أو الخال', '']
       ],
       qs: [
-        { p: 'من هذا؟', big: '👨', q: 'Who is he? He is my ___.', opts: ['dad', 'mom', 'baby'], a: 'dad', speak: 'He is my dad.' },
-        { p: 'من هذه؟', big: '👵', q: 'Who is she? She is my ___.', opts: ['grandma', 'sister', 'mom'], a: 'grandma', speak: 'She is my grandma.' },
-        { p: 'من هذه؟', big: '👩', q: 'Who is she? She is my ___.', opts: ['mom', 'dad', 'brother'], a: 'mom', speak: 'She is my mom.' },
-        { p: 'من هذا؟', big: '👴', q: 'Who is he? He is my ___.', opts: ['grandpa', 'baby', 'sister'], a: 'grandpa', speak: 'He is my grandpa.' },
+        { p: 'من هذا؟', big: '@dad', q: 'Who is he? He is my ___.', opts: ['dad', 'mom', 'baby'], a: 'dad', speak: 'He is my dad.' },
+        { p: 'من هذه؟', big: '@grandma', q: 'Who is she? She is my ___.', opts: ['grandma', 'sister', 'mom'], a: 'grandma', speak: 'She is my grandma.' },
+        { p: 'من هذه؟', big: '@mom', q: 'Who is she? She is my ___.', opts: ['mom', 'dad', 'brother'], a: 'mom', speak: 'She is my mom.' },
+        { p: 'من هذا؟', big: '@grandpa', q: 'Who is he? He is my ___.', opts: ['grandpa', 'baby', 'sister'], a: 'grandpa', speak: 'He is my grandpa.' },
         { t: 'order', w: ['This', 'is', 'my', 'mom'], ar: 'هذه أمي.' },
         { t: 'order', w: ['I', 'love', 'my', 'family'], ar: 'أنا أحب عائلتي.' },
         { t: 'order', w: ['He', 'is', 'my', 'brother'], ar: 'هو أخي.' }
@@ -391,13 +443,13 @@ window.CONFIG = {
         { t: 'this و that', b: 'نقول This للشيء القريب منا، ونقول That للشيء البعيد عنا.', ex: [['This is my bag.', 'هذه حقيبتي.'], ['That is a door.', 'ذلك باب.']] }
       ],
       vocab: [
-        ['book', 'كتاب', '📖'], ['pencil', 'قلم رصاص', '✏️'], ['pen', 'قلم حبر', '🖊️'], ['bag', 'حقيبة', '🎒'], ['ruler', 'مسطرة', '📏'], ['crayon', 'قلم تلوين', '🖍️'],
-        ['scissors', 'مقص', '✂️'], ['notebook', 'دفتر', '📓'], ['chair', 'كرسي', '🪑'], ['door', 'باب', '🚪'], ['window', 'نافذة', '🪟'], ['clock', 'ساعة', '🕒']
+        ['book', 'كتاب', '@book'], ['pencil', 'قلم رصاص', '@pencil'], ['pen', 'قلم حبر', '@pen'], ['bag', 'حقيبة', '@bag'], ['ruler', 'مسطرة', '@ruler'], ['crayon', 'قلم تلوين', '@crayon'],
+        ['scissors', 'مقص', '@scissors'], ['notebook', 'دفتر', '@notebook'], ['chair', 'كرسي', '@chair'], ['door', 'باب', '@door'], ['window', 'نافذة', '@window'], ['clock', 'ساعة', '@clock']
       ],
       qs: [
-        { p: 'ما هذا؟', big: '📖', q: 'What is this? It is a ___.', opts: ['book', 'bag', 'pen'], a: 'book', speak: 'What is this? It is a book.' },
-        { p: 'ما هذا؟', big: '🎒', q: 'What is this? It is a ___.', opts: ['bag', 'chair', 'ruler'], a: 'bag', speak: 'What is this? It is a bag.' },
-        { p: 'ما هذا؟', big: '✏️', q: 'What is this? It is a ___.', opts: ['pencil', 'door', 'clock'], a: 'pencil', speak: 'What is this? It is a pencil.' },
+        { p: 'ما هذا؟', big: '@book', q: 'What is this? It is a ___.', opts: ['book', 'bag', 'pen'], a: 'book', speak: 'What is this? It is a book.' },
+        { p: 'ما هذا؟', big: '@bag', q: 'What is this? It is a ___.', opts: ['bag', 'chair', 'ruler'], a: 'bag', speak: 'What is this? It is a bag.' },
+        { p: 'ما هذا؟', big: '@pencil', q: 'What is this? It is a ___.', opts: ['pencil', 'door', 'clock'], a: 'pencil', speak: 'What is this? It is a pencil.' },
         { p: 'الشيء قريب منك. اختر الكلمة', q: '___ is my bag.', opts: ['This', 'That'], a: 'This', tip: 'نستخدم This للشيء القريب.' },
         { p: 'الشيء بعيد عنك. اختر الكلمة', q: '___ is a door.', opts: ['That', 'This'], a: 'That', tip: 'نستخدم That للشيء البعيد.' },
         { t: 'order', w: ['What', 'is', 'this?'], ar: 'ما هذا؟' },
@@ -409,8 +461,8 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'q', 'q', 'pic2word', 'listen2pic', 'q'],
       tips: [{ t: 'لكل حرف صوت', b: 'اضغط على البطاقة واستمع للكلمة، ثم قل صوت أول حرف بصوت عالٍ. الحرف B يعطي صوت /b/ مثل ball.', ex: [['A, a, apple', 'الحرف A في كلمة تفاحة'], ['B, b, ball', 'الحرف B في كلمة كرة'], ['C, c, cat', 'الحرف C في كلمة قطة']] }],
       vocab: [
-        ['apple', 'تفاحة', '🍎', 'Aa'], ['ball', 'كرة', '⚽', 'Bb'], ['cat', 'قطة', '🐱', 'Cc'], ['dog', 'كلب', '🐶', 'Dd'], ['egg', 'بيضة', '🥚', 'Ee'],
-        ['fish', 'سمكة', '🐟', 'Ff'], ['goat', 'ماعز', '🐐', 'Gg'], ['hat', 'قبعة', '🎩', 'Hh'], ['ice cream', 'آيس كريم', '🍦', 'Ii'], ['juice', 'عصير', '🧃', 'Jj']
+        ['apple', 'تفاحة', '@apple', 'Aa'], ['ball', 'كرة', '@ball', 'Bb'], ['cat', 'قطة', '@cat', 'Cc'], ['dog', 'كلب', '@dog', 'Dd'], ['egg', 'بيضة', '@egg', 'Ee'],
+        ['fish', 'سمكة', '@fish', 'Ff'], ['goat', 'ماعز', '@goat', 'Gg'], ['hat', 'قبعة', '@hat', 'Hh'], ['ice cream', 'آيس كريم', '@ice-cream', 'Ii'], ['juice', 'عصير', '@juice', 'Jj']
       ],
       qs: [
         { p: 'أي كلمة تبدأ بالحرف B؟', q: 'Which word starts with B?', opts: ['ball', 'cat', 'dog'], a: 'ball', speak: 'ball', tip: 'الحرف B يعطي صوت /b/ مثل ball.' },
@@ -427,7 +479,9 @@ window.CONFIG = {
   ]
 };
 
-window.CONFIG.scene = "<svg viewBox=\"0 0 400 130\" focusable=\"false\" aria-hidden=\"true\">\n<defs><linearGradient id=\"g1sky\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#8FD6FF\"/><stop offset=\"1\" stop-color=\"#FFF1C4\"/></linearGradient></defs>\n<rect width=\"400\" height=\"130\" fill=\"url(#g1sky)\"/>\n<circle cx=\"338\" cy=\"32\" r=\"24\" fill=\"#FFD23F\" opacity=\".28\"/><circle cx=\"338\" cy=\"32\" r=\"15\" fill=\"#FFC21A\"/>\n<g fill=\"#fff\"><ellipse cx=\"70\" cy=\"30\" rx=\"26\" ry=\"9\"/><ellipse cx=\"88\" cy=\"23\" rx=\"15\" ry=\"9\"/><ellipse cx=\"205\" cy=\"42\" rx=\"22\" ry=\"7\"/><ellipse cx=\"219\" cy=\"36\" rx=\"12\" ry=\"7\"/></g>\n<path d=\"M0 92 Q70 52 140 86 T280 82 T400 88 V130 H0Z\" fill=\"#9BE0A5\"/>\n<path d=\"M0 100 Q90 72 180 98 T340 94 T400 98 V130 H0Z\" fill=\"#6CC48B\"/>\n<g><rect x=\"290\" y=\"72\" width=\"5\" height=\"16\" rx=\"2\" fill=\"#8A5A2B\"/><circle cx=\"292\" cy=\"66\" r=\"12\" fill=\"#2F9E5B\"/><circle cx=\"283\" cy=\"72\" r=\"8\" fill=\"#38B26A\"/><rect x=\"40\" y=\"78\" width=\"4\" height=\"12\" rx=\"2\" fill=\"#8A5A2B\"/><circle cx=\"42\" cy=\"73\" r=\"9\" fill=\"#2F9E5B\"/></g>\n<rect y=\"108\" width=\"400\" height=\"22\" fill=\"#D9B27C\"/>\n<g fill=\"#8A5A2B\"><rect x=\"4\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"34\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"64\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"94\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"124\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"154\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"184\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"214\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"244\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"274\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"304\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"334\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"364\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"394\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/></g>\n<rect y=\"113\" width=\"400\" height=\"3\" fill=\"#6B7684\"/><rect y=\"121\" width=\"400\" height=\"3\" fill=\"#6B7684\"/>\n<g class=\"sc-train\" style=\"font-size:36px\"><text x=\"0\" y=\"116\">🚂🚃🚃</text></g>\n</svg>";
+window.CONFIG.photos = {"@friend":["photo-1597413545419-4013431dbfec","🧑‍🤝‍🧑"],"@boy":["photo-1693639257331-0bad8ac3913f","👦"],"@girl":["photo-1489673446964-e1f989187ddc","👧"],"@teacher":["photo-1587691592099-24045742c181","🧑‍🏫"],"@school":["photo-1591123120675-6f7f1aae0e5b","🏫"],"@eye":["photo-1785059873421-ca4821009da1","👁️"],"@ear":["photo-1514885073919-368d69513883","👂"],"@nose":["photo-1549160854-9f955d41e4b0","👃"],"@mouth":["photo-1652761029249-6ec32a82ccb0","👄"],"@hand":["photo-1533648919817-0a5c949f603e","✋"],"@foot":["photo-1468616047823-d688c44bf6dd","🦶"],"@finger":["photo-1685580325404-5d3d2dc46b58","☝️"],"@tooth":["photo-1593183230686-69876b0cb240","🦷"],"@head":["photo-1699903905361-4d408679753f",""],"@knees":["photo-1695918427978-c7add5d96333",""],"@mom":["photo-1581998392741-67879e0ef04a","👩"],"@dad":["photo-1542948843-bf19f4f535cf","👨"],"@brother":["photo-1524503033411-c9566986fc8f","👦"],"@sister":["photo-1607453998774-d533f65dac99","👧"],"@baby":["photo-1630305131239-c8df91783f10","👶"],"@grandpa":["photo-1586498024141-1940debde48d","👴"],"@grandma":["photo-1593100126453-19b562a800c1","👵"],"@family":["photo-1666819256222-7034f91340a7","👨‍👩‍👧‍👦"],"@book":["photo-1543002588-bfa74002ed7e","📖"],"@pencil":["photo-1595584354232-f07d525d87c1","✏️"],"@pen":["photo-1583485088034-697b5bc54ccd","🖊️"],"@bag":["photo-1622560481156-01fc7e1693e6","🎒"],"@ruler":["photo-1529651795107-e5a141e34843","📏"],"@crayon":["photo-1694390187432-25f23879c838","🖍️"],"@scissors":["photo-1503792501406-2c40da09e1e2","✂️"],"@notebook":["photo-1623697899811-f2403f50685e","📓"],"@chair":["photo-1699588772787-1eed3b726e0a","🪑"],"@door":["photo-1503898362-59e068e7f9d8","🚪"],"@window":["photo-1527352774566-e4916e36c645","🪟"],"@clock":["photo-1563861826100-9cb868fdbe1c","🕒"],"@apple":["photo-1630563451961-ac2ff27616ab","🍎"],"@ball":["photo-1575361204480-aadea25e6e68","⚽"],"@cat":["photo-1595433707802-6b2626ef1c91","🐱"],"@dog":["photo-1534361960057-19889db9621e","🐶"],"@egg":["photo-1607690424560-35d967d6ad7c","🥚"],"@fish":["photo-1522069169874-c58ec4b76be5","🐟"],"@goat":["photo-1524024973431-2ad916746881","🐐"],"@hat":["photo-1583703779199-e6ed378df595","🎩"],"@ice-cream":["photo-1497034825429-c343d7c6a68f","🍦"],"@juice":["photo-1600271886742-f049cd451bba","🧃"]};
+window.CONFIG.img = {"🚂":"fe/locomotive","⭐":"fe/star","👋":"fe/waving-hand","🙋":"fe/person-raising-hand","🌅":"fe/sunrise","🌙":"fe/crescent-moon","🙏":"fe/folded-hands","🏷":"fe/label","🎨":"fe/artist-palette","🔴":"fe/red-circle","🟡":"fe/yellow-circle","🎀":"fe/ribbon","🔵":"fe/blue-circle","🟣":"fe/purple-circle","🟠":"fe/orange-circle","🟢":"fe/green-circle","⚫":"fe/black-circle","⚪":"fe/white-circle","🟤":"fe/brown-circle","🍌":"fe/banana","🍓":"fe/strawberry","🌿":"fe/herb","☁":"fe/cloud","🍊":"fe/tangerine","🧍":"fe/person-standing","🦵":"fe/leg","💪":"fe/flexed-biceps","👨":"fe/man","👩":"fe/woman","👧":"fe/girl","👦":"fe/boy","🔢":"fe/input-numbers","1⃣":"fe/keycap-1","2⃣":"fe/keycap-2","3⃣":"fe/keycap-3","4⃣":"fe/keycap-4","5⃣":"fe/keycap-5","6⃣":"fe/keycap-6","7⃣":"fe/keycap-7","8⃣":"fe/keycap-8","9⃣":"fe/keycap-9","🔟":"fe/keycap-10","🍎":"fe/red-apple","🐱":"fe/cat-face","🔺":"fe/red-triangle","⭕":"fe/hollow-red-circle","🟦":"fe/blue-square","❤":"fe/red-heart","🔶":"fe/large-orange-diamond","🎒":"fe/backpack","🔤":"fe/input-latin-letters","🏁":"fe/chequered-flag","🌟":"fe/glowing-star","🧭":"fe/compass","⚡":"fe/high-voltage","💎":"fe/gem-stone","🔥":"fe/fire","🏆":"fe/trophy","🐢":"fe/turtle","🎤":"fe/microphone","▶":"fe/play-button","💡":"fe/light-bulb","👏":"fe/clapping-hands","🧑":"fe/person","🤝":"fe/handshake","🧑‍🏫":"fe/teacher","🏫":"fe/school","👁":"fe/eye","👂":"fe/ear","👃":"fe/nose","👄":"fe/mouth","✋":"fe/raised-hand","🦶":"fe/foot","☝":"fe/index-pointing-up","🦷":"fe/tooth","👶":"fe/baby","👴":"fe/old-man","👵":"fe/old-woman","📖":"fe/open-book","✏":"fe/pencil","🖊":"fe/pen","📏":"fe/straight-ruler","🖍":"fe/crayon","✂":"fe/scissors","📓":"fe/notebook","🪑":"fe/chair","🚪":"fe/door","🪟":"fe/window","🕒":"fe/three-oclock","⚽":"fe/soccer-ball","🐶":"fe/dog-face","🥚":"fe/egg","🐟":"fe/fish","🐐":"fe/goat","🎩":"fe/top-hat","🍦":"fe/soft-ice-cream","🧃":"fe/beverage-box","🚃":"fe/railway-car"};
+window.CONFIG.scene = "<svg viewBox=\"0 0 400 130\" focusable=\"false\" aria-hidden=\"true\">\n<defs><linearGradient id=\"g1sky\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#8FD6FF\"/><stop offset=\"1\" stop-color=\"#FFF1C4\"/></linearGradient></defs>\n<rect width=\"400\" height=\"130\" fill=\"url(#g1sky)\"/>\n<circle cx=\"338\" cy=\"32\" r=\"24\" fill=\"#FFD23F\" opacity=\".28\"/><circle cx=\"338\" cy=\"32\" r=\"15\" fill=\"#FFC21A\"/>\n<g fill=\"#fff\"><ellipse cx=\"70\" cy=\"30\" rx=\"26\" ry=\"9\"/><ellipse cx=\"88\" cy=\"23\" rx=\"15\" ry=\"9\"/><ellipse cx=\"205\" cy=\"42\" rx=\"22\" ry=\"7\"/><ellipse cx=\"219\" cy=\"36\" rx=\"12\" ry=\"7\"/></g>\n<path d=\"M0 92 Q70 52 140 86 T280 82 T400 88 V130 H0Z\" fill=\"#9BE0A5\"/>\n<path d=\"M0 100 Q90 72 180 98 T340 94 T400 98 V130 H0Z\" fill=\"#6CC48B\"/>\n<g><rect x=\"290\" y=\"72\" width=\"5\" height=\"16\" rx=\"2\" fill=\"#8A5A2B\"/><circle cx=\"292\" cy=\"66\" r=\"12\" fill=\"#2F9E5B\"/><circle cx=\"283\" cy=\"72\" r=\"8\" fill=\"#38B26A\"/><rect x=\"40\" y=\"78\" width=\"4\" height=\"12\" rx=\"2\" fill=\"#8A5A2B\"/><circle cx=\"42\" cy=\"73\" r=\"9\" fill=\"#2F9E5B\"/></g>\n<rect y=\"108\" width=\"400\" height=\"22\" fill=\"#D9B27C\"/>\n<g fill=\"#8A5A2B\"><rect x=\"4\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"34\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"64\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"94\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"124\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"154\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"184\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"214\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"244\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"274\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"304\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"334\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"364\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/><rect x=\"394\" y=\"111\" width=\"10\" height=\"16\" rx=\"2\"/></g>\n<rect y=\"113\" width=\"400\" height=\"3\" fill=\"#6B7684\"/><rect y=\"121\" width=\"400\" height=\"3\" fill=\"#6B7684\"/>\n<g class=\"sc-train\" style=\"font-size:36px\"><image href=\"img/fe/locomotive.webp\" x=\"0\" y=\"82.9\" width=\"41.4\" height=\"41.4\"/><image href=\"img/fe/railway-car.webp\" x=\"41.4\" y=\"82.9\" width=\"41.4\" height=\"41.4\"/><image href=\"img/fe/railway-car.webp\" x=\"82.8\" y=\"82.9\" width=\"41.4\" height=\"41.4\"/></g>\n</svg>";
 </script>
 <script>
 (function () {
@@ -455,6 +509,25 @@ const norm = s => String(s).toLowerCase().replace(/[’‘`]/g, "'").replace(/[.
 const today = () => new Date().toLocaleDateString('en-CA');
 const toV = a => ({ en: a[0], ar: a[1], em: a[2] || '', k: a[3] || '' });
 
+/* ---------- pictures (one illustrated set, same look on every device) ---------- */
+const IMG = C.img || {}, PH = C.photos || {};
+const drawSrc = em => { if (!em) return ''; const f = IMG[String(em).replace(/\uFE0F/g, '')]; return f ? 'img/' + f + '.webp' : ''; };
+const photoSrc = em => { const p = PH[em]; return p ? 'https://images.unsplash.com/' + p[0] + '?w=600&h=600&fit=crop&crop=entropy&q=70&auto=format' : ''; };
+const picSrc = em => (em && String(em)[0] === '@') ? photoSrc(em) : drawSrc(em);
+function pic(em, cls, lazy) {
+  const photo = !!(em && String(em)[0] === '@'), back = photo ? (PH[em] || [])[1] : em;
+  const src = picSrc(em), plain = back && String(back)[0] !== '#' && String(back)[0] !== '@' ? back : '';
+  if (!src) return plain ? h('span', { class: cls || '' }, plain) : null;
+  const im = h('img', { class: 'pic ' + (photo ? 'ph ' : '') + (cls || ''), src, alt: '', draggable: 'false', decoding: 'async', loading: lazy ? 'lazy' : false });
+  im.addEventListener('error', () => {
+    const d = photo ? drawSrc(back) : '';
+    if (d && im.src.indexOf(d) < 0) { im.classList.remove('ph'); im.src = d; }
+    else im.replaceWith(document.createTextNode(plain));
+  });
+  return im;
+}
+const warm = list => list.forEach(em => { const s = picSrc(em); if (s) { const i = new Image(); i.src = s; } });
+
 const ICON = {
   star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4l2.9 6.2 6.7.8-5 4.6 1.4 6.7L12 17.4l-6 3.3 1.4-6.7-5-4.6 6.7-.8z"/></svg>',
   lock: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0110 0v3h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2zm2 0h6V7a3 3 0 00-6 0z"/></svg>',
@@ -468,7 +541,7 @@ const ic = (name, cls) => h('span', { class: cls || 'ic', html: ICON[name] });
 
 /* ---------- saved progress (only on this device) ---------- */
 const KEY = 'english-quest-' + C.id;
-let S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: true, open: false, name: '' };
+let S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: true, open: false, name: '', voice: '', micOff: false };
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
 try { if (!S.name && C.migrate) { const old = localStorage.getItem('english-quest-' + C.migrate); if (old) S.name = String(JSON.parse(old).name || ''); } } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
@@ -502,28 +575,78 @@ function sfx(kind) {
   } catch (e) {}
 }
 
-/* ---------- pronunciation (device voice) ---------- */
+/* ---------- pronunciation (best natural voice on this device) ---------- */
 const HAS_TTS = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-let voice = null;
+let voice = null, voices = [];
+const ODD = /(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|ralph|kathy|grandma|grandpa|eddy|flo\b|reed|rocko|sandy|shelley|hysterical|deranged|novelty)/i;
+function voiceScore(v) {
+  if (!/^en([-_]|$)/i.test(v.lang || '')) return -1;
+  const n = v.name || '';
+  if (ODD.test(n)) return -1;
+  let s = 0;
+  if (/natural|neural/i.test(n)) s += 100;
+  if (/premium/i.test(n)) s += 90;
+  if (/enhanced/i.test(n)) s += 70;
+  if (/google/i.test(n)) s += 50;
+  if (/online/i.test(n)) s += 15;
+  if (/(samantha|ava|allison|susan|zoe|evan|nathan|joelle|noelle|nicky|aaron|aria|jenny|ana\b|emma|michelle|libby|sonia|karen|daniel|serena)/i.test(n)) s += 25;
+  if (/^en[-_]US/i.test(v.lang)) s += 15; else if (/^en[-_](GB|AU|CA|IE|NZ)/i.test(v.lang)) s += 8;
+  if (v.localService === false) s += 5;
+  return s;
+}
 function loadVoice() {
   try {
-    const vs = speechSynthesis.getVoices();
-    voice = vs.find(v => /^en[-_]US/i.test(v.lang) && /(samantha|google|aria|jenny|zira|female)/i.test(v.name)) ||
-      vs.find(v => /^en[-_]US/i.test(v.lang)) || vs.find(v => /^en/i.test(v.lang)) || null;
+    voices = speechSynthesis.getVoices().map(v => ({ v, s: voiceScore(v) })).filter(x => x.s >= 0).sort((a, b) => b.s - a.s);
+    const picked = S.voice && voices.find(x => x.v.voiceURI === S.voice);
+    voice = picked ? picked.v : (voices[0] ? voices[0].v : null);
   } catch (e) {}
 }
-if (HAS_TTS) { try { speechSynthesis.onvoiceschanged = loadVoice; loadVoice(); } catch (e) {} }
+if (HAS_TTS) { try { speechSynthesis.onvoiceschanged = loadVoice; loadVoice(); setTimeout(loadVoice, 800); } catch (e) {} }
 function say(text, o) {
   o = o || {};
   if (!HAS_TTS || !text) return;
   if (!o.force && !S.sound) return;
   try {
+    if (!voice) loadVoice();
     if (!o.queue) speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US'; if (voice) u.voice = voice;
-    u.rate = o.rate || C.speechRate || 0.85; u.pitch = C.pitch || 1;
+    const vv = o.voice || voice;
+    u.lang = vv ? vv.lang : 'en-US'; if (vv) u.voice = vv;
+    u.rate = o.rate || C.speechRate || 0.9; u.pitch = C.pitch || 1;
     speechSynthesis.speak(u);
   } catch (e) {}
+}
+
+/* ---------- speaking challenge (speech recognition, where the browser has it) ---------- */
+const SRC = window.SpeechRecognition || window.webkitSpeechRecognition;
+const HAS_SR = !!SRC && window.isSecureContext !== false;
+const SOUNDS = { sea: ['see', 'c', 'she', 'si'], sun: ['son', 'some'], read: ['red', 'reed', 'rid'], write: ['right', 'rite', 'ride'], eat: ['it', 'e', 'each'],
+  in: ['inn', 'and', 'an', 'end', 'hen', 'and in'], on: ['an', 'own', 'one', 'and', 'un', 'own'], cap: ['cup', 'cab'], car: ['card', 'cart', 'are'], bed: ['bad', 'bet', 'bird', 'bread'],
+  hot: ['hut', 'hat', 'heart'], cat: ['cut', 'kat', 'cats'], dog: ['dock', 'duck', 'dogs'], cow: ['cal', 'cao', 'kao', 'cows'], key: ['kee', 'ki', 'keys', 'he'], sad: ['said', 'sat'],
+  pants: ['pans', 'parents', 'pant'], shoes: ['shoe', 'choose', 'shoots'], socks: ['sox', 'sucks', 'sock'], glasses: ['classes', 'glass'], gloves: ['glove', 'love'],
+  run: ['ran', 'rum', 'round'], swim: ['swing', 'swim'], walk: ['work', 'woke', 'wok'], sing: ['sang', 'sink', 'thing'], sick: ['seek', 'thick', 'six'], doll: ['dull', 'dolls', 'tall'],
+  kite: ['kate', 'kit', 'kites'], bike: ['bake', 'bikes', 'buy'], box: ['books', 'fox', 'boxes'], bag: ['back', 'bug', 'big'], big: ['bag', 'pig'], old: ['all', 'hold'], tall: ['tool', 'tell', 'doll'],
+  thobe: ['tobe', 'to be', 'top', 'toe', 'thobe'], under: ['ender', 'onder', 'anda'], behind: ['be hind', 'by hand'], 'next to': ['next', 'next two', 'next too'] };
+function lev(a, b) {
+  const m = a.length, n = b.length, d = Array.from({ length: m + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= n; j++) d[0][j] = j;
+  for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[m][n];
+}
+function heardIt(target, alts) {
+  const t = norm(target).replace(/-/g, ' '), tw = t.split(' ').length, near = SOUNDS[t] || [];
+  const tol = t.length <= 3 ? 0 : t.length <= 6 ? 1 : 2;
+  return alts.some(raw => {
+    const w = norm(raw).replace(/-/g, ' ').split(' ').filter(Boolean);
+    if (!w.length) return false;
+    if (near.includes(w.join(' '))) return true;
+    for (let size = tw; size <= tw + 1; size++)
+      for (let i = 0; i + size <= w.length; i++) {
+        const seg = w.slice(i, i + size).join(' ');
+        if (seg === t || seg.replace(/s$/, '') === t || near.includes(seg) || lev(seg, t) <= tol) return true;
+      }
+    return false;
+  });
 }
 
 /* ---------- question generation ---------- */
@@ -542,6 +665,7 @@ function gen(t, v, ctx) {
   if ((t === 'pic2word' || t === 'listen2pic') && !v.em) t = (t === 'pic2word') ? 'word2ar' : 'listen2word';
   if (t === 'listen2word' && !HAS_TTS) t = 'word2ar';
   if (t === 'spell' && (/\s/.test(v.en) || v.en.length > 9 || v.en.length < 2)) t = 'ar2word';
+  if (t === 'sayit' && !(HAS_SR && !S.micOff)) t = 'pic2word';
   const fb = { en: v.en, ar: v.ar, em: v.em }, speak = v.en;
   switch (t) {
     case 'pic2word': return { kind: 'choice', prompt: 'ما اسم هذه الصورة بالإنجليزية؟', big: v.em, say: v.en, opts: wordOpts(v, lvV), a: v.en, oc: 'en', fb, speak };
@@ -550,6 +674,7 @@ function gen(t, v, ctx) {
     case 'word2ar': return { kind: 'choice', prompt: 'ما معنى هذه الكلمة؟', text: v.en, say: v.en, opts: shuffle([v.ar, ...distract(v, lvV, 3, 'ar').map(x => x.ar)]), a: v.ar, oc: 'ar', fb, speak };
     case 'ar2word': return { kind: 'choice', prompt: 'كيف نقولها بالإنجليزية؟', text: v.ar, textAr: true, big: v.em, opts: wordOpts(v, lvV), a: v.en, oc: 'en', fb, speak };
     case 'spell': return { kind: 'build', prompt: 'رتّب الحروف لتكوّن الكلمة', big: v.em, text: v.ar, textAr: true, say: v.en, units: shuffle(v.en.split('')), ans: v.en.split(''), join: '', fb, speak };
+    case 'sayit': return { kind: 'speak', prompt: 'انطق الكلمة بصوتك', big: v.em, text: v.en, say: v.en, target: v.en, fb, speak, bonus: true };
     case 'match': {
       const four = [], seen = new Set();
       let guard = 0;
@@ -583,7 +708,9 @@ function buildQuiz(lv) {
   const custom = shuffle(lv.qs || []);
   let qi = 0, vi = 0;
   const out = [];
-  (lv.plan || C.defaultPlan).forEach(t => {
+  const plan = (lv.plan || C.defaultPlan).slice();
+  if (HAS_SR && !S.micOff && (lv.vocab || []).length >= 4) { plan.splice(4, 0, 'sayit'); plan.splice(9, 0, 'sayit'); }
+  plan.forEach(t => {
     if (t === 'q') { if (qi < custom.length) out.push(fromCustom(custom[qi++])); return; }
     if (!ctx.vs.length) return;
     if (t === 'match' && ctx.vs.length < 4) t = 'word2ar';
@@ -630,7 +757,7 @@ function confetti() {
 const mount = node => { document.querySelectorAll('.cf,.toast').forEach(x => x.remove()); try { speechSynthesis.cancel(); } catch (e) {} app.replaceChildren(node); window.scrollTo(0, 0); };
 const starRow = n => h('div', { class: 'stars', 'aria-label': n + ' من 3 نجوم' }, [1, 2, 3].map(i => h('span', { class: 'st' + (i <= n ? ' on' : ''), html: ICON.star })));
 const spk = (text, cls, label) => HAS_TTS ? h('button', { class: 'spk ' + (cls || ''), 'aria-label': label || 'استمع', onclick: () => say(text, { force: true }) }, ic('spk')) : null;
-const slowBtn = text => HAS_TTS ? h('button', { class: 'spk slow', 'aria-label': 'استمع ببطء', onclick: () => say(text, { force: true, rate: .5 }) }, '🐢') : null;
+const slowBtn = text => HAS_TTS ? h('button', { class: 'spk slow', 'aria-label': 'استمع ببطء', onclick: () => say(text, { force: true, rate: C.slowRate || .55 }) }, pic('🐢')) : null;
 const backBtn = fn => h('button', { class: 'round', 'aria-label': 'رجوع', onclick: fn }, ic('back'));
 function soundBtn() {
   const b = h('button', { class: 'round', 'aria-label': 'تشغيل أو إيقاف الصوت' });
@@ -652,11 +779,11 @@ function home() {
   const line = fill(rnd(C.lines));
   const node = h('div', { class: 'wrap screen' },
     h('div', { class: 'top' }, h('div', { class: 'brand' }, C.title),
-      h('div', { class: 'chips' }, chip(ICON.star, got + '/' + total), chip('⚡', fmt(S.xp)), chip('🔥', fmt(S.streak))), soundBtn()),
+      h('div', { class: 'chips' }, chip(ICON.star, got + '/' + total), chip(pic('⚡'), fmt(S.xp)), chip(pic('🔥'), fmt(S.streak))), soundBtn()),
     C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
-    h('div', { class: 'hero' }, h('div', { class: 'mascot', 'aria-hidden': 'true' }, C.mascot), h('div', { class: 'bubble' }, line)),
+    h('div', { class: 'hero' }, h('div', { class: 'mascot', 'aria-hidden': 'true' }, pic(C.mascot)), h('div', { class: 'bubble' }, line)),
     h('button', { class: 'go', onclick: () => openLevel(ci) },
-      h('span', { class: 'orb', style: '--lv:' + (cl.color || 'var(--a2)') + ';width:56px;height:56px;font-size:1.7rem' }, cl.emoji),
+      h('span', { class: 'orb', style: '--lv:' + (cl.color || 'var(--a2)') + ';width:56px;height:56px;font-size:1.7rem' }, pic(cl.emoji)),
       h('span', { class: 'gt' }, h('small', null, got ? 'كمّل رحلتك' : 'ابدأ رحلتك'), h('b', null, cl.title)), ic('go')),
     h('div', { class: 'meter', role: 'progressbar', 'aria-valuenow': pct, 'aria-valuemin': 0, 'aria-valuemax': 100, style: '--w:' + pct + '%' }, h('i')),
     h('div', { class: 'mlabel' }, h('span', null, C.journey), h('span', null, pct + '%')),
@@ -664,24 +791,52 @@ function home() {
     h('div', { class: 'path' }, C.levels.map((l, i) => {
       const open = isOpen(i), n = S.stars[l.id] || 0;
       return h('button', { class: 'node' + (open ? '' : ' locked'), disabled: !open, 'aria-label': l.title, onclick: () => openLevel(i) },
-        h('span', { class: 'orb', style: '--lv:' + (l.color || 'var(--a1)') }, l.emoji, h('span', { class: 'no' }, i + 1)),
+        h('span', { class: 'orb', style: '--lv:' + (l.color || 'var(--a1)') }, pic(l.emoji), h('span', { class: 'no' }, i + 1)),
         h('span', { class: 'meta' }, h('h3', null, l.title), h('p', null, l.sub), open ? starRow(n) : null),
         open ? h('span', { class: 'cefr' }, l.cefr) : h('span', { class: 'lk', html: ICON.lock }));
     })),
     h('h2', { class: 'sec' }, 'أوسمتك'),
-    h('div', { class: 'badges' }, BADGES.map(b => h('div', { class: 'bd' + (S.badges.includes(b.id) ? '' : ' off'), title: b.d }, h('span', { class: 'e' }, b.e), b.t))),
+    h('div', { class: 'badges' }, BADGES.map(b => h('div', { class: 'bd' + (S.badges.includes(b.id) ? '' : ' off'), title: b.d }, h('span', { class: 'e' }, pic(b.e)), b.t))),
     h('div', { class: 'foot' },
       C.askName ? h('button', { class: 'link', onclick: () => nameScreen(true) }, 'تغيير الاسم') : null,
       h('button', { class: 'link', onclick: e => { S.open = !S.open; save(); home(); } }, S.open ? 'ولي الأمر: إعادة قفل المراحل' : 'ولي الأمر: فتح جميع المراحل'),
-      resetBtn()));
+      HAS_TTS ? h('button', { class: 'link', onclick: voiceSheet }, 'صوت النطق') : null,
+      SRC ? h('button', { class: 'link', onclick: () => { S.micOff = !S.micOff; save(); toast(S.micOff ? 'تم إيقاف تحدي النطق' : 'تم تشغيل تحدي النطق 🎤'); home(); } }, S.micOff ? 'تشغيل تحدي النطق' : 'إيقاف تحدي النطق') : null,
+      resetBtn(),
+      h('p', { class: 'credit' }, 'الصور الفوتوغرافية من ', h('a', { href: 'https://unsplash.com', target: '_blank', rel: 'noopener' }, 'Unsplash'), '، والرسوم من Fluent Emoji لمايكروسوفت (', h('a', { href: 'img/fe/LICENSE.txt', target: '_blank', rel: 'noopener' }, 'رخصة MIT'), ')')));
   mount(node);
+}
+function voiceSheet() {
+  loadVoice();
+  document.querySelectorAll('.sheet').forEach(x => x.remove());
+  const sample = 'Hello! I am happy. Let us learn English together.';
+  const clean = n => String(n).replace(/\s*\(.*?\)\s*/g, ' ').replace(/Microsoft|Online|Google/gi, m => m).trim();
+  const list = h('div', { class: 'vlist' });
+  const close = () => sh.remove();
+  const paint = () => {
+    const rows = [{ v: null, label: 'تلقائي: أفضل صوت في جهازك', sub: voices[0] ? clean(voices[0].v.name) : '' }].concat(voices.slice(0, 12).map(x => ({ v: x.v, label: clean(x.v.name), sub: x.v.lang + (/natural|neural|premium|enhanced/i.test(x.v.name) ? ' · طبيعي' : '') })));
+    list.replaceChildren(...rows.map(r => {
+      const sel = r.v ? S.voice === r.v.voiceURI : !S.voice;
+      const pick = h('button', { class: 'vn', onclick: () => { S.voice = r.v ? r.v.voiceURI : ''; save(); loadVoice(); paint(); say(sample, { force: true }); } }, r.label, r.sub ? h('small', { class: 'en' }, r.sub) : null);
+      const play = h('button', { class: 'spk', 'aria-label': 'جرّب هذا الصوت', onclick: () => say(sample, { force: true, voice: r.v || (voices[0] && voices[0].v) }) }, ic('spk'));
+      return h('div', { class: 'vrow' + (sel ? ' sel' : '') }, play, pick);
+    }));
+  };
+  paint();
+  const sh = h('div', { class: 'sheet soft', role: 'dialog', 'aria-label': 'اختيار صوت النطق' }, h('div', { class: 'sheet-in' },
+    h('div', { class: 'sh-t' }, 'اختر صوت النطق'),
+    voices.length ? h('div', { class: 'sh-a' }, 'اضغط ▶ لتسمع الصوت، ثم اختر الأقرب لصوت الإنسان.') : h('div', { class: 'sh-a' }, 'لم أجد صوتًا إنجليزيًا في هذا الجهاز.'),
+    list,
+    h('p', { class: 'vhelp' }, 'أجمل الأصوات عادةً ما يحمل اسمه Natural أو Enhanced أو Google. في الآيفون يمكن تنزيل صوت إنجليزي محسّن من: الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات. وفي أندرويد من إعدادات «تحويل النص إلى كلام».'),
+    h('button', { class: 'btn full', onclick: close }, 'تم')));
+  app.append(sh);
 }
 function resetBtn() {
   const b = h('button', { class: 'link' }, 'مسح التقدم');
   let armed = false;
   b.onclick = () => {
     if (!armed) { armed = true; b.textContent = 'اضغط مرة أخرى للتأكيد'; setTimeout(() => { armed = false; b.textContent = 'مسح التقدم'; }, 4000); return; }
-    S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: S.sound, open: false, name: S.name }; save(); home();
+    S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: S.sound, open: false, name: S.name, voice: S.voice, micOff: S.micOff }; save(); home();
   };
   return b;
 }
@@ -690,14 +845,18 @@ function resetBtn() {
 function openLevel(i) {
   if (!isOpen(i)) return;
   const l = C.levels[i], vs = (l.vocab || []).map(toV);
+  warm(vs.map(v => v.em));
   const card = v => {
-    const el = h('button', { class: 'wc', 'aria-label': v.en + ' ' + v.ar },
-      v.k ? h('span', { class: 'k' }, v.k) : null, v.em ? h('span', { class: 'em' }, v.em) : null, h('span', { class: 'w' }, v.en), h('span', { class: 'm' }, v.ar));
-    el.onclick = () => { say(v.en, { force: true }); el.classList.remove('say'); void el.offsetWidth; el.classList.add('say'); };
+    const el = h('div', { class: 'wc' });
+    const main = h('button', { class: 'main', 'aria-label': v.en + ' ' + v.ar },
+      v.k ? h('span', { class: 'k' }, v.k) : null, v.em ? h('span', { class: 'em' }, pic(v.em, '', true)) : null, h('span', { class: 'w' }, v.en), h('span', { class: 'm' }, v.ar));
+    main.onclick = () => { say(v.en, { force: true }); el.classList.remove('say'); void el.offsetWidth; el.classList.add('say'); };
+    el.append(main);
+    if (HAS_TTS) el.append(h('button', { class: 'mini', 'aria-label': 'استمع ببطء: ' + v.en, onclick: () => say(v.en, { force: true, rate: C.slowRate || .55 }) }, pic('🐢')));
     return el;
   };
-  const tipCard = t => h('div', { class: 'tip' }, h('h4', null, '💡 ' + t.t), t.b ? h('p', null, t.b) : null,
-    (t.ex || []).map(e => h('div', { class: 'ex' }, spk(e[0]), h('div', { class: 'exb' }, h('div', { class: 'en' }, e[0]), h('div', { class: 'exa' }, e[1])))));
+  const tipCard = t => h('div', { class: 'tip' }, h('h4', null, pic('💡', 'ti'), ' ' + t.t), t.b ? h('p', null, t.b) : null,
+    (t.ex || []).map(e => h('div', { class: 'ex' }, spk(e[0]), slowBtn(e[0]), h('div', { class: 'exb' }, h('div', { class: 'en' }, e[0]), h('div', { class: 'exa' }, e[1])))));
   const playAll = () => { try { speechSynthesis.cancel(); } catch (e) {} vs.forEach(v => say(v.en, { force: true, queue: true })); };
   const node = h('div', { class: 'wrap screen' },
     h('div', { class: 'qtop' }, backBtn(home), h('div', { class: 'lvh' }, h('div', { class: 't' }, l.title), h('div', { class: 's' }, l.sub)), h('span', { class: 'cefr' }, l.cefr)),
@@ -715,7 +874,8 @@ function openLevel(i) {
 /* ---------- quiz ---------- */
 function startQuiz(l, idx) {
   const qs = buildQuiz(l);
-  next({ l, idx, queue: qs.slice(), total: qs.length, mastered: 0, first: 0, xp: 0, n: 0 });
+  warm(qs.flatMap(q => [q.big, ...(q.oc === 'emo' ? q.opts : [])]));
+  next({ l, idx, queue: qs.slice(), total: qs.length, scored: qs.filter(q => !q.bonus).length || 1, mastered: 0, first: 0, xp: 0, n: 0 });
 }
 function next(run) {
   if (!run.queue.length) return finish(run);
@@ -725,14 +885,22 @@ function next(run) {
 function qHead(q) {
   const c = h('div', { class: 'qcard' });
   if (q.passage) c.append(h('div', { class: 'passage' }, q.passage), spk(q.passage));
-  if (q.big) c.append(h('div', { class: 'big' + ([...q.big].length > 3 ? ' sm' : '') }, q.big));
+  if (q.big) c.append(h('div', { class: 'big' + (!picSrc(q.big) && [...q.big].length > 3 ? ' sm' : '') }, pic(q.big)));
   if (q.text) c.append(h('div', { class: 'qtext' + (q.textAr ? ' ar' : '') }, q.text));
   const s = q.listen || q.say;
-  if (s && HAS_TTS) c.append(h('div', { class: 'spkrow' }, spk(s, q.listen ? 'lg' : ''), q.listen ? slowBtn(s) : null));
+  if (s && HAS_TTS) c.append(h('div', { class: 'spkrow' }, spk(s, q.listen ? 'lg' : ''), slowBtn(s)));
   return c;
 }
 const correctText = q => q.kind === 'choice' ? q.a : q.kind === 'build' ? q.ans.join(q.join) : q.answers[0];
 function resolve(run, q, ok, extra) {
+  if (q.bonus) {
+    run.mastered++;
+    if (ok) { run.xp += 15; run.spoke = (run.spoke || 0) + 1; sfx('ok'); } else sfx('tap');
+    const bar = document.querySelector('.meter');
+    if (bar) bar.style.setProperty('--w', Math.round(run.mastered / run.total * 100) + '%');
+    document.querySelector('.qcount').textContent = run.mastered + '/' + run.total;
+    return sheet(run, q, ok);
+  }
   const wasFirst = extra && 'first' in extra ? extra.first : !q._tries;
   if (ok) { run.mastered++; if (wasFirst) { run.first++; run.xp += C.xpOk || 10; } else run.xp += 5; sfx('ok'); }
   else {
@@ -747,17 +915,18 @@ function resolve(run, q, ok, extra) {
 }
 function sheet(run, q, ok) {
   const fb = q.fb;
-  const sh = h('div', { class: 'sheet ' + (ok ? 'good' : 'bad'), role: 'status', 'aria-live': 'polite' }, h('div', { class: 'sheet-in' },
-    h('div', { class: 'sh-t' }, fill(ok ? rnd(C.praise) : rnd(C.oops))),
-    !ok && q.kind !== 'match' ? h('div', { class: 'sh-a' }, 'الإجابة الصحيحة: ', h('span', { class: q.oc === 'ar' ? '' : 'en' }, correctText(q))) : null,
-    fb ? h('div', { class: 'sh-fb' }, fb.em || '', h('span', { class: 'en' }, fb.en), '=', h('span', null, fb.ar)) : null,
-    q.tip ? h('div', { class: 'sh-tip' }, '💡 ' + q.tip) : null,
+  const soft = q.kind === 'speak' && !ok;
+  const sh = h('div', { class: 'sheet ' + (ok ? 'good' : soft ? 'soft' : 'bad'), role: 'status', 'aria-live': 'polite' }, h('div', { class: 'sheet-in' },
+    h('div', { class: 'sh-t' }, soft ? fill('لا بأس يا {n}! اسمعها وكرّرها معي.') : fill(ok ? rnd(C.praise) : rnd(C.oops))),
+    !ok && q.kind !== 'match' && q.kind !== 'speak' ? h('div', { class: 'sh-a' }, 'الإجابة الصحيحة: ', q.oc === 'emo' && fb ? h('span', { class: 'en' }, fb.en) : h('span', { class: q.oc === 'ar' ? '' : 'en' }, correctText(q))) : null,
+    fb ? h('div', { class: 'sh-fb' }, pic(fb.em), h('span', { class: 'en' }, fb.en), '=', h('span', null, fb.ar)) : null,
+    q.tip ? h('div', { class: 'sh-tip' }, pic('💡', 'ti'), ' ' + q.tip) : null,
     h('button', { class: 'btn full', onclick: () => next(run) }, run.queue.length ? 'متابعة' : 'إنهاء')));
   app.append(sh);
   if (q.speak) setTimeout(() => say(q.speak), 450);
 }
 function renderQ(run, q) {
-  const body = q.kind === 'choice' ? rChoice(run, q) : q.kind === 'build' ? rBuild(run, q) : q.kind === 'match' ? rMatch(run, q) : rType(run, q);
+  const body = q.kind === 'choice' ? rChoice(run, q) : q.kind === 'build' ? rBuild(run, q) : q.kind === 'match' ? rMatch(run, q) : q.kind === 'speak' ? rSpeak(run, q) : rType(run, q);
   let armed = false;
   const x = h('button', { class: 'round', 'aria-label': 'خروج', onclick: () => {
     if (!armed) { armed = true; toast('اضغط مرة أخرى للخروج من التحدي'); setTimeout(() => armed = false, 2500); return; }
@@ -769,12 +938,13 @@ function renderQ(run, q) {
     body);
   mount(node);
   if (q.listen) setTimeout(() => say(q.listen), 450);
+  if (q.kind === 'speak') setTimeout(() => say(q.target), 450);
 }
 function rChoice(run, q) {
   let locked = false;
   const opts = h('div', { class: 'opts' + (q.opts.some(o => o.length > 22) ? ' one' : '') });
   q.opts.forEach(o => {
-    const b = h('button', { class: 'opt ' + q.oc, 'data-v': o }, o);
+    const b = h('button', { class: 'opt ' + q.oc, 'data-v': o, 'aria-label': q.oc === 'emo' ? 'صورة' : false }, q.oc === 'emo' ? pic(o) : o);
     b.onclick = () => {
       if (locked) return; locked = true;
       const ok = o === q.a;
@@ -814,7 +984,7 @@ function rMatch(run, q) {
   let sel = null, mistakes = 0, matched = 0;
   const colL = h('div', { class: 'mc' }), colR = h('div', { class: 'mc' });
   const mk = (o, side) => {
-    const b = h('button', { class: 'm-i ' + (side === 'L' ? 'en' : q.right) }, o.t);
+    const b = h('button', { class: 'm-i ' + (side === 'L' ? 'en' : q.right) }, side === 'R' && q.right === 'emo' ? pic(o.t) : o.t);
     b.onclick = () => {
       if (side === 'L') { sel = { el: b, o }; colL.querySelectorAll('.m-i').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); say(o.t, { force: true }); return; }
       if (!sel) { sfx('tap'); return; }
@@ -827,6 +997,42 @@ function rMatch(run, q) {
   };
   L.forEach(o => colL.append(mk(o, 'L'))); R.forEach(o => colR.append(mk(o, 'R')));
   return h('div', null, h('div', { class: 'mt' }, colL, colR));
+}
+function rSpeak(run, q) {
+  let locked = false, tries = 0, rec = null, busy = false;
+  const status = h('div', { class: 'heard', 'aria-live': 'polite' }, 'اسمع الكلمة، ثم اضغط الميكروفون وقلها بصوت واضح');
+  const mic = h('button', { class: 'mic', 'aria-label': 'اضغط وتكلّم' }, pic('🎤'));
+  const finish = ok => { if (locked) return; locked = true; mic.disabled = true; skip.disabled = true; try { rec && rec.abort(); } catch (e) {} resolve(run, q, ok); };
+  const stopUi = () => { busy = false; mic.classList.remove('on'); };
+  mic.onclick = () => {
+    if (locked) return;
+    if (busy) { try { rec.stop(); } catch (e) {} return; }
+    try { speechSynthesis.cancel(); } catch (e) {}
+    try {
+      rec = new SRC(); rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 5; rec.continuous = false;
+    } catch (e) { status.textContent = 'تحدي النطق لا يعمل في هذا المتصفح.'; return; }
+    let got = false;
+    rec.onresult = e => {
+      got = true;
+      const alts = []; for (const r of e.results) for (let i = 0; i < r.length; i++) alts.push(r[i].transcript);
+      if (heardIt(q.target, alts)) { status.replaceChildren('سمعتك تقول: ', h('span', { class: 'en' }, q.target), ' 👏'); finish(true); return; }
+      tries++;
+      status.replaceChildren('سمعت: ', h('span', { class: 'en' }, alts[0] || '...'), tries < 3 ? ' — اسمعها مرة أخرى وحاول' : '');
+      if (tries >= 3) setTimeout(() => finish(false), 900); else setTimeout(() => say(q.target, { force: true }), 500);
+    };
+    rec.onerror = e => {
+      stopUi();
+      if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { status.textContent = 'يحتاج التحدي إذنًا لاستخدام الميكروفون. يمكنك التخطي الآن.'; S.micOff = true; save(); }
+      else if (e.error === 'no-speech') status.textContent = 'لم أسمعك جيدًا، اضغط وتكلّم بصوت أعلى قليلًا';
+      else if (e.error === 'network') status.textContent = 'تحدي النطق يحتاج اتصالًا بالإنترنت. يمكنك التخطي.';
+      else if (e.error !== 'aborted') status.textContent = 'لم يعمل الميكروفون هذه المرة، حاول مرة أخرى أو تخطَّ.';
+    };
+    rec.onend = () => { stopUi(); if (!got && !locked && status.textContent.indexOf('أستمع') === 0) status.textContent = 'لم أسمعك جيدًا، اضغط وتكلّم بصوت أعلى قليلًا'; };
+    try { rec.start(); busy = true; mic.classList.add('on'); status.textContent = 'أستمع إليك الآن...'; sfx('tap'); }
+    catch (e) { stopUi(); status.textContent = 'لم يعمل الميكروفون، حاول مرة أخرى.'; }
+  };
+  const skip = h('button', { class: 'link skip', onclick: () => finish(false) }, 'تخطَّ هذا التحدي');
+  return h('div', null, qHead(q), mic, status, skip);
 }
 function rType(run, q) {
   let locked = false;
@@ -849,7 +1055,7 @@ function touchStreak() {
   S.streak = S.last === y ? S.streak + 1 : 1; S.last = t;
 }
 function finish(run) {
-  const acc = run.first / run.total, stars = acc >= .9 ? 3 : acc >= .7 ? 2 : acc >= .5 ? 1 : 0;
+  const acc = run.first / run.scored, stars = acc >= .9 ? 3 : acc >= .7 ? 2 : acc >= .5 ? 1 : 0;
   const prev = S.stars[run.l.id] || 0;
   S.stars[run.l.id] = Math.max(prev, stars);
   const bonus = stars > 0 ? 20 : 0;
@@ -858,20 +1064,21 @@ function finish(run) {
   const last = run.idx === C.levels.length - 1, nextIdx = run.idx + 1;
   const msgs = C.result;
   const node = h('div', { class: 'wrap screen' }, h('div', { class: 'res' },
-    h('div', { class: 'mascot', 'aria-hidden': 'true' }, C.mascot),
+    h('div', { class: 'mascot', 'aria-hidden': 'true' }, pic(C.mascot)),
     h('h1', null, fill(stars === 3 ? msgs[3] : stars === 2 ? msgs[2] : stars === 1 ? msgs[1] : msgs[0])),
     h('div', { class: 'bigstars', 'aria-label': stars + ' من 3 نجوم' }, [1, 2, 3].map(i => h('span', { html: ICON.star }).firstChild).map((svg, i) => { if (i < stars) svg.setAttribute('class', 'on'); return svg; })),
     h('div', { class: 'stats' },
       h('div', { class: 'stat' }, h('b', null, Math.round(acc * 100) + '%'), h('span', null, 'إجابات من أول مرة')),
-      h('div', { class: 'stat' }, h('b', null, '+' + (run.xp + bonus)), h('span', null, 'نقطة'))),
-    fresh.length ? h('div', { class: 'bubble' }, 'وسام جديد! ' + fresh.map(b => b.e + ' ' + b.t).join(' ، ')) : null,
+      h('div', { class: 'stat' }, h('b', null, '+' + (run.xp + bonus)), h('span', null, 'نقطة')),
+      run.spoke ? h('div', { class: 'stat' }, h('b', null, String(run.spoke)), h('span', null, 'كلمات نطقتها')) : null),
+    fresh.length ? h('div', { class: 'bubble' }, 'وسام جديد! ', fresh.map((b, i) => [i ? ' ، ' : '', pic(b.e, 'ti'), ' ' + b.t])) : null,
     stars > 0 && !last ? h('button', { class: 'btn', onclick: () => openLevel(nextIdx) }, 'المرحلة التالية') : null,
     stars > 0 && last ? h('div', { class: 'bubble' }, fill(C.finale)) : null,
     stars === 0 ? h('button', { class: 'btn', onclick: () => openLevel(run.idx) }, 'راجع البطاقات') : null,
     h('button', { class: 'btn alt', onclick: () => startQuiz(run.l, run.idx) }, stars === 3 ? 'العب مرة أخرى' : 'حاول لتحصل على نجوم أكثر'),
     h('button', { class: 'link', onclick: home }, 'القائمة الرئيسية')));
   mount(node);
-  if (stars > 0) { sfx('win'); confetti(); setTimeout(() => say(C.sayWin), 700); if (fresh.length) setTimeout(() => { sfx('badge'); toast('وسام جديد: ' + fresh[0].e + ' ' + fresh[0].t); }, 1600); }
+  if (stars > 0) { sfx('win'); confetti(); setTimeout(() => say(C.sayWin), 700); if (fresh.length) setTimeout(() => { sfx('badge'); toast(['وسام جديد: ', pic(fresh[0].e, 'ti'), ' ' + fresh[0].t]); }, 1600); }
   else sfx('no');
 }
 
@@ -887,7 +1094,7 @@ function nameScreen(editing) {
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
   mount(h('div', { class: 'wrap screen' }, h('div', { class: 'namebox' },
     C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
-    h('div', { class: 'mascot huge', 'aria-hidden': 'true' }, C.mascot),
+    h('div', { class: 'mascot huge', 'aria-hidden': 'true' }, pic(C.mascot)),
     h('div', { class: 'bubble' }, editing ? 'اكتب الاسم الجديد' : C.nameAsk),
     inp, btn,
     editing ? h('button', { class: 'link', onclick: home }, 'رجوع دون تغيير') : null,

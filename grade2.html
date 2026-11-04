@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>حديقة الإنجليزية</title>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Baloo+Bhaijaan+2:wght@500;700;800&family=Lalezar&display=swap">
 <style>
 *{box-sizing:border-box}
@@ -196,6 +197,56 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .namebox .btn{min-width:220px}
 .inp.ar{direction:rtl;font-family:var(--font-ui);font-size:1.5rem;margin-top:0}
 .note{margin:0;color:var(--on-bg-2,var(--muted));font-size:.85rem;font-weight:700}
+/* pictures */
+img.pic{display:block;object-fit:contain;-webkit-user-drag:none;user-select:none;pointer-events:none}
+.wc{position:relative;padding:0;overflow:hidden}
+.wc .main{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:14px 8px 12px;border-radius:inherit}
+.wc .em img{width:88px;height:88px}
+.wc .em{line-height:1}
+.wc .mini{position:absolute;top:6px;inset-inline-start:6px;width:36px;height:36px;border-radius:50%;background:var(--card2);display:grid;place-items:center;box-shadow:0 2px 0 var(--line)}
+.wc .mini img{width:24px;height:24px}
+.big img{width:150px;height:150px;margin-inline:auto}
+.opt.emo img{width:86px;height:86px}
+.m-i.emo img{width:58px;height:58px}
+.mascot img{width:1em;height:1em}
+.orb img{width:64%;height:64%}
+.bd .e img{width:2.5rem;height:2.5rem;margin:0 auto 2px}
+.chip img{width:20px;height:20px}
+img.ti{display:inline-block;width:1.25em;height:1.25em;vertical-align:-.28em}
+.sh-fb img.pic{width:42px;height:42px}
+.spk.slow img{width:28px;height:28px}
+.spk.lg + .spk.slow{width:56px;height:56px}
+.spk.lg + .spk.slow img{width:34px;height:34px}
+/* photos */
+img.pic.ph{object-fit:cover;border-radius:16px;background:var(--card2);box-shadow:0 2px 0 rgba(31,48,80,.08)}
+.wc .em img.ph{width:min(132px,100%);height:auto;aspect-ratio:1/1}
+.big img.ph{width:min(230px,70vw);height:auto;aspect-ratio:1/1;border-radius:22px;border:4px solid #fff;box-shadow:var(--shadow)}
+.opt.emo img.ph{width:min(132px,100%);height:auto;aspect-ratio:1/1;border-radius:16px}
+.opt.emo:has(img.ph){padding:8px}
+.m-i.emo img.ph{width:64px;height:64px;border-radius:12px}
+.sh-fb img.ph{width:48px;height:48px;border-radius:10px}
+/* speaking challenge */
+.mic{width:96px;height:96px;border-radius:50%;background:var(--a1);color:var(--on-a1);display:grid;place-items:center;box-shadow:0 6px 0 var(--a1-deep);margin:18px auto 6px;transition:transform .08s}
+.mic img{width:58px;height:58px}
+.mic:active{transform:translateY(4px);box-shadow:0 2px 0 var(--a1-deep)}
+.mic.on{animation:micpulse 1s ease-in-out infinite}
+.mic[disabled]{opacity:.5}
+.heard{min-height:3em;text-align:center;font-weight:800;color:var(--muted)}
+.heard .en{color:var(--ink)}
+.skip{display:block;margin:4px auto 0}
+.sheet.soft{background:#E8F3FF;color:#173A66}
+.sheet.soft .btn{background:#2F7DD1;box-shadow:0 5px 0 #1E5A9E;color:#fff}
+/* voice chooser */
+.vlist{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow:auto;margin-block:6px}
+.vrow{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:8px 10px;border:3px solid transparent}
+.vrow.sel{border-color:var(--a2)}
+.vrow .vn{flex:1;min-width:0;text-align:start;font-weight:800;overflow-wrap:anywhere}
+.vrow .vn small{display:block;color:var(--muted);font-weight:700}
+.vrow .spk{width:40px;height:40px}
+.vhelp{font-size:.88rem;color:var(--muted);font-weight:700;margin:4px 0 0}
+.credit{width:100%;text-align:center;font-size:.75rem;color:var(--muted);margin:6px 0 0}
+.credit a{color:inherit}
+@keyframes micpulse{0%,100%{box-shadow:0 6px 0 var(--a1-deep),0 0 0 0 rgba(232,89,12,.45)}50%{box-shadow:0 6px 0 var(--a1-deep),0 0 0 18px rgba(232,89,12,0)}}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
 @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.12) rotate(-2deg)}100%{transform:scale(1)}}
@@ -224,7 +275,7 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 }
 body{font-size:17px;font-weight:600}
 .brand,h2.sec,.btn,.node h3,.qprompt,.sh-t,.go b,.lvh .t,.tip h4,.res h1,.stat b{font-weight:400;font-synthesis:none;letter-spacing:.01em}
-.brand::after{content:" ☀️"}
+.brand::after{content:"";display:inline-block;width:1.05em;height:1.05em;margin-inline-start:.25em;vertical-align:-.12em;background:url(img/fe/sun.webp) center/contain no-repeat}
 .brand{font-size:1.9rem;color:#B53F00;text-shadow:0 2px 0 #fff}
 h2.sec{font-size:1.5rem}
 .qprompt{font-size:1.45rem}
@@ -242,8 +293,9 @@ h2.sec{font-size:1.5rem}
 .meter i{background:linear-gradient(90deg,#FFB703,#FF7A18)}
 
 /* creative pass: garden path */
-:root{--veh:"🦋";--gh:74px;--ground:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgOTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iOTAiPjxwYXRoIGQ9Ik0wIDQ0IFE3MCAxNCAxNTAgNDIgVDI5MCA0MCBUMzYwIDQ0IFY5MCBIMFoiIGZpbGw9IiNCNkU5OEMiLz48cGF0aCBkPSJNMCA1OCBRMTAwIDM0IDIwMCA1NiBUMzYwIDU4IFY5MCBIMFoiIGZpbGw9IiM3RkQxNjUiLz48cGF0aCBkPSJNMCA3NCBIMzYwIFY5MCBIMFoiIGZpbGw9IiM1REJFNEQiLz48ZyBzdHJva2U9IiMyRjlFNDUiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik0zMCA4MCBWNjIiLz48cGF0aCBkPSJNOTYgODIgVjY0Ii8+PHBhdGggZD0iTTE3MCA4MCBWNjAiLz48cGF0aCBkPSJNMjQwIDgyIFY2NCIvPjxwYXRoIGQ9Ik0zMTYgODAgVjYyIi8+PC9nPjxjaXJjbGUgY3g9IjMwIiBjeT0iNTgiIHI9IjciIGZpbGw9IiNGRjVFOEEiLz48Y2lyY2xlIGN4PSIzMCIgY3k9IjU4IiByPSIyLjYiIGZpbGw9IiNGRkQyM0YiLz48Y2lyY2xlIGN4PSI5NiIgY3k9IjYwIiByPSI3IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iOTYiIGN5PSI2MCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMTcwIiBjeT0iNTYiIHI9IjciIGZpbGw9IiNGRjlBM0MiLz48Y2lyY2xlIGN4PSIxNzAiIGN5PSI1NiIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMjQwIiBjeT0iNjAiIHI9IjciIGZpbGw9IiNCMjZCRkYiLz48Y2lyY2xlIGN4PSIyNDAiIGN5PSI2MCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMzE2IiBjeT0iNTgiIHI9IjciIGZpbGw9IiNGRjVFOEEiLz48Y2lyY2xlIGN4PSIzMTYiIGN5PSI1OCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGc+PHBhdGggZD0iTTEyNiA3NiBxMTAgLTIyIDIyIDB6IiBmaWxsPSIjRTU0ODREIi8+PHJlY3QgeD0iMTM0IiB5PSI3NiIgd2lkdGg9IjYiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRjNENiIvPjxjaXJjbGUgY3g9IjEzMSIgY3k9IjcwIiByPSIxLjYiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSI2NiIgcj0iMS42IiBmaWxsPSIjZmZmIi8+PC9nPjwvc3ZnPgo=");--tw:16px;--scene-bd:#fff;
+:root{--veh:"";--gh:74px;--ground:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgOTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iOTAiPjxwYXRoIGQ9Ik0wIDQ0IFE3MCAxNCAxNTAgNDIgVDI5MCA0MCBUMzYwIDQ0IFY5MCBIMFoiIGZpbGw9IiNCNkU5OEMiLz48cGF0aCBkPSJNMCA1OCBRMTAwIDM0IDIwMCA1NiBUMzYwIDU4IFY5MCBIMFoiIGZpbGw9IiM3RkQxNjUiLz48cGF0aCBkPSJNMCA3NCBIMzYwIFY5MCBIMFoiIGZpbGw9IiM1REJFNEQiLz48ZyBzdHJva2U9IiMyRjlFNDUiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik0zMCA4MCBWNjIiLz48cGF0aCBkPSJNOTYgODIgVjY0Ii8+PHBhdGggZD0iTTE3MCA4MCBWNjAiLz48cGF0aCBkPSJNMjQwIDgyIFY2NCIvPjxwYXRoIGQ9Ik0zMTYgODAgVjYyIi8+PC9nPjxjaXJjbGUgY3g9IjMwIiBjeT0iNTgiIHI9IjciIGZpbGw9IiNGRjVFOEEiLz48Y2lyY2xlIGN4PSIzMCIgY3k9IjU4IiByPSIyLjYiIGZpbGw9IiNGRkQyM0YiLz48Y2lyY2xlIGN4PSI5NiIgY3k9IjYwIiByPSI3IiBmaWxsPSIjZmZmIi8+PGNpcmNsZSBjeD0iOTYiIGN5PSI2MCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMTcwIiBjeT0iNTYiIHI9IjciIGZpbGw9IiNGRjlBM0MiLz48Y2lyY2xlIGN4PSIxNzAiIGN5PSI1NiIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMjQwIiBjeT0iNjAiIHI9IjciIGZpbGw9IiNCMjZCRkYiLz48Y2lyY2xlIGN4PSIyNDAiIGN5PSI2MCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGNpcmNsZSBjeD0iMzE2IiBjeT0iNTgiIHI9IjciIGZpbGw9IiNGRjVFOEEiLz48Y2lyY2xlIGN4PSIzMTYiIGN5PSI1OCIgcj0iMi42IiBmaWxsPSIjRkZEMjNGIi8+PGc+PHBhdGggZD0iTTEyNiA3NiBxMTAgLTIyIDIyIDB6IiBmaWxsPSIjRTU0ODREIi8+PHJlY3QgeD0iMTM0IiB5PSI3NiIgd2lkdGg9IjYiIGhlaWdodD0iOCIgZmlsbD0iI0ZGRjNENiIvPjxjaXJjbGUgY3g9IjEzMSIgY3k9IjcwIiByPSIxLjYiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSI2NiIgcj0iMS42IiBmaWxsPSIjZmZmIi8+PC9nPjwvc3ZnPgo=");--tw:16px;--scene-bd:#fff;
   --trail:radial-gradient(circle,#F3B94D 0 42%,transparent 46%) center 0/16px 24px repeat-y}
+.meter i::after{width:34px;height:34px;background:url(img/fe/butterfly.webp) center/contain no-repeat}
 .sc-bfly{transform-box:fill-box;transform-origin:center;transform:translate(170px,30px);animation:sc-bfly 18s ease-in-out infinite}
 @keyframes sc-bfly{0%{transform:translate(-30px,44px) rotate(8deg)}20%{transform:translate(90px,8px) rotate(-8deg)}40%{transform:translate(170px,40px) rotate(8deg)}60%{transform:translate(250px,4px) rotate(-8deg)}80%{transform:translate(340px,36px) rotate(8deg)}100%{transform:translate(440px,8px) rotate(-8deg)}}
 .sc-sun{transform-box:fill-box;transform-origin:center;animation:sc-pulse 5s ease-in-out infinite alternate}
@@ -257,7 +309,7 @@ h2.sec{font-size:1.5rem}
 <script>
 window.CONFIG = {
   id: 'g2v2', migrate: 'g2', askName: true, title: 'حديقة الإنجليزية', mascot: '🦁',
-  nameAsk: 'أهلًا بك في الحديقة! أنا الأسد الصغير. ما اسمك يا صديقي؟', nameBtn: 'هيا نلعب', speechRate: 0.7, pitch: 1.1,
+  nameAsk: 'أهلًا بك في الحديقة! أنا الأسد الصغير. ما اسمك يا صديقي؟', nameBtn: 'هيا نلعب', speechRate: 0.88, slowRate: 0.55, pitch: 1,
   journey: 'تقدّمك في الحديقة', pathTitle: 'طريق الحديقة', learnTitle: 'تعلّم الكلمات', startLabel: 'ابدأ اللعب',
   confetti: ['#FF7A18', '#FFB703', '#1F9D45', '#3AA7FF', '#E5484D', '#8E5CF7'],
   lines: [
@@ -278,13 +330,13 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
       tips: [{ t: 'أنا...', b: 'نقول I am ثم الشعور. وعندما يسألك أحد How are you؟ تجيب I am happy أو I am fine.', ex: [['I am happy.', 'أنا سعيد.'], ['I am sad.', 'أنا حزين.'], ['How are you?', 'كيف حالك؟'], ['I am fine, thank you.', 'أنا بخير، شكرًا.']] }],
       vocab: [
-        ['happy', 'سعيد', '😊'], ['sad', 'حزين', '😢'], ['angry', 'غاضب', '😠'], ['tired', 'متعب', '😴'], ['scared', 'خائف', '😨'], ['hungry', 'جائع', '🍽️'],
-        ['thirsty', 'عطشان', '🥤'], ['cold', 'بردان', '🥶'], ['hot', 'حار', '🥵'], ['sick', 'مريض', '🤒'], ['excited', 'متحمس', '🤩']
+        ['happy', 'سعيد', '@happy'], ['sad', 'حزين', '@sad'], ['angry', 'غاضب', '@angry'], ['tired', 'متعب', '@tired'], ['scared', 'خائف', '@scared'], ['hungry', 'جائع', '🍽️'],
+        ['thirsty', 'عطشان', '@thirsty'], ['cold', 'بردان', '@cold-feel'], ['hot', 'حار', '🥵'], ['sick', 'مريض', '@sick'], ['excited', 'متحمس', '@excited']
       ],
       qs: [
-        { p: 'كيف يشعر؟', big: '😢', q: 'I am ___.', opts: ['sad', 'happy', 'hot'], a: 'sad' },
-        { p: 'كيف يشعر؟', big: '😊', q: 'I am ___.', opts: ['happy', 'angry', 'tired'], a: 'happy' },
-        { p: 'كيف يشعر؟', big: '🥶', q: 'I am ___.', opts: ['cold', 'hot', 'sick'], a: 'cold' },
+        { p: 'كيف يشعر؟', big: '@sad', q: 'I am ___.', opts: ['sad', 'happy', 'hot'], a: 'sad' },
+        { p: 'كيف يشعر؟', big: '@happy', q: 'I am ___.', opts: ['happy', 'angry', 'tired'], a: 'happy' },
+        { p: 'كيف يشعر؟', big: '@cold-feel', q: 'I am ___.', opts: ['cold', 'hot', 'sick'], a: 'cold' },
         { p: 'اختر الرد المناسب', q: 'How are you?', say: 'How are you?', opts: ['I am fine, thank you.', 'My name is Omar.', 'Goodbye.'], a: 'I am fine, thank you.', speak: 'How are you? I am fine, thank you.' },
         { t: 'order', w: ['I', 'am', 'happy'], ar: 'أنا سعيد.' },
         { t: 'order', w: ['I', 'am', 'hungry'], ar: 'أنا جائع.' },
@@ -296,14 +348,14 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
       tips: [{ t: 'أنا ألبس...', b: 'نقول I wear أو I am wearing ثم اسم الملابس. ونضيف اللون قبل الكلمة مثل a red shirt.', ex: [['I wear a red shirt.', 'ألبس قميصًا أحمر.'], ['He is wearing a hat.', 'هو يرتدي قبعة.'], ['What are you wearing?', 'ماذا ترتدي؟']] }],
       vocab: [
-        ['shirt', 'قميص', '👕'], ['pants', 'بنطلون', '👖'], ['dress', 'فستان', '👗'], ['shoes', 'حذاء', '👟'], ['socks', 'جوارب', '🧦'], ['cap', 'قبعة رياضية', '🧢'],
-        ['jacket', 'جاكيت', '🧥'], ['scarf', 'وشاح', '🧣'], ['gloves', 'قفازات', '🧤'], ['glasses', 'نظارة', '👓'], ['watch', 'ساعة يد', '⌚'], ['thobe', 'ثوب', '']
+        ['shirt', 'قميص', '@shirt'], ['pants', 'بنطلون', '@pants'], ['dress', 'فستان', '@dress'], ['shoes', 'حذاء', '@shoes'], ['socks', 'جوارب', '@socks'], ['cap', 'قبعة رياضية', '@cap'],
+        ['jacket', 'جاكيت', '@jacket'], ['scarf', 'وشاح', '@scarf'], ['gloves', 'قفازات', '@gloves'], ['glasses', 'نظارة', '@glasses'], ['watch', 'ساعة يد', '@watch'], ['thobe', 'ثوب', '@thobe']
       ],
       qs: [
-        { p: 'أكمل الجملة', q: 'We wear ___ on our feet.', opts: ['shoes', 'a cap', 'gloves'], a: 'shoes' },
-        { p: 'أكمل الجملة', q: 'We wear a ___ on our head.', opts: ['cap', 'sock', 'shoe'], a: 'cap' },
-        { p: 'أكمل الجملة', q: 'It is cold. I wear a ___.', opts: ['jacket', 'dress', 'watch'], a: 'jacket' },
-        { p: 'أكمل الجملة', q: 'I wear ___ on my hands in winter.', opts: ['gloves', 'socks', 'glasses'], a: 'gloves' },
+        { p: 'أكمل الجملة', q: 'We wear ___ on our feet.', opts: ['shoes', 'a cap', '@shoes'], a: 'shoes' },
+        { p: 'أكمل الجملة', q: 'We wear a ___ on our head.', opts: ['cap', 'sock', '@cap'], a: 'cap' },
+        { p: 'أكمل الجملة', q: 'It is cold. I wear a ___.', opts: ['jacket', 'dress', '@jacket'], a: 'jacket' },
+        { p: 'أكمل الجملة', q: 'I wear ___ on my hands in winter.', opts: ['gloves', 'socks', '@gloves'], a: 'gloves' },
         { t: 'order', w: ['I', 'wear', 'a', 'red', 'shirt'], ar: 'ألبس قميصًا أحمر.' },
         { t: 'order', w: ['He', 'is', 'wearing', 'a', 'cap'], ar: 'هو يرتدي قبعة رياضية.' },
         { t: 'order', w: ['I', 'wear', 'a', 'thobe'], ar: 'ألبس ثوبًا.' }
@@ -317,12 +369,12 @@ window.CONFIG = {
         { t: 'ماذا يفعل الآن؟', b: 'نقول He is أو She is ثم الفعل مع ing للحديث عمّا يحدث الآن.', ex: [['He is running.', 'هو يركض الآن.'], ['She is singing.', 'هي تغنّي الآن.']] }
       ],
       vocab: [
-        ['run', 'يركض', '🏃'], ['jump', 'يقفز', '🤸'], ['walk', 'يمشي', '🚶'], ['swim', 'يسبح', '🏊'], ['sing', 'يغنّي', '🎤'], ['dance', 'يرقص', '💃'],
-        ['read', 'يقرأ', '📖'], ['write', 'يكتب', '✍️'], ['draw', 'يرسم', '🎨'], ['eat', 'يأكل', '🍴'], ['drink', 'يشرب', '🥤'], ['sleep', 'ينام', '😴']
+        ['run', 'يركض', '@run'], ['jump', 'يقفز', '@jump'], ['walk', 'يمشي', '@walk'], ['swim', 'يسبح', '@swim'], ['sing', 'يغنّي', '@sing'], ['dance', 'يرقص', '@dance'],
+        ['read', 'يقرأ', '@read'], ['write', 'يكتب', '@write'], ['draw', 'يرسم', '@draw'], ['eat', 'يأكل', '@eat'], ['drink', 'يشرب', '@drink'], ['sleep', 'ينام', '@sleep']
       ],
       qs: [
-        { p: 'أكمل الجملة', q: 'I can ___.', big: '🏊', opts: ['swim', 'sing', 'sleep'], a: 'swim' },
-        { p: 'أكمل الجملة', q: 'I can ___ a picture.', opts: ['draw', 'run', 'eat'], a: 'draw' },
+        { p: 'أكمل الجملة', q: 'I can ___.', big: '@swim', opts: ['swim', 'sing', '@swim'], a: 'swim' },
+        { p: 'أكمل الجملة', q: 'I can ___ a picture.', opts: ['draw', 'run', '@draw'], a: 'draw' },
         { p: 'أكمل الجملة', q: 'Birds can ___.', opts: ['fly', 'swim', 'dance'], a: 'fly', tip: 'fly تعني يطير.' },
         { p: 'اختر الإجابة الصحيحة', q: 'Can you jump?', say: 'Can you jump?', opts: ['Yes, I can.', 'I am happy.', 'It is red.'], a: 'Yes, I can.', speak: 'Can you jump? Yes, I can.' },
         { t: 'order', w: ['I', 'can', 'run'], ar: 'أستطيع الركض.' },
@@ -335,13 +387,13 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
       tips: [{ t: 'أرى...', b: 'نقول I see ثم الشيء. ونقول There is للمفرد، و There are للجمع.', ex: [['I see a tree.', 'أرى شجرة.'], ['There is a bird.', 'يوجد طائر.'], ['There are two flowers.', 'يوجد زهرتان.']] }],
       vocab: [
-        ['tree', 'شجرة', '🌳'], ['flower', 'زهرة', '🌸'], ['sun', 'شمس', '☀️'], ['moon', 'قمر', '🌙'], ['cloud', 'سحابة', '☁️'], ['rain', 'مطر', '🌧️'],
-        ['mountain', 'جبل', '⛰️'], ['river', 'نهر', '🏞️'], ['sea', 'بحر', '🌊'], ['desert', 'صحراء', '🏜️'], ['bird', 'طائر', '🐦'], ['butterfly', 'فراشة', '🦋']
+        ['tree', 'شجرة', '@tree'], ['flower', 'زهرة', '@flower'], ['sun', 'شمس', '@sun'], ['moon', 'قمر', '@moon'], ['cloud', 'سحابة', '@cloud'], ['rain', 'مطر', '@rain'],
+        ['mountain', 'جبل', '@mountain'], ['river', 'نهر', '@river'], ['sea', 'بحر', '@sea'], ['desert', 'صحراء', '@desert'], ['bird', 'طائر', '@bird'], ['butterfly', 'فراشة', '@butterfly']
       ],
       qs: [
-        { p: 'أكمل الجملة', q: 'The ___ is hot and yellow.', big: '☀️', opts: ['sun', 'moon', 'rain'], a: 'sun' },
-        { p: 'أكمل الجملة', q: 'I see the ___ at night.', big: '🌙', opts: ['moon', 'sun', 'flower'], a: 'moon' },
-        { p: 'أكمل الجملة', q: 'Fish live in the ___.', opts: ['sea', 'tree', 'sun'], a: 'sea' },
+        { p: 'أكمل الجملة', q: 'The ___ is hot and yellow.', big: '@sun', opts: ['sun', 'moon', '@sun'], a: 'sun' },
+        { p: 'أكمل الجملة', q: 'I see the ___ at night.', big: '@moon', opts: ['moon', 'sun', '@moon'], a: 'moon' },
+        { p: 'أكمل الجملة', q: 'Fish live in the ___.', opts: ['sea', 'tree', '@sea'], a: 'sea' },
         { p: 'أكمل الجملة', q: 'There ___ a tree.', opts: ['is', 'are'], a: 'is', tip: 'tree مفرد، فنقول There is.' },
         { p: 'أكمل الجملة', q: 'There ___ two birds.', opts: ['are', 'is'], a: 'are', tip: 'two birds جمع، فنقول There are.' },
         { t: 'order', w: ['I', 'see', 'a', 'tree'], ar: 'أرى شجرة.' },
@@ -353,14 +405,14 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
       tips: [{ t: 'أصوات الحيوانات', b: 'كل حيوان له صوت. البقرة moo، والبطة quack، والقطة meow.', ex: [['The cow says moo.', 'البقرة تقول موو.'], ['The duck says quack.', 'البطة تقول كواك.'], ['I like cats.', 'أنا أحب القطط.']] }],
       vocab: [
-        ['cat', 'قطة', '🐱'], ['dog', 'كلب', '🐶'], ['cow', 'بقرة', '🐄'], ['horse', 'حصان', '🐴'], ['sheep', 'خروف', '🐑'], ['duck', 'بطة', '🦆'],
-        ['monkey', 'قرد', '🐵'], ['elephant', 'فيل', '🐘'], ['lion', 'أسد', '🦁'], ['camel', 'جمل', '🐪'], ['giraffe', 'زرافة', '🦒'], ['frog', 'ضفدع', '🐸']
+        ['cat', 'قطة', '@cat'], ['dog', 'كلب', '@dog'], ['cow', 'بقرة', '@cow'], ['horse', 'حصان', '@horse'], ['sheep', 'خروف', '@sheep'], ['duck', 'بطة', '@duck'],
+        ['monkey', 'قرد', '@monkey'], ['elephant', 'فيل', '@elephant'], ['lion', 'أسد', '@lion'], ['camel', 'جمل', '@camel'], ['giraffe', 'زرافة', '@giraffe'], ['frog', 'ضفدع', '@frog']
       ],
       qs: [
-        { p: 'أي حيوان يقول موو؟', q: 'Which animal says "moo"?', opts: ['cow', 'duck', 'lion'], a: 'cow', speak: 'The cow says moo.' },
-        { p: 'أي حيوان يقول كواك؟', q: 'Which animal says "quack"?', opts: ['duck', 'horse', 'frog'], a: 'duck', speak: 'The duck says quack.' },
-        { p: 'أي حيوان رقبته طويلة جدًا؟', q: 'Which animal has a long neck?', opts: ['giraffe', 'frog', 'sheep'], a: 'giraffe', speak: 'The giraffe has a long neck.' },
-        { p: 'أي حيوان نراه في الصحراء؟', q: 'Which animal lives in the desert?', opts: ['camel', 'frog', 'duck'], a: 'camel', speak: 'The camel lives in the desert.' },
+        { p: 'أي حيوان يقول موو؟', q: 'Which animal says "moo"?', opts: ['cow', 'duck', '@cow'], a: 'cow', speak: 'The cow says moo.' },
+        { p: 'أي حيوان يقول كواك؟', q: 'Which animal says "quack"?', opts: ['duck', 'horse', '@duck'], a: 'duck', speak: 'The duck says quack.' },
+        { p: 'أي حيوان رقبته طويلة جدًا؟', q: 'Which animal has a long neck?', opts: ['giraffe', 'frog', '@giraffe'], a: 'giraffe', speak: 'The giraffe has a long neck.' },
+        { p: 'أي حيوان نراه في الصحراء؟', q: 'Which animal lives in the desert?', opts: ['camel', 'frog', '@camel'], a: 'camel', speak: 'The camel lives in the desert.' },
         { t: 'order', w: ['I', 'like', 'cats'], ar: 'أنا أحب القطط.' },
         { t: 'order', w: ['The', 'cow', 'says', 'moo'], ar: 'البقرة تقول موو.' },
         { t: 'order', w: ['I', 'see', 'a', 'monkey'], ar: 'أرى قردًا.' }
@@ -371,13 +423,13 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'listen2pic', 'match', 'q', 'pic2word', 'q', 'spell', 'q', 'q'],
       tips: [{ t: 'عندي...', b: 'نقول I have ثم الشيء الذي نملكه. وللسؤال نقول Do you have؟ ونجيب Yes, I do أو No, I do not.', ex: [['I have a ball.', 'عندي كرة.'], ['Do you have a bike?', 'هل عندك دراجة؟'], ['Yes, I do.', 'نعم، عندي.']] }],
       vocab: [
-        ['ball', 'كرة', '⚽'], ['doll', 'دمية', '🪆'], ['kite', 'طائرة ورقية', '🪁'], ['car', 'سيارة', '🚗'], ['bike', 'دراجة', '🚲'], ['robot', 'روبوت', '🤖'],
-        ['teddy bear', 'دبدوب', '🧸'], ['book', 'كتاب', '📚'], ['phone', 'جوال', '📱'], ['lamp', 'مصباح', '💡'], ['bed', 'سرير', '🛏️'], ['key', 'مفتاح', '🔑']
+        ['ball', 'كرة', '@ball'], ['doll', 'دمية', '@doll'], ['kite', 'طائرة ورقية', '@kite'], ['car', 'سيارة', '@car'], ['bike', 'دراجة', '@bike'], ['robot', 'روبوت', '@robot'],
+        ['teddy bear', 'دبدوب', '@teddy-bear'], ['book', 'كتاب', '@book'], ['phone', 'جوال', '@phone'], ['lamp', 'مصباح', '@lamp'], ['bed', 'سرير', '@bed'], ['key', 'مفتاح', '@key']
       ],
       qs: [
-        { p: 'أكمل الجملة', big: '⚽', q: 'I have a ___.', opts: ['ball', 'lamp', 'key'], a: 'ball' },
-        { p: 'أكمل الجملة', big: '🚲', q: 'I have a ___.', opts: ['bike', 'doll', 'phone'], a: 'bike' },
-        { p: 'أكمل الجملة', big: '🛏️', q: 'I sleep on my ___.', opts: ['bed', 'car', 'kite'], a: 'bed' },
+        { p: 'أكمل الجملة', big: '@ball', q: 'I have a ___.', opts: ['ball', 'lamp', '@ball'], a: 'ball' },
+        { p: 'أكمل الجملة', big: '@bike', q: 'I have a ___.', opts: ['bike', 'doll', '@bike'], a: 'bike' },
+        { p: 'أكمل الجملة', big: '@bed', q: 'I sleep on my ___.', opts: ['bed', 'car', '@bed'], a: 'bed' },
         { p: 'اختر الإجابة المناسبة', q: 'Do you have a ball?', say: 'Do you have a ball?', opts: ['Yes, I do.', 'Yes, it is.', 'I am six.'], a: 'Yes, I do.', speak: 'Do you have a ball? Yes, I do.' },
         { t: 'order', w: ['I', 'have', 'a', 'ball'], ar: 'عندي كرة.' },
         { t: 'order', w: ['Do', 'you', 'have', 'a', 'bike?'], ar: 'هل عندك دراجة؟' },
@@ -389,15 +441,15 @@ window.CONFIG = {
       plan: ['listen2pic', 'pic2word', 'word2ar', 'match', 'q', 'pic2word', 'q', 'q', 'listen2word', 'q'],
       tips: [{ t: 'الأضداد', b: 'الصفة تصف الشيء. وهناك أضداد مثل big و small، و fast و slow، و hot و cold. ونقول It is ثم الصفة.', ex: [['The elephant is big.', 'الفيل كبير.'], ['The turtle is slow.', 'السلحفاة بطيئة.'], ['The giraffe is tall.', 'الزرافة طويلة.']] }],
       vocab: [
-        ['big', 'كبير', '🐘'], ['small', 'صغير', '🐜'], ['tall', 'طويل', '🦒'], ['fast', 'سريع', '🐆'], ['slow', 'بطيء', '🐢'], ['new', 'جديد', '🆕'],
-        ['old', 'قديم أو كبير في السن', '👴'], ['hot', 'حار', '🔥'], ['cold', 'بارد', '❄️'], ['clean', 'نظيف', '✨'], ['short', 'قصير', ''], ['dirty', 'متسخ', '']
+        ['big', 'كبير', '@elephant'], ['small', 'صغير', '@small'], ['tall', 'طويل', '@giraffe'], ['fast', 'سريع', '@fast'], ['slow', 'بطيء', '@slow'], ['new', 'جديد', '🆕'],
+        ['old', 'قديم أو كبير في السن', '👴'], ['hot', 'حار', '@hot'], ['cold', 'بارد', '@cold'], ['clean', 'نظيف', '#clean'], ['short', 'قصير', '#short'], ['dirty', 'متسخ', '#dirty']
       ],
       qs: [
-        { p: 'اختر الضد', q: 'big ↔ ___', opts: ['small', 'tall', 'hot'], a: 'small', speak: 'big, small' },
-        { p: 'اختر الضد', q: 'fast ↔ ___', opts: ['slow', 'new', 'clean'], a: 'slow', speak: 'fast, slow' },
-        { p: 'اختر الضد', q: 'hot ↔ ___', opts: ['cold', 'big', 'old'], a: 'cold', speak: 'hot, cold' },
-        { p: 'أكمل الجملة', big: '🐘', q: 'The elephant is ___.', opts: ['big', 'small', 'slow'], a: 'big' },
-        { p: 'أكمل الجملة', big: '🐆', q: 'The cheetah is ___.', opts: ['fast', 'slow', 'cold'], a: 'fast' },
+        { p: 'اختر الضد', q: 'big ↔ ___', opts: ['small', 'tall', '@small'], a: 'small', speak: 'big, small' },
+        { p: 'اختر الضد', q: 'fast ↔ ___', opts: ['slow', 'new', '@slow'], a: 'slow', speak: 'fast, slow' },
+        { p: 'اختر الضد', q: 'hot ↔ ___', opts: ['cold', 'big', '@cold'], a: 'cold', speak: 'hot, cold' },
+        { p: 'أكمل الجملة', big: '@elephant', q: 'The elephant is ___.', opts: ['big', 'small', '@elephant'], a: 'big' },
+        { p: 'أكمل الجملة', big: '@fast', q: 'The cheetah is ___.', opts: ['fast', 'slow', '@fast'], a: 'fast' },
         { t: 'order', w: ['The', 'giraffe', 'is', 'tall'], ar: 'الزرافة طويلة.' },
         { t: 'order', w: ['The', 'turtle', 'is', 'slow'], ar: 'السلحفاة بطيئة.' }
       ]
@@ -407,8 +459,8 @@ window.CONFIG = {
       plan: ['pic2word', 'listen2pic', 'word2ar', 'match', 'q', 'q', 'q', 'listen2word', 'q', 'q'],
       tips: [{ t: 'أين هو؟', b: 'نسأل Where is؟ ونجيب بكلمة تدل على المكان: in تعني داخل، on تعني فوق، under تعني تحت، next to تعني بجانب.', ex: [['Where is the cat?', 'أين القطة؟'], ['The cat is in the box.', 'القطة داخل الصندوق.'], ['The ball is under the bed.', 'الكرة تحت السرير.']] }],
       vocab: [
-        ['box', 'صندوق', '📦'], ['bed', 'سرير', '🛏️'], ['chair', 'كرسي', '🪑'], ['bag', 'حقيبة', '🎒'], ['ball', 'كرة', '⚽'], ['cat', 'قطة', '🐱'],
-        ['in', 'داخل', ''], ['on', 'فوق', ''], ['under', 'تحت', ''], ['next to', 'بجانب', ''], ['behind', 'خلف', '']
+        ['box', 'صندوق', '@box'], ['bed', 'سرير', '@bed'], ['chair', 'كرسي', '@chair'], ['bag', 'حقيبة', '@bag'], ['ball', 'كرة', '@ball'], ['cat', 'قطة', '@cat'],
+        ['in', 'داخل', '#in'], ['on', 'فوق', '#on'], ['under', 'تحت', '#under'], ['next to', 'بجانب', '#next'], ['behind', 'خلف', '#behind']
       ],
       qs: [
         { p: 'القطة داخل الصندوق', q: 'The cat is ___ the box.', opts: ['in', 'on', 'under'], a: 'in' },
@@ -424,7 +476,9 @@ window.CONFIG = {
   ]
 };
 
-window.CONFIG.scene = "<svg viewBox=\"0 0 400 130\" focusable=\"false\" aria-hidden=\"true\">\n<defs><linearGradient id=\"g2sky\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#7FCFFF\"/><stop offset=\"1\" stop-color=\"#E6F7D4\"/></linearGradient>\n<g id=\"g2fl\"><path d=\"M0 0 V22\" stroke=\"#2F9E45\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M0 14 q-9 -2 -10 -9 q8 0 10 9z\" fill=\"#3DB35A\"/><g fill=\"currentColor\"><circle cx=\"0\" cy=\"-6\" r=\"5\"/><circle cx=\"6\" cy=\"-1\" r=\"5\"/><circle cx=\"-6\" cy=\"-1\" r=\"5\"/><circle cx=\"3.6\" cy=\"5\" r=\"5\"/><circle cx=\"-3.6\" cy=\"5\" r=\"5\"/></g><circle cx=\"0\" cy=\"0\" r=\"3.6\" fill=\"#FFD23F\"/></g></defs>\n<rect width=\"400\" height=\"130\" fill=\"url(#g2sky)\"/>\n<g class=\"sc-sun\"><circle cx=\"64\" cy=\"34\" r=\"30\" fill=\"#FFE066\" opacity=\".35\"/><circle cx=\"64\" cy=\"34\" r=\"19\" fill=\"#FFC21A\"/></g>\n<g fill=\"#fff\"><ellipse cx=\"190\" cy=\"30\" rx=\"28\" ry=\"9\"/><ellipse cx=\"208\" cy=\"23\" rx=\"16\" ry=\"9\"/><ellipse cx=\"320\" cy=\"46\" rx=\"22\" ry=\"7\"/><ellipse cx=\"334\" cy=\"40\" rx=\"12\" ry=\"7\"/></g>\n<path d=\"M0 84 Q80 50 170 80 T340 76 T400 80 V130 H0Z\" fill=\"#A8E27F\"/>\n<path d=\"M0 100 Q100 74 200 98 T400 96 V130 H0Z\" fill=\"#74CC5E\"/>\n<g><use href=\"#g2fl\" x=\"26\" y=\"96\" style=\"color:#FF5E8A\"/><use href=\"#g2fl\" x=\"78\" y=\"102\" style=\"color:#FFFFFF\"/><use href=\"#g2fl\" x=\"132\" y=\"94\" style=\"color:#FF9A3C\"/><use href=\"#g2fl\" x=\"196\" y=\"104\" style=\"color:#B26BFF\"/><use href=\"#g2fl\" x=\"256\" y=\"95\" style=\"color:#FF5E8A\"/><use href=\"#g2fl\" x=\"312\" y=\"103\" style=\"color:#FFFFFF\"/><use href=\"#g2fl\" x=\"368\" y=\"96\" style=\"color:#FF9A3C\"/></g>\n<g class=\"sc-bfly\" style=\"font-size:24px\"><text x=\"0\" y=\"60\">🦋</text></g>\n</svg>";
+window.CONFIG.photos = {"@happy":["photo-1624272949900-9ae4c56397e8","😊"],"@sad":["photo-1517545084371-4a575dde2a02","😢"],"@angry":["photo-1653142732993-5af16437135a","😠"],"@tired":["photo-1546015720-b8b30df5aa27","🥱"],"@scared":["photo-1529672425113-d3035c7f4837","😨"],"@thirsty":["photo-1591123631256-5d6f560380b0","🥤"],"@cold-feel":["photo-1610880883314-2640659555ad","🥶"],"@sick":["photo-1779299996338-adc5000d3425","🤒"],"@excited":["photo-1597113117918-eb40fe0b84e7","🤩"],"@shirt":["photo-1621773881532-fe65715b5137","👕"],"@pants":["photo-1714143136372-ddaf8b606da7","👖"],"@dress":["photo-1618232468971-54188a224417","👗"],"@shoes":["photo-1608231387042-66d1773070a5","👟"],"@socks":["photo-1640026199235-c24aa417b552","🧦"],"@cap":["photo-1521369909029-2afed882baee","🧢"],"@jacket":["photo-1543076447-215ad9ba6923","🧥"],"@scarf":["photo-1643312892626-80632ef6d7dc","🧣"],"@gloves":["photo-1733652220367-367b63bd68fb","🧤"],"@glasses":["photo-1614715838608-dd527c46231d","👓"],"@watch":["photo-1620625515032-6ed0c1790c75","⌚"],"@thobe":["photo-1616147147027-60d49d3582c4","#thobe"],"@run":["photo-1749015314315-1c193d1f67e3","🏃"],"@jump":["photo-1571210862729-78a52d3779a2","🤸"],"@walk":["photo-1765329104418-b16804330f90","🚶"],"@swim":["photo-1574744918163-6cef6f4a31b0","🏊"],"@sing":["photo-1453738773917-9c3eff1db985","🎤"],"@dance":["photo-1528567656495-d439e32f6be1","💃"],"@read":["photo-1553729784-e91953dec042","📖"],"@write":["photo-1758612898701-e2f2958f219d","✍️"],"@draw":["photo-1646617747566-b7e784435a48","🎨"],"@eat":["photo-1760267982929-b038bf9b82e0","😋"],"@drink":["photo-1529079337819-f6d0024bd364","🥤"],"@sleep":["photo-1672928499632-1d040212e3f4","🛌"],"@tree":["photo-1502082553048-f009c37129b9","🌳"],"@flower":["photo-1470509037663-253afd7f0f51","🌸"],"@sun":["photo-1604949210966-9440c324823f","☀️"],"@moon":["photo-1527842891421-42eec6e703ea","🌙"],"@cloud":["photo-1769755498586-1cddbf017808","☁️"],"@rain":["photo-1632973541997-971a2eb8331d","🌧️"],"@mountain":["photo-1554629947-334ff61d85dc","⛰️"],"@river":["photo-1769251298735-2a1dcb1e755a","🏞️"],"@sea":["photo-1779377750657-7eaf7f784559","🌊"],"@desert":["photo-1638024510305-c36fcc0bf3b1","🏜️"],"@bird":["photo-1581084353720-d30b23c6b593","🐦"],"@butterfly":["photo-1599631438215-75bc2640feb8","🦋"],"@cat":["photo-1595433707802-6b2626ef1c91","🐱"],"@dog":["photo-1534361960057-19889db9621e","🐶"],"@cow":["photo-1564085352725-08da0272627d","🐄"],"@horse":["photo-1603989888581-3115416784fa","🐴"],"@camel":["photo-1598113972215-96c018fb1a0b","🐪"],"@sheep":["photo-1516380970301-774614f26517","🐑"],"@duck":["photo-1563409236302-8442b5e644df","🦆"],"@monkey":["photo-1605559911160-a3d95d213904","🐵"],"@elephant":["photo-1610957735048-538a729f16ab","🐘"],"@lion":["photo-1585468274952-66591eb14165","🦁"],"@giraffe":["photo-1626548307930-deac221f87d9","🦒"],"@frog":["photo-1545006398-2cf47cd87b90","🐸"],"@ball":["photo-1575361204480-aadea25e6e68","⚽"],"@doll":["photo-1612506001235-f0d0892aa11b","🪆"],"@kite":["photo-1489011397388-494518edf378","🪁"],"@car":["photo-1696824711591-018c23ff9248","🚗"],"@bike":["photo-1532298229144-0ec0c57515c7","🚲"],"@robot":["photo-1527430253228-e93688616381","🤖"],"@teddy-bear":["photo-1530325553241-4f6e7690cf36","🧸"],"@book":["photo-1543002588-bfa74002ed7e","📚"],"@phone":["photo-1580910051074-3eb694886505","📱"],"@lamp":["photo-1517991104123-1d56a6e81ed9","💡"],"@bed":["photo-1693034433366-57fbb0286641","🛏️"],"@key":["photo-1562770584-eaf50b017307","🔑"],"@small":["photo-1629678945317-aeaf81f49fe6","🐜"],"@fast":["photo-1705218543098-09e4e3614591","🐆"],"@slow":["photo-1508455858334-95337ba25607","🐢"],"@hot":["photo-1470549584009-d347338fc0ff","🔥"],"@cold":["photo-1588714225808-84c439557977","❄️"],"@box":["photo-1656543802898-41c8c46683a7","📦"],"@chair":["photo-1699588772787-1eed3b726e0a","🪑"],"@bag":["photo-1622560481156-01fc7e1693e6","🎒"]};
+window.CONFIG.img = {"☀":"fe/sun","🦋":"fe/butterfly","🦁":"fe/lion","😊":"fe/smiling-face-with-smiling-eyes","😢":"fe/crying-face","😠":"fe/angry-face","🥱":"fe/yawning-face","😨":"fe/fearful-face","🍽":"fe/fork-and-knife-with-plate","🥤":"fe/cup-with-straw","🥶":"fe/cold-face","🥵":"fe/hot-face","🤒":"fe/face-with-thermometer","🤩":"fe/star-struck","👕":"fe/t-shirt","👖":"fe/jeans","👗":"fe/dress","👟":"fe/running-shoe","🧦":"fe/socks","🧢":"fe/billed-cap","🧥":"fe/coat","🧣":"fe/scarf","🧤":"fe/gloves","👓":"fe/glasses","⌚":"fe/watch","🏃":"fe/person-running","🤸":"fe/person-cartwheeling","🚶":"fe/person-walking","🏊":"fe/person-swimming","🎤":"fe/microphone","💃":"fe/woman-dancing","📖":"fe/open-book","✍":"fe/writing-hand","🎨":"fe/artist-palette","😋":"fe/face-savoring-food","🛌":"fe/person-in-bed","🌳":"fe/deciduous-tree","🌸":"fe/cherry-blossom","🌙":"fe/crescent-moon","☁":"fe/cloud","🌧":"fe/cloud-with-rain","⛰":"fe/mountain","🏞":"fe/national-park","🌊":"fe/water-wave","🏜":"fe/desert","🐦":"fe/bird","🐘":"fe/elephant","🐱":"fe/cat-face","🐶":"fe/dog-face","🐄":"fe/cow","🐴":"fe/horse-face","🐑":"fe/ewe","🦆":"fe/duck","🐵":"fe/monkey-face","🐪":"fe/camel","🦒":"fe/giraffe","🐸":"fe/frog","🧸":"fe/teddy-bear","⚽":"fe/soccer-ball","🪆":"fe/nesting-dolls","🪁":"fe/kite","🚗":"fe/automobile","🚲":"fe/bicycle","🤖":"fe/robot","📚":"fe/books","📱":"fe/mobile-phone","💡":"fe/light-bulb","🛏":"fe/bed","🔑":"fe/key","📏":"fe/straight-ruler","🐜":"fe/ant","🐆":"fe/leopard","🐢":"fe/turtle","🆕":"fe/new-button","👴":"fe/old-man","🔥":"fe/fire","❄":"fe/snowflake","📦":"fe/package","🪑":"fe/chair","🎒":"fe/backpack","🏁":"fe/chequered-flag","🌟":"fe/glowing-star","🧭":"fe/compass","⚡":"fe/high-voltage","💎":"fe/gem-stone","🏆":"fe/trophy","✨":"fe/sparkles","🐈":"fe/cat","🧍":"fe/person-standing","🎉":"fe/party-popper","👍":"fe/thumbs-up","🙂":"fe/slightly-smiling-face","🤔":"fe/thinking-face","#thobe":"g2/thobe","#clean":"g2/clean","#dirty":"g2/dirty","#short":"g2/short","#in":"g2/in","#on":"g2/on","#under":"g2/under","#next":"g2/next","#behind":"g2/behind"};
+window.CONFIG.scene = "<svg viewBox=\"0 0 400 130\" focusable=\"false\" aria-hidden=\"true\">\n<defs><linearGradient id=\"g2sky\" x1=\"0\" y1=\"0\" x2=\"0\" y2=\"1\"><stop offset=\"0\" stop-color=\"#7FCFFF\"/><stop offset=\"1\" stop-color=\"#E6F7D4\"/></linearGradient>\n<g id=\"g2fl\"><path d=\"M0 0 V22\" stroke=\"#2F9E45\" stroke-width=\"3\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M0 14 q-9 -2 -10 -9 q8 0 10 9z\" fill=\"#3DB35A\"/><g fill=\"currentColor\"><circle cx=\"0\" cy=\"-6\" r=\"5\"/><circle cx=\"6\" cy=\"-1\" r=\"5\"/><circle cx=\"-6\" cy=\"-1\" r=\"5\"/><circle cx=\"3.6\" cy=\"5\" r=\"5\"/><circle cx=\"-3.6\" cy=\"5\" r=\"5\"/></g><circle cx=\"0\" cy=\"0\" r=\"3.6\" fill=\"#FFD23F\"/></g></defs>\n<rect width=\"400\" height=\"130\" fill=\"url(#g2sky)\"/>\n<g class=\"sc-sun\"><circle cx=\"64\" cy=\"34\" r=\"30\" fill=\"#FFE066\" opacity=\".35\"/><circle cx=\"64\" cy=\"34\" r=\"19\" fill=\"#FFC21A\"/></g>\n<g fill=\"#fff\"><ellipse cx=\"190\" cy=\"30\" rx=\"28\" ry=\"9\"/><ellipse cx=\"208\" cy=\"23\" rx=\"16\" ry=\"9\"/><ellipse cx=\"320\" cy=\"46\" rx=\"22\" ry=\"7\"/><ellipse cx=\"334\" cy=\"40\" rx=\"12\" ry=\"7\"/></g>\n<path d=\"M0 84 Q80 50 170 80 T340 76 T400 80 V130 H0Z\" fill=\"#A8E27F\"/>\n<path d=\"M0 100 Q100 74 200 98 T400 96 V130 H0Z\" fill=\"#74CC5E\"/>\n<g><use href=\"#g2fl\" x=\"26\" y=\"96\" style=\"color:#FF5E8A\"/><use href=\"#g2fl\" x=\"78\" y=\"102\" style=\"color:#FFFFFF\"/><use href=\"#g2fl\" x=\"132\" y=\"94\" style=\"color:#FF9A3C\"/><use href=\"#g2fl\" x=\"196\" y=\"104\" style=\"color:#B26BFF\"/><use href=\"#g2fl\" x=\"256\" y=\"95\" style=\"color:#FF5E8A\"/><use href=\"#g2fl\" x=\"312\" y=\"103\" style=\"color:#FFFFFF\"/><use href=\"#g2fl\" x=\"368\" y=\"96\" style=\"color:#FF9A3C\"/></g>\n<g class=\"sc-bfly\"><image href=\"img/fe/butterfly.webp\" x=\"-15\" y=\"36\" width=\"32\" height=\"32\"/></g>\n</svg>";
 </script>
 <script>
 (function () {
@@ -452,6 +506,25 @@ const norm = s => String(s).toLowerCase().replace(/[’‘`]/g, "'").replace(/[.
 const today = () => new Date().toLocaleDateString('en-CA');
 const toV = a => ({ en: a[0], ar: a[1], em: a[2] || '', k: a[3] || '' });
 
+/* ---------- pictures (one illustrated set, same look on every device) ---------- */
+const IMG = C.img || {}, PH = C.photos || {};
+const drawSrc = em => { if (!em) return ''; const f = IMG[String(em).replace(/\uFE0F/g, '')]; return f ? 'img/' + f + '.webp' : ''; };
+const photoSrc = em => { const p = PH[em]; return p ? 'https://images.unsplash.com/' + p[0] + '?w=600&h=600&fit=crop&crop=entropy&q=70&auto=format' : ''; };
+const picSrc = em => (em && String(em)[0] === '@') ? photoSrc(em) : drawSrc(em);
+function pic(em, cls, lazy) {
+  const photo = !!(em && String(em)[0] === '@'), back = photo ? (PH[em] || [])[1] : em;
+  const src = picSrc(em), plain = back && String(back)[0] !== '#' && String(back)[0] !== '@' ? back : '';
+  if (!src) return plain ? h('span', { class: cls || '' }, plain) : null;
+  const im = h('img', { class: 'pic ' + (photo ? 'ph ' : '') + (cls || ''), src, alt: '', draggable: 'false', decoding: 'async', loading: lazy ? 'lazy' : false });
+  im.addEventListener('error', () => {
+    const d = photo ? drawSrc(back) : '';
+    if (d && im.src.indexOf(d) < 0) { im.classList.remove('ph'); im.src = d; }
+    else im.replaceWith(document.createTextNode(plain));
+  });
+  return im;
+}
+const warm = list => list.forEach(em => { const s = picSrc(em); if (s) { const i = new Image(); i.src = s; } });
+
 const ICON = {
   star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4l2.9 6.2 6.7.8-5 4.6 1.4 6.7L12 17.4l-6 3.3 1.4-6.7-5-4.6 6.7-.8z"/></svg>',
   lock: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0110 0v3h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2zm2 0h6V7a3 3 0 00-6 0z"/></svg>',
@@ -465,7 +538,7 @@ const ic = (name, cls) => h('span', { class: cls || 'ic', html: ICON[name] });
 
 /* ---------- saved progress (only on this device) ---------- */
 const KEY = 'english-quest-' + C.id;
-let S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: true, open: false, name: '' };
+let S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: true, open: false, name: '', voice: '', micOff: false };
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
 try { if (!S.name && C.migrate) { const old = localStorage.getItem('english-quest-' + C.migrate); if (old) S.name = String(JSON.parse(old).name || ''); } } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
@@ -499,28 +572,78 @@ function sfx(kind) {
   } catch (e) {}
 }
 
-/* ---------- pronunciation (device voice) ---------- */
+/* ---------- pronunciation (best natural voice on this device) ---------- */
 const HAS_TTS = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-let voice = null;
+let voice = null, voices = [];
+const ODD = /(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|ralph|kathy|grandma|grandpa|eddy|flo\b|reed|rocko|sandy|shelley|hysterical|deranged|novelty)/i;
+function voiceScore(v) {
+  if (!/^en([-_]|$)/i.test(v.lang || '')) return -1;
+  const n = v.name || '';
+  if (ODD.test(n)) return -1;
+  let s = 0;
+  if (/natural|neural/i.test(n)) s += 100;
+  if (/premium/i.test(n)) s += 90;
+  if (/enhanced/i.test(n)) s += 70;
+  if (/google/i.test(n)) s += 50;
+  if (/online/i.test(n)) s += 15;
+  if (/(samantha|ava|allison|susan|zoe|evan|nathan|joelle|noelle|nicky|aaron|aria|jenny|ana\b|emma|michelle|libby|sonia|karen|daniel|serena)/i.test(n)) s += 25;
+  if (/^en[-_]US/i.test(v.lang)) s += 15; else if (/^en[-_](GB|AU|CA|IE|NZ)/i.test(v.lang)) s += 8;
+  if (v.localService === false) s += 5;
+  return s;
+}
 function loadVoice() {
   try {
-    const vs = speechSynthesis.getVoices();
-    voice = vs.find(v => /^en[-_]US/i.test(v.lang) && /(samantha|google|aria|jenny|zira|female)/i.test(v.name)) ||
-      vs.find(v => /^en[-_]US/i.test(v.lang)) || vs.find(v => /^en/i.test(v.lang)) || null;
+    voices = speechSynthesis.getVoices().map(v => ({ v, s: voiceScore(v) })).filter(x => x.s >= 0).sort((a, b) => b.s - a.s);
+    const picked = S.voice && voices.find(x => x.v.voiceURI === S.voice);
+    voice = picked ? picked.v : (voices[0] ? voices[0].v : null);
   } catch (e) {}
 }
-if (HAS_TTS) { try { speechSynthesis.onvoiceschanged = loadVoice; loadVoice(); } catch (e) {} }
+if (HAS_TTS) { try { speechSynthesis.onvoiceschanged = loadVoice; loadVoice(); setTimeout(loadVoice, 800); } catch (e) {} }
 function say(text, o) {
   o = o || {};
   if (!HAS_TTS || !text) return;
   if (!o.force && !S.sound) return;
   try {
+    if (!voice) loadVoice();
     if (!o.queue) speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US'; if (voice) u.voice = voice;
-    u.rate = o.rate || C.speechRate || 0.85; u.pitch = C.pitch || 1;
+    const vv = o.voice || voice;
+    u.lang = vv ? vv.lang : 'en-US'; if (vv) u.voice = vv;
+    u.rate = o.rate || C.speechRate || 0.9; u.pitch = C.pitch || 1;
     speechSynthesis.speak(u);
   } catch (e) {}
+}
+
+/* ---------- speaking challenge (speech recognition, where the browser has it) ---------- */
+const SRC = window.SpeechRecognition || window.webkitSpeechRecognition;
+const HAS_SR = !!SRC && window.isSecureContext !== false;
+const SOUNDS = { sea: ['see', 'c', 'she', 'si'], sun: ['son', 'some'], read: ['red', 'reed', 'rid'], write: ['right', 'rite', 'ride'], eat: ['it', 'e', 'each'],
+  in: ['inn', 'and', 'an', 'end', 'hen', 'and in'], on: ['an', 'own', 'one', 'and', 'un', 'own'], cap: ['cup', 'cab'], car: ['card', 'cart', 'are'], bed: ['bad', 'bet', 'bird', 'bread'],
+  hot: ['hut', 'hat', 'heart'], cat: ['cut', 'kat', 'cats'], dog: ['dock', 'duck', 'dogs'], cow: ['cal', 'cao', 'kao', 'cows'], key: ['kee', 'ki', 'keys', 'he'], sad: ['said', 'sat'],
+  pants: ['pans', 'parents', 'pant'], shoes: ['shoe', 'choose', 'shoots'], socks: ['sox', 'sucks', 'sock'], glasses: ['classes', 'glass'], gloves: ['glove', 'love'],
+  run: ['ran', 'rum', 'round'], swim: ['swing', 'swim'], walk: ['work', 'woke', 'wok'], sing: ['sang', 'sink', 'thing'], sick: ['seek', 'thick', 'six'], doll: ['dull', 'dolls', 'tall'],
+  kite: ['kate', 'kit', 'kites'], bike: ['bake', 'bikes', 'buy'], box: ['books', 'fox', 'boxes'], bag: ['back', 'bug', 'big'], big: ['bag', 'pig'], old: ['all', 'hold'], tall: ['tool', 'tell', 'doll'],
+  thobe: ['tobe', 'to be', 'top', 'toe', 'thobe'], under: ['ender', 'onder', 'anda'], behind: ['be hind', 'by hand'], 'next to': ['next', 'next two', 'next too'] };
+function lev(a, b) {
+  const m = a.length, n = b.length, d = Array.from({ length: m + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= n; j++) d[0][j] = j;
+  for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[m][n];
+}
+function heardIt(target, alts) {
+  const t = norm(target).replace(/-/g, ' '), tw = t.split(' ').length, near = SOUNDS[t] || [];
+  const tol = t.length <= 3 ? 0 : t.length <= 6 ? 1 : 2;
+  return alts.some(raw => {
+    const w = norm(raw).replace(/-/g, ' ').split(' ').filter(Boolean);
+    if (!w.length) return false;
+    if (near.includes(w.join(' '))) return true;
+    for (let size = tw; size <= tw + 1; size++)
+      for (let i = 0; i + size <= w.length; i++) {
+        const seg = w.slice(i, i + size).join(' ');
+        if (seg === t || seg.replace(/s$/, '') === t || near.includes(seg) || lev(seg, t) <= tol) return true;
+      }
+    return false;
+  });
 }
 
 /* ---------- question generation ---------- */
@@ -539,6 +662,7 @@ function gen(t, v, ctx) {
   if ((t === 'pic2word' || t === 'listen2pic') && !v.em) t = (t === 'pic2word') ? 'word2ar' : 'listen2word';
   if (t === 'listen2word' && !HAS_TTS) t = 'word2ar';
   if (t === 'spell' && (/\s/.test(v.en) || v.en.length > 9 || v.en.length < 2)) t = 'ar2word';
+  if (t === 'sayit' && !(HAS_SR && !S.micOff)) t = 'pic2word';
   const fb = { en: v.en, ar: v.ar, em: v.em }, speak = v.en;
   switch (t) {
     case 'pic2word': return { kind: 'choice', prompt: 'ما اسم هذه الصورة بالإنجليزية؟', big: v.em, say: v.en, opts: wordOpts(v, lvV), a: v.en, oc: 'en', fb, speak };
@@ -547,6 +671,7 @@ function gen(t, v, ctx) {
     case 'word2ar': return { kind: 'choice', prompt: 'ما معنى هذه الكلمة؟', text: v.en, say: v.en, opts: shuffle([v.ar, ...distract(v, lvV, 3, 'ar').map(x => x.ar)]), a: v.ar, oc: 'ar', fb, speak };
     case 'ar2word': return { kind: 'choice', prompt: 'كيف نقولها بالإنجليزية؟', text: v.ar, textAr: true, big: v.em, opts: wordOpts(v, lvV), a: v.en, oc: 'en', fb, speak };
     case 'spell': return { kind: 'build', prompt: 'رتّب الحروف لتكوّن الكلمة', big: v.em, text: v.ar, textAr: true, say: v.en, units: shuffle(v.en.split('')), ans: v.en.split(''), join: '', fb, speak };
+    case 'sayit': return { kind: 'speak', prompt: 'انطق الكلمة بصوتك', big: v.em, text: v.en, say: v.en, target: v.en, fb, speak, bonus: true };
     case 'match': {
       const four = [], seen = new Set();
       let guard = 0;
@@ -580,7 +705,9 @@ function buildQuiz(lv) {
   const custom = shuffle(lv.qs || []);
   let qi = 0, vi = 0;
   const out = [];
-  (lv.plan || C.defaultPlan).forEach(t => {
+  const plan = (lv.plan || C.defaultPlan).slice();
+  if (HAS_SR && !S.micOff && (lv.vocab || []).length >= 4) { plan.splice(4, 0, 'sayit'); plan.splice(9, 0, 'sayit'); }
+  plan.forEach(t => {
     if (t === 'q') { if (qi < custom.length) out.push(fromCustom(custom[qi++])); return; }
     if (!ctx.vs.length) return;
     if (t === 'match' && ctx.vs.length < 4) t = 'word2ar';
@@ -627,7 +754,7 @@ function confetti() {
 const mount = node => { document.querySelectorAll('.cf,.toast').forEach(x => x.remove()); try { speechSynthesis.cancel(); } catch (e) {} app.replaceChildren(node); window.scrollTo(0, 0); };
 const starRow = n => h('div', { class: 'stars', 'aria-label': n + ' من 3 نجوم' }, [1, 2, 3].map(i => h('span', { class: 'st' + (i <= n ? ' on' : ''), html: ICON.star })));
 const spk = (text, cls, label) => HAS_TTS ? h('button', { class: 'spk ' + (cls || ''), 'aria-label': label || 'استمع', onclick: () => say(text, { force: true }) }, ic('spk')) : null;
-const slowBtn = text => HAS_TTS ? h('button', { class: 'spk slow', 'aria-label': 'استمع ببطء', onclick: () => say(text, { force: true, rate: .5 }) }, '🐢') : null;
+const slowBtn = text => HAS_TTS ? h('button', { class: 'spk slow', 'aria-label': 'استمع ببطء', onclick: () => say(text, { force: true, rate: C.slowRate || .55 }) }, pic('🐢')) : null;
 const backBtn = fn => h('button', { class: 'round', 'aria-label': 'رجوع', onclick: fn }, ic('back'));
 function soundBtn() {
   const b = h('button', { class: 'round', 'aria-label': 'تشغيل أو إيقاف الصوت' });
@@ -649,11 +776,11 @@ function home() {
   const line = fill(rnd(C.lines));
   const node = h('div', { class: 'wrap screen' },
     h('div', { class: 'top' }, h('div', { class: 'brand' }, C.title),
-      h('div', { class: 'chips' }, chip(ICON.star, got + '/' + total), chip('⚡', fmt(S.xp)), chip('🔥', fmt(S.streak))), soundBtn()),
+      h('div', { class: 'chips' }, chip(ICON.star, got + '/' + total), chip(pic('⚡'), fmt(S.xp)), chip(pic('🔥'), fmt(S.streak))), soundBtn()),
     C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
-    h('div', { class: 'hero' }, h('div', { class: 'mascot', 'aria-hidden': 'true' }, C.mascot), h('div', { class: 'bubble' }, line)),
+    h('div', { class: 'hero' }, h('div', { class: 'mascot', 'aria-hidden': 'true' }, pic(C.mascot)), h('div', { class: 'bubble' }, line)),
     h('button', { class: 'go', onclick: () => openLevel(ci) },
-      h('span', { class: 'orb', style: '--lv:' + (cl.color || 'var(--a2)') + ';width:56px;height:56px;font-size:1.7rem' }, cl.emoji),
+      h('span', { class: 'orb', style: '--lv:' + (cl.color || 'var(--a2)') + ';width:56px;height:56px;font-size:1.7rem' }, pic(cl.emoji)),
       h('span', { class: 'gt' }, h('small', null, got ? 'كمّل رحلتك' : 'ابدأ رحلتك'), h('b', null, cl.title)), ic('go')),
     h('div', { class: 'meter', role: 'progressbar', 'aria-valuenow': pct, 'aria-valuemin': 0, 'aria-valuemax': 100, style: '--w:' + pct + '%' }, h('i')),
     h('div', { class: 'mlabel' }, h('span', null, C.journey), h('span', null, pct + '%')),
@@ -661,24 +788,52 @@ function home() {
     h('div', { class: 'path' }, C.levels.map((l, i) => {
       const open = isOpen(i), n = S.stars[l.id] || 0;
       return h('button', { class: 'node' + (open ? '' : ' locked'), disabled: !open, 'aria-label': l.title, onclick: () => openLevel(i) },
-        h('span', { class: 'orb', style: '--lv:' + (l.color || 'var(--a1)') }, l.emoji, h('span', { class: 'no' }, i + 1)),
+        h('span', { class: 'orb', style: '--lv:' + (l.color || 'var(--a1)') }, pic(l.emoji), h('span', { class: 'no' }, i + 1)),
         h('span', { class: 'meta' }, h('h3', null, l.title), h('p', null, l.sub), open ? starRow(n) : null),
         open ? h('span', { class: 'cefr' }, l.cefr) : h('span', { class: 'lk', html: ICON.lock }));
     })),
     h('h2', { class: 'sec' }, 'أوسمتك'),
-    h('div', { class: 'badges' }, BADGES.map(b => h('div', { class: 'bd' + (S.badges.includes(b.id) ? '' : ' off'), title: b.d }, h('span', { class: 'e' }, b.e), b.t))),
+    h('div', { class: 'badges' }, BADGES.map(b => h('div', { class: 'bd' + (S.badges.includes(b.id) ? '' : ' off'), title: b.d }, h('span', { class: 'e' }, pic(b.e)), b.t))),
     h('div', { class: 'foot' },
       C.askName ? h('button', { class: 'link', onclick: () => nameScreen(true) }, 'تغيير الاسم') : null,
       h('button', { class: 'link', onclick: e => { S.open = !S.open; save(); home(); } }, S.open ? 'ولي الأمر: إعادة قفل المراحل' : 'ولي الأمر: فتح جميع المراحل'),
-      resetBtn()));
+      HAS_TTS ? h('button', { class: 'link', onclick: voiceSheet }, 'صوت النطق') : null,
+      SRC ? h('button', { class: 'link', onclick: () => { S.micOff = !S.micOff; save(); toast(S.micOff ? 'تم إيقاف تحدي النطق' : 'تم تشغيل تحدي النطق 🎤'); home(); } }, S.micOff ? 'تشغيل تحدي النطق' : 'إيقاف تحدي النطق') : null,
+      resetBtn(),
+      h('p', { class: 'credit' }, 'الصور الفوتوغرافية من ', h('a', { href: 'https://unsplash.com', target: '_blank', rel: 'noopener' }, 'Unsplash'), '، والرسوم من Fluent Emoji لمايكروسوفت (', h('a', { href: 'img/fe/LICENSE.txt', target: '_blank', rel: 'noopener' }, 'رخصة MIT'), ')')));
   mount(node);
+}
+function voiceSheet() {
+  loadVoice();
+  document.querySelectorAll('.sheet').forEach(x => x.remove());
+  const sample = 'Hello! I am happy. Let us learn English together.';
+  const clean = n => String(n).replace(/\s*\(.*?\)\s*/g, ' ').replace(/Microsoft|Online|Google/gi, m => m).trim();
+  const list = h('div', { class: 'vlist' });
+  const close = () => sh.remove();
+  const paint = () => {
+    const rows = [{ v: null, label: 'تلقائي: أفضل صوت في جهازك', sub: voices[0] ? clean(voices[0].v.name) : '' }].concat(voices.slice(0, 12).map(x => ({ v: x.v, label: clean(x.v.name), sub: x.v.lang + (/natural|neural|premium|enhanced/i.test(x.v.name) ? ' · طبيعي' : '') })));
+    list.replaceChildren(...rows.map(r => {
+      const sel = r.v ? S.voice === r.v.voiceURI : !S.voice;
+      const pick = h('button', { class: 'vn', onclick: () => { S.voice = r.v ? r.v.voiceURI : ''; save(); loadVoice(); paint(); say(sample, { force: true }); } }, r.label, r.sub ? h('small', { class: 'en' }, r.sub) : null);
+      const play = h('button', { class: 'spk', 'aria-label': 'جرّب هذا الصوت', onclick: () => say(sample, { force: true, voice: r.v || (voices[0] && voices[0].v) }) }, ic('spk'));
+      return h('div', { class: 'vrow' + (sel ? ' sel' : '') }, play, pick);
+    }));
+  };
+  paint();
+  const sh = h('div', { class: 'sheet soft', role: 'dialog', 'aria-label': 'اختيار صوت النطق' }, h('div', { class: 'sheet-in' },
+    h('div', { class: 'sh-t' }, 'اختر صوت النطق'),
+    voices.length ? h('div', { class: 'sh-a' }, 'اضغط ▶ لتسمع الصوت، ثم اختر الأقرب لصوت الإنسان.') : h('div', { class: 'sh-a' }, 'لم أجد صوتًا إنجليزيًا في هذا الجهاز.'),
+    list,
+    h('p', { class: 'vhelp' }, 'أجمل الأصوات عادةً ما يحمل اسمه Natural أو Enhanced أو Google. في الآيفون يمكن تنزيل صوت إنجليزي محسّن من: الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات. وفي أندرويد من إعدادات «تحويل النص إلى كلام».'),
+    h('button', { class: 'btn full', onclick: close }, 'تم')));
+  app.append(sh);
 }
 function resetBtn() {
   const b = h('button', { class: 'link' }, 'مسح التقدم');
   let armed = false;
   b.onclick = () => {
     if (!armed) { armed = true; b.textContent = 'اضغط مرة أخرى للتأكيد'; setTimeout(() => { armed = false; b.textContent = 'مسح التقدم'; }, 4000); return; }
-    S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: S.sound, open: false, name: S.name }; save(); home();
+    S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: S.sound, open: false, name: S.name, voice: S.voice, micOff: S.micOff }; save(); home();
   };
   return b;
 }
@@ -687,14 +842,18 @@ function resetBtn() {
 function openLevel(i) {
   if (!isOpen(i)) return;
   const l = C.levels[i], vs = (l.vocab || []).map(toV);
+  warm(vs.map(v => v.em));
   const card = v => {
-    const el = h('button', { class: 'wc', 'aria-label': v.en + ' ' + v.ar },
-      v.k ? h('span', { class: 'k' }, v.k) : null, v.em ? h('span', { class: 'em' }, v.em) : null, h('span', { class: 'w' }, v.en), h('span', { class: 'm' }, v.ar));
-    el.onclick = () => { say(v.en, { force: true }); el.classList.remove('say'); void el.offsetWidth; el.classList.add('say'); };
+    const el = h('div', { class: 'wc' });
+    const main = h('button', { class: 'main', 'aria-label': v.en + ' ' + v.ar },
+      v.k ? h('span', { class: 'k' }, v.k) : null, v.em ? h('span', { class: 'em' }, pic(v.em, '', true)) : null, h('span', { class: 'w' }, v.en), h('span', { class: 'm' }, v.ar));
+    main.onclick = () => { say(v.en, { force: true }); el.classList.remove('say'); void el.offsetWidth; el.classList.add('say'); };
+    el.append(main);
+    if (HAS_TTS) el.append(h('button', { class: 'mini', 'aria-label': 'استمع ببطء: ' + v.en, onclick: () => say(v.en, { force: true, rate: C.slowRate || .55 }) }, pic('🐢')));
     return el;
   };
-  const tipCard = t => h('div', { class: 'tip' }, h('h4', null, '💡 ' + t.t), t.b ? h('p', null, t.b) : null,
-    (t.ex || []).map(e => h('div', { class: 'ex' }, spk(e[0]), h('div', { class: 'exb' }, h('div', { class: 'en' }, e[0]), h('div', { class: 'exa' }, e[1])))));
+  const tipCard = t => h('div', { class: 'tip' }, h('h4', null, pic('💡', 'ti'), ' ' + t.t), t.b ? h('p', null, t.b) : null,
+    (t.ex || []).map(e => h('div', { class: 'ex' }, spk(e[0]), slowBtn(e[0]), h('div', { class: 'exb' }, h('div', { class: 'en' }, e[0]), h('div', { class: 'exa' }, e[1])))));
   const playAll = () => { try { speechSynthesis.cancel(); } catch (e) {} vs.forEach(v => say(v.en, { force: true, queue: true })); };
   const node = h('div', { class: 'wrap screen' },
     h('div', { class: 'qtop' }, backBtn(home), h('div', { class: 'lvh' }, h('div', { class: 't' }, l.title), h('div', { class: 's' }, l.sub)), h('span', { class: 'cefr' }, l.cefr)),
@@ -712,7 +871,8 @@ function openLevel(i) {
 /* ---------- quiz ---------- */
 function startQuiz(l, idx) {
   const qs = buildQuiz(l);
-  next({ l, idx, queue: qs.slice(), total: qs.length, mastered: 0, first: 0, xp: 0, n: 0 });
+  warm(qs.flatMap(q => [q.big, ...(q.oc === 'emo' ? q.opts : [])]));
+  next({ l, idx, queue: qs.slice(), total: qs.length, scored: qs.filter(q => !q.bonus).length || 1, mastered: 0, first: 0, xp: 0, n: 0 });
 }
 function next(run) {
   if (!run.queue.length) return finish(run);
@@ -722,14 +882,22 @@ function next(run) {
 function qHead(q) {
   const c = h('div', { class: 'qcard' });
   if (q.passage) c.append(h('div', { class: 'passage' }, q.passage), spk(q.passage));
-  if (q.big) c.append(h('div', { class: 'big' + ([...q.big].length > 3 ? ' sm' : '') }, q.big));
+  if (q.big) c.append(h('div', { class: 'big' + (!picSrc(q.big) && [...q.big].length > 3 ? ' sm' : '') }, pic(q.big)));
   if (q.text) c.append(h('div', { class: 'qtext' + (q.textAr ? ' ar' : '') }, q.text));
   const s = q.listen || q.say;
-  if (s && HAS_TTS) c.append(h('div', { class: 'spkrow' }, spk(s, q.listen ? 'lg' : ''), q.listen ? slowBtn(s) : null));
+  if (s && HAS_TTS) c.append(h('div', { class: 'spkrow' }, spk(s, q.listen ? 'lg' : ''), slowBtn(s)));
   return c;
 }
 const correctText = q => q.kind === 'choice' ? q.a : q.kind === 'build' ? q.ans.join(q.join) : q.answers[0];
 function resolve(run, q, ok, extra) {
+  if (q.bonus) {
+    run.mastered++;
+    if (ok) { run.xp += 15; run.spoke = (run.spoke || 0) + 1; sfx('ok'); } else sfx('tap');
+    const bar = document.querySelector('.meter');
+    if (bar) bar.style.setProperty('--w', Math.round(run.mastered / run.total * 100) + '%');
+    document.querySelector('.qcount').textContent = run.mastered + '/' + run.total;
+    return sheet(run, q, ok);
+  }
   const wasFirst = extra && 'first' in extra ? extra.first : !q._tries;
   if (ok) { run.mastered++; if (wasFirst) { run.first++; run.xp += C.xpOk || 10; } else run.xp += 5; sfx('ok'); }
   else {
@@ -744,17 +912,18 @@ function resolve(run, q, ok, extra) {
 }
 function sheet(run, q, ok) {
   const fb = q.fb;
-  const sh = h('div', { class: 'sheet ' + (ok ? 'good' : 'bad'), role: 'status', 'aria-live': 'polite' }, h('div', { class: 'sheet-in' },
-    h('div', { class: 'sh-t' }, fill(ok ? rnd(C.praise) : rnd(C.oops))),
-    !ok && q.kind !== 'match' ? h('div', { class: 'sh-a' }, 'الإجابة الصحيحة: ', h('span', { class: q.oc === 'ar' ? '' : 'en' }, correctText(q))) : null,
-    fb ? h('div', { class: 'sh-fb' }, fb.em || '', h('span', { class: 'en' }, fb.en), '=', h('span', null, fb.ar)) : null,
-    q.tip ? h('div', { class: 'sh-tip' }, '💡 ' + q.tip) : null,
+  const soft = q.kind === 'speak' && !ok;
+  const sh = h('div', { class: 'sheet ' + (ok ? 'good' : soft ? 'soft' : 'bad'), role: 'status', 'aria-live': 'polite' }, h('div', { class: 'sheet-in' },
+    h('div', { class: 'sh-t' }, soft ? fill('لا بأس يا {n}! اسمعها وكرّرها معي.') : fill(ok ? rnd(C.praise) : rnd(C.oops))),
+    !ok && q.kind !== 'match' && q.kind !== 'speak' ? h('div', { class: 'sh-a' }, 'الإجابة الصحيحة: ', q.oc === 'emo' && fb ? h('span', { class: 'en' }, fb.en) : h('span', { class: q.oc === 'ar' ? '' : 'en' }, correctText(q))) : null,
+    fb ? h('div', { class: 'sh-fb' }, pic(fb.em), h('span', { class: 'en' }, fb.en), '=', h('span', null, fb.ar)) : null,
+    q.tip ? h('div', { class: 'sh-tip' }, pic('💡', 'ti'), ' ' + q.tip) : null,
     h('button', { class: 'btn full', onclick: () => next(run) }, run.queue.length ? 'متابعة' : 'إنهاء')));
   app.append(sh);
   if (q.speak) setTimeout(() => say(q.speak), 450);
 }
 function renderQ(run, q) {
-  const body = q.kind === 'choice' ? rChoice(run, q) : q.kind === 'build' ? rBuild(run, q) : q.kind === 'match' ? rMatch(run, q) : rType(run, q);
+  const body = q.kind === 'choice' ? rChoice(run, q) : q.kind === 'build' ? rBuild(run, q) : q.kind === 'match' ? rMatch(run, q) : q.kind === 'speak' ? rSpeak(run, q) : rType(run, q);
   let armed = false;
   const x = h('button', { class: 'round', 'aria-label': 'خروج', onclick: () => {
     if (!armed) { armed = true; toast('اضغط مرة أخرى للخروج من التحدي'); setTimeout(() => armed = false, 2500); return; }
@@ -766,12 +935,13 @@ function renderQ(run, q) {
     body);
   mount(node);
   if (q.listen) setTimeout(() => say(q.listen), 450);
+  if (q.kind === 'speak') setTimeout(() => say(q.target), 450);
 }
 function rChoice(run, q) {
   let locked = false;
   const opts = h('div', { class: 'opts' + (q.opts.some(o => o.length > 22) ? ' one' : '') });
   q.opts.forEach(o => {
-    const b = h('button', { class: 'opt ' + q.oc, 'data-v': o }, o);
+    const b = h('button', { class: 'opt ' + q.oc, 'data-v': o, 'aria-label': q.oc === 'emo' ? 'صورة' : false }, q.oc === 'emo' ? pic(o) : o);
     b.onclick = () => {
       if (locked) return; locked = true;
       const ok = o === q.a;
@@ -811,7 +981,7 @@ function rMatch(run, q) {
   let sel = null, mistakes = 0, matched = 0;
   const colL = h('div', { class: 'mc' }), colR = h('div', { class: 'mc' });
   const mk = (o, side) => {
-    const b = h('button', { class: 'm-i ' + (side === 'L' ? 'en' : q.right) }, o.t);
+    const b = h('button', { class: 'm-i ' + (side === 'L' ? 'en' : q.right) }, side === 'R' && q.right === 'emo' ? pic(o.t) : o.t);
     b.onclick = () => {
       if (side === 'L') { sel = { el: b, o }; colL.querySelectorAll('.m-i').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); say(o.t, { force: true }); return; }
       if (!sel) { sfx('tap'); return; }
@@ -824,6 +994,42 @@ function rMatch(run, q) {
   };
   L.forEach(o => colL.append(mk(o, 'L'))); R.forEach(o => colR.append(mk(o, 'R')));
   return h('div', null, h('div', { class: 'mt' }, colL, colR));
+}
+function rSpeak(run, q) {
+  let locked = false, tries = 0, rec = null, busy = false;
+  const status = h('div', { class: 'heard', 'aria-live': 'polite' }, 'اسمع الكلمة، ثم اضغط الميكروفون وقلها بصوت واضح');
+  const mic = h('button', { class: 'mic', 'aria-label': 'اضغط وتكلّم' }, pic('🎤'));
+  const finish = ok => { if (locked) return; locked = true; mic.disabled = true; skip.disabled = true; try { rec && rec.abort(); } catch (e) {} resolve(run, q, ok); };
+  const stopUi = () => { busy = false; mic.classList.remove('on'); };
+  mic.onclick = () => {
+    if (locked) return;
+    if (busy) { try { rec.stop(); } catch (e) {} return; }
+    try { speechSynthesis.cancel(); } catch (e) {}
+    try {
+      rec = new SRC(); rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 5; rec.continuous = false;
+    } catch (e) { status.textContent = 'تحدي النطق لا يعمل في هذا المتصفح.'; return; }
+    let got = false;
+    rec.onresult = e => {
+      got = true;
+      const alts = []; for (const r of e.results) for (let i = 0; i < r.length; i++) alts.push(r[i].transcript);
+      if (heardIt(q.target, alts)) { status.replaceChildren('سمعتك تقول: ', h('span', { class: 'en' }, q.target), ' 👏'); finish(true); return; }
+      tries++;
+      status.replaceChildren('سمعت: ', h('span', { class: 'en' }, alts[0] || '...'), tries < 3 ? ' — اسمعها مرة أخرى وحاول' : '');
+      if (tries >= 3) setTimeout(() => finish(false), 900); else setTimeout(() => say(q.target, { force: true }), 500);
+    };
+    rec.onerror = e => {
+      stopUi();
+      if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { status.textContent = 'يحتاج التحدي إذنًا لاستخدام الميكروفون. يمكنك التخطي الآن.'; S.micOff = true; save(); }
+      else if (e.error === 'no-speech') status.textContent = 'لم أسمعك جيدًا، اضغط وتكلّم بصوت أعلى قليلًا';
+      else if (e.error === 'network') status.textContent = 'تحدي النطق يحتاج اتصالًا بالإنترنت. يمكنك التخطي.';
+      else if (e.error !== 'aborted') status.textContent = 'لم يعمل الميكروفون هذه المرة، حاول مرة أخرى أو تخطَّ.';
+    };
+    rec.onend = () => { stopUi(); if (!got && !locked && status.textContent.indexOf('أستمع') === 0) status.textContent = 'لم أسمعك جيدًا، اضغط وتكلّم بصوت أعلى قليلًا'; };
+    try { rec.start(); busy = true; mic.classList.add('on'); status.textContent = 'أستمع إليك الآن...'; sfx('tap'); }
+    catch (e) { stopUi(); status.textContent = 'لم يعمل الميكروفون، حاول مرة أخرى.'; }
+  };
+  const skip = h('button', { class: 'link skip', onclick: () => finish(false) }, 'تخطَّ هذا التحدي');
+  return h('div', null, qHead(q), mic, status, skip);
 }
 function rType(run, q) {
   let locked = false;
@@ -846,7 +1052,7 @@ function touchStreak() {
   S.streak = S.last === y ? S.streak + 1 : 1; S.last = t;
 }
 function finish(run) {
-  const acc = run.first / run.total, stars = acc >= .9 ? 3 : acc >= .7 ? 2 : acc >= .5 ? 1 : 0;
+  const acc = run.first / run.scored, stars = acc >= .9 ? 3 : acc >= .7 ? 2 : acc >= .5 ? 1 : 0;
   const prev = S.stars[run.l.id] || 0;
   S.stars[run.l.id] = Math.max(prev, stars);
   const bonus = stars > 0 ? 20 : 0;
@@ -855,20 +1061,21 @@ function finish(run) {
   const last = run.idx === C.levels.length - 1, nextIdx = run.idx + 1;
   const msgs = C.result;
   const node = h('div', { class: 'wrap screen' }, h('div', { class: 'res' },
-    h('div', { class: 'mascot', 'aria-hidden': 'true' }, C.mascot),
+    h('div', { class: 'mascot', 'aria-hidden': 'true' }, pic(C.mascot)),
     h('h1', null, fill(stars === 3 ? msgs[3] : stars === 2 ? msgs[2] : stars === 1 ? msgs[1] : msgs[0])),
     h('div', { class: 'bigstars', 'aria-label': stars + ' من 3 نجوم' }, [1, 2, 3].map(i => h('span', { html: ICON.star }).firstChild).map((svg, i) => { if (i < stars) svg.setAttribute('class', 'on'); return svg; })),
     h('div', { class: 'stats' },
       h('div', { class: 'stat' }, h('b', null, Math.round(acc * 100) + '%'), h('span', null, 'إجابات من أول مرة')),
-      h('div', { class: 'stat' }, h('b', null, '+' + (run.xp + bonus)), h('span', null, 'نقطة'))),
-    fresh.length ? h('div', { class: 'bubble' }, 'وسام جديد! ' + fresh.map(b => b.e + ' ' + b.t).join(' ، ')) : null,
+      h('div', { class: 'stat' }, h('b', null, '+' + (run.xp + bonus)), h('span', null, 'نقطة')),
+      run.spoke ? h('div', { class: 'stat' }, h('b', null, String(run.spoke)), h('span', null, 'كلمات نطقتها')) : null),
+    fresh.length ? h('div', { class: 'bubble' }, 'وسام جديد! ', fresh.map((b, i) => [i ? ' ، ' : '', pic(b.e, 'ti'), ' ' + b.t])) : null,
     stars > 0 && !last ? h('button', { class: 'btn', onclick: () => openLevel(nextIdx) }, 'المرحلة التالية') : null,
     stars > 0 && last ? h('div', { class: 'bubble' }, fill(C.finale)) : null,
     stars === 0 ? h('button', { class: 'btn', onclick: () => openLevel(run.idx) }, 'راجع البطاقات') : null,
     h('button', { class: 'btn alt', onclick: () => startQuiz(run.l, run.idx) }, stars === 3 ? 'العب مرة أخرى' : 'حاول لتحصل على نجوم أكثر'),
     h('button', { class: 'link', onclick: home }, 'القائمة الرئيسية')));
   mount(node);
-  if (stars > 0) { sfx('win'); confetti(); setTimeout(() => say(C.sayWin), 700); if (fresh.length) setTimeout(() => { sfx('badge'); toast('وسام جديد: ' + fresh[0].e + ' ' + fresh[0].t); }, 1600); }
+  if (stars > 0) { sfx('win'); confetti(); setTimeout(() => say(C.sayWin), 700); if (fresh.length) setTimeout(() => { sfx('badge'); toast(['وسام جديد: ', pic(fresh[0].e, 'ti'), ' ' + fresh[0].t]); }, 1600); }
   else sfx('no');
 }
 
@@ -884,7 +1091,7 @@ function nameScreen(editing) {
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
   mount(h('div', { class: 'wrap screen' }, h('div', { class: 'namebox' },
     C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
-    h('div', { class: 'mascot huge', 'aria-hidden': 'true' }, C.mascot),
+    h('div', { class: 'mascot huge', 'aria-hidden': 'true' }, pic(C.mascot)),
     h('div', { class: 'bubble' }, editing ? 'اكتب الاسم الجديد' : C.nameAsk),
     inp, btn,
     editing ? h('button', { class: 'link', onclick: home }, 'رجوع دون تغيير') : null,

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}[hidden]{display:none!important}img{max-width:100%}</style>
 <title>دوري الإنجليزية</title>
+<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Changa:wght@500;700;800&family=Nunito:wght@600;800&family=Readex+Pro:wght@400;500;700&display=swap">
 <style>
 *{box-sizing:border-box}
@@ -196,6 +197,57 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .namebox .btn{min-width:220px}
 .inp.ar{direction:rtl;font-family:var(--font-ui);font-size:1.5rem;margin-top:0}
 .note{margin:0;color:var(--on-bg-2,var(--muted));font-size:.85rem;font-weight:700}
+/* pictures */
+img.pic{display:block;object-fit:contain;-webkit-user-drag:none;user-select:none;pointer-events:none}
+.wc{position:relative;padding:0;overflow:hidden}
+.wc .main{display:flex;flex-direction:column;align-items:center;gap:4px;width:100%;padding:14px 8px 12px;border-radius:inherit}
+.wc .em img{width:88px;height:88px}
+.wc .em{line-height:1}
+.wc .mini{position:absolute;top:6px;inset-inline-start:6px;width:36px;height:36px;border-radius:50%;background:var(--card2);display:grid;place-items:center;box-shadow:0 2px 0 var(--line)}
+.wc .mini img{width:24px;height:24px}
+.big img{width:150px;height:150px;margin-inline:auto}
+.opt.emo img{width:86px;height:86px}
+.m-i.emo img{width:58px;height:58px}
+.mascot img{width:1em;height:1em}
+.orb img{width:64%;height:64%}
+.bd .e img{width:2.5rem;height:2.5rem;margin:0 auto 2px}
+.chip img{width:20px;height:20px}
+img.ti{display:inline-block;width:1.25em;height:1.25em;vertical-align:-.28em}
+.sh-fb img.pic{width:42px;height:42px}
+.spk.slow img{width:28px;height:28px}
+.spk.lg + .spk.slow{width:56px;height:56px}
+.spk.lg + .spk.slow img{width:34px;height:34px}
+/* photos */
+img.pic.ph{object-fit:cover;border-radius:16px;background:var(--card2);box-shadow:0 2px 0 rgba(31,48,80,.08)}
+.wc .em img.ph{width:min(132px,100%);height:auto;aspect-ratio:1/1}
+.big img.ph{width:min(230px,70vw);height:auto;aspect-ratio:1/1;border-radius:22px;border:4px solid #fff;box-shadow:var(--shadow)}
+.opt.emo img.ph{width:min(132px,100%);height:auto;aspect-ratio:1/1;border-radius:16px}
+.opt.emo:has(img.ph){padding:8px}
+.m-i.emo img.ph{width:64px;height:64px;border-radius:12px}
+.sh-fb img.ph{width:48px;height:48px;border-radius:10px}
+/* speaking challenge */
+.mic{width:96px;height:96px;border-radius:50%;background:var(--a1);color:var(--on-a1);display:grid;place-items:center;box-shadow:0 6px 0 var(--a1-deep);margin:18px auto 6px;transition:transform .08s}
+.mic img{width:58px;height:58px}
+.mic:active{transform:translateY(4px);box-shadow:0 2px 0 var(--a1-deep)}
+.mic.on{animation:micpulse 1s ease-in-out infinite}
+.mic[disabled]{opacity:.5}
+.heard{min-height:3em;text-align:center;font-weight:800;color:var(--muted)}
+.heard .en{color:var(--ink)}
+.skip{display:block;margin:4px auto 0}
+.sheet.soft{background:#E8F3FF;color:#173A66}
+.sheet.soft .btn{background:#2F7DD1;box-shadow:0 5px 0 #1E5A9E;color:#fff}
+/* voice chooser */
+.vlist{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow:auto;margin-block:6px}
+.vrow{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:16px;padding:8px 10px;border:3px solid transparent}
+.vrow.sel{border-color:var(--a2)}
+.vrow .vn{flex:1;min-width:0;text-align:start;font-weight:800;overflow-wrap:anywhere}
+.vrow .vn small{display:block;color:var(--muted);font-weight:700}
+.vrow .spk{width:40px;height:40px}
+.vhelp{font-size:.88rem;color:var(--muted);font-weight:700;margin:4px 0 0}
+.credit{width:100%;text-align:center;font-size:.75rem;color:var(--muted);margin:6px 0 0}
+.credit a{color:inherit}
+@keyframes micpulse{0%,100%{box-shadow:0 6px 0 var(--a1-deep),0 0 0 0 rgba(232,89,12,.45)}50%{box-shadow:0 6px 0 var(--a1-deep),0 0 0 18px rgba(232,89,12,0)}}
+.meter i::after{width:34px;height:34px;background:url(img/fe/soccer-ball.webp) center/contain no-repeat}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes bob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-7px) rotate(3deg)}}
 @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.12) rotate(-2deg)}100%{transform:scale(1)}}
@@ -226,7 +278,7 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .brand,h2.sec,.lvh .t,.qprompt,.res h1,.mlabel,.hint,.lvh .s,.link,.foot{color:var(--on-bg)}
 .mlabel,.hint,.lvh .s,.link{color:var(--on-bg-2)}
 .brand{text-transform:none;font-size:1.7rem}
-.brand::before{content:"⚽ ";}
+.brand::before{content:"";display:inline-block;width:1.05em;height:1.05em;margin-inline-end:.25em;vertical-align:-.12em;background:url(img/fe/soccer-ball.webp) center/contain no-repeat}
 .orb{border:4px solid #fff;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.5),transparent 42%),var(--lv)}
 .node{border-radius:16px}
 .go{box-shadow:0 6px 0 var(--a1-deep)}
@@ -238,7 +290,7 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 .stat,.bd{border:2px solid rgba(255,255,255,.7)}
 
 /* creative pass: match day */
-:root{--veh:"⚽";--gh:84px;--ground:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgOTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iOTAiPjxyZWN0IHk9IjM0IiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjU2IiBmaWxsPSIjMTQzMDVFIi8+PHJlY3QgeT0iMzQiIHdpZHRoPSIzNjAiIGhlaWdodD0iOSIgZmlsbD0iI0ZGRDIxRiIvPjxnIGZpbGw9IiMwRTIzNDciPjxyZWN0IHk9IjQzIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjEyIi8+PHJlY3QgeT0iNjciIHdpZHRoPSIzNjAiIGhlaWdodD0iMTIiLz48L2c+PGc+PGNpcmNsZSBjeD0iMTAiIGN5PSI1MiIgcj0iNSIgZmlsbD0iI0U1NDg0RCIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iNjIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUyIiByPSI1IiBmaWxsPSIjRkZEMjFGIi8+PGNpcmNsZSBjeD0iNzAiIGN5PSI2MiIgcj0iNSIgZmlsbD0iI0U1NDg0RCIvPjxjaXJjbGUgY3g9IjkwIiBjeT0iNTIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSI2MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjEzMCIgY3k9IjUyIiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMTUwIiBjeT0iNjIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxNzAiIGN5PSI1MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjE5MCIgY3k9IjYyIiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMjEwIiBjeT0iNTIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIyMzAiIGN5PSI2MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjUyIiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMjcwIiBjeT0iNjIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIyOTAiIGN5PSI1MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjMxMCIgY3k9IjYyIiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMzMwIiBjeT0iNTIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIzNTAiIGN5PSI2MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iNzQiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI2MCIgY3k9Ijc0IiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iNzQiIHI9IjUiIGZpbGw9IiNGRkQyMUYiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSI3NCIgcj0iNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjE4MCIgY3k9Ijc0IiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMjIwIiBjeT0iNzQiIHI9IjUiIGZpbGw9IiNGRkQyMUYiLz48Y2lyY2xlIGN4PSIyNjAiIGN5PSI3NCIgcj0iNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjMwMCIgY3k9Ijc0IiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMzQwIiBjeT0iNzQiIHI9IjUiIGZpbGw9IiNGRkQyMUYiLz48L2c+PC9zdmc+Cg==");--tw:4px;--scene-bd:#fff;
+:root{--veh:"";--gh:84px;--ground:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNjAgOTAiIHdpZHRoPSIzNjAiIGhlaWdodD0iOTAiPjxyZWN0IHk9IjM0IiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjU2IiBmaWxsPSIjMTQzMDVFIi8+PHJlY3QgeT0iMzQiIHdpZHRoPSIzNjAiIGhlaWdodD0iOSIgZmlsbD0iI0ZGRDIxRiIvPjxnIGZpbGw9IiMwRTIzNDciPjxyZWN0IHk9IjQzIiB3aWR0aD0iMzYwIiBoZWlnaHQ9IjEyIi8+PHJlY3QgeT0iNjciIHdpZHRoPSIzNjAiIGhlaWdodD0iMTIiLz48L2c+PGc+PGNpcmNsZSBjeD0iMTAiIGN5PSI1MiIgcj0iNSIgZmlsbD0iI0U1NDg0RCIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iNjIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI1MCIgY3k9IjUyIiByPSI1IiBmaWxsPSIjRkZEMjFGIi8+PGNpcmNsZSBjeD0iNzAiIGN5PSI2MiIgcj0iNSIgZmlsbD0iI0U1NDg0RCIvPjxjaXJjbGUgY3g9IjkwIiBjeT0iNTIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxMTAiIGN5PSI2MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjEzMCIgY3k9IjUyIiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMTUwIiBjeT0iNjIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxNzAiIGN5PSI1MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjE5MCIgY3k9IjYyIiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMjEwIiBjeT0iNTIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIyMzAiIGN5PSI2MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjUyIiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMjcwIiBjeT0iNjIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIyOTAiIGN5PSI1MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjMxMCIgY3k9IjYyIiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMzMwIiBjeT0iNTIiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIzNTAiIGN5PSI2MiIgcj0iNSIgZmlsbD0iI0ZGRDIxRiIvPjxjaXJjbGUgY3g9IjIwIiBjeT0iNzQiIHI9IjUiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI2MCIgY3k9Ijc0IiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iNzQiIHI9IjUiIGZpbGw9IiNGRkQyMUYiLz48Y2lyY2xlIGN4PSIxNDAiIGN5PSI3NCIgcj0iNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjE4MCIgY3k9Ijc0IiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMjIwIiBjeT0iNzQiIHI9IjUiIGZpbGw9IiNGRkQyMUYiLz48Y2lyY2xlIGN4PSIyNjAiIGN5PSI3NCIgcj0iNSIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjMwMCIgY3k9Ijc0IiByPSI1IiBmaWxsPSIjRTU0ODREIi8+PGNpcmNsZSBjeD0iMzQwIiBjeT0iNzQiIHI9IjUiIGZpbGw9IiNGRkQyMUYiLz48L2c+PC9zdmc+Cg==");--tw:4px;--scene-bd:#fff;
   --trail:repeating-linear-gradient(rgba(255,255,255,.75) 0 10px,transparent 10px 18px)}
 .sc-ball{transform-box:fill-box;transform-origin:center;transform:translate(200px,77px);animation:sc-ball 6s ease-in infinite}
 @keyframes sc-ball{0%{opacity:0;transform:translate(110px,80px) rotate(0)}4%{opacity:1}70%{opacity:1;transform:translate(366px,72px) rotate(900deg)}80%{opacity:1;transform:translate(378px,72px) rotate(930deg)}92%,100%{opacity:0;transform:translate(378px,72px) rotate(930deg)}}
@@ -251,7 +303,7 @@ h2.sec{font-family:var(--font-display);font-size:1.3rem;margin:26px 0 10px;line-
 <script>
 window.CONFIG = {
   id: 'g5v2', migrate: 'g5', askName: true, title: 'دوري الإنجليزية', mascot: '🦅',
-  nameAsk: 'أهلًا بك في الدوري! أنا الصقر، مدرب الفريق. ما اسمك يا لاعب؟', nameBtn: 'ادخل الملعب', speechRate: 0.85, pitch: 1,
+  nameAsk: 'أهلًا بك في الدوري! أنا الصقر، مدرب الفريق. ما اسمك يا لاعب؟', nameBtn: 'ادخل الملعب', speechRate: 0.9, slowRate: 0.55, pitch: 1,
   journey: 'تقدّمك في الموسم', pathTitle: 'جدول المباريات', learnTitle: 'تدريب الكلمات', startLabel: 'ابدأ المباراة',
   confetti: ['#FFD21F', '#FFFFFF', '#14305E', '#1E9E57', '#FF6B3D', '#3AA7FF'],
   lines: [
@@ -274,8 +326,8 @@ window.CONFIG = {
         { t: 'المضارع البسيط', b: 'نستخدم المضارع البسيط للعادات والحقائق. مع he و she و it نضيف s للفعل.', ex: [['I go to school.', 'أذهب إلى المدرسة.'], ['He goes to school.', 'هو يذهب إلى المدرسة.']] }
       ],
       vocab: [
-        ['name', 'اسم', '🏷️'], ['age', 'عمر', '🎂'], ['country', 'دولة', '🌍'], ['city', 'مدينة', '🏙️'], ['school', 'مدرسة', '🏫'], ['friend', 'صديق', '🧑‍🤝‍🧑'],
-        ['teacher', 'معلم', '🧑‍🏫'], ['student', 'طالب', '🧑‍🎓'], ['classmate', 'زميل في الصف', ''], ['family', 'عائلة', '👨‍👩‍👧‍👦'], ['subject', 'مادة دراسية', '📚'], ['homework', 'واجب', '📝']
+        ['name', 'اسم', '🏷️'], ['age', 'عمر', '🎂'], ['country', 'دولة', '🌍'], ['city', 'مدينة', '@city'], ['school', 'مدرسة', '@school'], ['friend', 'صديق', '@friend'],
+        ['teacher', 'معلم', '@teacher'], ['student', 'طالب', '@student'], ['classmate', 'زميل في الصف', '@classmate'], ['family', 'عائلة', '@family'], ['subject', 'مادة دراسية', '📚'], ['homework', 'واجب', '@homework']
       ],
       qs: [
         { q: 'I ___ a student.', opts: ['am', 'is', 'are'], a: 'am', tip: 'نستخدم am مع I فقط.' },
@@ -296,11 +348,11 @@ window.CONFIG = {
         { t: 'ما اهتماماتك؟', b: 'نسأل What are you interested in؟ ونجيب I am interested in ثم الهواية مع ing.', ex: [['What are you interested in?', 'بماذا تهتم؟'], ['I am interested in photography.', 'أهتم بالتصوير.']] }
       ],
       vocab: [
-        ['reading', 'القراءة', '📖'], ['painting', 'الرسم', '🎨'], ['photography', 'التصوير', '📷'], ['coding', 'البرمجة', '💻'], ['chess', 'الشطرنج', '♟️'], ['hiking', 'المشي في الجبال', '🥾'],
-        ['camping', 'التخييم', '⛺'], ['cycling', 'ركوب الدراجات', '🚴'], ['gaming', 'ألعاب الفيديو', '🎮'], ['cooking', 'الطبخ', '🍳'], ['fishing', 'صيد السمك', '🎣'], ['collecting', 'جمع الأشياء', '🪙']
+        ['reading', 'القراءة', '@reading'], ['painting', 'الرسم', '@painting'], ['photography', 'التصوير', '@photography'], ['coding', 'البرمجة', '@coding'], ['chess', 'الشطرنج', '@chess'], ['hiking', 'المشي في الجبال', '@hiking'],
+        ['camping', 'التخييم', '@camping'], ['cycling', 'ركوب الدراجات', '@cycling'], ['gaming', 'ألعاب الفيديو', '@gaming'], ['cooking', 'الطبخ', '@cooking'], ['fishing', 'صيد السمك', '@fishing'], ['collecting', 'جمع الأشياء', '@collecting']
       ],
       qs: [
-        { q: 'I like ___.', big: '📷', opts: ['photography', 'camping', 'chess'], a: 'photography' },
+        { q: 'I like ___.', big: '@photography', opts: ['photography', 'camping', 'chess'], a: 'photography' },
         { q: 'She enjoys ___ pictures.', opts: ['painting', 'paint', 'paints'], a: 'painting', tip: 'بعد enjoy نضيف ing.' },
         { q: 'My brother loves ___ video games.', opts: ['playing', 'play', 'plays'], a: 'playing' },
         { q: 'We enjoy ___ in the desert.', opts: ['camping', 'camp', 'camped'], a: 'camping' },
@@ -318,8 +370,8 @@ window.CONFIG = {
         { t: 'موعد النشاط', b: 'نستخدم on مع اليوم، و at مع الساعة، و in مع أجزاء اليوم.', ex: [['The club meets on Monday at four.', 'يجتمع النادي يوم الاثنين في الرابعة.'], ['We practice in the afternoon.', 'نتدرّب بعد الظهر.']] }
       ],
       vocab: [
-        ['club', 'نادٍ', '🏟️'], ['join', 'ينضم', '🤝'], ['member', 'عضو', '🪪'], ['coach', 'مدرّب', '🧑‍🏫'], ['practice', 'يتدرّب', '🏋️'], ['schedule', 'جدول', '🗓️'],
-        ['workshop', 'ورشة عمل', '🛠️'], ['team', 'فريق', '👥'], ['competition', 'مسابقة', '🏆'], ['volunteer', 'متطوّع', '🙋'], ['register', 'يسجّل', '📝'], ['activity', 'نشاط', '🎯']
+        ['club', 'نادٍ', '🏟️'], ['join', 'ينضم', '🤝'], ['member', 'عضو', '🪪'], ['coach', 'مدرّب', '@coach'], ['practice', 'يتدرّب', '@practice'], ['schedule', 'جدول', '🗓️'],
+        ['workshop', 'ورشة عمل', '@workshop'], ['team', 'فريق', '@team'], ['competition', 'مسابقة', '🏆'], ['volunteer', 'متطوّع', '@volunteer'], ['register', 'يسجّل', '📝'], ['activity', 'نشاط', '🎯']
       ],
       qs: [
         { q: 'I want to ___ the chess club.', opts: ['join', 'joins', 'joining'], a: 'join', tip: 'بعد want to يأتي الفعل بدون s.' },
@@ -340,8 +392,8 @@ window.CONFIG = {
         { t: 'وصف البيت', b: 'نصف البيت بكلمات مثل modern و traditional و big و small. ونقول It has ثم ما فيه.', ex: [['It is a modern house.', 'إنه بيت حديث.'], ['It has a big garden.', 'فيه حديقة كبيرة.']] }
       ],
       vocab: [
-        ['living room', 'غرفة المعيشة', '🛋️'], ['kitchen', 'مطبخ', '🍳'], ['bedroom', 'غرفة نوم', '🛏️'], ['bathroom', 'حمّام', '🚿'], ['garage', 'مرآب', '🚗'], ['garden', 'حديقة', '🌳'],
-        ['balcony', 'شرفة', ''], ['stairs', 'درج', '🪜'], ['roof', 'سقف أو سطح', ''], ['modern', 'حديث', '🏢'], ['traditional', 'تقليدي', '🏘️'], ['floor', 'طابق أو أرضية', '']
+        ['living room', 'غرفة المعيشة', '@living-room'], ['kitchen', 'مطبخ', '@kitchen'], ['bedroom', 'غرفة نوم', '@bedroom'], ['bathroom', 'حمّام', '@bathroom'], ['garage', 'مرآب', '@garage'], ['garden', 'حديقة', '@garden'],
+        ['balcony', 'شرفة', '@balcony'], ['stairs', 'درج', '@stairs'], ['roof', 'سقف أو سطح', '@roof'], ['modern', 'حديث', '@modern'], ['traditional', 'تقليدي', '@traditional'], ['floor', 'طابق أو أرضية', '@floor']
       ],
       qs: [
         { q: 'We cook food in the ___.', opts: ['kitchen', 'bedroom', 'garage'], a: 'kitchen' },
@@ -362,8 +414,8 @@ window.CONFIG = {
         { t: 'أين الأثاث؟', b: 'in front of تعني أمام، و behind تعني خلف، و between تعني بين، و next to تعني بجانب.', ex: [['The lamp is next to the bed.', 'المصباح بجانب السرير.'], ['The desk is in front of the window.', 'المكتب أمام النافذة.']] }
       ],
       vocab: [
-        ['sofa', 'أريكة', '🛋️'], ['bed', 'سرير', '🛏️'], ['table', 'طاولة', ''], ['wardrobe', 'خزانة ملابس', ''], ['desk', 'مكتب', ''], ['lamp', 'مصباح', '💡'],
-        ['carpet', 'سجادة', ''], ['curtains', 'ستائر', ''], ['shelf', 'رف', ''], ['fridge', 'ثلاجة', ''], ['mirror', 'مرآة', '🪞'], ['TV', 'تلفاز', '📺']
+        ['sofa', 'أريكة', '@sofa'], ['bed', 'سرير', '@bed'], ['table', 'طاولة', '@table'], ['wardrobe', 'خزانة ملابس', '@wardrobe'], ['desk', 'مكتب', '@desk'], ['lamp', 'مصباح', '@lamp'],
+        ['carpet', 'سجادة', '@carpet'], ['curtains', 'ستائر', '@curtains'], ['shelf', 'رف', '@shelf'], ['fridge', 'ثلاجة', '@fridge'], ['mirror', 'مرآة', '@mirror'], ['TV', 'تلفاز', '@tv']
       ],
       qs: [
         { q: 'There ___ a lamp next to the bed.', opts: ['is', 'are', 'am'], a: 'is' },
@@ -385,8 +437,8 @@ window.CONFIG = {
         { t: 'أين يعمل؟ وماذا يريد أن يكون؟', b: 'نقول works in أو works at ثم المكان. ونقول I want to be ثم المهنة لنعبّر عن حلمنا.', ex: [['A pharmacist works in a pharmacy.', 'الصيدلاني يعمل في صيدلية.'], ['I want to be a pilot.', 'أريد أن أكون طيّارًا.']] }
       ],
       vocab: [
-        ['engineer', 'مهندس', '👷'], ['architect', 'مهندس معماري', '📐'], ['pharmacist', 'صيدلاني', '💊'], ['journalist', 'صحفي', '📰'], ['vet', 'طبيب بيطري', '🐕'], ['baker', 'خبّاز', '🥖'],
-        ['mechanic', 'ميكانيكي', '🔧'], ['electrician', 'كهربائي', '💡'], ['police officer', 'شرطي', '👮'], ['pilot', 'طيّار', '🧑‍✈️'], ['nurse', 'ممرضة', '👩‍⚕️'], ['firefighter', 'رجل إطفاء', '🧑‍🚒']
+        ['engineer', 'مهندس', '@engineer'], ['architect', 'مهندس معماري', '@architect'], ['pharmacist', 'صيدلاني', '@pharmacist'], ['journalist', 'صحفي', '@journalist'], ['vet', 'طبيب بيطري', '@vet'], ['baker', 'خبّاز', '@baker'],
+        ['mechanic', 'ميكانيكي', '@mechanic'], ['electrician', 'كهربائي', '@electrician'], ['police officer', 'شرطي', '@police-officer'], ['pilot', 'طيّار', '@pilot'], ['nurse', 'ممرضة', '@nurse'], ['firefighter', 'رجل إطفاء', '@firefighter']
       ],
       qs: [
         { q: 'A ___ fixes cars.', opts: ['mechanic', 'baker', 'journalist'], a: 'mechanic' },
@@ -408,8 +460,8 @@ window.CONFIG = {
         { t: 'a و an', b: 'نستخدم a و an مع المفرد القابل للعدّ مثل an egg و a tomato.', ex: [['an egg', 'بيضة'], ['a tomato', 'طماطم']] }
       ],
       vocab: [
-        ['flour', 'طحين', '🌾'], ['sugar', 'سكر', '🍬'], ['butter', 'زبدة', '🧈'], ['egg', 'بيضة', '🥚'], ['milk', 'حليب', '🥛'], ['honey', 'عسل', '🍯'],
-        ['dates', 'تمر', '🌴'], ['cheese', 'جبن', '🧀'], ['salt', 'ملح', '🧂'], ['oil', 'زيت', '🫒'], ['bread', 'خبز', '🍞'], ['tomato', 'طماطم', '🍅']
+        ['flour', 'طحين', '@flour'], ['sugar', 'سكر', '@sugar'], ['butter', 'زبدة', '@butter'], ['egg', 'بيضة', '@egg'], ['milk', 'حليب', '@milk'], ['honey', 'عسل', '@honey'],
+        ['dates', 'تمر', '@dates'], ['cheese', 'جبن', '@cheese'], ['salt', 'ملح', '@salt'], ['oil', 'زيت', '@oil'], ['bread', 'خبز', '@bread'], ['tomato', 'طماطم', '@tomato']
       ],
       qs: [
         { q: 'I have ___ milk in the fridge.', opts: ['some', 'any', 'many'], a: 'some' },
@@ -431,8 +483,8 @@ window.CONFIG = {
         { t: 'خطوات الوصفة', b: 'نبدأ الجملة بالفعل مباشرة عندما نعطي أمرًا. ونرتّب الخطوات بكلمات مثل first و next و then و finally.', ex: [['First, cut the bread.', 'أولًا، قطّع الخبز.'], ['Next, add the cheese.', 'بعد ذلك، أضف الجبن.'], ['Finally, eat and enjoy!', 'وأخيرًا، كل واستمتع!']] }
       ],
       vocab: [
-        ['mix', 'يخلط', '🥣'], ['pour', 'يصبّ', '🫗'], ['slice', 'يقطّع شرائح', '🔪'], ['spread', 'يدهن', '🧈'], ['bake', 'يخبز في الفرن', '🥧'], ['fry', 'يقلي', '🍳'],
-        ['add', 'يضيف', '➕'], ['cut', 'يقطع', '✂️'], ['sandwich', 'ساندويتش', '🥪'], ['snack', 'وجبة خفيفة', '🍿'], ['recipe', 'وصفة', '📋'], ['ingredient', 'مكوّن', '🧂']
+        ['mix', 'يخلط', '@mix'], ['pour', 'يصبّ', '@pour'], ['slice', 'يقطّع شرائح', '@slice'], ['spread', 'يدهن', '@spread'], ['bake', 'يخبز في الفرن', '@bake'], ['fry', 'يقلي', '@fry'],
+        ['add', 'يضيف', '➕'], ['cut', 'يقطع', '@cut'], ['sandwich', 'ساندويتش', '@sandwich'], ['snack', 'وجبة خفيفة', '@snack'], ['recipe', 'وصفة', '📋'], ['ingredient', 'مكوّن', '🧂']
       ],
       qs: [
         { q: 'First, ___ the bread.', opts: ['cut', 'cuts', 'cutting'], a: 'cut', tip: 'في الأمر نستخدم الفعل كما هو.' },
@@ -456,7 +508,9 @@ window.CONFIG = {
   ]
 };
 
-window.CONFIG.scene = "<svg viewBox=\"0 0 400 130\" focusable=\"false\" aria-hidden=\"true\">\n<rect width=\"400\" height=\"130\" fill=\"#1F8A4C\"/>\n<g fill=\"#27995A\"><rect x=\"50\" width=\"50\" height=\"130\"/><rect x=\"150\" width=\"50\" height=\"130\"/><rect x=\"250\" width=\"50\" height=\"130\"/><rect x=\"350\" width=\"50\" height=\"130\"/></g>\n<rect width=\"400\" height=\"24\" fill=\"#14305E\"/>\n<g><circle cx=\"12\" cy=\"6\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"30\" cy=\"12\" r=\"4\" fill=\"#fff\"/><circle cx=\"48\" cy=\"6\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"66\" cy=\"12\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"84\" cy=\"6\" r=\"4\" fill=\"#fff\"/><circle cx=\"102\" cy=\"12\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"120\" cy=\"6\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"138\" cy=\"12\" r=\"4\" fill=\"#fff\"/><circle cx=\"156\" cy=\"6\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"174\" cy=\"12\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"192\" cy=\"6\" r=\"4\" fill=\"#fff\"/><circle cx=\"210\" cy=\"12\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"228\" cy=\"6\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"246\" cy=\"12\" r=\"4\" fill=\"#fff\"/><circle cx=\"264\" cy=\"6\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"282\" cy=\"12\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"300\" cy=\"6\" r=\"4\" fill=\"#fff\"/><circle cx=\"318\" cy=\"12\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"336\" cy=\"6\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"354\" cy=\"12\" r=\"4\" fill=\"#fff\"/><circle cx=\"372\" cy=\"6\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"390\" cy=\"12\" r=\"4\" fill=\"#FFD21F\"/></g>\n<g fill=\"none\" stroke=\"#fff\" stroke-width=\"2.5\" opacity=\".9\"><rect x=\"10\" y=\"32\" width=\"380\" height=\"90\"/><path d=\"M200 32 V122\"/><circle cx=\"200\" cy=\"77\" r=\"20\"/><rect x=\"10\" y=\"52\" width=\"40\" height=\"50\"/><rect x=\"350\" y=\"52\" width=\"40\" height=\"50\"/></g>\n<g fill=\"none\" stroke=\"#fff\" stroke-width=\"1.5\" opacity=\".75\"><path d=\"M10 64 h-8 v26 h8 M390 64 h8 v26 h-8\"/><path d=\"M2 70 h6 M2 76 h6 M2 82 h6 M392 70 h6 M392 76 h6 M392 82 h6\"/></g>\n<g class=\"sc-ball\" style=\"font-size:22px\"><text x=\"-11\" y=\"8\" text-anchor=\"middle\">⚽</text></g>\n</svg>";
+window.CONFIG.photos = {"@city":["photo-1477959858617-67f85cf4f1df","🏙️"],"@school":["photo-1591123120675-6f7f1aae0e5b","🏫"],"@friend":["photo-1597413545419-4013431dbfec","🧑‍🤝‍🧑"],"@teacher":["photo-1587691592099-24045742c181","🧑‍🏫"],"@student":["photo-1580067644090-a03da9d1e360","🧑‍🎓"],"@classmate":["photo-1588072432836-e10032774350",""],"@family":["photo-1666819256222-7034f91340a7","👨‍👩‍👧‍👦"],"@homework":["photo-1560785496-3c9d27877182","📝"],"@reading":["photo-1553729784-e91953dec042","📖"],"@painting":["photo-1605721911519-3dfeb3be25e7","🎨"],"@photography":["photo-1495745966610-2a67f2297e5e","📷"],"@coding":["photo-1597933471507-1ca5765185d8","💻"],"@chess":["photo-1560174038-da43ac74f01b","♟️"],"@hiking":["photo-1501554728187-ce583db33af7","🥾"],"@camping":["photo-1504280390367-361c6d9f38f4","⛺"],"@cycling":["photo-1566728060299-ad216d6fa3c1","🚴"],"@gaming":["photo-1493711662062-fa541adb3fc8","🎮"],"@cooking":["photo-1528712306091-ed0763094c98","🍳"],"@fishing":["photo-1505850557988-b858c0aec076","🎣"],"@collecting":["photo-1586974710160-55f48f417990","🪙"],"@coach":["photo-1529932398402-e0b30f66a559","🧑‍🏫"],"@practice":["photo-1618073193718-23a66109f4e6","🏋️"],"@workshop":["photo-1783309239756-168e747dde35","🛠️"],"@team":["photo-1622659097509-4d56de14539e","👥"],"@volunteer":["photo-1628717341663-0007b0ee2597","🙋"],"@living-room":["photo-1583847268964-b28dc8f51f92","🛋️"],"@kitchen":["photo-1600489000022-c2086d79f9d4","🍳"],"@bedroom":["photo-1615874959474-d609969a20ed","🛏️"],"@bathroom":["photo-1584622650111-993a426fbf0a","🚿"],"@garage":["photo-1551522435-a13afa10f103","🚗"],"@garden":["photo-1534710961216-75c88202f43e","🌳"],"@balcony":["photo-1616593969747-4797dc75033e",""],"@stairs":["photo-1502101872923-d48509bff386","🪜"],"@roof":["photo-1518736346281-76873166a64a",""],"@modern":["photo-1721815693498-cc28507c0ba2","🏢"],"@traditional":["photo-1593857389276-7c794900c90f","🏘️"],"@floor":["photo-1506968430777-bf7784a87f23",""],"@sofa":["photo-1555041469-a586c61ea9bc","🛋️"],"@bed":["photo-1693034433366-57fbb0286641","🛏️"],"@table":["photo-1758977404039-6e834be8eca8",""],"@wardrobe":["photo-1558769132-cb1aea458c5e",""],"@desk":["photo-1761323612470-b8de857169e1",""],"@lamp":["photo-1517991104123-1d56a6e81ed9","💡"],"@carpet":["photo-1652634213812-f0deeb1de78e",""],"@curtains":["photo-1578337834535-357ad7dccdfd",""],"@shelf":["photo-1545696648-86c761bc5410",""],"@fridge":["photo-1721613877687-c9099b698faa",""],"@mirror":["photo-1650507154947-6c9edfc068d7","🪞"],"@tv":["photo-1560169897-fc0cdbdfa4d5","📺"],"@engineer":["photo-1621905252507-b35492cc74b4","👷"],"@architect":["photo-1608303588026-884930af2559","📐"],"@pharmacist":["photo-1580281657527-47f249e8f4df","💊"],"@journalist":["photo-1485579149621-3123dd979885","📰"],"@vet":["photo-1654895716780-b4664497420d","🐕"],"@baker":["photo-1608198093002-ad4e005484ec","🥖"],"@mechanic":["photo-1615906655593-ad0386982a0f","🔧"],"@electrician":["photo-1682345262055-8f95f3c513ea","💡"],"@police-officer":["photo-1605071483252-41904a888644","👮"],"@pilot":["photo-1511140276483-30c1217ca449","🧑‍✈️"],"@nurse":["photo-1624727828489-a1e03b79bba8","👩‍⚕️"],"@firefighter":["photo-1576707995936-a6cffe26ef7b","🧑‍🚒"],"@flour":["photo-1627485937980-221c88ac04f9","🌾"],"@sugar":["photo-1709651808265-977ed7ef78c6","🍬"],"@butter":["photo-1589985270826-4b7bb135bc9d","🧈"],"@egg":["photo-1607690424560-35d967d6ad7c","🥚"],"@milk":["photo-1550583724-b2692b85b150","🥛"],"@honey":["photo-1587049352851-8d4e89133924","🍯"],"@dates":["photo-1691657917109-c6e027eac44a","🌴"],"@cheese":["photo-1683314573422-649a3c6ad784","🧀"],"@salt":["photo-1518110925495-5fe2fda0442c","🧂"],"@oil":["photo-1474979266404-7eaacbcd87c5","🫒"],"@bread":["photo-1598373182133-52452f7691ef","🍞"],"@tomato":["photo-1607305387299-a3d9611cd469","🍅"],"@mix":["photo-1760445529633-5d80cf816e38","🥣"],"@pour":["photo-1771556011230-90f132a4f2e4","🫗"],"@slice":["photo-1549931319-a545dcf3bc73","🔪"],"@spread":["photo-1662988564746-4fc159c87f2d","🧈"],"@bake":["photo-1586826583078-cef32c938857","🥧"],"@fry":["photo-1610328466269-1f36faad83c1","🍳"],"@cut":["photo-1514986888952-8cd320577b68","✂️"],"@sandwich":["photo-1553909489-cd47e0907980","🥪"],"@snack":["photo-1578849278619-e73505e9610f","🍿"]};
+window.CONFIG.img = {"🦅":"fe/eagle","⚽":"fe/soccer-ball","🤝":"fe/handshake","🏷":"fe/label","🎂":"fe/birthday-cake","🌍":"fe/globe-showing-europe-africa","📚":"fe/books","🎯":"fe/bullseye","🏟":"fe/stadium","🪪":"fe/identification-card","🗓":"fe/spiral-calendar","🏆":"fe/trophy","📝":"fe/memo","🏠":"fe/house","🛋":"fe/couch-and-lamp","💼":"fe/briefcase","🍽":"fe/fork-and-knife-with-plate","🥪":"fe/sandwich","➕":"fe/plus","📋":"fe/clipboard","🧂":"fe/salt","🏁":"fe/chequered-flag","🌟":"fe/glowing-star","🧭":"fe/compass","⚡":"fe/high-voltage","💎":"fe/gem-stone","🔥":"fe/fire","🐢":"fe/turtle","🎤":"fe/microphone","▶":"fe/play-button","💡":"fe/light-bulb","👏":"fe/clapping-hands","🏙":"fe/cityscape","🏫":"fe/school","🧑":"fe/person","🧑‍🏫":"fe/teacher","🧑‍🎓":"fe/student","👨":"fe/man","👩":"fe/woman","👧":"fe/girl","👦":"fe/boy","📖":"fe/open-book","🎨":"fe/artist-palette","📷":"fe/camera","💻":"fe/laptop","♟":"fe/chess-pawn","🥾":"fe/hiking-boot","⛺":"fe/tent","🚴":"fe/person-biking","🎮":"fe/video-game","🍳":"fe/cooking","🎣":"fe/fishing-pole","🪙":"fe/coin","🏋":"fe/person-lifting-weights","🛠":"fe/hammer-and-wrench","👥":"fe/busts-in-silhouette","🙋":"fe/person-raising-hand","🛏":"fe/bed","🚿":"fe/shower","🚗":"fe/automobile","🌳":"fe/deciduous-tree","🪜":"fe/ladder","🏢":"fe/office-building","🏘":"fe/houses","🪞":"fe/mirror","📺":"fe/television","👷":"fe/construction-worker","📐":"fe/triangular-ruler","💊":"fe/pill","📰":"fe/newspaper","🐕":"fe/dog","🥖":"fe/baguette-bread","🔧":"fe/wrench","👮":"fe/police-officer","🧑‍✈":"fe/pilot","👩‍⚕":"fe/woman-health-worker","🧑‍🚒":"fe/firefighter","🌾":"fe/sheaf-of-rice","🍬":"fe/candy","🧈":"fe/butter","🥚":"fe/egg","🥛":"fe/glass-of-milk","🍯":"fe/honey-pot","🌴":"fe/palm-tree","🧀":"fe/cheese-wedge","🫒":"fe/olive","🍞":"fe/bread","🍅":"fe/tomato","🥣":"fe/bowl-with-spoon","🫗":"fe/pouring-liquid","🔪":"fe/kitchen-knife","🥧":"fe/pie","✂":"fe/scissors","🍿":"fe/popcorn"};
+window.CONFIG.scene = "<svg viewBox=\"0 0 400 130\" focusable=\"false\" aria-hidden=\"true\">\n<rect width=\"400\" height=\"130\" fill=\"#1F8A4C\"/>\n<g fill=\"#27995A\"><rect x=\"50\" width=\"50\" height=\"130\"/><rect x=\"150\" width=\"50\" height=\"130\"/><rect x=\"250\" width=\"50\" height=\"130\"/><rect x=\"350\" width=\"50\" height=\"130\"/></g>\n<rect width=\"400\" height=\"24\" fill=\"#14305E\"/>\n<g><circle cx=\"12\" cy=\"6\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"30\" cy=\"12\" r=\"4\" fill=\"#fff\"/><circle cx=\"48\" cy=\"6\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"66\" cy=\"12\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"84\" cy=\"6\" r=\"4\" fill=\"#fff\"/><circle cx=\"102\" cy=\"12\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"120\" cy=\"6\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"138\" cy=\"12\" r=\"4\" fill=\"#fff\"/><circle cx=\"156\" cy=\"6\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"174\" cy=\"12\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"192\" cy=\"6\" r=\"4\" fill=\"#fff\"/><circle cx=\"210\" cy=\"12\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"228\" cy=\"6\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"246\" cy=\"12\" r=\"4\" fill=\"#fff\"/><circle cx=\"264\" cy=\"6\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"282\" cy=\"12\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"300\" cy=\"6\" r=\"4\" fill=\"#fff\"/><circle cx=\"318\" cy=\"12\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"336\" cy=\"6\" r=\"4\" fill=\"#FFD21F\"/><circle cx=\"354\" cy=\"12\" r=\"4\" fill=\"#fff\"/><circle cx=\"372\" cy=\"6\" r=\"4\" fill=\"#E5484D\"/><circle cx=\"390\" cy=\"12\" r=\"4\" fill=\"#FFD21F\"/></g>\n<g fill=\"none\" stroke=\"#fff\" stroke-width=\"2.5\" opacity=\".9\"><rect x=\"10\" y=\"32\" width=\"380\" height=\"90\"/><path d=\"M200 32 V122\"/><circle cx=\"200\" cy=\"77\" r=\"20\"/><rect x=\"10\" y=\"52\" width=\"40\" height=\"50\"/><rect x=\"350\" y=\"52\" width=\"40\" height=\"50\"/></g>\n<g fill=\"none\" stroke=\"#fff\" stroke-width=\"1.5\" opacity=\".75\"><path d=\"M10 64 h-8 v26 h8 M390 64 h8 v26 h-8\"/><path d=\"M2 70 h6 M2 76 h6 M2 82 h6 M392 70 h6 M392 76 h6 M392 82 h6\"/></g>\n<g class=\"sc-ball\" style=\"font-size:22px\"><image href=\"img/fe/soccer-ball.webp\" x=\"-23.6\" y=\"-12.2\" width=\"25.3\" height=\"25.3\"/></g>\n</svg>";
 </script>
 <script>
 (function () {
@@ -484,6 +538,25 @@ const norm = s => String(s).toLowerCase().replace(/[’‘`]/g, "'").replace(/[.
 const today = () => new Date().toLocaleDateString('en-CA');
 const toV = a => ({ en: a[0], ar: a[1], em: a[2] || '', k: a[3] || '' });
 
+/* ---------- pictures (one illustrated set, same look on every device) ---------- */
+const IMG = C.img || {}, PH = C.photos || {};
+const drawSrc = em => { if (!em) return ''; const f = IMG[String(em).replace(/\uFE0F/g, '')]; return f ? 'img/' + f + '.webp' : ''; };
+const photoSrc = em => { const p = PH[em]; return p ? 'https://images.unsplash.com/' + p[0] + '?w=600&h=600&fit=crop&crop=entropy&q=70&auto=format' : ''; };
+const picSrc = em => (em && String(em)[0] === '@') ? photoSrc(em) : drawSrc(em);
+function pic(em, cls, lazy) {
+  const photo = !!(em && String(em)[0] === '@'), back = photo ? (PH[em] || [])[1] : em;
+  const src = picSrc(em), plain = back && String(back)[0] !== '#' && String(back)[0] !== '@' ? back : '';
+  if (!src) return plain ? h('span', { class: cls || '' }, plain) : null;
+  const im = h('img', { class: 'pic ' + (photo ? 'ph ' : '') + (cls || ''), src, alt: '', draggable: 'false', decoding: 'async', loading: lazy ? 'lazy' : false });
+  im.addEventListener('error', () => {
+    const d = photo ? drawSrc(back) : '';
+    if (d && im.src.indexOf(d) < 0) { im.classList.remove('ph'); im.src = d; }
+    else im.replaceWith(document.createTextNode(plain));
+  });
+  return im;
+}
+const warm = list => list.forEach(em => { const s = picSrc(em); if (s) { const i = new Image(); i.src = s; } });
+
 const ICON = {
   star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.4l2.9 6.2 6.7.8-5 4.6 1.4 6.7L12 17.4l-6 3.3 1.4-6.7-5-4.6 6.7-.8z"/></svg>',
   lock: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10V7a5 5 0 0110 0v3h1a2 2 0 012 2v8a2 2 0 01-2 2H6a2 2 0 01-2-2v-8a2 2 0 012-2zm2 0h6V7a3 3 0 00-6 0z"/></svg>',
@@ -497,7 +570,7 @@ const ic = (name, cls) => h('span', { class: cls || 'ic', html: ICON[name] });
 
 /* ---------- saved progress (only on this device) ---------- */
 const KEY = 'english-quest-' + C.id;
-let S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: true, open: false, name: '' };
+let S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: true, open: false, name: '', voice: '', micOff: false };
 try { const raw = localStorage.getItem(KEY); if (raw) S = Object.assign(S, JSON.parse(raw)); } catch (e) {}
 try { if (!S.name && C.migrate) { const old = localStorage.getItem('english-quest-' + C.migrate); if (old) S.name = String(JSON.parse(old).name || ''); } } catch (e) {}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
@@ -531,28 +604,78 @@ function sfx(kind) {
   } catch (e) {}
 }
 
-/* ---------- pronunciation (device voice) ---------- */
+/* ---------- pronunciation (best natural voice on this device) ---------- */
 const HAS_TTS = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window;
-let voice = null;
+let voice = null, voices = [];
+const ODD = /(albert|bad news|bahh|bells|boing|bubbles|cellos|good news|jester|organ|superstar|trinoids|whisper|wobble|zarvox|fred|junior|ralph|kathy|grandma|grandpa|eddy|flo\b|reed|rocko|sandy|shelley|hysterical|deranged|novelty)/i;
+function voiceScore(v) {
+  if (!/^en([-_]|$)/i.test(v.lang || '')) return -1;
+  const n = v.name || '';
+  if (ODD.test(n)) return -1;
+  let s = 0;
+  if (/natural|neural/i.test(n)) s += 100;
+  if (/premium/i.test(n)) s += 90;
+  if (/enhanced/i.test(n)) s += 70;
+  if (/google/i.test(n)) s += 50;
+  if (/online/i.test(n)) s += 15;
+  if (/(samantha|ava|allison|susan|zoe|evan|nathan|joelle|noelle|nicky|aaron|aria|jenny|ana\b|emma|michelle|libby|sonia|karen|daniel|serena)/i.test(n)) s += 25;
+  if (/^en[-_]US/i.test(v.lang)) s += 15; else if (/^en[-_](GB|AU|CA|IE|NZ)/i.test(v.lang)) s += 8;
+  if (v.localService === false) s += 5;
+  return s;
+}
 function loadVoice() {
   try {
-    const vs = speechSynthesis.getVoices();
-    voice = vs.find(v => /^en[-_]US/i.test(v.lang) && /(samantha|google|aria|jenny|zira|female)/i.test(v.name)) ||
-      vs.find(v => /^en[-_]US/i.test(v.lang)) || vs.find(v => /^en/i.test(v.lang)) || null;
+    voices = speechSynthesis.getVoices().map(v => ({ v, s: voiceScore(v) })).filter(x => x.s >= 0).sort((a, b) => b.s - a.s);
+    const picked = S.voice && voices.find(x => x.v.voiceURI === S.voice);
+    voice = picked ? picked.v : (voices[0] ? voices[0].v : null);
   } catch (e) {}
 }
-if (HAS_TTS) { try { speechSynthesis.onvoiceschanged = loadVoice; loadVoice(); } catch (e) {} }
+if (HAS_TTS) { try { speechSynthesis.onvoiceschanged = loadVoice; loadVoice(); setTimeout(loadVoice, 800); } catch (e) {} }
 function say(text, o) {
   o = o || {};
   if (!HAS_TTS || !text) return;
   if (!o.force && !S.sound) return;
   try {
+    if (!voice) loadVoice();
     if (!o.queue) speechSynthesis.cancel();
     const u = new SpeechSynthesisUtterance(text);
-    u.lang = 'en-US'; if (voice) u.voice = voice;
-    u.rate = o.rate || C.speechRate || 0.85; u.pitch = C.pitch || 1;
+    const vv = o.voice || voice;
+    u.lang = vv ? vv.lang : 'en-US'; if (vv) u.voice = vv;
+    u.rate = o.rate || C.speechRate || 0.9; u.pitch = C.pitch || 1;
     speechSynthesis.speak(u);
   } catch (e) {}
+}
+
+/* ---------- speaking challenge (speech recognition, where the browser has it) ---------- */
+const SRC = window.SpeechRecognition || window.webkitSpeechRecognition;
+const HAS_SR = !!SRC && window.isSecureContext !== false;
+const SOUNDS = { sea: ['see', 'c', 'she', 'si'], sun: ['son', 'some'], read: ['red', 'reed', 'rid'], write: ['right', 'rite', 'ride'], eat: ['it', 'e', 'each'],
+  in: ['inn', 'and', 'an', 'end', 'hen', 'and in'], on: ['an', 'own', 'one', 'and', 'un', 'own'], cap: ['cup', 'cab'], car: ['card', 'cart', 'are'], bed: ['bad', 'bet', 'bird', 'bread'],
+  hot: ['hut', 'hat', 'heart'], cat: ['cut', 'kat', 'cats'], dog: ['dock', 'duck', 'dogs'], cow: ['cal', 'cao', 'kao', 'cows'], key: ['kee', 'ki', 'keys', 'he'], sad: ['said', 'sat'],
+  pants: ['pans', 'parents', 'pant'], shoes: ['shoe', 'choose', 'shoots'], socks: ['sox', 'sucks', 'sock'], glasses: ['classes', 'glass'], gloves: ['glove', 'love'],
+  run: ['ran', 'rum', 'round'], swim: ['swing', 'swim'], walk: ['work', 'woke', 'wok'], sing: ['sang', 'sink', 'thing'], sick: ['seek', 'thick', 'six'], doll: ['dull', 'dolls', 'tall'],
+  kite: ['kate', 'kit', 'kites'], bike: ['bake', 'bikes', 'buy'], box: ['books', 'fox', 'boxes'], bag: ['back', 'bug', 'big'], big: ['bag', 'pig'], old: ['all', 'hold'], tall: ['tool', 'tell', 'doll'],
+  thobe: ['tobe', 'to be', 'top', 'toe', 'thobe'], under: ['ender', 'onder', 'anda'], behind: ['be hind', 'by hand'], 'next to': ['next', 'next two', 'next too'] };
+function lev(a, b) {
+  const m = a.length, n = b.length, d = Array.from({ length: m + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= n; j++) d[0][j] = j;
+  for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return d[m][n];
+}
+function heardIt(target, alts) {
+  const t = norm(target).replace(/-/g, ' '), tw = t.split(' ').length, near = SOUNDS[t] || [];
+  const tol = t.length <= 3 ? 0 : t.length <= 6 ? 1 : 2;
+  return alts.some(raw => {
+    const w = norm(raw).replace(/-/g, ' ').split(' ').filter(Boolean);
+    if (!w.length) return false;
+    if (near.includes(w.join(' '))) return true;
+    for (let size = tw; size <= tw + 1; size++)
+      for (let i = 0; i + size <= w.length; i++) {
+        const seg = w.slice(i, i + size).join(' ');
+        if (seg === t || seg.replace(/s$/, '') === t || near.includes(seg) || lev(seg, t) <= tol) return true;
+      }
+    return false;
+  });
 }
 
 /* ---------- question generation ---------- */
@@ -571,6 +694,7 @@ function gen(t, v, ctx) {
   if ((t === 'pic2word' || t === 'listen2pic') && !v.em) t = (t === 'pic2word') ? 'word2ar' : 'listen2word';
   if (t === 'listen2word' && !HAS_TTS) t = 'word2ar';
   if (t === 'spell' && (/\s/.test(v.en) || v.en.length > 9 || v.en.length < 2)) t = 'ar2word';
+  if (t === 'sayit' && !(HAS_SR && !S.micOff)) t = 'pic2word';
   const fb = { en: v.en, ar: v.ar, em: v.em }, speak = v.en;
   switch (t) {
     case 'pic2word': return { kind: 'choice', prompt: 'ما اسم هذه الصورة بالإنجليزية؟', big: v.em, say: v.en, opts: wordOpts(v, lvV), a: v.en, oc: 'en', fb, speak };
@@ -579,6 +703,7 @@ function gen(t, v, ctx) {
     case 'word2ar': return { kind: 'choice', prompt: 'ما معنى هذه الكلمة؟', text: v.en, say: v.en, opts: shuffle([v.ar, ...distract(v, lvV, 3, 'ar').map(x => x.ar)]), a: v.ar, oc: 'ar', fb, speak };
     case 'ar2word': return { kind: 'choice', prompt: 'كيف نقولها بالإنجليزية؟', text: v.ar, textAr: true, big: v.em, opts: wordOpts(v, lvV), a: v.en, oc: 'en', fb, speak };
     case 'spell': return { kind: 'build', prompt: 'رتّب الحروف لتكوّن الكلمة', big: v.em, text: v.ar, textAr: true, say: v.en, units: shuffle(v.en.split('')), ans: v.en.split(''), join: '', fb, speak };
+    case 'sayit': return { kind: 'speak', prompt: 'انطق الكلمة بصوتك', big: v.em, text: v.en, say: v.en, target: v.en, fb, speak, bonus: true };
     case 'match': {
       const four = [], seen = new Set();
       let guard = 0;
@@ -612,7 +737,9 @@ function buildQuiz(lv) {
   const custom = shuffle(lv.qs || []);
   let qi = 0, vi = 0;
   const out = [];
-  (lv.plan || C.defaultPlan).forEach(t => {
+  const plan = (lv.plan || C.defaultPlan).slice();
+  if (HAS_SR && !S.micOff && (lv.vocab || []).length >= 4) { plan.splice(4, 0, 'sayit'); plan.splice(9, 0, 'sayit'); }
+  plan.forEach(t => {
     if (t === 'q') { if (qi < custom.length) out.push(fromCustom(custom[qi++])); return; }
     if (!ctx.vs.length) return;
     if (t === 'match' && ctx.vs.length < 4) t = 'word2ar';
@@ -659,7 +786,7 @@ function confetti() {
 const mount = node => { document.querySelectorAll('.cf,.toast').forEach(x => x.remove()); try { speechSynthesis.cancel(); } catch (e) {} app.replaceChildren(node); window.scrollTo(0, 0); };
 const starRow = n => h('div', { class: 'stars', 'aria-label': n + ' من 3 نجوم' }, [1, 2, 3].map(i => h('span', { class: 'st' + (i <= n ? ' on' : ''), html: ICON.star })));
 const spk = (text, cls, label) => HAS_TTS ? h('button', { class: 'spk ' + (cls || ''), 'aria-label': label || 'استمع', onclick: () => say(text, { force: true }) }, ic('spk')) : null;
-const slowBtn = text => HAS_TTS ? h('button', { class: 'spk slow', 'aria-label': 'استمع ببطء', onclick: () => say(text, { force: true, rate: .5 }) }, '🐢') : null;
+const slowBtn = text => HAS_TTS ? h('button', { class: 'spk slow', 'aria-label': 'استمع ببطء', onclick: () => say(text, { force: true, rate: C.slowRate || .55 }) }, pic('🐢')) : null;
 const backBtn = fn => h('button', { class: 'round', 'aria-label': 'رجوع', onclick: fn }, ic('back'));
 function soundBtn() {
   const b = h('button', { class: 'round', 'aria-label': 'تشغيل أو إيقاف الصوت' });
@@ -681,11 +808,11 @@ function home() {
   const line = fill(rnd(C.lines));
   const node = h('div', { class: 'wrap screen' },
     h('div', { class: 'top' }, h('div', { class: 'brand' }, C.title),
-      h('div', { class: 'chips' }, chip(ICON.star, got + '/' + total), chip('⚡', fmt(S.xp)), chip('🔥', fmt(S.streak))), soundBtn()),
+      h('div', { class: 'chips' }, chip(ICON.star, got + '/' + total), chip(pic('⚡'), fmt(S.xp)), chip(pic('🔥'), fmt(S.streak))), soundBtn()),
     C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
-    h('div', { class: 'hero' }, h('div', { class: 'mascot', 'aria-hidden': 'true' }, C.mascot), h('div', { class: 'bubble' }, line)),
+    h('div', { class: 'hero' }, h('div', { class: 'mascot', 'aria-hidden': 'true' }, pic(C.mascot)), h('div', { class: 'bubble' }, line)),
     h('button', { class: 'go', onclick: () => openLevel(ci) },
-      h('span', { class: 'orb', style: '--lv:' + (cl.color || 'var(--a2)') + ';width:56px;height:56px;font-size:1.7rem' }, cl.emoji),
+      h('span', { class: 'orb', style: '--lv:' + (cl.color || 'var(--a2)') + ';width:56px;height:56px;font-size:1.7rem' }, pic(cl.emoji)),
       h('span', { class: 'gt' }, h('small', null, got ? 'كمّل رحلتك' : 'ابدأ رحلتك'), h('b', null, cl.title)), ic('go')),
     h('div', { class: 'meter', role: 'progressbar', 'aria-valuenow': pct, 'aria-valuemin': 0, 'aria-valuemax': 100, style: '--w:' + pct + '%' }, h('i')),
     h('div', { class: 'mlabel' }, h('span', null, C.journey), h('span', null, pct + '%')),
@@ -693,24 +820,52 @@ function home() {
     h('div', { class: 'path' }, C.levels.map((l, i) => {
       const open = isOpen(i), n = S.stars[l.id] || 0;
       return h('button', { class: 'node' + (open ? '' : ' locked'), disabled: !open, 'aria-label': l.title, onclick: () => openLevel(i) },
-        h('span', { class: 'orb', style: '--lv:' + (l.color || 'var(--a1)') }, l.emoji, h('span', { class: 'no' }, i + 1)),
+        h('span', { class: 'orb', style: '--lv:' + (l.color || 'var(--a1)') }, pic(l.emoji), h('span', { class: 'no' }, i + 1)),
         h('span', { class: 'meta' }, h('h3', null, l.title), h('p', null, l.sub), open ? starRow(n) : null),
         open ? h('span', { class: 'cefr' }, l.cefr) : h('span', { class: 'lk', html: ICON.lock }));
     })),
     h('h2', { class: 'sec' }, 'أوسمتك'),
-    h('div', { class: 'badges' }, BADGES.map(b => h('div', { class: 'bd' + (S.badges.includes(b.id) ? '' : ' off'), title: b.d }, h('span', { class: 'e' }, b.e), b.t))),
+    h('div', { class: 'badges' }, BADGES.map(b => h('div', { class: 'bd' + (S.badges.includes(b.id) ? '' : ' off'), title: b.d }, h('span', { class: 'e' }, pic(b.e)), b.t))),
     h('div', { class: 'foot' },
       C.askName ? h('button', { class: 'link', onclick: () => nameScreen(true) }, 'تغيير الاسم') : null,
       h('button', { class: 'link', onclick: e => { S.open = !S.open; save(); home(); } }, S.open ? 'ولي الأمر: إعادة قفل المراحل' : 'ولي الأمر: فتح جميع المراحل'),
-      resetBtn()));
+      HAS_TTS ? h('button', { class: 'link', onclick: voiceSheet }, 'صوت النطق') : null,
+      SRC ? h('button', { class: 'link', onclick: () => { S.micOff = !S.micOff; save(); toast(S.micOff ? 'تم إيقاف تحدي النطق' : 'تم تشغيل تحدي النطق 🎤'); home(); } }, S.micOff ? 'تشغيل تحدي النطق' : 'إيقاف تحدي النطق') : null,
+      resetBtn(),
+      h('p', { class: 'credit' }, 'الصور الفوتوغرافية من ', h('a', { href: 'https://unsplash.com', target: '_blank', rel: 'noopener' }, 'Unsplash'), '، والرسوم من Fluent Emoji لمايكروسوفت (', h('a', { href: 'img/fe/LICENSE.txt', target: '_blank', rel: 'noopener' }, 'رخصة MIT'), ')')));
   mount(node);
+}
+function voiceSheet() {
+  loadVoice();
+  document.querySelectorAll('.sheet').forEach(x => x.remove());
+  const sample = 'Hello! I am happy. Let us learn English together.';
+  const clean = n => String(n).replace(/\s*\(.*?\)\s*/g, ' ').replace(/Microsoft|Online|Google/gi, m => m).trim();
+  const list = h('div', { class: 'vlist' });
+  const close = () => sh.remove();
+  const paint = () => {
+    const rows = [{ v: null, label: 'تلقائي: أفضل صوت في جهازك', sub: voices[0] ? clean(voices[0].v.name) : '' }].concat(voices.slice(0, 12).map(x => ({ v: x.v, label: clean(x.v.name), sub: x.v.lang + (/natural|neural|premium|enhanced/i.test(x.v.name) ? ' · طبيعي' : '') })));
+    list.replaceChildren(...rows.map(r => {
+      const sel = r.v ? S.voice === r.v.voiceURI : !S.voice;
+      const pick = h('button', { class: 'vn', onclick: () => { S.voice = r.v ? r.v.voiceURI : ''; save(); loadVoice(); paint(); say(sample, { force: true }); } }, r.label, r.sub ? h('small', { class: 'en' }, r.sub) : null);
+      const play = h('button', { class: 'spk', 'aria-label': 'جرّب هذا الصوت', onclick: () => say(sample, { force: true, voice: r.v || (voices[0] && voices[0].v) }) }, ic('spk'));
+      return h('div', { class: 'vrow' + (sel ? ' sel' : '') }, play, pick);
+    }));
+  };
+  paint();
+  const sh = h('div', { class: 'sheet soft', role: 'dialog', 'aria-label': 'اختيار صوت النطق' }, h('div', { class: 'sheet-in' },
+    h('div', { class: 'sh-t' }, 'اختر صوت النطق'),
+    voices.length ? h('div', { class: 'sh-a' }, 'اضغط ▶ لتسمع الصوت، ثم اختر الأقرب لصوت الإنسان.') : h('div', { class: 'sh-a' }, 'لم أجد صوتًا إنجليزيًا في هذا الجهاز.'),
+    list,
+    h('p', { class: 'vhelp' }, 'أجمل الأصوات عادةً ما يحمل اسمه Natural أو Enhanced أو Google. في الآيفون يمكن تنزيل صوت إنجليزي محسّن من: الإعدادات ← تسهيلات الاستخدام ← المحتوى المنطوق ← الأصوات. وفي أندرويد من إعدادات «تحويل النص إلى كلام».'),
+    h('button', { class: 'btn full', onclick: close }, 'تم')));
+  app.append(sh);
 }
 function resetBtn() {
   const b = h('button', { class: 'link' }, 'مسح التقدم');
   let armed = false;
   b.onclick = () => {
     if (!armed) { armed = true; b.textContent = 'اضغط مرة أخرى للتأكيد'; setTimeout(() => { armed = false; b.textContent = 'مسح التقدم'; }, 4000); return; }
-    S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: S.sound, open: false, name: S.name }; save(); home();
+    S = { xp: 0, stars: {}, badges: [], streak: 0, last: '', sound: S.sound, open: false, name: S.name, voice: S.voice, micOff: S.micOff }; save(); home();
   };
   return b;
 }
@@ -719,14 +874,18 @@ function resetBtn() {
 function openLevel(i) {
   if (!isOpen(i)) return;
   const l = C.levels[i], vs = (l.vocab || []).map(toV);
+  warm(vs.map(v => v.em));
   const card = v => {
-    const el = h('button', { class: 'wc', 'aria-label': v.en + ' ' + v.ar },
-      v.k ? h('span', { class: 'k' }, v.k) : null, v.em ? h('span', { class: 'em' }, v.em) : null, h('span', { class: 'w' }, v.en), h('span', { class: 'm' }, v.ar));
-    el.onclick = () => { say(v.en, { force: true }); el.classList.remove('say'); void el.offsetWidth; el.classList.add('say'); };
+    const el = h('div', { class: 'wc' });
+    const main = h('button', { class: 'main', 'aria-label': v.en + ' ' + v.ar },
+      v.k ? h('span', { class: 'k' }, v.k) : null, v.em ? h('span', { class: 'em' }, pic(v.em, '', true)) : null, h('span', { class: 'w' }, v.en), h('span', { class: 'm' }, v.ar));
+    main.onclick = () => { say(v.en, { force: true }); el.classList.remove('say'); void el.offsetWidth; el.classList.add('say'); };
+    el.append(main);
+    if (HAS_TTS) el.append(h('button', { class: 'mini', 'aria-label': 'استمع ببطء: ' + v.en, onclick: () => say(v.en, { force: true, rate: C.slowRate || .55 }) }, pic('🐢')));
     return el;
   };
-  const tipCard = t => h('div', { class: 'tip' }, h('h4', null, '💡 ' + t.t), t.b ? h('p', null, t.b) : null,
-    (t.ex || []).map(e => h('div', { class: 'ex' }, spk(e[0]), h('div', { class: 'exb' }, h('div', { class: 'en' }, e[0]), h('div', { class: 'exa' }, e[1])))));
+  const tipCard = t => h('div', { class: 'tip' }, h('h4', null, pic('💡', 'ti'), ' ' + t.t), t.b ? h('p', null, t.b) : null,
+    (t.ex || []).map(e => h('div', { class: 'ex' }, spk(e[0]), slowBtn(e[0]), h('div', { class: 'exb' }, h('div', { class: 'en' }, e[0]), h('div', { class: 'exa' }, e[1])))));
   const playAll = () => { try { speechSynthesis.cancel(); } catch (e) {} vs.forEach(v => say(v.en, { force: true, queue: true })); };
   const node = h('div', { class: 'wrap screen' },
     h('div', { class: 'qtop' }, backBtn(home), h('div', { class: 'lvh' }, h('div', { class: 't' }, l.title), h('div', { class: 's' }, l.sub)), h('span', { class: 'cefr' }, l.cefr)),
@@ -744,7 +903,8 @@ function openLevel(i) {
 /* ---------- quiz ---------- */
 function startQuiz(l, idx) {
   const qs = buildQuiz(l);
-  next({ l, idx, queue: qs.slice(), total: qs.length, mastered: 0, first: 0, xp: 0, n: 0 });
+  warm(qs.flatMap(q => [q.big, ...(q.oc === 'emo' ? q.opts : [])]));
+  next({ l, idx, queue: qs.slice(), total: qs.length, scored: qs.filter(q => !q.bonus).length || 1, mastered: 0, first: 0, xp: 0, n: 0 });
 }
 function next(run) {
   if (!run.queue.length) return finish(run);
@@ -754,14 +914,22 @@ function next(run) {
 function qHead(q) {
   const c = h('div', { class: 'qcard' });
   if (q.passage) c.append(h('div', { class: 'passage' }, q.passage), spk(q.passage));
-  if (q.big) c.append(h('div', { class: 'big' + ([...q.big].length > 3 ? ' sm' : '') }, q.big));
+  if (q.big) c.append(h('div', { class: 'big' + (!picSrc(q.big) && [...q.big].length > 3 ? ' sm' : '') }, pic(q.big)));
   if (q.text) c.append(h('div', { class: 'qtext' + (q.textAr ? ' ar' : '') }, q.text));
   const s = q.listen || q.say;
-  if (s && HAS_TTS) c.append(h('div', { class: 'spkrow' }, spk(s, q.listen ? 'lg' : ''), q.listen ? slowBtn(s) : null));
+  if (s && HAS_TTS) c.append(h('div', { class: 'spkrow' }, spk(s, q.listen ? 'lg' : ''), slowBtn(s)));
   return c;
 }
 const correctText = q => q.kind === 'choice' ? q.a : q.kind === 'build' ? q.ans.join(q.join) : q.answers[0];
 function resolve(run, q, ok, extra) {
+  if (q.bonus) {
+    run.mastered++;
+    if (ok) { run.xp += 15; run.spoke = (run.spoke || 0) + 1; sfx('ok'); } else sfx('tap');
+    const bar = document.querySelector('.meter');
+    if (bar) bar.style.setProperty('--w', Math.round(run.mastered / run.total * 100) + '%');
+    document.querySelector('.qcount').textContent = run.mastered + '/' + run.total;
+    return sheet(run, q, ok);
+  }
   const wasFirst = extra && 'first' in extra ? extra.first : !q._tries;
   if (ok) { run.mastered++; if (wasFirst) { run.first++; run.xp += C.xpOk || 10; } else run.xp += 5; sfx('ok'); }
   else {
@@ -776,17 +944,18 @@ function resolve(run, q, ok, extra) {
 }
 function sheet(run, q, ok) {
   const fb = q.fb;
-  const sh = h('div', { class: 'sheet ' + (ok ? 'good' : 'bad'), role: 'status', 'aria-live': 'polite' }, h('div', { class: 'sheet-in' },
-    h('div', { class: 'sh-t' }, fill(ok ? rnd(C.praise) : rnd(C.oops))),
-    !ok && q.kind !== 'match' ? h('div', { class: 'sh-a' }, 'الإجابة الصحيحة: ', h('span', { class: q.oc === 'ar' ? '' : 'en' }, correctText(q))) : null,
-    fb ? h('div', { class: 'sh-fb' }, fb.em || '', h('span', { class: 'en' }, fb.en), '=', h('span', null, fb.ar)) : null,
-    q.tip ? h('div', { class: 'sh-tip' }, '💡 ' + q.tip) : null,
+  const soft = q.kind === 'speak' && !ok;
+  const sh = h('div', { class: 'sheet ' + (ok ? 'good' : soft ? 'soft' : 'bad'), role: 'status', 'aria-live': 'polite' }, h('div', { class: 'sheet-in' },
+    h('div', { class: 'sh-t' }, soft ? fill('لا بأس يا {n}! اسمعها وكرّرها معي.') : fill(ok ? rnd(C.praise) : rnd(C.oops))),
+    !ok && q.kind !== 'match' && q.kind !== 'speak' ? h('div', { class: 'sh-a' }, 'الإجابة الصحيحة: ', q.oc === 'emo' && fb ? h('span', { class: 'en' }, fb.en) : h('span', { class: q.oc === 'ar' ? '' : 'en' }, correctText(q))) : null,
+    fb ? h('div', { class: 'sh-fb' }, pic(fb.em), h('span', { class: 'en' }, fb.en), '=', h('span', null, fb.ar)) : null,
+    q.tip ? h('div', { class: 'sh-tip' }, pic('💡', 'ti'), ' ' + q.tip) : null,
     h('button', { class: 'btn full', onclick: () => next(run) }, run.queue.length ? 'متابعة' : 'إنهاء')));
   app.append(sh);
   if (q.speak) setTimeout(() => say(q.speak), 450);
 }
 function renderQ(run, q) {
-  const body = q.kind === 'choice' ? rChoice(run, q) : q.kind === 'build' ? rBuild(run, q) : q.kind === 'match' ? rMatch(run, q) : rType(run, q);
+  const body = q.kind === 'choice' ? rChoice(run, q) : q.kind === 'build' ? rBuild(run, q) : q.kind === 'match' ? rMatch(run, q) : q.kind === 'speak' ? rSpeak(run, q) : rType(run, q);
   let armed = false;
   const x = h('button', { class: 'round', 'aria-label': 'خروج', onclick: () => {
     if (!armed) { armed = true; toast('اضغط مرة أخرى للخروج من التحدي'); setTimeout(() => armed = false, 2500); return; }
@@ -798,12 +967,13 @@ function renderQ(run, q) {
     body);
   mount(node);
   if (q.listen) setTimeout(() => say(q.listen), 450);
+  if (q.kind === 'speak') setTimeout(() => say(q.target), 450);
 }
 function rChoice(run, q) {
   let locked = false;
   const opts = h('div', { class: 'opts' + (q.opts.some(o => o.length > 22) ? ' one' : '') });
   q.opts.forEach(o => {
-    const b = h('button', { class: 'opt ' + q.oc, 'data-v': o }, o);
+    const b = h('button', { class: 'opt ' + q.oc, 'data-v': o, 'aria-label': q.oc === 'emo' ? 'صورة' : false }, q.oc === 'emo' ? pic(o) : o);
     b.onclick = () => {
       if (locked) return; locked = true;
       const ok = o === q.a;
@@ -843,7 +1013,7 @@ function rMatch(run, q) {
   let sel = null, mistakes = 0, matched = 0;
   const colL = h('div', { class: 'mc' }), colR = h('div', { class: 'mc' });
   const mk = (o, side) => {
-    const b = h('button', { class: 'm-i ' + (side === 'L' ? 'en' : q.right) }, o.t);
+    const b = h('button', { class: 'm-i ' + (side === 'L' ? 'en' : q.right) }, side === 'R' && q.right === 'emo' ? pic(o.t) : o.t);
     b.onclick = () => {
       if (side === 'L') { sel = { el: b, o }; colL.querySelectorAll('.m-i').forEach(x => x.classList.remove('sel')); b.classList.add('sel'); say(o.t, { force: true }); return; }
       if (!sel) { sfx('tap'); return; }
@@ -856,6 +1026,42 @@ function rMatch(run, q) {
   };
   L.forEach(o => colL.append(mk(o, 'L'))); R.forEach(o => colR.append(mk(o, 'R')));
   return h('div', null, h('div', { class: 'mt' }, colL, colR));
+}
+function rSpeak(run, q) {
+  let locked = false, tries = 0, rec = null, busy = false;
+  const status = h('div', { class: 'heard', 'aria-live': 'polite' }, 'اسمع الكلمة، ثم اضغط الميكروفون وقلها بصوت واضح');
+  const mic = h('button', { class: 'mic', 'aria-label': 'اضغط وتكلّم' }, pic('🎤'));
+  const finish = ok => { if (locked) return; locked = true; mic.disabled = true; skip.disabled = true; try { rec && rec.abort(); } catch (e) {} resolve(run, q, ok); };
+  const stopUi = () => { busy = false; mic.classList.remove('on'); };
+  mic.onclick = () => {
+    if (locked) return;
+    if (busy) { try { rec.stop(); } catch (e) {} return; }
+    try { speechSynthesis.cancel(); } catch (e) {}
+    try {
+      rec = new SRC(); rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 5; rec.continuous = false;
+    } catch (e) { status.textContent = 'تحدي النطق لا يعمل في هذا المتصفح.'; return; }
+    let got = false;
+    rec.onresult = e => {
+      got = true;
+      const alts = []; for (const r of e.results) for (let i = 0; i < r.length; i++) alts.push(r[i].transcript);
+      if (heardIt(q.target, alts)) { status.replaceChildren('سمعتك تقول: ', h('span', { class: 'en' }, q.target), ' 👏'); finish(true); return; }
+      tries++;
+      status.replaceChildren('سمعت: ', h('span', { class: 'en' }, alts[0] || '...'), tries < 3 ? ' — اسمعها مرة أخرى وحاول' : '');
+      if (tries >= 3) setTimeout(() => finish(false), 900); else setTimeout(() => say(q.target, { force: true }), 500);
+    };
+    rec.onerror = e => {
+      stopUi();
+      if (e.error === 'not-allowed' || e.error === 'service-not-allowed') { status.textContent = 'يحتاج التحدي إذنًا لاستخدام الميكروفون. يمكنك التخطي الآن.'; S.micOff = true; save(); }
+      else if (e.error === 'no-speech') status.textContent = 'لم أسمعك جيدًا، اضغط وتكلّم بصوت أعلى قليلًا';
+      else if (e.error === 'network') status.textContent = 'تحدي النطق يحتاج اتصالًا بالإنترنت. يمكنك التخطي.';
+      else if (e.error !== 'aborted') status.textContent = 'لم يعمل الميكروفون هذه المرة، حاول مرة أخرى أو تخطَّ.';
+    };
+    rec.onend = () => { stopUi(); if (!got && !locked && status.textContent.indexOf('أستمع') === 0) status.textContent = 'لم أسمعك جيدًا، اضغط وتكلّم بصوت أعلى قليلًا'; };
+    try { rec.start(); busy = true; mic.classList.add('on'); status.textContent = 'أستمع إليك الآن...'; sfx('tap'); }
+    catch (e) { stopUi(); status.textContent = 'لم يعمل الميكروفون، حاول مرة أخرى.'; }
+  };
+  const skip = h('button', { class: 'link skip', onclick: () => finish(false) }, 'تخطَّ هذا التحدي');
+  return h('div', null, qHead(q), mic, status, skip);
 }
 function rType(run, q) {
   let locked = false;
@@ -878,7 +1084,7 @@ function touchStreak() {
   S.streak = S.last === y ? S.streak + 1 : 1; S.last = t;
 }
 function finish(run) {
-  const acc = run.first / run.total, stars = acc >= .9 ? 3 : acc >= .7 ? 2 : acc >= .5 ? 1 : 0;
+  const acc = run.first / run.scored, stars = acc >= .9 ? 3 : acc >= .7 ? 2 : acc >= .5 ? 1 : 0;
   const prev = S.stars[run.l.id] || 0;
   S.stars[run.l.id] = Math.max(prev, stars);
   const bonus = stars > 0 ? 20 : 0;
@@ -887,20 +1093,21 @@ function finish(run) {
   const last = run.idx === C.levels.length - 1, nextIdx = run.idx + 1;
   const msgs = C.result;
   const node = h('div', { class: 'wrap screen' }, h('div', { class: 'res' },
-    h('div', { class: 'mascot', 'aria-hidden': 'true' }, C.mascot),
+    h('div', { class: 'mascot', 'aria-hidden': 'true' }, pic(C.mascot)),
     h('h1', null, fill(stars === 3 ? msgs[3] : stars === 2 ? msgs[2] : stars === 1 ? msgs[1] : msgs[0])),
     h('div', { class: 'bigstars', 'aria-label': stars + ' من 3 نجوم' }, [1, 2, 3].map(i => h('span', { html: ICON.star }).firstChild).map((svg, i) => { if (i < stars) svg.setAttribute('class', 'on'); return svg; })),
     h('div', { class: 'stats' },
       h('div', { class: 'stat' }, h('b', null, Math.round(acc * 100) + '%'), h('span', null, 'إجابات من أول مرة')),
-      h('div', { class: 'stat' }, h('b', null, '+' + (run.xp + bonus)), h('span', null, 'نقطة'))),
-    fresh.length ? h('div', { class: 'bubble' }, 'وسام جديد! ' + fresh.map(b => b.e + ' ' + b.t).join(' ، ')) : null,
+      h('div', { class: 'stat' }, h('b', null, '+' + (run.xp + bonus)), h('span', null, 'نقطة')),
+      run.spoke ? h('div', { class: 'stat' }, h('b', null, String(run.spoke)), h('span', null, 'كلمات نطقتها')) : null),
+    fresh.length ? h('div', { class: 'bubble' }, 'وسام جديد! ', fresh.map((b, i) => [i ? ' ، ' : '', pic(b.e, 'ti'), ' ' + b.t])) : null,
     stars > 0 && !last ? h('button', { class: 'btn', onclick: () => openLevel(nextIdx) }, 'المرحلة التالية') : null,
     stars > 0 && last ? h('div', { class: 'bubble' }, fill(C.finale)) : null,
     stars === 0 ? h('button', { class: 'btn', onclick: () => openLevel(run.idx) }, 'راجع البطاقات') : null,
     h('button', { class: 'btn alt', onclick: () => startQuiz(run.l, run.idx) }, stars === 3 ? 'العب مرة أخرى' : 'حاول لتحصل على نجوم أكثر'),
     h('button', { class: 'link', onclick: home }, 'القائمة الرئيسية')));
   mount(node);
-  if (stars > 0) { sfx('win'); confetti(); setTimeout(() => say(C.sayWin), 700); if (fresh.length) setTimeout(() => { sfx('badge'); toast('وسام جديد: ' + fresh[0].e + ' ' + fresh[0].t); }, 1600); }
+  if (stars > 0) { sfx('win'); confetti(); setTimeout(() => say(C.sayWin), 700); if (fresh.length) setTimeout(() => { sfx('badge'); toast(['وسام جديد: ', pic(fresh[0].e, 'ti'), ' ' + fresh[0].t]); }, 1600); }
   else sfx('no');
 }
 
@@ -916,7 +1123,7 @@ function nameScreen(editing) {
   inp.addEventListener('keydown', e => { if (e.key === 'Enter') go(); });
   mount(h('div', { class: 'wrap screen' }, h('div', { class: 'namebox' },
     C.scene ? h('div', { class: 'scene', 'aria-hidden': 'true', html: C.scene }) : null,
-    h('div', { class: 'mascot huge', 'aria-hidden': 'true' }, C.mascot),
+    h('div', { class: 'mascot huge', 'aria-hidden': 'true' }, pic(C.mascot)),
     h('div', { class: 'bubble' }, editing ? 'اكتب الاسم الجديد' : C.nameAsk),
     inp, btn,
     editing ? h('button', { class: 'link', onclick: home }, 'رجوع دون تغيير') : null,

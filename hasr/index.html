@@ -119,6 +119,10 @@ input:disabled{opacity:.6}
 .ph button{position:absolute;top:4px;left:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-weight:800;cursor:pointer;line-height:1}
 .addph{width:92px;height:92px;border-radius:12px;border:1.5px dashed var(--brand-ink);background:var(--surface-2);color:var(--brand-ink);font-weight:800;font-size:13px;display:grid;place-items:center;align-content:center;gap:2px;cursor:pointer;padding:6px;text-align:center}
 .addph svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2}
+.method .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.method .opts span{min-width:0;padding:13px 8px;font-size:16px;border-radius:12px}
+.method-hint{margin:0 0 10px;color:var(--muted);font-size:14px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .savebar{position:sticky;bottom:0;z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 -8px 22px rgba(0,0,0,.08)}
 .item{display:grid;grid-template-columns:30px minmax(0,1fr);gap:2px 10px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:var(--surface-2)}
 .item details{grid-column:1/-1;margin-top:6px}
@@ -222,6 +226,14 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
           <input type="file" id="ph-in" accept="image/*" hidden>
         </div>
         <p class="msg" id="ph-msg" role="status" style="margin:8px 0 0"></p>
+      </section>
+
+      <section class="card" id="method-card">
+        <div class="card-h" style="margin-bottom:6px"><h2>طريقة الرصد<span class="req">*</span></h2></div>
+        <p class="method-hint">اختر أين تم رصد هذه المنشأة.</p>
+        <fieldset class="seg2 method" id="f-method"><legend class="vh">طريقة الرصد</legend>
+          <div class="opts"><label for="m-1"><input type="radio" name="f-m" id="m-1" value="في تطبيق امتثال"><span>في تطبيق امتثال</span></label><label for="m-2"><input type="radio" name="f-m" id="m-2" value="في نظام التموين"><span>في نظام التموين</span></label></div>
+        </fieldset>
       </section>
 
       <div class="savebar">
@@ -425,10 +437,13 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
     phmsg('جارٍ تجهيز الصورة…',true);compress(f).then(function(d){S.photos.push(d);renderPhotos();phmsg('',true)}).catch(function(){phmsg('تعذّر قراءة الصورة. جرّب صورة أخرى.',false)})});
 
   /* ---------- draft (kept on device until saved) ---------- */
-  function saveDraft(){var d={cart:S.cart};EST.forEach(function(k){d[k]=$('#f-'+k).value});sset(K.draft,JSON.stringify(d))}
+  function getMethod(){var r=document.querySelector('input[name=f-m]:checked');return r?r.value:''}
+  function setMethod(v){Array.prototype.forEach.call(document.querySelectorAll('input[name=f-m]'),function(r){r.checked=!!v&&r.value===v})}
+  function saveDraft(){var d={cart:S.cart,method:getMethod()};EST.forEach(function(k){d[k]=$('#f-'+k).value});sset(K.draft,JSON.stringify(d))}
   function loadDraft(){var d=jget(K.draft,null);if(!d)return;EST.forEach(function(k){if(d[k])$('#f-'+k).value=d[k]});
-    if(Array.isArray(d.cart))S.cart=d.cart.filter(function(p){return p&&p.ptype&&p.prod});}
+    if(Array.isArray(d.cart))S.cart=d.cart.filter(function(p){return p&&p.ptype&&p.prod});if(d.method)setMethod(d.method);}
   EST.forEach(function(k){$('#f-'+k).addEventListener('input',function(){this.classList.remove('bad');saveDraft()})});
+  $('#f-method').addEventListener('change',function(){this.classList.remove('bad');if(/طريقة الرصد/.test(msg.textContent))flash('');saveDraft()});
 
   /* ---------- outbox (offline queue) ---------- */
   var DBP=null;
@@ -458,7 +473,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
   /* ---------- save ---------- */
   var form=$('#f'),msg=$('#f-msg');
   function flash(t,kind){msg.textContent=t;msg.className='msg '+(kind===true?'ok':kind||'err');if(kind===true)setTimeout(function(){if(msg.textContent===t)msg.textContent=''},8000)}
-  function collect(){var est={};EST.forEach(function(k){est[k]=$('#f-'+k).value.trim()});est.lic=digits(est.lic);est.phone=est.phone?phoneNorm(est.phone):'';return est}
+  function collect(){var est={};EST.forEach(function(k){est[k]=$('#f-'+k).value.trim()});est.lic=digits(est.lic);est.phone=est.phone?phoneNorm(est.phone):'';est.method=getMethod();return est}
   function validate(est){
     if(!S.code){flash('أدخل رمز المراقب أولاً.');$('#code-in').classList.add('bad');$('#insp-card').scrollIntoView({behavior:'smooth'});return false}
     if(!est.est){$('#f-est').classList.add('bad');flash('اكتب اسم المنشأة.');$('#f-est').focus();return false}
@@ -466,11 +481,12 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
     if(est.phone&&!/^05\d{8}$/.test(est.phone)){$('#f-phone').classList.add('bad');$('#phone-err').hidden=false;flash('رقم التواصل يبدأ بـ 05 ويتكون من 10 أرقام.');$('#f-phone').focus();return false}
     if(composerDirty()){flash('لديك منتج لم تضغط له «تأكيد وإضافة المنتج». أضفه أو امسح خاناته ثم احفظ.');$('#composer').scrollIntoView({behavior:'smooth',block:'center'});return false}
     if(!S.cart.length){flash('أضف منتجاً واحداً على الأقل ثم اضغط حفظ.');return false}
+    if(!est.method){$('#f-method').classList.add('bad');flash('اختر طريقة الرصد: في تطبيق امتثال أو في نظام التموين.');$('#method-card').scrollIntoView({behavior:'smooth',block:'center'});return false}
     return true}
   function finish(est,products,res,queued){
-    var mine=jget(K.mine,[]);mine.push({nonce:S.nonce,id:res?res.id:'',at:res?res.at:nowStr(),est:est.est,lic:est.lic,city:est.city,contact:est.contact,phone:est.phone,products:products,status:queued?'pending':'sent'});
+    var mine=jget(K.mine,[]);mine.push({nonce:S.nonce,id:res?res.id:'',at:res?res.at:nowStr(),est:est.est,lic:est.lic,city:est.city,contact:est.contact,phone:est.phone,method:est.method,products:products,status:queued?'pending':'sent'});
     if(mine.length>200)mine=mine.slice(-200);sset(K.mine,JSON.stringify(mine));
-    EST.forEach(function(k){$('#f-'+k).value=''});S.cart=[];S.photos=[];S.nonce=null;S.fix=null;S.locState='idle';started=false;dupFor='';$('#dup-box').hidden=true;
+    EST.forEach(function(k){$('#f-'+k).value=''});setMethod('');$('#f-method').classList.remove('bad');S.cart=[];S.photos=[];S.nonce=null;S.fix=null;S.locState='idle';started=false;dupFor='';$('#dup-box').hidden=true;
     sdel(K.draft);resetComposer();renderCart();renderPhotos();renderMine();locUI();pendUI();window.scrollTo({top:0,behavior:'smooth'})}
   var pending=null;
   function submit(confirmDup){var est=collect();if(!validate(est))return;
@@ -478,7 +494,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
     var btn=$('#f-save');btn.disabled=true;flash('جارٍ الحفظ…','wait');
     var locP=S.fix&&Date.now()-S.fix.t<180000?Promise.resolve(S.fix):Promise.race([locate(30000),new Promise(function(r){setTimeout(function(){r(S.fix)},9000)})]);
     locP.then(function(fix){
-      var payload={nonce:S.nonce,code:S.code,est:est.est,lic:est.lic,city:est.city,contact:est.contact,phone:est.phone,products:S.cart.slice(),photos:S.photos.slice(),
+      var payload={nonce:S.nonce,code:S.code,est:est.est,lic:est.lic,city:est.city,contact:est.contact,phone:est.phone,method:est.method,products:S.cart.slice(),photos:S.photos.slice(),
         loc:fix?{lat:fix.lat,lng:fix.lng,acc:fix.acc}:null,clientAt:nowStr(),confirmDup:!!confirmDup};
       var products=payload.products;
       function queue(){payload.queued=true;payload.confirmDup=true;return obPut({nonce:payload.nonce,payload:payload,at:payload.clientAt}).then(function(){
@@ -487,7 +503,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
       if(navigator.onLine===false)return queue();
       return call('POST',null,{action:'save',data:payload},60000).then(function(j){
         if(j.ok){var res=j.result;finish(est,products,res,false);
-          flash('تم حفظ «'+est.est+'» بـ '+plural(res.count,'منتج واحد','منتجين','منتجات','منتجاً')+' ووصل للمشرف ✓'+(fix?'':' (بدون موقع)'),true);setStatus(liveText()+' · آخر حفظ '+res.at,'live');return}
+          flash('تم حفظ «'+est.est+'» بـ '+plural(res.count,'منتج واحد','منتجين','منتجات','منتجاً')+' ووصل للمشرف ✓'+(fix?'':' (بدون موقع)'),true);setStatus(liveText()+' · آخر حفظ \u2066'+res.at+'\u2069','live');return}
         if(j.dup){pending=true;showDup(j.dup);flash('');return}
         if(j.codeInvalid){S.code='';S.who='';sdel(K.code);sdel(K.who);renderInspector();codeMsg(j.error||'الرمز غير صحيح.');flash(j.error||'رمز المراقب غير صحيح.');return}
         flash('تعذّر الحفظ: '+(j.error||'خطأ غير معروف'))
@@ -511,7 +527,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
     $('#my-count').textContent=mine.length?plural(mine.length,'منشأة واحدة','منشأتان','منشآت','منشأة'):'0 منشأة';$('#my-empty').hidden=mine.length>0;
     mine.slice().reverse().forEach(function(v,i){var row=el('div','item');row.appendChild(el('div','n',mine.length-i));
       var t=el('div','t',v.est+(v.city?' · '+v.city:''));if(v.status==='pending')t.appendChild(el('span','chip pd',' بانتظار الإرسال'));if(v.status==='failed')t.appendChild(el('span','chip fl',' لم يُرسل'));row.appendChild(t);
-      var bits=[v.at,plural(v.products.length,'منتج واحد','منتجان','منتجات','منتجاً')];if(v.contact)bits.push('المسؤول: '+v.contact);if(v.phone)bits.push(v.phone);if(v.status==='failed'&&v.err)bits.push('السبب: '+v.err);
+      var bits=[v.at,plural(v.products.length,'منتج واحد','منتجان','منتجات','منتجاً')];if(v.method)bits.push(v.method.replace(/^في /,''));if(v.contact)bits.push('المسؤول: '+v.contact);if(v.phone)bits.push(v.phone);if(v.status==='failed'&&v.err)bits.push('السبب: '+v.err);
       row.appendChild(el('div','m',bits.join(' · ')));
       var det=el('details');det.appendChild(el('summary','','عرض المنتجات'));det.appendChild(prodTable(v.products));row.appendChild(det);box.appendChild(row)})}
 

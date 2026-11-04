@@ -503,7 +503,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
       if(navigator.onLine===false)return queue();
       return call('POST',null,{action:'save',data:payload},60000).then(function(j){
         if(j.ok){var res=j.result;finish(est,products,res,false);
-          flash('تم حفظ «'+est.est+'» بـ '+plural(res.count,'منتج واحد','منتجين','منتجات','منتجاً')+' ووصل للمشرف ✓'+(fix?'':' (بدون موقع)'),true);setStatus(liveText()+' · آخر حفظ \u2066'+res.at+'\u2069','live');return}
+          flash('تم حفظ «'+est.est+'» بـ '+plural(res.count,'منتج واحد','منتجين','منتجات','منتجاً')+' ووصل للمشرف ✓'+(fix?'':' (بدون موقع)'),true);setStatus(liveText()+' · آخر حفظ '+String(res.at).slice(11),'live');return}
         if(j.dup){pending=true;showDup(j.dup);flash('');return}
         if(j.codeInvalid){S.code='';S.who='';sdel(K.code);sdel(K.who);renderInspector();codeMsg(j.error||'الرمز غير صحيح.');flash(j.error||'رمز المراقب غير صحيح.');return}
         flash('تعذّر الحفظ: '+(j.error||'خطأ غير معروف'))

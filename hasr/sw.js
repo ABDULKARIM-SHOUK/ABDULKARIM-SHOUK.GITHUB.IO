@@ -1,5 +1,5 @@
-/* حصر المنتجات · يتيح فتح الصفحة بدون إنترنت (الشبكة أولاً ثم النسخة المحفوظة) */
-var CACHE = 'hasr-v3';
+/* حصر المنتجات · يتيح فتح الصفحة بدون إنترنت أو مع اتصال ضعيف (الشبكة أولاً لمدة 3 ثوانٍ ثم النسخة المحفوظة) */
+var CACHE = 'hasr-v4';
 self.addEventListener('install', function (e) {
   self.skipWaiting();
   e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll([new Request('./', { cache: 'reload' }), new Request('./index.html', { cache: 'reload' })]); }).catch(function () {}));
@@ -16,15 +16,20 @@ self.addEventListener('fetch', function (e) {
   var u = new URL(r.url);
   if (u.origin === self.location.origin && /\/hasr\/(index\.html|admin\.html)?$/.test(u.pathname)) {
     var isIndex = !/admin\.html$/.test(u.pathname);
-    e.respondWith(fetch(r.url, { cache: 'no-cache', credentials: 'same-origin' }).then(function (res) { return res.ok ? save(r, res) : res; }).catch(function () {
-      return caches.match(r, { ignoreSearch: true }).then(function (m) { return m || (isIndex ? caches.match('./index.html') : Response.error()); });
+    var net = fetch(r.url, { cache: 'no-cache', credentials: 'same-origin' }).then(function (res) { return res.ok ? save(r, res) : res; });
+    var stored = function () { return caches.match(r, { ignoreSearch: true }).then(function (m) { return m || (isIndex ? caches.match('./index.html') : undefined); }); };
+    e.respondWith(new Promise(function (resolve) {
+      var done = false; function give(x) { if (!done && x) { done = true; resolve(x); } }
+      net.then(give, function () { stored().then(function (m) { give(m || Response.error()); }); });
+      setTimeout(function () { stored().then(give); }, 3000);   // الشبكة لا ترد: افتح النسخة المحفوظة
     }));
+    e.waitUntil(net.catch(function () {}));   // يكمل تحديث النسخة المحفوظة في الخلفية
     return;
   }
   if (/^fonts\.(googleapis|gstatic)\.com$/.test(u.hostname)) {
     e.respondWith(caches.match(r).then(function (m) {
-      var net = fetch(r).then(function (res) { return save(r, res); }).catch(function () { return m; });
-      return m || net;
+      var n = fetch(r).then(function (res) { return save(r, res); }).catch(function () { return m; });
+      return m || n;
     }));
   }
 });

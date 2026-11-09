@@ -426,12 +426,12 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
     .then(function(X){var aoa=[['م','وقت الإدخال','المراقب','اسم المنشأة','رقم الترخيص','المدينة','اسم المسؤول بالمنشأة','رقم التواصل','نوع المنتج','اسم المنتج','الكمية','الوحدة','حالة التوفر','السعر (ريال)','هل يوجد عرض من المصنع؟','ملاحظة','الجولة','طريقة الرصد','خط العرض','خط الطول','رابط الموقع','عدد الصور','تنبيهات']],n=0;
       VIS.slice().reverse().forEach(function(v){v.products.forEach(function(p){n++;aoa.push([n,v.at,v.ins,v.est,String(v.lic||''),v.city,v.contact,String(v.phone||''),p.ptype,p.prod,p.avail==='نافد'?0:p.qty,p.unit,p.avail,p.price,p.offer,p.offer==='لا'?SHOP:'',v.round,v.method,v.hasLoc?v.lat:'',v.hasLoc?v.lng:'',v.map||'',v.photos.length,v.flags])})});
       var ws=X.utils.aoa_to_sheet(aoa);ws['!cols']=[5,17,20,26,14,12,20,14,16,22,8,8,11,10,18,16,22,16,11,11,30,9,30].map(function(w){return {wch:w}});
-      var wb=X.utils.book_new();X.utils.book_append_sheet(wb,ws,'حصر المنتجات');
+      var mz=[['#','اسم المنشأة ','نوع المنتج ','كمية المنتج ','الوحدة','أسم المنتج ','المنطقة ']],k=0;VIS.slice().reverse().forEach(function(v){v.products.forEach(function(p){k++;var q=p.avail==='نافد'?0:p.qty,qn=Number(q);mz.push([k,v.est,p.ptype,q!==''&&isFinite(qn)?qn:q,p.unit,p.prod,'جازان'])})});var wm=X.utils.aoa_to_sheet(mz);wm['!cols']=[6,34,16,12,10,30,12].map(function(w){return {wch:w}});var wb=X.utils.book_new();X.utils.book_append_sheet(wb,wm,'نموذج الوزارة');X.utils.book_append_sheet(wb,ws,'حصر المنتجات');
       var A=agg(VIS),none=!!A.meth[M_NONE],s2=[['ملخص طريقة الرصد'],[filterText().join(' · ')],[],['طريقة الرصد','المنشآت','المنتجات','النسبة من المنشآت','المراقبون']];
       A.methIds.forEach(function(k){var m=A.meth[k];s2.push([mShort(k),m.v,m.p,A.nv?Math.round(m.v*100/A.nv)+'%':'—',Object.keys(m.ins).length])});
       s2.push([]);s2.push(['المراقب','تطبيق امتثال','نظام التموين'].concat(none?[M_NONE]:[]).concat(['إجمالي المنشآت']));
       A.insIds.forEach(function(id){var p=A.per[id];s2.push([id,p.m[METHS[0]]||0,p.m[METHS[1]]||0].concat(none?[p.m[M_NONE]||0]:[]).concat([p.v]))});
-      var ws2=X.utils.aoa_to_sheet(s2);ws2['!cols']=[28,14,14,16,14].map(function(w){return {wch:w}});X.utils.book_append_sheet(wb,ws2,'ملخص طريقة الرصد');wb.Workbook={Views:[{RTL:true}]};X.writeFile(wb,'حصر_المنتجات_'+todayStr+'.xlsx')})
+      var ws2=X.utils.aoa_to_sheet(s2);ws2['!cols']=[28,14,14,16,14].map(function(w){return {wch:w}});X.utils.book_append_sheet(wb,ws2,'ملخص طريقة الرصد');wb.Workbook={Views:[{RTL:true}]};X.writeFile(wb,'نموذج_الوزارة_حصر_المنتجات_'+todayStr+'.xlsx')})
     .catch(function(){toast('تعذّر تجهيز ملف الإكسل الآن.')}).then(function(){b.disabled=false})};
 
   /* ---------- round report (canvas → PNG / print) ---------- */

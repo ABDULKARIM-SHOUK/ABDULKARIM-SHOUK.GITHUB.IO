@@ -1250,7 +1250,7 @@ let INSPS = null, OPEN_ADD = false;
 const dh = s => { let h = 2166136261; for (const c of String(s)) { h ^= c.codePointAt(0); h = Math.imul(h, 16777619) >>> 0; } return h.toString(16); };
 const demoInsp = () => store.get("ps_demo_insp", null) || [{ id: "demo1", name: "مراقب تجريبي", code: "1001", h: dh("pin:demo1:1234"), active: true, created: Date.now(), last: 0 }];
 const pubI = x => ({ id: x.id, name: x.name, code: x.code, active: x.active !== false, last: x.last || 0, target: x.target || 0 });
-const IERR = { name: "اكتب اسم المراقب الثلاثي", code: "رقم المراقب أرقام فقط، من 3 إلى 10", newPin: "الرمز السري من 4 إلى 8 أرقام", dupcode: "رقم المراقب مستخدم لمراقب آخر", notfound: "لم يُعثر على المراقب، حدّث الصفحة", pin: "انتهت جلسة المشرف، سجّل الدخول من جديد", locked: "محاولات خاطئة كثيرة، حاول بعد 15 دقيقة" };
+const IERR = { name: "اكتب اسم المراقب", code: "اكتب رقم المراقب", newPin: "الرمز السري من 4 إلى 8 أرقام", dupcode: "رقم المراقب مستخدم لمراقب آخر", notfound: "لم يُعثر على المراقب، حدّث الصفحة", pin: "انتهت جلسة المشرف، سجّل الدخول من جديد", locked: "محاولات خاطئة كثيرة، حاول بعد 15 دقيقة" };
 async function inspCall(body) {
   if (CFG.api) {
     try { const j = await apiPost({ ...body, pin: ssn.get(K.pin) }); if (j.inspectors) INSPS = j.inspectors; return j; }
@@ -1259,8 +1259,8 @@ async function inspCall(body) {
   let L = demoInsp();
   if (body.action === "insp_save") {
     const d = body.insp, name = String(d.name || "").trim(), code = String(d.code || "").trim(), pin = String(d.newPin || "");
-    if (name.length < 3) return { ok: false, error: "name" };
-    if (!/^\d{3,10}$/.test(code)) return { ok: false, error: "code" };
+    if (!name) return { ok: false, error: "name" };
+    if (!code || code.length > 40) return { ok: false, error: "code" };
     if (pin && !/^\d{4,8}$/.test(pin) || !d.id && !pin) return { ok: false, error: "newPin" };
     if (L.some(x => x.code === code && x.id !== d.id)) return { ok: false, error: "dupcode" };
     const target = Math.max(0, Math.min(999, Math.round(+d.target || 0)));
@@ -1298,7 +1298,7 @@ function inspSheet(x) {
   const edit = !!x;
   openSheet(edit ? "تعديل بيانات المراقب" : "إضافة مراقب", `
     <label class="f"><span class="req">الاسم الثلاثي</span><input id="in_name" value="${esc(edit ? x.name : "")}" autocomplete="off"></label>
-    <label class="f"><span class="req">رقم المراقب</span><input id="in_code" inputmode="numeric" value="${esc(edit ? x.code : "")}" autocomplete="off" placeholder="مثال: الرقم الوظيفي"></label>
+    <label class="f"><span class="req">رقم المراقب</span><input id="in_code" value="${esc(edit ? x.code : "")}" autocomplete="off" placeholder="مثال: الرقم الوظيفي"></label>
     <label class="f"><span class="${edit ? "" : "req"}">${edit ? "رمز سري جديد (اتركه فارغاً لإبقاء الرمز الحالي)" : "الرمز السري"}</span>
       <div class="two" style="grid-template-columns:1fr auto;margin-top:4px"><input id="in_pin" inputmode="numeric" autocomplete="off" style="height:46px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;font:inherit;letter-spacing:3px" placeholder="4 إلى 8 أرقام">
       <button type="button" class="btn ghost sm" id="genPin" style="width:auto;padding:0 14px">توليد</button></div></label>

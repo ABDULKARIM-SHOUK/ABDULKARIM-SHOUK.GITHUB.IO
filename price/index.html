@@ -660,7 +660,7 @@ function renderHome() {
         <h3>دخول المراقب</h3>
         <p class="k">ادخل برقم المراقب والرمز السري اللذين أعطاك إياهما المشرف.</p>
         ${A && A.expired ? `<div class="msg" style="margin-bottom:10px">انتهت صلاحية دخولك (تغيّر الرمز أو أُوقف الحساب). سجّل الدخول من جديد، وستُرسل زياراتك المحفوظة بعده.</div>` : ""}
-        <label class="f"><span>رقم المراقب</span><input id="lgCode" inputmode="numeric" autocomplete="username" value="${esc(A ? A.code : "")}"></label>
+        <label class="f"><span>رقم المراقب</span><input id="lgCode" autocomplete="username" value="${esc(A ? A.code : "")}"></label>
         <label class="f"><span>الرمز السري</span><input id="lgPin" type="password" inputmode="numeric" autocomplete="current-password"></label>
         <button class="btn" id="lgBtn">دخول</button>
         ${CFG.api ? "" : `<div class="k" style="margin-top:10px">النسخة التجريبية: يضيف المشرف المراقبين من صفحة المتابعة، أو ادخل برقم <b>1001</b> والرمز <b>1234</b>.</div>`}

@@ -219,6 +219,33 @@ body.haspub .ofoot{margin-bottom:76px}
 .report .rhead{border-top:4px solid var(--gold)}
 .btn.wa{background:#1fa855;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center}
 .btn.wa:active{background:#178a45}
+
+/* ---------- شاشات الكمبيوتر واللابتوب: عرض أوسع، والنوافذ في وسط الشاشة ---------- */
+@media (min-width:900px){
+  .official{padding:18px 24px}
+  .official img{height:92px;width:92px}
+  .official b{font-size:28px}
+  .official span{font-size:16px}
+  .sheet{align-items:center;padding:24px}
+  .panel{border-radius:22px;max-height:86vh;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+  .grab{display:none}
+}
+@media (min-width:900px){
+  main,.appbar,.pubbar .in,.official .in,.ofoot .in{max-width:1240px}
+  .tabs{max-width:560px}
+  .filters{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);align-items:center}
+  .kpis{grid-template-columns:repeat(9,1fr)}
+  .kpi b{font-size:24px}
+  /* بطاقات المتابعة في عمودين متجاورين */
+  .dash{columns:2;column-gap:14px}
+  .dash>*{break-inside:avoid;display:inline-block;width:100%;margin-top:0}
+  .dash>details.card{display:block}
+  #weekXl,#openRep{max-width:280px}
+  .btnrow:has(#weekXl){justify-content:flex-start}
+  .panel{max-width:640px}
+}
+@media (min-width:900px) and (max-width:1150px){ .kpis{grid-template-columns:repeat(5,1fr)} }
+@media (min-width:1600px){ .dash{columns:3} }
 .report .rhead h2{margin:0 0 4px;font-size:18px}
 .report .kpis{grid-template-columns:repeat(3,1fr)}
 @media print{
@@ -229,6 +256,7 @@ body.haspub .ofoot{margin-bottom:76px}
   main{max-width:none;padding:0 4px}
   .card,.kpi{break-inside:avoid;border-color:#cfd8d4}
   .report .kpis{grid-template-columns:repeat(5,1fr)}
+  .dash{columns:1}
   .tbl{font-size:12px}
   @page{size:A4;margin:10mm}
 }
@@ -980,7 +1008,7 @@ async function renderMonitor(force) {
     <div class="upd2"><span>${a.from === a.to ? fmtDateAr(a.from) : `${dshort(a.from)} – ${dshort(a.to)}`} · آخر تحديث ${tm(DLOADED || Date.now())}</span><button class="link" id="reload">تحديث</button></div>
     ${H.kpis(a)}
     <div class="btnrow" style="margin:-2px 0 12px"><button class="btn sm" id="weekXl">ملف الأسبوع (Excel)</button><button class="btn ghost sm" id="openRep">تقرير للطباعة</button></div>
-    ${H.month(a)}${H.insp(a, true)}${H.outl(a)}${H.chg(a)}${H.estR(a)}${H.flags(a)}${H.cmp(a)}${H.visits(a)}
+    <div class="dash">${H.month(a)}${H.insp(a, true)}${H.outl(a)}${H.chg(a)}${H.estR(a)}${H.flags(a)}${H.cmp(a)}</div>${H.visits(a)}
     ${a.L.length ? `<button class="btn ghost" id="expCsv">تنزيل بيانات الفترة (CSV)</button>` : ""}
     <div class="btnrow"><button class="btn ghost sm" id="pinChg">تغيير رمز المشرف</button><button class="btn ghost sm" id="logout">خروج</button></div>`;
   pubbar();
@@ -997,7 +1025,7 @@ async function renderReport() {
       <div class="card rhead"><h2>تقرير رصد أسعار السلع التموينية</h2>
         <div class="k">الفترة: ${a.from === a.to ? fmtDateAr(a.from) : `من ${longD(a.from)} إلى ${longD(a.to)}`} · ${esc(gT)} · ${esc(DQ.insp || "كل المراقبين")}</div>
         <div class="k">أُعدّ في ${fmtT(Date.now())} · يشمل الزيارات المعتمدة فقط (لا المحذوفة ولا المُعادة للتصحيح).</div></div>
-      ${H.kpis(a)}${H.month(a)}${H.insp(a, false)}${H.chg(a)}${H.estR(a)}${H.flags(a)}${H.outl(a)}
+      ${H.kpis(a)}<div class="dash">${H.month(a)}${H.insp(a, false)}${H.chg(a)}${H.estR(a)}${H.flags(a)}${H.outl(a)}</div>
     </div>`;
   pubbar();
 }

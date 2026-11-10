@@ -217,6 +217,8 @@ body.haspub .ofoot{margin-bottom:76px}
 .stbox b{display:block}
 .btn.sm#weekXl{background:linear-gradient(135deg,#12332a,#1d5a45);box-shadow:inset 0 -3px 0 var(--gold)}
 .report .rhead{border-top:4px solid var(--gold)}
+.btn.wa{background:#1fa855;color:#fff;text-decoration:none;display:flex;align-items:center;justify-content:center}
+.btn.wa:active{background:#178a45}
 .report .rhead h2{margin:0 0 4px;font-size:18px}
 .report .kpis{grid-template-columns:repeat(3,1fr)}
 @media print{
@@ -1317,11 +1319,40 @@ function inspSheet(x) {
   ]);
   if (!edit) $("#in_pin").value = genPin();
 }
+/* ---------- إرسال بيانات الدخول للمراقب: نسخ أو واتساب ---------- */
+let CRED = "";
+const inspLink = () => { try { return new URL("index.html", location.href.split("#")[0]).href; } catch (e) { return "index.html"; } };
+// رقم الجوال بصيغة واتساب الدولية: 05xxxxxxxx أو 5xxxxxxxx ← 9665xxxxxxxx
+function waNum(v) {
+  let d = toLatin(String(v || "")).replace(/\D/g, "").replace(/^00/, "");
+  if (/^05\d{8}$/.test(d)) d = "966" + d.slice(1);
+  else if (/^5\d{8}$/.test(d)) d = "966" + d;
+  return d;
+}
+function waHref() { const n = waNum(($("#waPhone") || {}).value); return `https://wa.me/${n}?text=${encodeURIComponent(CRED)}`; }
+async function copyText(s) {
+  try { await navigator.clipboard.writeText(s); return true; } catch (e) {
+    const ta = document.createElement("textarea"); ta.value = s; ta.setAttribute("readonly", ""); ta.style.cssText = "position:fixed;top:-1000px;opacity:0";
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch (e2) {} ta.remove(); return ok;
+  }
+}
 function pinShown(insp) {
+  CRED = `السلام عليكم ${insp.name}\nبيانات دخولك لصفحة رصد أسعار السلع التموينية:\n\nالرابط: ${inspLink()}\nرقم المراقب: ${insp.code}\nالرمز السري: ${insp.newPin}\n\nاحفظ الرابط في الشاشة الرئيسية لجوالك، ولا تشارك الرمز السري مع أحد.`;
   openSheet("أعطِ المراقب بيانات الدخول", `
     <div class="note" style="font-size:16px;line-height:2">المراقب: <b>${esc(insp.name)}</b><br>رقم المراقب: <b dir="ltr">${esc(insp.code)}</b><br>الرمز السري: <b dir="ltr" style="letter-spacing:3px">${esc(insp.newPin)}</b></div>
-    <div class="hint" style="margin-top:10px">لن يظهر الرمز مرة أخرى بعد إغلاق هذه النافذة.</div>`, [{ t: "تم", cls: "ghost" }]);
+    <label class="f" style="margin-top:12px"><span>جوال المراقب للواتساب (اختياري)</span><input id="waPhone" inputmode="tel" dir="ltr" autocomplete="off" placeholder="05xxxxxxxx"></label>
+    <div class="btnrow" style="margin-top:0">
+      <button type="button" class="btn ghost" id="cpCred">نسخ البيانات</button>
+      <a class="btn wa" id="waCred" href="${esc(waHref())}" target="_blank" rel="noopener">إرسال واتساب</a>
+    </div>
+    <div class="hint" style="margin-top:10px">ترسل الرسالة الرابط ورقم المراقب ورمزه. إن تركت الجوال فارغاً يفتح واتساب لتختار المراقب من جهات الاتصال. لن يظهر الرمز مرة أخرى بعد إغلاق هذه النافذة.</div>`, [{ t: "تم", cls: "ghost" }]);
 }
+document.addEventListener("input", e => { if (e.target.id === "waPhone") { const a = $("#waCred"); if (a) a.href = waHref(); } });
+document.addEventListener("click", async e => {
+  if (e.target.closest("#cpCred")) { e.preventDefault(); toast(await copyText(CRED) ? "نُسخت بيانات الدخول، الصقها في الرسالة" : "تعذّر النسخ، انسخها يدوياً"); }
+  if (e.target.closest("#waCred")) { const a = $("#waCred"); a.href = waHref(); }
+});
 function delInspSheet(x) {
   openSheet("حذف المراقب", `سيُحذف حساب «${esc(x.name)}» ولن يستطيع الدخول أو الإرسال. تبقى زياراته السابقة في الجدول باسمه. للإيقاف المؤقت استعمل «فعّال» بدل الحذف.`, [
     { t: "نعم، احذف", cls: "warn", fn: async () => { const j = await inspCall({ action: "insp_delete", id: x.id }); if (!j.ok) return IERR[j.error] || "تعذّر الحذف"; setTimeout(() => { renderInspectors(); toast("حُذف المراقب"); }, 0); } },

@@ -226,6 +226,29 @@ bdi{unicode-bidi:isolate}
 .ofoot span{display:block;margin-top:6px;font-size:13px;color:#d5e2dc;direction:ltr;text-align:left;letter-spacing:.2px}
 body.visit .ofoot{display:none}
 
+/* ---------- شاشات الكمبيوتر واللابتوب: عرض أوسع، والنوافذ في وسط الشاشة ---------- */
+@media (min-width:900px){
+  .official{padding:18px 24px}
+  .official img{height:92px;width:92px}
+  .official b{font-size:28px}
+  .official span{font-size:16px}
+  .sheet{align-items:center;padding:24px}
+  .panel{border-radius:22px;max-height:86vh;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+  .grab{display:none}
+}
+@media (min-width:900px){
+  main,.appbar,.vhead .in,.actionbar .in,.official .in,.ofoot .in{max-width:780px}
+  body.visit main,body.visit .appbar,body.visit .vhead .in,body.visit .actionbar .in,body.visit .official .in{max-width:1180px}
+  /* بيانات المنشأة في عمودين */
+  .estc{display:grid;grid-template-columns:1fr 1fr;column-gap:16px}
+  .estc>:not(.f){grid-column:1/-1}
+  /* الأصناف في عمودين */
+  .list{display:grid;grid-template-columns:1fr 1fr}
+  .list .sec{grid-column:1/-1}
+  .list .row:nth-child(odd){border-inline-end:1px solid var(--line)}
+  .panel{max-width:600px}
+}
+
 /* ---------- الموقع، التكرار، التصحيح، المستهدف ---------- */
 .geo{display:flex;align-items:center;gap:8px;font-size:13px;border-radius:10px;padding:7px 10px;margin:-2px 0 10px;line-height:1.5}
 .geo svg{flex:none}
@@ -825,7 +848,7 @@ function openVisit() {
       <div class="k">الزيارة الأصلية: ${fmtDate(V.fixDate || V.date)}</div>
       ${V.fixWhy ? `<div class="why">سبب الإعادة: ${esc(V.fixWhy)}</div>` : ""}
       <div class="k" style="margin-top:6px">عدّل ما يلزم ثم احفظ؛ تحل هذه الزيارة محل الأصلية في الجدول، وتنتقل صورها السابقة معها.</div></div>` : ""}
-    <div class="card">
+    <div class="card estc">
       <div class="rowhead"><h3>بيانات المنشأة</h3>${V.replaces ? "" : `<button class="link" id="newEst">منشأة جديدة</button>`}</div>
       <div class="k" style="margin-bottom:10px">تاريخ الزيارة: ${fmtDate(V.date)} (تلقائي)</div>
       <label class="f"><span class="req">اسم المنشأة</span><input id="f_name" data-est="name" autocomplete="off"></label>

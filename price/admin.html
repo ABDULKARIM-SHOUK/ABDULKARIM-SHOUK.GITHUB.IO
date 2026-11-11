@@ -262,11 +262,129 @@ body.haspub .ofoot{margin-bottom:76px}
   .panel{max-width:640px}
 }
 @media (min-width:900px) and (max-width:1150px){ .kpis{grid-template-columns:repeat(5,1fr)} }
+/* ---------- التنقل: شريط جانبي في الكمبيوتر، وشريط سفلي في الجوال ---------- */
+.snav{position:fixed;left:0;right:0;bottom:0;z-index:35;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 20px rgba(10,50,52,.08);
+  display:grid;grid-template-columns:repeat(4,1fr);padding:4px 4px calc(4px + env(safe-area-inset-bottom))}
+.snav .nv{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:58px;border:0;background:transparent;color:var(--muted);font-size:12px;font-weight:600;border-radius:12px}
+.snav .nv svg{width:22px;height:22px}
+.snav .nv.on{color:var(--brand-d)}
+.snav .nv.on:before{content:"";position:absolute;top:0;width:36px;height:4px;border-radius:0 0 4px 4px;background:var(--gold)}
+.snav .nb{position:absolute;top:5px;margin-right:26px;min-width:18px;height:18px;padding:0 5px;border-radius:99px;background:var(--bad);color:#fff;font-size:11px;font-weight:700;line-height:18px;text-align:center}
+.snav .nb.g{background:var(--gold);color:var(--adm)}
+.snav .nfoot{display:none}
+body.hasnav{padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+body.hasnav .pubbar{bottom:calc(66px + env(safe-area-inset-bottom))}
+body.hasnav .toast{bottom:calc(84px + env(safe-area-inset-bottom))}
+body.hasnav.haspub .toast{bottom:calc(150px + env(safe-area-inset-bottom))}
+.fab{position:fixed;left:16px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:34;height:52px;padding:0 18px;border:0;border-radius:16px;background:var(--gold);color:var(--adm);font-weight:800;font-size:15px;box-shadow:0 8px 20px rgba(18,51,42,.28);display:flex;align-items:center;gap:6px}
+body.haspub .fab{bottom:calc(148px + env(safe-area-inset-bottom))}
+.card{scroll-margin-top:96px}
+
+/* ---------- ترويسة المتابعة وشريط الأسبوع ---------- */
+.mhead{display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 14px;margin:4px 2px 12px}
+.mhead .hi{flex:1 1 220px;min-width:0}
+.mhead .hi span{font-size:13.5px;color:var(--muted)}
+.mhead h1{margin:0;font-size:22px;line-height:1.35;color:var(--adm)}
+.mhead .acts{display:flex;gap:8px;flex-wrap:wrap}
+.mhead .acts .btn{width:auto;padding:0 16px}
+.wband{background:linear-gradient(120deg,var(--adm),#1d5a45);color:#fff;border-radius:18px;padding:16px 18px;margin-bottom:12px;border-bottom:4px solid var(--gold);display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center}
+.wband .wm{flex:1 1 260px;min-width:0}
+.wband .wm b{font-size:34px;line-height:1}
+.wband .wm span{font-size:14.5px;color:#d7e4df;margin-right:8px}
+.wband .wbar{height:10px;background:rgba(255,255,255,.16);border-radius:99px;overflow:hidden;margin:10px 0 6px}
+.wband .wbar i{display:block;height:100%;background:var(--gold);border-radius:99px}
+.wband small{display:block;font-size:12.5px;color:#c9d8d2;line-height:1.6}
+.wband small a,.wband small button{color:#f1dfae;font-weight:700;background:none;border:0;padding:0;font-size:inherit;text-decoration:underline}
+.wband .ws{flex:1 1 300px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.wband .ws div{background:rgba(255,255,255,.08);border-radius:12px;padding:8px 10px}
+.wband .ws b{display:block;font-size:20px}
+.wband .ws span{font-size:12px;color:#d7e4df}
+.duo{display:flex;flex-wrap:wrap;gap:0 14px;align-items:flex-start}
+.duo>.card{flex:1 1 300px;min-width:0}
+.duo>.inbox{flex:3 1 380px}
+.duo>.bcard{flex:2 1 300px}
+
+/* ---------- يحتاج انتباهك ---------- */
+.inbox h3 .cnt{display:inline-block;margin-right:6px;background:var(--bad-l);color:var(--bad);font-size:12.5px;border-radius:99px;padding:0 9px}
+.ibx{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid #edf2f1}
+.ibx:first-of-type{border-top:0}
+.ibx .in{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-weight:800;flex:none;background:var(--brand-l);color:var(--brand)}
+.ibx.bad .in{background:var(--bad-l);color:var(--bad)}
+.ibx.warn .in{background:var(--warn-l);color:var(--warn)}
+.ibx .tx{flex:1;min-width:0}
+.ibx .tx b{display:block;font-size:15px}
+.ibx .tx small{display:block;font-size:12.5px;color:var(--muted);line-height:1.6;overflow:hidden;text-overflow:ellipsis}
+.ibx .go{height:40px;padding:0 12px;border:1.5px solid #cfe0d8;border-radius:10px;background:#fff;color:var(--brand);font-weight:700;font-size:13.5px;white-space:nowrap;flex:none}
+.allok{display:flex;align-items:center;gap:10px;color:var(--ok);font-weight:700;padding:6px 0}
+
+/* ---------- جدول تخطيط الأسبوع ---------- */
+.tview{margin:0 0 12px}
+.tbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.wknav{display:flex;align-items:center;gap:6px}
+.wknav b{font-size:15.5px;color:var(--adm);padding:0 4px;white-space:nowrap}
+.wknav button{height:38px;min-width:38px;padding:0 10px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--brand-d);font-weight:700;font-size:13px}
+.tacts{display:flex;gap:6px;flex-wrap:wrap}
+.tacts .btn{width:auto;padding:0 14px;height:40px;font-size:13.5px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--muted);margin:0 2px 8px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:4px;border:1.5px solid;vertical-align:-1px;margin-left:5px}
+.planwrap{display:flex;flex-direction:column;gap:0}
+.board{min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow-x:auto;margin-bottom:12px}
+.bgrid{display:grid;grid-template-columns:128px 1.15fr repeat(7,minmax(0,1fr));min-width:880px}
+.bgrid .bh{padding:9px 6px;font-size:12.5px;font-weight:700;text-align:center;background:#f7faf9;border-bottom:1px solid var(--line)}
+.bgrid .bh.td{background:var(--adm);color:#fff}
+.bgrid .bh.wk{background:#fbf6ea;color:#7a5b16}
+.bgrid .bn{padding:9px 10px;border-bottom:1px solid #edf2f1;font-size:13.5px}
+.bgrid .bn b{display:block}
+.bgrid .bn small{display:block;font-size:11.5px;color:var(--muted);line-height:1.5}
+.bcell{position:relative;border-bottom:1px solid #edf2f1;border-right:1px solid #f1f5f4;min-height:78px;padding:6px 5px 26px;display:flex;flex-direction:column;gap:5px}
+.bcell.tdc{background:#fbfdfc}.bcell.wkc{background:#fffdf7}
+.bcell.over{background:#eaf5ef;outline:2px dashed var(--accent);outline-offset:-3px}
+.chip{border:1.5px solid var(--brand);background:#fff;border-radius:9px;padding:4px 7px;font-size:12px;line-height:1.45;cursor:pointer;text-align:right}
+.chip b{display:block;font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip small{color:var(--muted);font-size:11px}
+.chip.done{border-color:var(--ok);background:var(--ok-l)}.chip.done b{color:var(--ok)}
+.chip.late{border-color:var(--bad);background:var(--bad-l)}.chip.late b{color:var(--bad)}
+.chip[draggable=true]{cursor:grab}
+.cadd{position:absolute;bottom:4px;left:4px;width:24px;height:22px;border:1px dashed #bcd2c8;border-radius:7px;background:transparent;color:var(--muted);font-size:15px;line-height:1;opacity:.55}
+.bcell:hover .cadd,.cadd:focus{opacity:1;border-color:var(--accent);color:var(--brand)}
+.sugs{border-top:4px solid var(--gold)}
+.sugs .sgl{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));column-gap:18px}
+.sugs .sg{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid #edf2f1}
+.sugs .sg div{flex:1;min-width:0}
+.sugs .sg b{display:block;font-size:14px}
+.sugs .sg small{font-size:12px;color:var(--muted)}
+.sugs .sg button{height:36px;padding:0 12px;border:1.5px solid #cfe0d8;border-radius:10px;background:#fff;color:var(--brand);font-weight:700;font-size:13px;flex:none}
+.aplist{max-height:46vh;overflow:auto;border:1px solid var(--line);border-radius:12px;padding:4px 12px;margin:8px 0}
+.aplist div{padding:7px 0;border-top:1px solid #edf2f1;font-size:14px}
+.aplist div:first-child{border-top:0}
+.aplist small{display:block;color:var(--muted);font-size:12.5px}
+
+@media (min-width:900px){
+  main.nav{display:grid;grid-template-columns:228px minmax(0,1fr);column-gap:22px;align-items:start}
+  main.nav>*{grid-column:2}
+  main.nav>.snav{grid-column:1;grid-row:1/span 40;position:sticky;top:84px;bottom:auto;left:auto;right:auto;z-index:5;
+    display:flex;flex-direction:column;gap:4px;padding:12px 10px;background:linear-gradient(170deg,var(--adm),#1a4537);border:0;border-left:4px solid var(--gold);border-radius:18px;box-shadow:0 10px 26px rgba(18,51,42,.18)}
+  main.nav>.snav .nv{flex-direction:row;justify-content:flex-start;gap:12px;height:48px;padding:0 14px;color:#dfe9e5;font-size:15px}
+  main.nav>.snav .nv:hover{background:rgba(255,255,255,.07)}
+  main.nav>.snav .nv.on{background:rgba(194,162,90,.2);color:#f1dfae}
+  main.nav>.snav .nv.on:before{display:none}
+  main.nav>.snav .nb{position:static;margin:0 auto 0 0}
+  main.nav>.snav .nfoot{display:block;margin-top:10px;padding:12px 8px 2px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:#a9bfb7;line-height:1.7}
+  main.nav>.snav .nfoot button{width:100%;height:42px;margin-bottom:8px;border:0;border-radius:11px;background:var(--gold);color:var(--adm);font-weight:800;font-size:14px}
+  body.hasnav{padding-bottom:0}
+  body.hasnav .pubbar{bottom:0}
+  body.hasnav .toast{bottom:calc(24px + env(safe-area-inset-bottom))}
+  body.hasnav.haspub .toast{bottom:calc(96px + env(safe-area-inset-bottom))}
+  .fab{display:none}
+  main.nav .tabs{display:none}
+  .mhead h1{font-size:26px}
+}
+
 @media (min-width:1600px){ .dash{columns:3} }
 .report .rhead h2{margin:0 0 4px;font-size:18px}
 .report .kpis{grid-template-columns:repeat(3,1fr)}
 @media print{
-  .top,.pubbar,.toast,.sheet,.noprint,.tabs,.link,.chev{display:none!important}
+  .top,.pubbar,.toast,.sheet,.noprint,.tabs,.link,.chev,.snav,.fab{display:none!important}
   body{background:#fff}
   .official,.ofoot,.kpi,.pill2,.bar i,.report .rhead{-webkit-print-color-adjust:exact;print-color-adjust:exact}
   .ofoot{margin-top:8px}
@@ -739,6 +857,7 @@ function renderLog() {
 }
 function render() {
   $("#toast").hidden = true;
+  $("#main").classList.remove("nav"); document.body.classList.remove("hasnav");
   if (!sess.get()) { renderLogin(); return window.scrollTo(0, 0); }
   loadWork0();
   if (ssn.get(K.must) === "1") { renderPinChange(true); return window.scrollTo(0, 0); }
@@ -752,7 +871,25 @@ function render() {
   else if (h === "#/" ) renderHome();
   else { if (h !== "#/m") setHash("#/m"); renderMonitor(); }
 }
-const tabs = on => `<div class="tabs"><button class="tab ${on === "mon" ? "on" : ""}" data-tab="#/m">المتابعة</button><button class="tab ${on === "task" ? "on" : ""}" data-tab="#/t">المهام</button><button class="tab ${on === "cat" ? "on" : ""}" data-tab="#/">الأصناف</button><button class="tab ${on === "insp" ? "on" : ""}" data-tab="#/i">المراقبون</button></div>`;
+const NAVI = {
+  mon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+  task: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>',
+  cat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 9h16M9 9v11"/></svg>',
+  insp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6"/><path d="M17 11a3 3 0 1 0 0-6M22 21c0-3-2-5-5-5"/></svg>'
+};
+// شريط التنقل: جانبي في الكمبيوتر وسفلي في الجوال، مع عدد المتأخر وغير المنشور
+const tabs = on => {
+  const late = (TASKS || []).filter(overdue).length, ch = W ? changes().length : 0;
+  const it = (k, h, label, badge) => `<button class="nv ${on === k ? "on" : ""}" data-tab="${h}" ${on === k ? 'aria-current="page"' : ""}>${NAVI[k]}<span>${label}</span>${badge || ""}</button>`;
+  queueMicrotask(() => { const m = $("#main"), has = !!(m && m.querySelector(":scope>.snav")); m.classList.toggle("nav", has); document.body.classList.toggle("hasnav", has); });
+  return `<nav class="snav" aria-label="أقسام صفحة المشرف">
+    ${it("mon", "#/m", "المتابعة")}
+    ${it("task", "#/t", "المهام", late ? `<span class="nb" title="مهام متأخرة">${late}</span>` : "")}
+    ${it("cat", "#/", "الأصناف", ch ? `<span class="nb g" title="تغييرات لم تُنشر">${ch}</span>` : "")}
+    ${it("insp", "#/i", "المراقبون")}
+    <div class="nfoot"><button type="button" id="weekXlNav">ملف الأسبوع للوزارة</button>آخر تحديث للبيانات ${DLOADED ? tm(DLOADED) : "—"}</div>
+  </nav>${on === "mon" || on === "task" ? `<button class="fab" id="fabTask" aria-label="مهمة جديدة"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>مهمة جديدة</button>` : ""}`;
+};
 
 async function doLogin() {
   const pin = toLatin($("#pin").value.trim());
@@ -1003,7 +1140,49 @@ function basketSheet() {
    { t: "رجوع", cls: "ghost" }]);
 }
 const dayTxt = (iso, today) => iso === today ? "اليوم" : dshort(iso);
+// شريط الأسبوع: إنجاز المهام هذا الأسبوع (الأحد – السبت) أياً كانت فترة العرض
+function weekStats() {
+  const today = todayISO(), ws = weekStart(today), we = addDays(ws, 6);
+  const T = (TASKS || []).filter(t => t.status !== TS.cancelled && ((t.from || ws) <= we && (t.to || we) >= ws || t.status === TS.done && t.done && isoOf(t.done) >= ws && isoOf(t.done) <= we));
+  const done = T.filter(t => t.status === TS.done).length;
+  const V = (DATA || []).filter(v => live(v) && v.date >= ws && v.date <= we);
+  const act = (INSPS || []).filter(x => x.active);
+  const seen = new Set(V.map(v => v.iid || v.inspector));
+  const busy = act.filter(x => seen.has(x.id) || seen.has(x.name));
+  const left = Math.max(1, Math.round((new Date(we + "T12:00:00") - new Date(today + "T12:00:00")) / 864e5) + 1);
+  return { ws, we, T, done, open: T.length - done, V, prices: V.reduce((s, v) => s + v.items.filter(i => !i.na && i.price > 0).length, 0),
+    ests: new Set(V.map(v => v.est.uid)).size, act, busy, idle: act.filter(x => !busy.includes(x)), left };
+}
+const greet = () => new Date().getHours() < 12 ? "صباح الخير" : "مساء الخير";
 const H = {
+  week: w => `<section class="wband" aria-label="إنجاز الأسبوع">
+      <div class="wm">${w.T.length
+        ? `<div><b>${w.done}</b><span>من ${w.T.length} مهمة أُنجزت هذا الأسبوع</span></div>
+           <div class="wbar"><i style="width:${Math.round(w.done / w.T.length * 100)}%"></i></div>
+           <small>${w.open ? `باقٍ ${w.left === 1 ? "يوم واحد" : w.left === 2 ? "يومان" : w.left + " أيام"} · المطلوب نحو ${Math.ceil(w.open / w.left)} ${Math.ceil(w.open / w.left) === 1 ? "زيارة" : "زيارات"} يومياً لإكمال الأسبوع` : "أُنجزت كل مهام الأسبوع"}</small>`
+        : `<div><b>${w.V.length}</b><span>زيارة معتمدة هذا الأسبوع</span></div>
+           <small style="margin-top:8px">لم تُوزَّع مهام لهذا الأسبوع بعد. <button type="button" data-go="#/t">وزّعها من «المهام»</button></small>`}</div>
+      <div class="ws"><div><b>${w.prices}</b><span>سعراً مرصوداً</span></div><div><b>${w.ests}</b><span>منشأة</span></div><div><b>${w.busy.length}/${w.act.length}</b><span>مراقباً رصد</span></div></div>
+    </section>`,
+  inbox: (a, w) => {
+    const late = (TASKS || []).filter(overdue), L = [];
+    const names = (arr, f, n = 3) => arr.slice(0, n).map(f).join("، ") + (arr.length > n ? ` و${arr.length - n} غيرها` : "");
+    if (late.length) L.push({ tone: "bad", n: late.length, title: late.length === 1 ? "مهمة متأخرة" : "مهام متأخرة", sub: "انتهت فترتها ولم تُزر: " + names(late, t => t.est.name), cta: "عرض المهام", go: "#/t" });
+    if (a.nShort) L.push({ tone: "bad", n: a.nShort, title: "بلاغات نقص أو انقطاع", sub: "أبلغ عنها المراقبون في الفترة المعروضة", cta: "عرض", go: "c-flags" });
+    if (a.outl.length) L.push({ tone: "warn", n: a.outl.length, title: "أسعار تحتاج مراجعة", sub: "بعيدة عن وسيط الصنف بأكثر من 40%، غالباً خطأ إدخال", cta: "مراجعة", go: "c-outl" });
+    if (a.nDup) L.push({ tone: "warn", n: a.nDup, title: "زيارات مكررة", sub: "المنشأة نفسها في اليوم نفسه، احذف المكرر", cta: "عرض", go: "c-visits" });
+    const noTask = w.act.filter(x => !x.free && !w.T.some(t => t.iid === x.id));
+    if (noTask.length) L.push({ tone: "warn", n: noTask.length, title: "مراقبون بلا مهام هذا الأسبوع", sub: names(noTask, x => x.name) + " · لا يستطيعون الرصد دون مهمة", cta: "إسناد مهام", go: "#/t" });
+    const idle = w.idle.filter(x => !noTask.includes(x));
+    if (idle.length && w.left <= 5) L.push({ tone: "ok", n: idle.length, title: "لم يرصدوا هذا الأسبوع", sub: names(idle, x => x.name), cta: "عرض", go: "c-insp" });
+    if (a.nRet) L.push({ tone: "ok", n: a.nRet, title: "زيارات مُعادة لم تُصحَّح بعد", sub: "بانتظار تصحيح المراقبين", cta: "عرض", go: "c-visits" });
+    const ch = W ? changes().length : 0;
+    if (ch) L.push({ tone: "ok", n: ch, title: "تغييرات أصناف لم تُنشر", sub: "لا تصل للمراقبين حتى تنشرها", cta: "مراجعة", go: "#/" });
+    return `<div class="card inbox" id="c-inbox"><div class="rowhead"><h3>يحتاج انتباهك${L.length ? `<span class="cnt">${L.length}</span>` : ""}</h3><span class="k">الأهم أولاً</span></div>
+      ${L.length ? L.map(x => `<div class="ibx ${x.tone}"><span class="in">${x.n}</span><div class="tx"><b>${x.title}</b><small>${esc(x.sub)}</small></div><button type="button" class="go" data-go="${x.go}">${x.cta}</button></div>`).join("")
+        : `<div class="allok"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>لا يوجد ما يحتاج انتباهك الآن</div>`}
+    </div>`;
+  },
   kpis: a => `<div class="kpis">
       <div class="kpi"><b>${a.V.length}</b><span>زيارة معتمدة</span></div>
       <div class="kpi"><b>${a.ests}</b><span>منشأة</span></div>
@@ -1025,20 +1204,20 @@ const H = {
       <div class="k">الأسبوع ${dshort(cur.ws)}–${dshort(cur.we)} · أساس 100 = أسبوع ${dshort(base.ws)} · ${cur.matched ? `بُني التغيّر على ${cur.matched} ${cur.matched > 2 && cur.matched < 11 ? "أصناف" : "صنفاً"} رُصدت في الأسبوعين، في ${rows.length} من ${B.total} أقسام` : `أصناف هذا الأسبوع: ${cur.items}، ولم يتكرر منها شيء عن الأسبوع السابق`}.</div>
       ${rows.length ? `<table class="tbl" style="margin-top:8px"><tr><th>القسم</th><th>أصناف</th><th>التغيّر</th></tr>${rows.map(s => `<tr><td>${esc(s.name)}</td><td class="num">${s.n}</td><td class="num ${s.r > 1.005 ? "hi" : s.r < 0.995 ? "lo" : ""}">${((s.r - 1) * 100).toFixed(1)}%</td></tr>`).join("")}</table>` : ""}
     </div>`; },
-  month: a => a.mon.length ? `<div class="card"><div class="rowhead"><h3>إنجاز الشهر</h3><span class="k">${longD(a.mk + "-01").replace(/^1\s*/, "")}</span></div>
+  month: a => a.mon.length ? `<div class="card" id="c-month"><div class="rowhead"><h3>إنجاز الشهر</h3><span class="k">${longD(a.mk + "-01").replace(/^1\s*/, "")}</span></div>
       ${a.mon.map(m => `<div class="mrow"><div class="vm"><b>${esc(m.x.name)}</b>
         <small>${m.done} من ${m.x.target} زيارة · المتوقع حتى اليوم ${m.exp}</small>
         <div class="bar ${m.done >= m.x.target ? "" : m.late ? "z" : ""}"><i style="width:${Math.min(100, m.done / m.x.target * 100)}%"></i></div></div>
         <span class="pill2 ${m.done >= m.x.target ? "ok" : m.late ? "r" : "ok"}">${m.done >= m.x.target ? "مكتمل" : m.late ? "متأخر" : Math.round(m.done / m.x.target * 100) + "%"}</span></div>`).join("")}
     </div>` : "",
-  insp: (a, add) => `<div class="card"><div class="rowhead"><h3>المراقبون</h3>${add ? `<button class="link" id="addInspQ">+ إضافة مراقب</button>` : ""}</div>
+  insp: (a, add) => `<div class="card" id="c-insp"><div class="rowhead"><h3>المراقبون</h3>${add ? `<button class="link" id="addInspQ">+ إضافة مراقب</button>` : ""}</div>
       ${a.iRows.length ? a.iRows.map(([name, o]) => `<div class="vrow" data-insp="${esc(name)}"><div class="vm"><b>${esc(name)}</b>
         <small>${o.n} زيارة · ${o.ests.size} منشأة · ${o.p} سعراً${DQ.range !== "today" ? ` · اليوم ${o.today}` : ""} · آخر إدخال ${o.last ? dayTxt(isoOf(o.last), todayISO()) + " " + tm(o.last) : "—"}</small>
         <div class="bar"><i style="width:${o.n / Math.max(1, ...a.iRows.map(r => r[1].n)) * 100}%"></i></div></div>
         <span class="pill2 ${o.it && Math.round(o.z / o.it * 100) > 60 ? "" : "ok"}">${o.it ? Math.round(o.z / o.it * 100) : 0}% أصفار</span></div>`).join("") : `<div class="empty">لا توجد زيارات معتمدة في هذه الفترة</div>`}
       ${a.silent.length ? `<div class="k" style="margin-top:8px">لم يُدخلوا في هذه الفترة: ${a.silent.map(esc).join("، ")}</div>` : ""}
     </div>`,
-  outl: a => `<div class="card"><div class="rowhead"><h3>أسعار تحتاج مراجعة</h3><span class="k">${a.outl.length}</span></div>
+  outl: a => `<div class="card" id="c-outl"><div class="rowhead"><h3>أسعار تحتاج مراجعة</h3><span class="k">${a.outl.length}</span></div>
       ${a.outl.length ? `<table class="tbl"><tr><th>الصنف</th><th>السعر</th><th>الوسيط</th><th>المنشأة</th></tr>
         ${a.outl.slice(0, 15).map(o => `<tr data-vid="${esc(o.x.v.id)}"><td dir="rtl">${bidiHtml(o.t)}</td><td class="num ${o.d > 0 ? "hi" : "lo"}">${fmtN(o.x.p)}</td><td class="num">${fmtN(o.m)}</td>
           <td>${esc(o.x.v.est.name)}<div class="k">${esc(o.x.v.inspector)} · ${dshort(o.x.v.date)}${o.x.photo ? " · " + photoLink(o.x.photo) : ""}</div></td></tr>`).join("")}</table>
@@ -1058,7 +1237,7 @@ const H = {
       ${a.estR.slice(0, 15).map(e => `<tr data-vid="${esc(e.v.id)}"><td>${esc(e.v.est.name)}<div class="k">${esc(e.v.inspector)} · ${dshort(e.v.date)}</div></td>
         <td dir="rtl">${e.rows.slice(0, 3).map(r => `${bidiHtml(r.t)} <span class="k">${fmtN(r.a)}←${fmtN(r.b)}</span>`).join("<br>")}${e.rows.length > 3 ? `<div class="k">و${e.rows.length - 3} أخرى</div>` : ""}</td>
         <td class="num hi">${pctTxt(e.rows[0].d)}</td></tr>`).join("")}</table></div>` : "",
-  flags: a => `<div class="card"><div class="rowhead"><h3>بلاغات النقص والارتفاع</h3><span class="k">${a.fl.length}</span></div>
+  flags: a => `<div class="card" id="c-flags"><div class="rowhead"><h3>بلاغات النقص والارتفاع</h3><span class="k">${a.fl.length}</span></div>
       ${a.fl.length ? `<table class="tbl"><tr><th>البلاغ</th><th>السلعة</th><th>المنشأة</th></tr>
         ${a.fl.slice(0, 30).map(f => `<tr data-vid="${esc(f.v.id)}"><td><span class="pill2 ${f.k === "short" ? "r" : ""}">${f.k === "short" ? (f.kinds.map(k => k === "cut" ? "انقطاع" : "نقص").join(" و") || "نقص") : "ارتفاع"}</span></td>
           <td dir="rtl">${bidiHtml(itemName(f.v, f))}${f.price != null ? `<div class="k">السعر ${fmtN(f.price)}</div>` : ""}</td>
@@ -1071,7 +1250,7 @@ const H = {
         : `<div class="k" style="margin-top:8px">لا توجد أسعار في هذه الفترة.</div>`}
     </details>`,
   visits: a => { const today = todayISO();
-    return `<div class="card"><div class="rowhead"><h3>الزيارات</h3><span class="k">${a.L.length}</span></div>
+    return `<div class="card" id="c-visits"><div class="rowhead"><h3>الزيارات</h3><span class="k">${a.L.length}</span></div>
       ${a.L.length ? a.L.slice(0, 80).map(v => { const z = zp(v), ph = photosOf(v).length, f = flagRows(v);
         return `<div class="vrow ${v.status ? "st" : ""}" data-vid="${esc(v.id)}"><div class="vm"><b>${esc(v.est.name)}</b>
           <small>${esc(vGroups(v))} · ${esc(v.inspector)} · ${v.date === today ? tm(v.ts) : dshort(v.date)}</small>
@@ -1091,9 +1270,14 @@ async function renderMonitor(force) {
     await loadData(force);
     if (HASH !== "#/m" || !sess.get()) return;
   }
-  const a = analyze();
+  demoTaskSync();
+  const a = analyze(), w = weekStats();
   $("#main").innerHTML = tabs("mon") + `
     ${CFG.api ? "" : `<div class="demo">نسخة تجريبية: تعرض اللوحة زيارات هذا الجهاز فقط. بعد الربط بجدول Google تعرض زيارات كل المراقبين.</div>`}
+    <section class="mhead"><div class="hi"><span>${greet()}</span><h1>أسبوع ${dshort(w.ws)} – ${dshort(w.we)}</h1></div>
+      <div class="acts"><button class="btn sm" id="weekXl">ملف الأسبوع (Excel)</button><button class="btn ghost sm" id="openRep">تقرير للطباعة</button></div></section>
+    ${H.week(w)}
+    <div class="duo">${H.inbox(a, w)}${H.basket()}</div>
     <div class="filters">
       <div class="seg wide" id="rng"><button data-r="today" class="${DQ.range === "today" ? "on" : ""}">اليوم</button><button data-r="7" class="${DQ.range === "7" ? "on" : ""}">آخر 7 أيام</button><button data-r="30" class="${DQ.range === "30" ? "on" : ""}">آخر 30 يوماً</button></div>
       <div class="row2">
@@ -1103,8 +1287,7 @@ async function renderMonitor(force) {
     </div>
     <div class="upd2"><span>${a.from === a.to ? fmtDateAr(a.from) : `${dshort(a.from)} – ${dshort(a.to)}`} · آخر تحديث ${tm(DLOADED || Date.now())}</span><button class="link" id="reload">تحديث</button></div>
     ${H.kpis(a)}
-    <div class="btnrow" style="margin:-2px 0 12px"><button class="btn sm" id="weekXl">ملف الأسبوع (Excel)</button><button class="btn ghost sm" id="openRep">تقرير للطباعة</button></div>
-    <div class="dash">${H.basket()}${H.month(a)}${H.insp(a, true)}${H.outl(a)}${H.chg(a)}${H.estR(a)}${H.flags(a)}${H.cmp(a)}</div>${H.visits(a)}
+    <div class="dash">${H.month(a)}${H.insp(a, true)}${H.outl(a)}${H.chg(a)}${H.estR(a)}${H.flags(a)}${H.cmp(a)}</div>${H.visits(a)}
     ${a.L.length ? `<button class="btn ghost" id="expCsv">تنزيل بيانات الفترة (CSV)</button>` : ""}
     <div class="btnrow"><button class="btn ghost sm" id="pinChg">تغيير رمز المشرف</button><button class="btn ghost sm" id="logout">خروج</button></div>`;
   pubbar();
@@ -1438,7 +1621,7 @@ async function renderInspectors(force) {
 const genPin = () => String(Math.floor(1000 + Math.random() * 9000));
 
 /* ================= المهام: توزيع المنشآت على المراقبين ================= */
-let TASKS = null, TQ = { st: "مفتوحة", iid: "" };
+let TASKS = null, TQ = { st: "مفتوحة", iid: "", view: "", ws: "" };
 const TS = { open: "مفتوحة", done: "منجزة", cancelled: "ملغاة" };
 const demoTasks = () => store.get("ps_demo_tasks", []);
 const TERR = { insp: "اختر المراقب", estname: "اكتب اسم المنشأة", estuid: "اكتب الرقم الموحد للمنشأة", closed: "المهمة منجزة ولا يمكن تعديلها", notfound: "لم يُعثر على المهمة، حدّث الصفحة", pin: "انتهت جلسة المشرف، سجّل الدخول من جديد", net: "تعذّر الاتصال، تحقق من الإنترنت" };
@@ -1448,6 +1631,11 @@ async function taskCall(body) {
     catch (e) { return { ok: false, error: "net" }; }
   }
   let L = demoTasks(); const a = body.action;
+  if (a === "task_bulk") {
+    let n = 0;
+    for (const d of body.tasks || []) { const r = await taskCall({ action: "task_save", task: { ...d, id: undefined } }); if (r.ok) n++; }
+    return { ok: true, saved: n, failed: (body.tasks || []).length - n, tasks: demoTasks() };
+  }
   if (a === "task_save") {
     const d = body.task, x = (INSPS || demoInsp()).find(i => i.id === d.iid);
     if (!x) return { ok: false, error: "insp" };
@@ -1496,12 +1684,17 @@ async function renderTasks() {
       <small>الرقم الموحد ${esc(t.est.uid)} · ${esc(gNames(t.groups))}${t.to ? ` · حتى ${dshort(t.to)}` : ""}</small>
       ${t.note ? `<small>${esc(t.note)}</small>` : ""}</div>
       <div class="pills">${overdue(t) ? `<span class="pill2 r">متأخرة</span>` : ""}<span class="pill2 ${t.status === TS.done ? "ok" : t.status === TS.cancelled ? "" : ""}">${esc(t.status)}</span></div>${chev}</div>`;
-  $("#main").innerHTML = tabs("task") + `
+  if (!TQ.view) TQ.view = innerWidth >= 900 ? "board" : "list";
+  if (!TQ.ws) TQ.ws = ws;
+  const head = tabs("task") + `
     ${CFG.api ? "" : `<div class="demo">نسخة تجريبية: المهام محفوظة على هذا الجهاز فقط، وتظهر في صفحة المراقب على الجهاز نفسه.</div>`}
     <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
       <div class="kpi"><b>${nOpen}</b><span>مهمة مفتوحة</span></div>
       <div class="kpi ${nLate ? "bad" : ""}"><b>${nLate}</b><span>متأخرة</span></div>
       <div class="kpi"><b>${nWk}</b><span>أُنجزت هذا الأسبوع</span></div></div>
+    <div class="seg wide tview" id="tview"><button data-tv="board" class="${TQ.view === "board" ? "on" : ""}">الجدول الأسبوعي</button><button data-tv="list" class="${TQ.view === "list" ? "on" : ""}">القائمة</button></div>`;
+  if (TQ.view === "board") { $("#main").innerHTML = head + planBoard(insps); pubbar(); return; }
+  $("#main").innerHTML = head + `
     <div class="filters">
       <div class="seg wide" id="tst">${["مفتوحة", "منجزة", "ملغاة", "الكل"].map(s => `<button data-ts="${s}" class="${TQ.st === s ? "on" : ""}">${s}</button>`).join("")}</div>
       <div class="row2" style="grid-template-columns:1fr"><select id="tI"><option value="">كل المراقبين</option>${insps.map(x => `<option value="${esc(x.id)}" ${TQ.iid === x.id ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select></div>
@@ -1516,7 +1709,112 @@ async function renderTasks() {
     <div class="btnrow"><button class="btn ghost sm" id="logout">خروج</button></div>`;
   pubbar();
 }
-function taskSheet(t, iidPreset) {
+/* ---------- جدول تخطيط الأسبوع ---------- */
+// مكان المهمة في الجدول: يوم محدد إن كانت ليوم واحد أو أُنجزت فيه، وإلا عمود «خلال الأسبوع»
+function taskSlot(t, ws) {
+  const we = addDays(ws, 6);
+  if (t.status === TS.cancelled) return null;
+  if (t.status === TS.done && t.done) { const d = isoOf(t.done); return d >= ws && d <= we ? d : null; }
+  if (!((t.from || ws) <= we && (t.to || we) >= ws)) return null;
+  return t.from && t.from === t.to ? t.from : "w";
+}
+function lastVisits() {
+  const m = {};
+  (DATA || []).forEach(v => { if (!live(v) || !v.est || !v.est.uid) return; const u = String(v.est.uid); if (!m[u] || m[u] < v.date) m[u] = v.date; });
+  return m;
+}
+// منشآت مقترحة: آخر زيارة لها قبل 30 يوماً فأكثر، ولا مهمة لها في الأسبوع المعروض
+function suggestions(ws) {
+  const today = todayISO(), last = lastVisits(), we = addDays(ws, 6);
+  const busy = new Set((TASKS || []).filter(t => t.status !== TS.cancelled && (t.from || ws) <= we && (t.to || we) >= ws).map(t => String(t.est.uid)));
+  return knownEsts().filter(e => !busy.has(String(e.uid)) && last[e.uid])
+    .map(e => ({ ...e, last: last[e.uid], days: Math.round((new Date(today + "T12:00:00") - new Date(last[e.uid] + "T12:00:00")) / 864e5) }))
+    .filter(e => e.days >= 30).sort((a, b) => b.days - a.days);
+}
+function planBoard(insps) {
+  const ws = TQ.ws, we = addDays(ws, 6), today = todayISO(), cur = weekStart(today);
+  const days = [0, 1, 2, 3, 4, 5, 6].map(i => addDays(ws, i));
+  const T = TASKS || [], sug = suggestions(ws);
+  const chip = t => { const cls = t.status === TS.done ? "done" : overdue(t) ? "late" : "";
+    return `<div class="chip ${cls}" data-task="${esc(t.id)}" draggable="${t.status === TS.open}" title="${esc(t.est.name + " · " + gNames(t.groups))}"><b>${esc(t.est.name)}</b><small>${esc(gNames(t.groups))}</small></div>`; };
+  const rows = insps.map(x => {
+    const mine = T.filter(t => t.iid === x.id), slots = {};
+    mine.forEach(t => { const s = taskSlot(t, ws); if (s) (slots[s] = slots[s] || []).push(t); });
+    const inWk = Object.values(slots).flat(), dn = inWk.filter(t => t.status === TS.done).length;
+    const cell = (key, cls) => `<div class="bcell ${cls}" data-drop="${esc(x.id)}|${key}">${(slots[key] || []).map(chip).join("")}<button type="button" class="cadd" data-cell="${esc(x.id)}|${key}" aria-label="إضافة مهمة لـ ${esc(x.name)}">+</button></div>`;
+    return `<div class="bn"><b>${esc(x.name)}</b><small>${inWk.length ? `${dn} منجزة · ${inWk.length - dn} مفتوحة` : "بلا مهام"}${x.free ? " · زيارات حرة" : ""}</small></div>
+      ${cell("w", "wkc")}${days.map(d => cell(d, d === today ? "tdc" : "")).join("")}`;
+  }).join("");
+  return `<div class="tbar">
+      <div class="wknav"><button type="button" data-wk="-1" aria-label="الأسبوع السابق">‹</button><b>أسبوع ${dshort(ws)} – ${dshort(we)}</b><button type="button" data-wk="1" aria-label="الأسبوع التالي">›</button>${ws !== cur ? `<button type="button" data-wk="0">هذا الأسبوع</button>` : ""}</div>
+      <div class="tacts"><button class="btn ghost sm" id="copyWeek">نسخ خطة الأسبوع الماضي</button><button class="btn ghost sm" id="autoPlan">توزيع مقترح</button><button class="btn sm" id="addTask">+ مهمة</button></div>
+    </div>
+    <div class="legend"><span><i style="border-color:var(--ok);background:var(--ok-l)"></i>منجزة</span><span><i style="border-color:var(--brand)"></i>مفتوحة</span><span><i style="border-color:var(--bad);background:var(--bad-l)"></i>متأخرة</span><span>اسحب المهمة المفتوحة إلى يوم أو مراقب آخر لإعادة إسنادها، أو اضغط + لإضافة مهمة في الخانة.</span></div>
+    ${insps.length ? `<div class="planwrap"><div class="board"><div class="bgrid">
+        <div class="bh">المراقب</div><div class="bh wk">خلال الأسبوع</div>${days.map((d, i) => `<div class="bh ${d === today ? "td" : ""}">${DAYS[i]} ${+d.slice(8)}</div>`).join("")}
+        ${rows}</div></div>
+      <aside class="card sugs"><div class="rowhead"><h3>منشآت مقترحة للإسناد</h3><span class="k">${sug.length}</span></div>
+        <div class="k">آخر زيارة لها قبل 30 يوماً فأكثر، ولا مهمة لها في هذا الأسبوع.</div>
+        ${sug.length ? `<div class="sgl">` + sug.slice(0, 12).map(s => `<div class="sg"><div><b>${esc(s.name)}</b><small>آخر زيارة قبل ${s.days} يوماً · ${esc(s.uid)}</small></div><button type="button" data-sug="${esc(s.uid)}">إسناد</button></div>`).join("") + `</div>`
+          : `<div class="k" style="margin-top:8px">لا توجد منشآت مضى على زيارتها 30 يوماً.</div>`}
+      </aside></div>`
+      : `<div class="card empty">أضف المراقبين أولاً من تبويب «المراقبون».</div>`}
+    <div class="btnrow"><button class="btn ghost sm" id="logout">خروج</button></div>`;
+}
+const taskBody = t => ({ id: t.id, iid: t.iid, est: { ...t.est }, groups: t.groups || [], from: t.from || "", to: t.to || "", note: t.note || "" });
+async function moveTask(id, iid, key) {
+  const t = (TASKS || []).find(x => x.id === id); if (!t || t.status !== TS.open) return;
+  const ws = TQ.ws, from = key === "w" ? ws : key, to = key === "w" ? addDays(ws, 6) : key;
+  if (t.iid === iid && t.from === from && t.to === to) return;
+  const j = await taskCall({ action: "task_save", task: { ...taskBody(t), iid, from, to } });
+  if (!j.ok) return toast(TERR[j.error] || "تعذّر نقل المهمة");
+  renderTasks(); toast(t.iid === iid ? "نُقلت المهمة" : "أُسندت المهمة لمراقب آخر");
+}
+async function bulkTasks(tasks, done) {
+  if (!tasks.length) return "لا توجد مهام لإنشائها";
+  const j = await taskCall({ action: "task_bulk", tasks });
+  if (!j.ok) return TERR[j.error] || "تعذّر الحفظ";
+  setTimeout(() => { renderTasks(); toast(`${done} ${j.saved}${j.failed ? ` · تعذّر ${j.failed}` : ""}`); }, 0);
+}
+const sameWeekTask = (iid, uid, ws) => { const we = addDays(ws, 6); return (TASKS || []).some(t => t.status !== TS.cancelled && t.iid === iid && String(t.est.uid) === String(uid) && (t.from || ws) <= we && (t.to || we) >= ws); };
+function copyWeekSheet() {
+  const ws = TQ.ws, pw = addDays(ws, -7), pe = addDays(pw, 6), act = new Set((INSPS || []).filter(x => x.active).map(x => x.id));
+  const src = (TASKS || []).filter(t => t.status !== TS.cancelled && act.has(t.iid) && (t.from || pw) >= pw && (t.from || pw) <= pe);
+  const L = src.filter(t => !sameWeekTask(t.iid, t.est.uid, ws)).map(t => ({ ...taskBody(t), id: undefined,
+    from: t.from ? addDays(t.from, 7) : ws, to: t.to ? addDays(t.to, 7) : addDays(ws, 6) }));
+  const nm = id => ((INSPS || []).find(x => x.id === id) || {}).name || "";
+  openSheet("نسخ خطة الأسبوع الماضي", L.length
+    ? `<div class="k">تُنشأ هذه المهام لأسبوع ${dshort(ws)} – ${dshort(addDays(ws, 6))} بالمراقبين والمجموعات أنفسهم، وتُزاح التواريخ أسبوعاً.</div>
+       <div class="aplist">${L.map(x => `<div>${esc(x.est.name)}<small>${esc(nm(x.iid))} · ${esc(gNames(x.groups))}</small></div>`).join("")}</div>`
+    : `<div class="k">لا توجد مهام في أسبوع ${dshort(pw)} – ${dshort(pe)} لم تُنسخ بعد.</div>`,
+    L.length ? [{ t: `إنشاء ${L.length} ${L.length > 2 && L.length < 11 ? "مهام" : "مهمة"}`, fn: () => bulkTasks(L, "أُنشئت المهام:") }, { t: "رجوع", cls: "ghost" }] : [{ t: "إغلاق", cls: "ghost" }]);
+}
+function autoPlanSheet(q) {
+  q = q || 3;
+  const ws = TQ.ws, we = addDays(ws, 6), act = (INSPS || []).filter(x => x.active), cand = suggestions(ws);
+  const need = {}; act.forEach(x => need[x.id] = Math.max(0, q - (TASKS || []).filter(t => t.iid === x.id && t.status !== TS.cancelled && (t.from || ws) <= we && (t.to || we) >= ws).length));
+  const plan = []; let i = 0, guard = 0;
+  while (cand.length && act.some(x => need[x.id] > 0) && guard++ < 500) {
+    const x = act[i++ % act.length]; if (!need[x.id]) continue;
+    const e = cand.shift(); plan.push({ iid: x.id, est: { name: e.name, uid: e.uid, address: e.address || "" }, groups: [], from: ws, to: we, note: "", why: e.days, nm: x.name }); need[x.id]--;
+  }
+  openSheet("توزيع مقترح للمهام", `
+    <label class="f"><span>عدد المنشآت لكل مراقب في الأسبوع</span><select id="apQ">${[1, 2, 3, 4, 5].map(n => `<option ${n === q ? "selected" : ""}>${n}</option>`).join("")}</select></label>
+    <div class="k">يوزّع المنشآت التي مضى على آخر زيارة لها 30 يوماً فأكثر (الأقدم أولاً) على المراقبين الفعّالين بالتناوب، ويحسب المهام الموجودة لكل منهم. راجع القائمة قبل الإسناد.</div>
+    ${plan.length ? `<div class="aplist">${plan.map(x => `<div>${esc(x.est.name)}<small>${esc(x.nm)} · آخر زيارة قبل ${x.why} يوماً · كل المجموعات</small></div>`).join("")}</div>`
+      : `<div class="k" style="margin-top:8px">لا توجد منشآت مقترحة، أو لكل مراقب ${q} مهام هذا الأسبوع.</div>`}`,
+    plan.length ? [{ t: `إسناد ${plan.length} ${plan.length > 2 && plan.length < 11 ? "مهام" : "مهمة"}`, fn: () => bulkTasks(plan.map(({ why, nm, ...x }) => x), "أُسندت المهام:") }, { t: "رجوع", cls: "ghost" }] : [{ t: "إغلاق", cls: "ghost" }]);
+}
+document.addEventListener("change", e => { if (e.target.id === "apQ") autoPlanSheet(+e.target.value); });
+// السحب والإفلات في جدول الأسبوع
+document.addEventListener("dragstart", e => { const c = e.target.closest && e.target.closest(".chip[draggable=true]"); if (c) { e.dataTransfer.setData("text/plain", c.dataset.task); e.dataTransfer.effectAllowed = "move"; } });
+document.addEventListener("dragover", e => { const c = e.target.closest && e.target.closest("[data-drop]"); if (c) { e.preventDefault(); $$(".bcell.over").forEach(x => x !== c && x.classList.remove("over")); c.classList.add("over"); } });
+document.addEventListener("dragleave", e => { const c = e.target.closest && e.target.closest("[data-drop]"); if (c && !c.contains(e.relatedTarget)) c.classList.remove("over"); });
+document.addEventListener("drop", e => { const c = e.target.closest && e.target.closest("[data-drop]"); if (!c) return; e.preventDefault(); c.classList.remove("over");
+  const id = e.dataTransfer.getData("text/plain"), [iid, key] = c.dataset.drop.split("|"); if (id) moveTask(id, iid, key); });
+
+function taskSheet(t, iidPreset, pre) {
+  pre = pre || {};
   const edit = !!t, insps = (INSPS || []).filter(x => x.active || (t && x.id === t.iid)), ws = weekStart(todayISO()), sel = new Set((t && t.groups || []).map(Number));
   const ests = knownEsts(), closed = edit && t.status === TS.done;
   if (closed) {
@@ -1526,14 +1824,14 @@ function taskSheet(t, iidPreset) {
   }
   openSheet(edit ? "تعديل المهمة" : "مهمة جديدة", `
     <label class="f"><span class="req">المراقب</span><select id="tk_i">${insps.map(x => `<option value="${esc(x.id)}" ${(t ? t.iid : iidPreset) === x.id ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select></label>
-    <label class="f"><span class="req">اسم المنشأة</span><input id="tk_name" list="tk_ests" value="${esc(t ? t.est.name : "")}" autocomplete="off" placeholder="اكتب الاسم أو اختر من المنشآت السابقة"></label>
+    <label class="f"><span class="req">اسم المنشأة</span><input id="tk_name" list="tk_ests" value="${esc(t ? t.est.name : pre.est ? pre.est.name : "")}" autocomplete="off" placeholder="اكتب الاسم أو اختر من المنشآت السابقة"></label>
     <datalist id="tk_ests">${ests.map(e => `<option value="${esc(e.name)}">${esc(e.uid)}</option>`).join("")}</datalist>
-    <div class="two"><label class="f"><span class="req">الرقم الموحد</span><input id="tk_uid" inputmode="numeric" value="${esc(t ? t.est.uid : "")}" autocomplete="off"></label>
-      <label class="f"><span>العنوان</span><input id="tk_addr" value="${esc(t ? t.est.address : "")}" autocomplete="off"></label></div>
+    <div class="two"><label class="f"><span class="req">الرقم الموحد</span><input id="tk_uid" inputmode="numeric" value="${esc(t ? t.est.uid : pre.est ? pre.est.uid : "")}" autocomplete="off"></label>
+      <label class="f"><span>العنوان</span><input id="tk_addr" value="${esc(t ? t.est.address : pre.est ? pre.est.address || "" : "")}" autocomplete="off"></label></div>
     <div class="f"><span>المجموعات المطلوبة (اتركها كلها فارغة لكل المجموعات)</span>
       <div class="tkg">${pubCat().groups.filter(g => g.active !== false).map(g => `<label class="chk" style="margin:2px 0"><input type="checkbox" data-tg="${g.id}" ${sel.has(g.id) ? "checked" : ""}> ${esc(g.title)}</label>`).join("")}</div></div>
-    <div class="two"><label class="f"><span>من</span><input id="tk_from" type="date" value="${esc(t ? t.from : ws)}"></label>
-      <label class="f"><span>حتى</span><input id="tk_to" type="date" value="${esc(t ? t.to : addDays(ws, 6))}"></label></div>
+    <div class="two"><label class="f"><span>من</span><input id="tk_from" type="date" value="${esc(t ? t.from : pre.from || ws)}"></label>
+      <label class="f"><span>حتى</span><input id="tk_to" type="date" value="${esc(t ? t.to : pre.to || addDays(ws, 6))}"></label></div>
     <label class="f"><span>ملاحظة للمراقب</span><textarea id="tk_note" rows="2" placeholder="مثال: ركّز على أصناف الأرز والسكر">${esc(t ? t.note : "")}</textarea></label>
     ${edit && t.status === TS.cancelled ? `<div class="stbox">المهمة ملغاة ولا تظهر للمراقب.</div>` : ""}`,
   [{ t: edit ? "حفظ" : "إضافة المهمة", fn: async () => {
@@ -1689,7 +1987,16 @@ document.addEventListener("click", e => {
   if (t.closest("#pinChg")) { go("#/pin"); return; }
   if (t.closest("#togDel")) { DQ.showDel = !DQ.showDel; return renderMonitor(); }
   if (t.closest("#addInsp")) return inspSheet(null);
-  if (t.closest("#addTask")) return taskSheet(null, TQ.iid);
+  if (t.closest("#addTask")) return taskSheet(null, TQ.iid, TQ.view === "board" && TQ.ws ? { from: TQ.ws, to: addDays(TQ.ws, 6) } : null);
+  if (t.closest("#fabTask")) return taskSheet(null, TQ.iid);
+  if (t.closest("#weekXlNav")) return weekSheet();
+  if (t.closest("#copyWeek")) return copyWeekSheet();
+  if (t.closest("#autoPlan")) return autoPlanSheet(3);
+  const gob = t.closest("[data-go]"); if (gob) { const g = gob.dataset.go; if (g.startsWith("#")) { if (g === "#/t") TQ.st = "مفتوحة"; return go(g); } const el = document.getElementById(g); if (el) { if (el.tagName === "DETAILS") el.open = true; el.scrollIntoView({ behavior: "smooth", block: "start" }); } return; }
+  const tvb = t.closest("[data-tv]"); if (tvb) { TQ.view = tvb.dataset.tv; return renderTasks(); }
+  const wkb = t.closest("[data-wk]"); if (wkb) { const d = +wkb.dataset.wk; TQ.ws = d ? addDays(TQ.ws || weekStart(todayISO()), 7 * d) : weekStart(todayISO()); return renderTasks(); }
+  const cab = t.closest("[data-cell]"); if (cab) { const [iid, key] = cab.dataset.cell.split("|"); return taskSheet(null, iid, key === "w" ? { from: TQ.ws, to: addDays(TQ.ws, 6) } : { from: key, to: key }); }
+  const sgb = t.closest("[data-sug]"); if (sgb) { const e = knownEsts().find(x => String(x.uid) === sgb.dataset.sug); return taskSheet(null, TQ.iid, { est: e, from: TQ.ws, to: addDays(TQ.ws, 6) }); }
   const af = t.closest("[data-addfor]"); if (af) return taskSheet(null, af.dataset.addfor);
   const tk = t.closest("[data-task]"); if (tk) return taskSheet((TASKS || []).find(x => x.id === tk.dataset.task));
   const tsb = t.closest("[data-ts]"); if (tsb) { TQ.st = tsb.dataset.ts; return renderTasks(); }

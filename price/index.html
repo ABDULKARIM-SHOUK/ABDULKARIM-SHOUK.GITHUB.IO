@@ -286,6 +286,7 @@ body.visit .ofoot{display:none}
 .task .why{font-size:13.5px;color:#243b3e;background:var(--ok-l);border-radius:8px;padding:6px 10px;margin:6px 0 8px;line-height:1.7}
 .task .btn{height:42px;font-size:14.5px;margin-top:8px}
 .task .lt{color:var(--bad);font-weight:700}
+.task.per b{color:var(--ok)}
 .taskbar{border:1.5px solid #9fd0b5;background:#f3fbf6}
 .taskbar b{display:block;color:var(--ok);font-size:15.5px}
 .taskbar .why{margin-top:6px;font-size:14px;line-height:1.7;color:#243b3e}
@@ -483,7 +484,7 @@ const gst = t => String(t || "").replace(/^المجموعة\s+/, "");
 const shortTitle = g => gst(g.title);
 const newVisit = () => ({ vid: uid(), date: todayISO(), cur: GROUPS[0] ? GROUPS[0].id : 1,
   est: { name: "", uid: "", address: "", rep: "", phone: "" }, items: {},
-  short: { val: "", kinds: [], rows: [] }, rise: { val: "", rows: [] }, ack: false, geo: null, replaces: "", task: "", taskGroups: [] });
+  short: { val: "", kinds: [], rows: [] }, rise: { val: "", rows: [] }, ack: false, geo: null, replaces: "", task: "", taskGroups: [], taskPer: false });
 const it = n => V.items[ik(n)] || (V.items[ik(n)] = { p: "", note: "", showNote: false, ph: false });
 const hasContent = v => !!(v && (Object.values(v.est).some(Boolean) || v.ack || v.short.val || v.rise.val ||
   Object.values(v.items).some(i => i.p || i.note || i.ph)));
@@ -749,7 +750,12 @@ function renderHome() {
         <button class="btn" style="margin-top:10px">متابعة الزيارة</button></div>`
       : ""}
     ${tasks.length ? `<div class="card taskc"><div class="rowhead"><h3>مهامي</h3><span class="pill3 ok">${tasks.length}</span></div>
-      ${tasks.map(x => `<div class="task ${x.late ? "late" : ""}"><b>${esc(x.est.name)}</b>
+      ${tasks.map(x => x.per ? `<div class="task per"><b>رصد مفتوح خلال الفترة</b>
+        <div class="k">أي منشأة · ${esc(taskGroupsTxt(x))} فقط</div>
+        <div class="k">${x.soon ? `تبدأ ${fmtDate(x.from)} · ` : ""}حتى ${fmtDate(x.to)}</div>
+        ${x.note ? `<div class="why">${esc(x.note)}</div>` : ""}
+        ${hasDraft || x.soon ? "" : `<button class="btn" data-task="${esc(x.id)}">+ زيارة منشأة جديدة</button>`}</div>`
+      : `<div class="task ${x.late ? "late" : ""}"><b>${esc(x.est.name)}</b>
         <div class="k">الرقم الموحد ${esc(x.est.uid)}${x.est.address ? " · " + esc(x.est.address) : ""}</div>
         <div class="k">${esc(taskGroupsTxt(x))}${x.to ? ` · <span class="${x.late ? "lt" : ""}">${x.late ? "متأخرة، كانت" : ""} حتى ${fmtDate(x.to)}</span>` : ""}</div>
         ${x.note ? `<div class="why">${esc(x.note)}</div>` : ""}
@@ -809,21 +815,26 @@ function monthTarget() {
 /* ---------- المهام التي يوزعها المشرف ---------- */
 // الزيارات الحرة: آخر ما وصل من الجدول، وإلا ما رجع عند الدخول
 function canFree() { const me = store.get(K.me, null), a = auth() || {}; return me && typeof me.free === "boolean" ? me.free : !!a.free; }
+// مهمة «رصد مفتوح»: أي منشأة خلال الفترة، بالمجموعات المحددة فقط، ولا تُغلق بزيارة واحدة
+const isPer = x => !!x && !String((x.est || {}).uid || "");
 function myTasks() {
   const A = auth() || {}, recs = store.get(K.recs, []), today = todayISO();
-  return store.get(K.tasks, []).filter(x => x && x.iid === A.iid && !recs.some(r => r.task === x.id && !r.rejected))
-    .map(x => ({ ...x, late: !!(x.to && x.to < today) }))
+  return store.get(K.tasks, []).filter(x => x && x.iid === A.iid && (isPer(x) ? !(x.to && x.to < today) : !recs.some(r => r.task === x.id && !r.rejected)))
+    .map(x => ({ ...x, per: isPer(x), soon: isPer(x) && !!(x.from && x.from > today), late: !isPer(x) && !!(x.to && x.to < today) }))
     .sort((a, b) => (a.to || "9").localeCompare(b.to || "9"));
 }
 const taskGroupsTxt = x => {
   const L = (x.groups || []).map(id => groupOf(id)).filter(Boolean);
   return L.length ? "المجموعات: " + L.map(shortTitle).join("، ") : "كل المجموعات";
 };
+const activePer = () => myTasks().filter(x => x.per && !x.soon);
+const perFields = x => ({ task: x.id, taskPer: true, taskGroups: (x.groups || []).map(Number), taskNote: x.note || "", taskTo: x.to || "" });
 function startTask(id) {
   const x = myTasks().find(t => t.id === id); if (!x) return;
   if (hasContent(store.get(K.draft, null))) return sheet("لديك زيارة لم تُحفظ", "احفظ الزيارة الحالية أو امسحها أولاً، ثم ابدأ هذه المهمة.",
     [{ t: "متابعة الزيارة الحالية", fn: () => go("#/v") }, { t: "رجوع", cls: "ghost" }]);
   const v = newVisit();
+  if (x.per) { if (x.soon) return; Object.assign(v, perFields(x)); V = v; v.cur = VG()[0].id; V = null; store.set(K.draft, v); return go("#/v"); }
   Object.assign(v, { task: x.id, taskGroups: (x.groups || []).map(Number), taskNote: x.note || "", taskTo: x.to || "",
     est: { name: x.est.name || "", uid: String(x.est.uid || ""), address: x.est.address || "", rep: "", phone: "" } });
   V = v; v.cur = VG()[0].id; V = null;
@@ -848,7 +859,7 @@ $("#home").addEventListener("click", e => {
   if (e.target.closest("#seenBtn")) { store.set(K.seen, CAT.v); return renderHome(); }
   if (e.target.closest("#exportCsv")) return exportCsv();
   if (e.target.closest("#resume")) { if (authed()) go("#/v"); }
-  if (e.target.closest("#startVisit")) { if (authed() && canFree()) go("#/v"); }
+  if (e.target.closest("#startVisit")) { if (authed() && canFree()) { const ap = activePer()[0]; if (ap) return startTask(ap.id); go("#/v"); } }
   if (e.target.closest("#refTasks")) { fetchMine(true); return toast("جارٍ تحديث المهام…"); }
   const tk = e.target.closest("[data-task]"); if (tk) return startTask(tk.dataset.task);
   const fx = e.target.closest("[data-fix]"); if (fx) return startFix(fx.dataset.fix);
@@ -906,6 +917,8 @@ function openVisit() {
   const d = store.get(K.draft, null);
   V = d && d.items && !d.gid ? d : newVisit(); V.date = todayISO(); MODE = "all";
   // دون مهمة ودون إذن بالزيارات الحرة لا تُفتح زيارة جديدة
+  // خلال فترة رصد مفتوح تُقيَّد كل زيارة جديدة بمجموعاته
+  if (!V.task && !V.replaces && !hasContent(V)) { const ap = activePer()[0]; if (ap) { Object.assign(V, perFields(ap)); store.set(K.draft, V); } }
   const noPerm = !V.task && !V.replaces && !canFree();
   if (noPerm && !hasContent(V)) { V = null; setHash("#/"); renderHome(); return toast("لا تستطيع الرصد إلا للمنشآت المسندة إليك من المشرف"); }
   if (!V.vid) V.vid = uid();
@@ -920,7 +933,7 @@ function openVisit() {
       <div class="k" style="margin-top:6px">عدّل ما يلزم ثم احفظ؛ تحل هذه الزيارة محل الأصلية في الجدول، وتنتقل صورها السابقة معها.</div></div>` : ""}
     ${noPerm ? `<div class="card fixbar"><b>هذه الزيارة ليست ضمن مهامك</b>
       <div class="k">لم يعد مسموحاً لك بالزيارات الحرة، فلن تُقبل في الجدول. امسحها من «منشأة جديدة» وابدأ من مهامك.</div></div>` : ""}
-    ${V.task ? `<div class="card taskbar"><b>مهمة من المشرف</b>
+    ${V.task ? `<div class="card taskbar"><b>${V.taskPer ? "رصد مفتوح خلال الفترة · أي منشأة" : "مهمة من المشرف"}</b>
       <div class="k">المجموعات المطلوبة: ${esc(VG().map(shortTitle).join("، "))}${V.taskTo ? ` · حتى ${fmtDate(V.taskTo)}` : ""}</div>
       ${V.taskNote ? `<div class="why">${esc(V.taskNote)}</div>` : ""}</div>` : ""}
     <div class="card estc">
@@ -949,7 +962,7 @@ function openVisit() {
     <div class="vcredit">حقوق التصميم: <bdi dir="ltr">ABDULKARIM N.SHOUK</bdi> · مشرف الرقابة الميدانية</div>`;
   $$("[data-est]").forEach(i => i.value = V.est[i.dataset.est] || "");
   // منشأة المهمة يحددها المشرف: لا يغيّر المراقب اسمها ولا رقمها الموحد
-  if (V.task) ["#f_name", "#f_uid"].forEach(s => { const i = $(s); i.readOnly = true; i.classList.add("locked"); });
+  if (V.task && !V.taskPer) ["#f_name", "#f_uid"].forEach(s => { const i = $(s); i.readOnly = true; i.classList.add("locked"); });
   $("#ack").checked = !!V.ack;
   renderFlags();
   showGroup(G.id, true);

@@ -1143,14 +1143,15 @@ const dayTxt = (iso, today) => iso === today ? "اليوم" : dshort(iso);
 // شريط الأسبوع: إنجاز المهام هذا الأسبوع (الأحد – السبت) أياً كانت فترة العرض
 function weekStats() {
   const today = todayISO(), ws = weekStart(today), we = addDays(ws, 6);
-  const T = (TASKS || []).filter(t => t.status !== TS.cancelled && ((t.from || ws) <= we && (t.to || we) >= ws || t.status === TS.done && t.done && isoOf(t.done) >= ws && isoOf(t.done) <= we));
+  const P = (TASKS || []).filter(t => isPeriod(t) && t.status === TS.open && (t.from || ws) <= we && (t.to || we) >= ws);
+  const T = (TASKS || []).filter(t => !isPeriod(t) && t.status !== TS.cancelled && ((t.from || ws) <= we && (t.to || we) >= ws || t.status === TS.done && t.done && isoOf(t.done) >= ws && isoOf(t.done) <= we));
   const done = T.filter(t => t.status === TS.done).length;
   const V = (DATA || []).filter(v => live(v) && v.date >= ws && v.date <= we);
   const act = (INSPS || []).filter(x => x.active);
   const seen = new Set(V.map(v => v.iid || v.inspector));
   const busy = act.filter(x => seen.has(x.id) || seen.has(x.name));
   const left = Math.max(1, Math.round((new Date(we + "T12:00:00") - new Date(today + "T12:00:00")) / 864e5) + 1);
-  return { ws, we, T, done, open: T.length - done, V, prices: V.reduce((s, v) => s + v.items.filter(i => !i.na && i.price > 0).length, 0),
+  return { ws, we, T, P, done, open: T.length - done, V, prices: V.reduce((s, v) => s + v.items.filter(i => !i.na && i.price > 0).length, 0),
     ests: new Set(V.map(v => v.est.uid)).size, act, busy, idle: act.filter(x => !busy.includes(x)), left };
 }
 const greet = () => new Date().getHours() < 12 ? "صباح الخير" : "مساء الخير";
@@ -1171,7 +1172,7 @@ const H = {
     if (a.nShort) L.push({ tone: "bad", n: a.nShort, title: "بلاغات نقص أو انقطاع", sub: "أبلغ عنها المراقبون في الفترة المعروضة", cta: "عرض", go: "c-flags" });
     if (a.outl.length) L.push({ tone: "warn", n: a.outl.length, title: "أسعار تحتاج مراجعة", sub: "بعيدة عن وسيط الصنف بأكثر من 40%، غالباً خطأ إدخال", cta: "مراجعة", go: "c-outl" });
     if (a.nDup) L.push({ tone: "warn", n: a.nDup, title: "زيارات مكررة", sub: "المنشأة نفسها في اليوم نفسه، احذف المكرر", cta: "عرض", go: "c-visits" });
-    const noTask = w.act.filter(x => !x.free && !w.T.some(t => t.iid === x.id));
+    const noTask = w.act.filter(x => !x.free && !w.T.some(t => t.iid === x.id) && !w.P.some(t => t.iid === x.id));
     if (noTask.length) L.push({ tone: "warn", n: noTask.length, title: "مراقبون بلا مهام هذا الأسبوع", sub: names(noTask, x => x.name) + " · لا يستطيعون الرصد دون مهمة", cta: "إسناد مهام", go: "#/t" });
     const idle = w.idle.filter(x => !noTask.includes(x));
     if (idle.length && w.left <= 5) L.push({ tone: "ok", n: idle.length, title: "لم يرصدوا هذا الأسبوع", sub: names(idle, x => x.name), cta: "عرض", go: "c-insp" });
@@ -1639,8 +1640,9 @@ async function taskCall(body) {
   if (a === "task_save") {
     const d = body.task, x = (INSPS || demoInsp()).find(i => i.id === d.iid);
     if (!x) return { ok: false, error: "insp" };
-    if (!String(d.est.name || "").trim()) return { ok: false, error: "estname" };
-    if (!String(d.est.uid || "").trim()) return { ok: false, error: "estuid" };
+    if (d.period) d.est = { name: "رصد مفتوح خلال الفترة", uid: "", address: "" };
+    else if (!String(d.est.name || "").trim()) return { ok: false, error: "estname" };
+    else if (!String(d.est.uid || "").trim()) return { ok: false, error: "estuid" };
     const o = { iid: x.id, insp: x.name, est: { name: d.est.name.trim(), uid: d.est.uid.trim(), address: (d.est.address || "").trim() }, groups: d.groups || [], from: d.from || "", to: d.to || "", note: (d.note || "").trim() };
     if (d.id) { const t = L.find(t => t.id === d.id); if (!t) return { ok: false, error: "notfound" }; if (t.status === TS.done) return { ok: false, error: "closed" }; Object.assign(t, o); }
     else L.push({ id: uid(), ...o, status: TS.open, visit: "", created: Date.now(), done: 0 });
@@ -1655,15 +1657,26 @@ async function taskCall(body) {
 function demoTaskSync() {
   if (CFG.api) return;
   const L = demoTasks(), recs = store.get("ps_records", []); let ch = false;
-  L.forEach(t => { if (t.status !== TS.open) return; const r = recs.find(r => r.task === t.id); if (r) { t.status = TS.done; t.visit = r.id; t.done = r.ts; ch = true; } });
+  L.forEach(t => { if (t.status !== TS.open || isPeriod(t)) return; const r = recs.find(r => r.task === t.id); if (r) { t.status = TS.done; t.visit = r.id; t.done = r.ts; ch = true; } });
   if (ch) store.set("ps_demo_tasks", L); TASKS = L;
 }
-const overdue = t => t.status === TS.open && t.to && t.to < todayISO();
+// مهمة الرصد المفتوح: لا منشأة محددة (الرقم الموحد فارغ)
+const isPeriod = t => !!t && !String((t.est || {}).uid || "");
+const taskTitle = t => isPeriod(t) ? "رصد مفتوح خلال الفترة" : t.est.name;
+const overdue = t => t.status === TS.open && !isPeriod(t) && t.to && t.to < todayISO();
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest("[data-tkm]"); if (!b) return;
+  const per = b.dataset.tkm === "period";
+  $$("#tk_mode [data-tkm]").forEach(x => x.classList.toggle("on", x === b));
+  $("#tk_estbox").hidden = per; $(".tkper").hidden = !per;
+  $("#tk_glab").textContent = per ? "المجموعات المسموح رصدها خلال الفترة" : "المجموعات المطلوبة (اتركها كلها فارغة لكل المجموعات)";
+  $$("[data-pq]").forEach(x => x.classList.toggle("req", per));
+});
 const gNames = ids => !ids || !ids.length ? "كل المجموعات" : ids.map(id => { const g = pubCat().groups.find(g => g.id === +id); return g ? gShort(g.title) : id; }).join("، ");
 function knownEsts() {
   const m = new Map();
   (DATA || []).slice().sort((a, b) => a.ts - b.ts).forEach(v => { if (v.est && v.est.uid) m.set(String(v.est.uid), { name: v.est.name, uid: String(v.est.uid), address: v.est.address || "" }); });
-  (TASKS || []).forEach(t => { if (!m.has(String(t.est.uid))) m.set(String(t.est.uid), t.est); });
+  (TASKS || []).forEach(t => { if (!isPeriod(t) && !m.has(String(t.est.uid))) m.set(String(t.est.uid), t.est); });
   return [...m.values()];
 }
 async function renderTasks() {
@@ -1680,8 +1693,8 @@ async function renderTasks() {
   const people = insps.filter(x => !TQ.iid || x.id === TQ.iid);
   const stat = id => { const mine = T.filter(t => t.iid === id); return { open: mine.filter(t => t.status === TS.open).length, late: mine.filter(overdue).length, wk: mine.filter(t => t.status === TS.done && t.done && isoOf(t.done) >= ws).length }; };
   const nOpen = T.filter(t => t.status === TS.open).length, nLate = T.filter(overdue).length, nWk = T.filter(t => t.status === TS.done && t.done && isoOf(t.done) >= ws).length;
-  const row = t => `<div class="vrow" data-task="${esc(t.id)}"><div class="vm"><b>${esc(t.est.name)}</b>
-      <small>الرقم الموحد ${esc(t.est.uid)} · ${esc(gNames(t.groups))}${t.to ? ` · حتى ${dshort(t.to)}` : ""}</small>
+  const row = t => `<div class="vrow" data-task="${esc(t.id)}"><div class="vm"><b>${esc(taskTitle(t))}</b>
+      <small>${isPeriod(t) ? `أي منشأة · ${esc(gNames(t.groups))} فقط · ${dshort(t.from)} – ${dshort(t.to)}` : `الرقم الموحد ${esc(t.est.uid)} · ${esc(gNames(t.groups))}${t.to ? ` · حتى ${dshort(t.to)}` : ""}`}</small>
       ${t.note ? `<small>${esc(t.note)}</small>` : ""}</div>
       <div class="pills">${overdue(t) ? `<span class="pill2 r">متأخرة</span>` : ""}<span class="pill2 ${t.status === TS.done ? "ok" : t.status === TS.cancelled ? "" : ""}">${esc(t.status)}</span></div>${chev}</div>`;
   if (!TQ.view) TQ.view = innerWidth >= 900 ? "board" : "list";
@@ -1736,7 +1749,7 @@ function planBoard(insps) {
   const days = [0, 1, 2, 3, 4, 5, 6].map(i => addDays(ws, i));
   const T = TASKS || [], sug = suggestions(ws);
   const chip = t => { const cls = t.status === TS.done ? "done" : overdue(t) ? "late" : "";
-    return `<div class="chip ${cls}" data-task="${esc(t.id)}" draggable="${t.status === TS.open}" title="${esc(t.est.name + " · " + gNames(t.groups))}"><b>${esc(t.est.name)}</b><small>${esc(gNames(t.groups))}</small></div>`; };
+    return `<div class="chip ${cls}" data-task="${esc(t.id)}" draggable="${t.status === TS.open && !isPeriod(t)}" title="${esc(t.est.name + " · " + gNames(t.groups))}"><b>${esc(t.est.name)}</b><small>${esc(gNames(t.groups))}</small></div>`; };
   const rows = insps.map(x => {
     const mine = T.filter(t => t.iid === x.id), slots = {};
     mine.forEach(t => { const s = taskSlot(t, ws); if (s) (slots[s] = slots[s] || []).push(t); });
@@ -1816,7 +1829,7 @@ document.addEventListener("drop", e => { const c = e.target.closest && e.target.
 function taskSheet(t, iidPreset, pre) {
   pre = pre || {};
   const edit = !!t, insps = (INSPS || []).filter(x => x.active || (t && x.id === t.iid)), ws = weekStart(todayISO()), sel = new Set((t && t.groups || []).map(Number));
-  const ests = knownEsts(), closed = edit && t.status === TS.done;
+  const ests = knownEsts(), closed = edit && t.status === TS.done, per = edit ? isPeriod(t) : !!pre.period;
   if (closed) {
     const v = (DATA || []).find(x => x.id === t.visit);
     if (v) return visitSheet(v.id);
@@ -1824,20 +1837,27 @@ function taskSheet(t, iidPreset, pre) {
   }
   openSheet(edit ? "تعديل المهمة" : "مهمة جديدة", `
     <label class="f"><span class="req">المراقب</span><select id="tk_i">${insps.map(x => `<option value="${esc(x.id)}" ${(t ? t.iid : iidPreset) === x.id ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select></label>
+    <div class="f"><span>نوع المهمة</span><div class="seg wide" id="tk_mode" style="margin-top:4px"><button type="button" data-tkm="est" class="${per ? "" : "on"}">منشأة محددة</button><button type="button" data-tkm="period" class="${per ? "on" : ""}">رصد مفتوح لفترة</button></div></div>
+    <div class="stbox tkper" ${per ? "" : "hidden"}>يزور المراقب أي منشأة خلال الفترة، ويرصد <b>المجموعات المحددة فقط</b>. لا تُقبل منه خلالها أسعار لمجموعات أخرى، وتبقى المهمة مفتوحة حتى نهاية الفترة.</div>
+    <div id="tk_estbox" ${per ? "hidden" : ""}>
     <label class="f"><span class="req">اسم المنشأة</span><input id="tk_name" list="tk_ests" value="${esc(t ? t.est.name : pre.est ? pre.est.name : "")}" autocomplete="off" placeholder="اكتب الاسم أو اختر من المنشآت السابقة"></label>
     <datalist id="tk_ests">${ests.map(e => `<option value="${esc(e.name)}">${esc(e.uid)}</option>`).join("")}</datalist>
     <div class="two"><label class="f"><span class="req">الرقم الموحد</span><input id="tk_uid" inputmode="numeric" value="${esc(t ? t.est.uid : pre.est ? pre.est.uid : "")}" autocomplete="off"></label>
       <label class="f"><span>العنوان</span><input id="tk_addr" value="${esc(t ? t.est.address : pre.est ? pre.est.address || "" : "")}" autocomplete="off"></label></div>
-    <div class="f"><span>المجموعات المطلوبة (اتركها كلها فارغة لكل المجموعات)</span>
+    </div>
+    <div class="f"><span id="tk_glab">${per ? "المجموعات المسموح رصدها خلال الفترة" : "المجموعات المطلوبة (اتركها كلها فارغة لكل المجموعات)"}</span>
       <div class="tkg">${pubCat().groups.filter(g => g.active !== false).map(g => `<label class="chk" style="margin:2px 0"><input type="checkbox" data-tg="${g.id}" ${sel.has(g.id) ? "checked" : ""}> ${esc(g.title)}</label>`).join("")}</div></div>
-    <div class="two"><label class="f"><span>من</span><input id="tk_from" type="date" value="${esc(t ? t.from : pre.from || ws)}"></label>
-      <label class="f"><span>حتى</span><input id="tk_to" type="date" value="${esc(t ? t.to : pre.to || addDays(ws, 6))}"></label></div>
+    <div class="two"><label class="f"><span class="${per ? "req" : ""}" data-pq>من</span><input id="tk_from" type="date" value="${esc(t ? t.from : pre.from || ws)}"></label>
+      <label class="f"><span class="${per ? "req" : ""}" data-pq>حتى</span><input id="tk_to" type="date" value="${esc(t ? t.to : pre.to || addDays(ws, 6))}"></label></div>
     <label class="f"><span>ملاحظة للمراقب</span><textarea id="tk_note" rows="2" placeholder="مثال: ركّز على أصناف الأرز والسكر">${esc(t ? t.note : "")}</textarea></label>
     ${edit && t.status === TS.cancelled ? `<div class="stbox">المهمة ملغاة ولا تظهر للمراقب.</div>` : ""}`,
   [{ t: edit ? "حفظ" : "إضافة المهمة", fn: async () => {
-      const task = { id: edit ? t.id : undefined, iid: $("#tk_i").value, est: { name: $("#tk_name").value.trim(), uid: toLatin($("#tk_uid").value.trim()), address: $("#tk_addr").value.trim() },
+      const period = $('#tk_mode [data-tkm="period"]').classList.contains("on");
+      const task = { id: edit ? t.id : undefined, period, iid: $("#tk_i").value, est: { name: $("#tk_name").value.trim(), uid: toLatin($("#tk_uid").value.trim()), address: $("#tk_addr").value.trim() },
         groups: [...document.querySelectorAll("[data-tg]")].filter(c => c.checked).map(c => +c.dataset.tg), from: $("#tk_from").value, to: $("#tk_to").value, note: $("#tk_note").value.trim() };
       if (task.from && task.to && task.to < task.from) return "تاريخ «حتى» قبل تاريخ «من»";
+      if (period && (!task.from || !task.to)) return "حدّد بداية الفترة ونهايتها";
+      if (period) task.est = { name: "", uid: "", address: "" };
       const j = await taskCall({ action: "task_save", task }); if (!j.ok) return TERR[j.error] || "تعذّر الحفظ";
       setTimeout(() => { renderTasks(); toast(edit ? "حُفظت المهمة" : "أُسندت المهمة للمراقب"); }, 0);
     } },

@@ -1,6 +1,6 @@
 // يخزّن صفحة المراقب على الجهاز لتفتح دون إنترنت، ويحدّثها في الخلفية عند توفر الاتصال.
-const C = "ps-f07ad6d5f2";
-const FILES = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png"];
+const C = "ps-9c9d648022";
+const FILES = ["./", "./index.html", "./manifest.json", "./icon-192.png", "./icon-512.png", "./admin.html", "./manifest-admin.json", "./icon-admin-192.png", "./icon-admin-512.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(C).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
 });

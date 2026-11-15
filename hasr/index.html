@@ -212,7 +212,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
         </div>
         <div class="added-h">المنتجات المضافة لهذه المنشأة</div>
         <div class="list" id="added"></div>
-        <div class="empty" id="added-empty">لم تُضف منتجات بعد. اختر نوع المنتج وأكمل بياناته ثم اضغط «تأكيد وإضافة المنتج». بعد إضافة كل الأصناف اضغط «حفظ».</div>
+        <div class="empty" id="added-empty">لم تُضف منتجات بعد. اختر نوع المنتج وأكمل بياناته ثم اضغط «تأكيد وإضافة المنتج»، ويبقى مربع الإضافة مفتوحاً للصنف التالي. بعد إضافة كل الأصناف اضغط «حفظ».</div>
         <div class="actions" id="c-open-row" hidden>
           <button type="button" class="btn ghost" id="c-open">+ إضافة منتج آخر</button>
           <span class="msg" id="a-msg" role="status"></span>
@@ -369,19 +369,20 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
   function resetComposer(){$('#c-type').value='';$('#c-prod').value='';$('#c-qty').value='';$('#c-qty').disabled=false;$('#c-unit').value='';$('#c-price').value='';
     setRadio('c-a','متوفر');setRadio('c-o','');syncNote();clearBad();S.unitTouched=false;
     S.cartEdit=-1;$('#c-title').textContent='إضافة منتج';$('#c-add').textContent='تأكيد وإضافة المنتج';$('#c-cancel').hidden=true;$('#composer').classList.remove('editing')}
-  $('#c-add').onclick=function(){var v=composerVal(),miss=[];clearBad();
+  function keepY(y){window.scrollTo({top:y,behavior:'instant'});requestAnimationFrame(function(){window.scrollTo({top:y,behavior:'instant'})})}
+  $('#c-add').onclick=function(){var y=window.scrollY,v=composerVal(),miss=[];clearBad();
     if(!v.ptype){miss.push('نوع المنتج');$('#c-type').classList.add('bad')}
     if(!v.prod){miss.push('اسم المنتج');$('#c-prod').classList.add('bad')}
     if(v.avail==='نافد')v.qty='0';
     if(v.qty===''||isNaN(parseFloat(v.qty))){miss.push('الكمية');$('#c-qty').classList.add('bad')}
     if(!v.unit&&v.avail!=='نافد'){miss.push('الوحدة');$('#c-unit').classList.add('bad')}
     if(!v.offer){miss.push('العرض من المصنع');$('#c-offer').classList.add('bad')}
-    if(miss.length){cmsg('أكمل: '+miss.join('، '),false);return}
+    if(miss.length){cmsg('أكمل: '+miss.join('، '),false);keepY(y);return}
     if(v.price&&isNaN(parseFloat(v.price))){$('#c-price').classList.add('bad');cmsg('السعر يجب أن يكون رقماً.',false);return}
     var editing=S.cartEdit>=0;if(editing)S.cart[S.cartEdit]=v;else S.cart.push(v);
     resetComposer();renderCart();saveDraft();
-    showComposer(false);amsg(editing?'تم تعديل المنتج ✓':'تمت إضافة «'+v.prod+'» ✓ لإضافة صنف آخر اضغط «+ إضافة منتج آخر»، وعند الانتهاء اضغط «حفظ».',true)};
-  $('#c-cancel').onclick=function(){resetComposer();renderCart();cmsg('',true);showComposer(!S.cart.length)};
+    showComposer(true);amsg('',true);cmsg(editing?'تم تعديل المنتج ✓ أكمل بالصنف التالي.':'تمت إضافة «'+v.prod+'» ✓ أكمل بالصنف التالي، وعند الانتهاء اضغط «حفظ».',true);keepY(y)};
+  $('#c-cancel').onclick=function(){var y=window.scrollY;resetComposer();renderCart();cmsg('',true);showComposer(true);keepY(y)};
   function editCartItem(i){showComposer(true);amsg('',true);var p=S.cart[i];S.cartEdit=i;fillTypeSelect($('#c-type'),p.ptype);$('#c-prod').value=p.prod;
     fillUnitSelect(p.unit);S.unitTouched=true;setRadio('c-a',p.avail||'متوفر');$('#c-qty').value=p.qty;syncAvail();$('#c-price').value=p.price||'';
     setRadio('c-o',p.offer);syncNote();clearBad();
@@ -533,7 +534,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
       var det=el('details');det.appendChild(el('summary','','عرض المنتجات'));det.appendChild(prodTable(v.products));row.appendChild(det);box.appendChild(row)})}
 
   /* ---------- boot ---------- */
-  renderInspector();fillTypeSelect($('#c-type'),'');fillUnitSelect('');loadDraft();renderCart();showComposer(!S.cart.length);renderMine();renderPhotos();locUI();pendUI();
+  renderInspector();fillTypeSelect($('#c-type'),'');fillUnitSelect('');loadDraft();renderCart();showComposer(true);renderMine();renderPhotos();locUI();pendUI();
   if(S.code&&S.round)$('#insp-rd').textContent='الجولة: '+S.round;
   (S.code?call('GET',{action:'whoami',code:S.code},null,20000):call('GET',{action:'types'},null,20000)).then(function(j){
     if(S.code&&j&&j.codeInvalid){S.code='';S.who='';sdel(K.code);sdel(K.who);renderInspector();codeMsg('رمزك لم يعد صالحاً. أدخل الرمز الجديد من المشرف.');}

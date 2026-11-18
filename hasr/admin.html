@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex">
-<title>متابعة حصر المنتجات · فرع جازان</title>
+<title>متابعة حصر المنتجات · جازان</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
@@ -87,9 +87,9 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
 </head>
 <body>
 <header class="hd" id="hd"><div class="wrap hd-in"><div>
-  <div class="k">المملكة العربية السعودية</div><div class="o">وزارة التجارة · فرع جازان</div>
+  <div class="k">منطقة جازان</div>
   <h1>متابعة حصر <b>المنتجات</b></h1><div class="sub">لوحة المشرف · تتحدث تلقائياً</div>
-</div><img class="logo" id="logo" alt="شعار وزارة التجارة" hidden></div></header>
+</div></div></header>
 
 <main class="wrap">
   <section class="card gate" id="gate" hidden>
@@ -206,7 +206,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
 <div class="toast" id="toast" role="status" hidden></div>
 <div id="print-area"></div>
 
-<footer class="band"><div class="wrap band-in"><div class="slg">بجهودكـم نحـقق <b>إنجـاز جـازان</b></div><img class="soc" id="soc" alt="" hidden></div></footer>
+<footer class="band"><div class="wrap band-in"><div class="slg">حصر <b>المنتجات</b> · جازان</div></div></footer>
 
 <script>
 (function(){
@@ -231,10 +231,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
 
   /* brand images reused from the entry page */
   var IMG={};
-  var imgsReady=fetch('./index.html').then(function(r){return r.text()}).then(function(h){
-    var b=h.match(/url\((data:image\/jpeg;base64,[^)]+)\)/),l=h.match(/class="logo" src="(data:image\/png;base64,[^"]+)"/),s=h.match(/class="soc" src="(data:image\/png;base64,[^"]+)"/);
-    if(b){IMG.bld=b[1];$('#hd').style.backgroundImage='linear-gradient(270deg,rgba(4,43,32,.95),rgba(6,58,43,.86) 55%,rgba(8,76,57,.55)),url('+b[1]+')'}
-    if(l){IMG.logo=l[1];$('#logo').src=l[1];$('#logo').hidden=false}if(s){IMG.soc=s[1];$('#soc').src=s[1];$('#soc').hidden=false}}).catch(function(){});
+  var imgsReady=Promise.resolve();
 
   /* ---------- key + loading ---------- */
   var KEY=null,DATA={visits:[],types:[],units:[],round:'',inspectors:[],daily:false},timer=null,FIL=null;
@@ -467,7 +464,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
     var gr=g.createLinearGradient(W,0,0,0);gr.addColorStop(0,'rgba(4,43,32,.95)');gr.addColorStop(.55,'rgba(6,58,43,.86)');gr.addColorStop(1,'rgba(8,76,57,.6)');g.fillStyle=gr;g.fillRect(0,0,W,HH);
     g.fillStyle='#c8a24a';g.fillRect(0,HH,W,6);
     if(imgs.logo){rr(M,40,116,116,22,'#ffffff');g.drawImage(imgs.logo,M+10,50,96,96*imgs.logo.height/imgs.logo.width)}
-    text('المملكة العربية السعودية',W-M,46,{w:700,s:18,c:'#e3c873'});text('وزارة التجارة · فرع جازان',W-M,78,{s:22,c:'#d6e8e0'});
+    text('منطقة جازان',W-M,62,{w:700,s:22,c:'#e3c873'});
     font(800,40);var w1=g.measureText('تقرير حصر ').width;text('تقرير حصر ',W-M,124,{w:800,s:40,c:'#ffffff'});text('المنتجات',W-M-w1,124,{w:800,s:40,c:'#e3c873'});
     var fb=filterText(true);text(fb.join(' · '),W-M,170,{s:17,c:'#ffffff',max:W-2*M-140});
     var y=HH+6+28;
@@ -491,7 +488,7 @@ details summary{cursor:pointer;color:var(--brand-ink);font-weight:700;font-size:
       y+=34});
     text('المصدر: نظام حصر المنتجات · تاريخ الإصدار '+arDate(todayStr)+' · '+plural(A.nv,'منشأة واحدة','منشأتان','منشآت','منشأة')+' و'+A.np+' منتج',W-M,y+8,{s:13,c:'#5d7167'});y+=46;
     var bg=g.createLinearGradient(W,0,0,0);bg.addColorStop(0,'#052f23');bg.addColorStop(.6,'#0b4d3a');bg.addColorStop(1,'#073b2c');g.fillStyle=bg;g.fillRect(0,y,W,H-y);g.fillStyle='#c8a24a';g.fillRect(0,y,W,6);
-    font(800,30);var w2=g.measureText('بجهودكم نحقق ').width;text('بجهودكم نحقق ',W-M,y+51,{w:800,s:30,c:'#ffffff'});text('إنجاز جازان',W-M-w2,y+51,{w:800,s:30,c:'#e3c873'});
+    font(800,30);var w2=g.measureText('حصر ').width;text('حصر ',W-M,y+51,{w:800,s:30,c:'#ffffff'});text('المنتجات · جازان',W-M-w2,y+51,{w:800,s:30,c:'#e3c873'});
     if(imgs.soc){var sh=34,sw=sh*imgs.soc.width/imgs.soc.height;g.drawImage(imgs.soc,M,y+51-sh/2,sw,sh)}
     return cv}
   var REP=null;
